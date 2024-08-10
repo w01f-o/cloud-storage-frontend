@@ -2,17 +2,17 @@ import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adap
 import { CloudStoreApi } from "./index.api";
 
 export class FoldersApi extends CloudStoreApi {
-  static API_ENDPOINT: string = `${this.API_BASE_URL}/folder`;
+  protected static API_ENDPOINT: string = `${this.API_BASE_URL}/folder`;
 
-  static async getAll(cookieStore: ReadonlyRequestCookies) {
+  public static async getAll(cookieStore: ReadonlyRequestCookies) {
     return await this.fetchWithAuth(`${this.API_ENDPOINT}`, cookieStore);
   }
 
-  static async getById(cookieStore: ReadonlyRequestCookies) {}
+  public static async getById(cookieStore: ReadonlyRequestCookies) {}
 
-  static async create() {}
+  public static async create() {}
 
-  static async updateColor() {}
+  public static async updateColor() {}
 
-  static async delete() {}
+  public static async delete() {}
 }
