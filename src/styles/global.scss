@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  font-family: inherit;
+  color: inherit;
 }
 
 ul {
@@ -9,7 +12,6 @@ ul {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
 }
 
@@ -22,6 +24,7 @@ body {
   width: 100vw;
   padding: var(--offset-body-padding);
   background: var(--color-body-backgroud);
+  color: var(--color-black);
 }
 
 body .row {

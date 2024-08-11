@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info {
+}
+
+.avatar {
+  display: flex;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.name {
+  font: {
+    size: 20px;
+    weight: 600;
+  }
+}
+
+.email {
+  font: {
+    weight: 400;
+    size: 16px;
+  }
+}
