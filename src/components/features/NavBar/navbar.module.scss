@@ -1,10 +1,13 @@
 @import "@/styles/utils/mixins";
 
+.nav {
+  position: relative;
+}
+
 .link {
   display: block;
-  position: relative;
   padding: 20px 0;
-
+  position: relative;
   font: {
     size: 18px;
   }
@@ -35,11 +38,24 @@
   }
 }
 
+.activeBar {
+  position: absolute;
+  top: 0;
+  left: -30px;
+  transform: translateY(12px);
+  height: 40px;
+  width: 4px;
+  background: var(--color-blue_light);
+  transition: 0.2s;
+}
+
 .active {
   font: {
     weight: 600;
   }
+}
 
+.tempActive {
   &::before {
     content: "";
     position: absolute;
@@ -47,7 +63,7 @@
     transform: translateY(-50%);
     left: -30px;
     height: 40px;
-    width: 3px;
+    width: 4px;
     background: var(--color-blue_light);
   }
 }

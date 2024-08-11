@@ -11,7 +11,7 @@ export class Route {
     return this._path;
   }
 
-  get name(): string {
+  public get name(): string {
     return this._name;
   }
 }
