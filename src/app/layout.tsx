@@ -7,6 +7,7 @@ import SideBar from "@/components/widgets/Sidebar/SideBar";
 import { Nunito_Sans } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
 import { Col, Row } from "@w01f-o/react-grid-layout";
+import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
@@ -24,7 +25,10 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <SideBar />
           </Col>
           <Col xs={10}>
-            <div className={`page-box`}>{children}</div>
+            <div className={`page-box`}>
+              <PageTitle />
+              {children}
+            </div>
           </Col>
         </Row>
       </body>

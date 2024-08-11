@@ -8,7 +8,12 @@ const LogoutButton: FC = () => {
   const clickHandler = () => {};
 
   return (
-    <button className={styles.button} title="Выйти" onClick={clickHandler}>
+    <button
+      className={styles.button}
+      title="Выйти"
+      onClick={clickHandler}
+      type="button"
+    >
       <LogoutIcon />
       Выйти
     </button>

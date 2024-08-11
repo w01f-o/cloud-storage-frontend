@@ -27,13 +27,29 @@ body {
   color: var(--color-black);
 }
 
-body .row {
-  height: 100%;
-}
+body {
+  .row {
+    height: 100%;
+  }
 
-body .page-box {
-  height: 100%;
-  border-radius: 45px;
+  .page-box {
+    height: 100%;
+    border-radius: 45px;
+    padding: 65px 40px;
 
-  background: var(--color-white);
+    background: var(--color-white);
+  }
+
+  .not-found {
+    display: grid;
+    place-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    font: {
+      size: 54px;
+      weight: 600;
+    }
+  }
 }
