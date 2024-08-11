@@ -1,0 +1,11 @@
+@mixin hover-screen {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+@mixin not-hover-screen {
+  @media (hover: none) {
+    @content;
+  }
+}

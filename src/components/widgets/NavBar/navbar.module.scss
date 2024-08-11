@@ -1,0 +1,53 @@
+@import "@/styles/utils/mixins";
+
+.link {
+  display: block;
+  position: relative;
+  padding: 20px 30px;
+
+  font: {
+    size: 18px;
+  }
+
+  @include hover-screen {
+    $transitionTime: 0.2s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 90%;
+      height: 90%;
+      opacity: 0;
+      transition: opacity $transitionTime;
+      border-radius: 15px;
+
+      background: rgba(28, 28, 28, 0.04);
+    }
+
+    &:hover::after {
+      opacity: 1;
+      transition: opacity $transitionTime;
+    }
+  }
+}
+
+.active {
+  font: {
+    weight: 600;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 70%;
+    width: 3px;
+    background: var(--color-white-blue);
+  }
+}
