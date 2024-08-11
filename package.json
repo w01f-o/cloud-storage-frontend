@@ -10,12 +10,11 @@
   },
   "dependencies": {
     "@w01f-o/react-grid-layout": "^1.0.3",
+    "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "next": "14.2.5",
     "nextjs-toploader": "^1.6.12",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-preset-env": "^10.0.0",
     "postcss-pxtorem": "^6.1.0",
     "react": "^18",
     "react-dom": "^18",
