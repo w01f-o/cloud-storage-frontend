@@ -11,7 +11,6 @@ import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "700"],
   preload: true,
 });
 

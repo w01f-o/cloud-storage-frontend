@@ -10,8 +10,8 @@ const CurrentUser: FC = () => {
         <Image src={"/no-avatar.svg"} alt={"avatar"} width={50} height={50} />
       </div>
       <div className={styles.info}>
-        <div className={styles.name}>Иван Иванов</div>
-        <div className={styles.email}>example@mail.ru</div>
+        <div className={styles.name}>Example name</div>
+        <div className={styles.email}>example@example.ru</div>
       </div>
     </Link>
   );
