@@ -22,22 +22,16 @@ button {
 body {
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
   padding: var(--offset-body-padding);
+
   background: var(--color-body-backgroud);
   color: var(--color-black);
 }
 
 body {
   .row {
-    height: 100%;
-  }
-
-  .page-box {
-    height: 100%;
-    border-radius: 45px;
-    padding: 65px 40px;
-
-    background: var(--color-white);
+    height: calc(100vh - 60px);
   }
 
   .not-found {

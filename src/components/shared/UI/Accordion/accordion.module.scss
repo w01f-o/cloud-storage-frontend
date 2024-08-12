@@ -1,0 +1,49 @@
+@import "@/styles/utils/mixins.scss";
+
+.button {
+  $transitionTime: 0.2s;
+
+  border-radius: 15px;
+  padding: 16px;
+  width: 100%;
+
+  transition: background $transitionTime;
+
+  @include hover-screen {
+    &:hover {
+      background: var(--color-hover);
+      transition: background $transitionTime;
+    }
+  }
+
+  font: {
+    size: 24px;
+  }
+  user-select: none;
+  text-align: start;
+  background: none;
+  border: none;
+}
+
+.body {
+  display: grid;
+  grid-template-rows: 0fr;
+  padding-inline: 16px;
+  transition: 0.2s;
+}
+
+.content {
+  overflow: hidden;
+
+  font: {
+    size: 20px;
+  }
+}
+
+.active {
+  .body {
+    grid-template-rows: 1fr;
+    transition: 0.2s;
+    padding: 16px;
+  }
+}

@@ -28,7 +28,7 @@
       transition: opacity $transitionTime;
       border-radius: 15px;
 
-      background: rgba(28, 28, 28, 0.04);
+      background: var(--color-hover);
     }
 
     &:hover::after {
