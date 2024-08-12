@@ -1,5 +1,11 @@
 @import "@/styles/utils/mixins.scss";
 
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .button {
   $transitionTime: 0.2s;
 

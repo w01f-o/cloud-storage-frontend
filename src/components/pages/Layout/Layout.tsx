@@ -19,7 +19,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         </Col>
         <Col xs={10}>
           <div className={styles.box}>
-            <div className={styles.container}>
+            <div className={styles.scrollContainer}>
               <div className={styles.content}>
                 <PageTitle />
                 {children}

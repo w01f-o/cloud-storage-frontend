@@ -18,7 +18,7 @@ const Accordion: FC<AccordionProps> = ({ data }) => {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.accordion}>
       {data.map((item) => (
         <AccordionItem
           key={item.id}
