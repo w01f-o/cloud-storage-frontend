@@ -15,7 +15,7 @@ const NavBar: FC = () => {
   const navListRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
-    if (pathname === "/auth/login" || pathname === "/auth/register") {
+    if (appRoutes.every((route) => route.path !== pathname)) {
       setActiveBarPosition(null);
     }
 
