@@ -1,9 +1,14 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useState } from "react";
 import styles from "./currentUser.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
 
 const CurrentUser: FC = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   return (
     <Link className={styles.wrapper} href="/profile">
       <div className={styles.avatar}>
