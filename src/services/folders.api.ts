@@ -1,4 +1,3 @@
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { CloudStoreApi } from "./index.api";
 
 export class FoldersApi extends CloudStoreApi {
@@ -8,7 +7,7 @@ export class FoldersApi extends CloudStoreApi {
     return await this.fetchWithAuth(`${this.API_ENDPOINT}`, token);
   }
 
-  public static async getById(cookieStore: ReadonlyRequestCookies) {}
+  public static async getById() {}
 
   public static async create() {}
 

@@ -26,4 +26,16 @@ export class AuthApi extends CloudStoreApi {
       body: JSON.stringify(Object.fromEntries(formData)),
     });
   }
+
+  public static async logout(
+    token: string,
+  ): Promise<{ data: any; response: Response }> {
+    return await this.fetchWithoutAuth(`${this.API_ENDPOINT}/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
+    });
+  }
 }

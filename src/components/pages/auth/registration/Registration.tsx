@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { registerAction } from "@/actions/auth";
+import { registerAction } from "@/actions/auth.actions";
 import Field from "@/components/shared/UI/Field/Field";
 import Link from "next/link";
 

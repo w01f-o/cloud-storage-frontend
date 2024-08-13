@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import Field from "@/components/shared/UI/Field/Field";
-import { signInAction } from "@/actions/auth";
+import { signInAction } from "@/actions/auth.actions";
 import Link from "next/link";
 
 const Login: FC = () => {

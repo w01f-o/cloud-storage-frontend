@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn, signOut } from "@/services/auth/auth";
+import { auth, signIn, signOut } from "@/services/auth/auth";
 import { AuthApi } from "@/services/auth/auth.api";
 import { redirect } from "next/navigation";
 
@@ -19,5 +19,7 @@ export const registerAction = async (formData: FormData) => {
 };
 
 export const signOutAction = async () => {
+  const session = await auth();
+  await AuthApi.logout(session!.user.refreshToken);
   await signOut();
 };

@@ -1,22 +1,7 @@
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
-
 export class CloudStoreApi {
-  protected static readonly API_BASE_URL: string = `http://${process.env.NEXT_PUBLIC_API_BASE_URL}`;
+  protected static readonly API_BASE_URL: string = process.env
+    .NEXT_PUBLIC_API_BASE_URL as string;
   protected static API_ENDPOINT: string;
-  private static readonly COOKIE_ACCESS_TOKEN: string = "at";
-  private static readonly COOKIE_REFRESH_TOKEN: string = "rt";
-
-  protected static getAccessTokenFromCookie(
-    cookieStore: ReadonlyRequestCookies,
-  ): string {
-    return cookieStore.get(this.COOKIE_ACCESS_TOKEN)?.value ?? "";
-  }
-
-  protected static getRefreshTokenFromCookie(
-    cookieStore: ReadonlyRequestCookies,
-  ): string {
-    return cookieStore.get(this.COOKIE_REFRESH_TOKEN)?.value ?? "";
-  }
 
   protected static async fetchWithAuth<T>(
     endpoint: string,

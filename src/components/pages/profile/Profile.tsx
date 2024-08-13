@@ -9,7 +9,7 @@ const Profile: FC = async () => {
     redirect("/auth/login");
   }
 
-  return <></>;
+  return <div>{JSON.stringify(session)}</div>;
 };
 
 export default Profile;
