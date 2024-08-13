@@ -2,24 +2,31 @@
 
 import { auth, signIn, signOut } from "@/services/auth/auth";
 import { AuthApi } from "@/services/auth/auth.api";
-import { redirect } from "next/navigation";
 
 export const signInAction = async (formData: FormData) => {
-  await signIn("credentials", formData);
-  redirect("/");
+  const body = {
+    email: formData.get("email"),
+    password: formData.get("password"),
+  };
+
+  await signIn("credentials", { redirectTo: "/", ...body });
 };
 
 export const registerAction = async (formData: FormData) => {
-  const { response } = await AuthApi.register(formData);
+  const body = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  };
+  const { response } = await AuthApi.register(body);
 
   if (response.ok) {
-    await signIn("credentials", formData);
-    redirect("/");
+    await signIn("credentials", { redirectTo: "/", ...body });
   }
 };
 
 export const signOutAction = async () => {
   const session = await auth();
   await AuthApi.logout(session!.user.refreshToken);
-  await signOut();
+  await signOut({ redirectTo: "/auth/login" });
 };

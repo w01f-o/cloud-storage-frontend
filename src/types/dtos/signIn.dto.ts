@@ -1,7 +1,6 @@
 import { DtoField } from "@/types/dtos/dtoField.type";
 
-export interface RegisterDto {
-  name: DtoField;
+export interface SignInDto {
   email: DtoField;
   password: DtoField;
 }
