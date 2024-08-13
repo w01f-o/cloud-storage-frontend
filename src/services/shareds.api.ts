@@ -1,7 +1,7 @@
 import { CloudStoreApi } from "./index.api";
 
 export class SharedFilesApi extends CloudStoreApi {
-  static API_ENDPOINT: string = `${this.API_BASE_URL}/shared-file`;
+  protected static API_ENDPOINT: string = "/shared-file";
 
   static async getSharedFile() {}
 

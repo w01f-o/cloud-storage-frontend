@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./sidebar.module.scss";
 import NavBar from "@/components/widgets/NavBar/NavBar";
-import LogoutButton from "@/components/features/LogoutButton/LogoutButton";
+import SignOutButton from "@/components/features/SignOutButton/SignOutButton";
 import CurrentUser from "@/components/widgets/CurrentUser/CurrentUser";
 
 const SideBar: FC = () => {
@@ -9,7 +9,7 @@ const SideBar: FC = () => {
     <aside className={styles.sidebar}>
       <CurrentUser />
       <NavBar />
-      <LogoutButton />
+      <SignOutButton />
     </aside>
   );
 };

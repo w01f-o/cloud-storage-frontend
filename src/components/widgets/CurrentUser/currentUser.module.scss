@@ -4,6 +4,9 @@
 }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: calc(100% - 62px);
 }
 
@@ -36,4 +39,11 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.login {
+  font: {
+    size: 18px;
+  }
+  padding-left: 2px;
 }

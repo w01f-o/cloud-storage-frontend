@@ -1,7 +1,7 @@
 import { CloudStoreApi } from "./index.api";
 
 export class UserApi extends CloudStoreApi {
-  static API_ENDPOINT: string = `${this.API_BASE_URL}/user`;
+  protected static API_ENDPOINT: string = "/user";
 
   static async getUser(id: string) {}
 

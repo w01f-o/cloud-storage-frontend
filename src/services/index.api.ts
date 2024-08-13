@@ -7,37 +7,40 @@ export class CloudStoreApi {
   private static readonly COOKIE_REFRESH_TOKEN: string = "rt";
 
   protected static getAccessTokenFromCookie(
-    cookieStore: ReadonlyRequestCookies
+    cookieStore: ReadonlyRequestCookies,
   ): string {
     return cookieStore.get(this.COOKIE_ACCESS_TOKEN)?.value ?? "";
   }
 
   protected static getRefreshTokenFromCookie(
-    cookieStore: ReadonlyRequestCookies
+    cookieStore: ReadonlyRequestCookies,
   ): string {
     return cookieStore.get(this.COOKIE_REFRESH_TOKEN)?.value ?? "";
   }
 
   protected static async fetchWithAuth<T>(
-    url: string,
-    cookieStore: ReadonlyRequestCookies,
-    options?: RequestInit
-  ): Promise<T> {
-    const response = await fetch(url, {
+    endpoint: string,
+    token: string,
+    options?: RequestInit,
+  ): Promise<{ data: T; response: Response }> {
+    const response = await fetch(`${this.API_BASE_URL}${endpoint}`, {
       ...options,
       headers: {
-        Authorization: `Bearer ${this.getAccessTokenFromCookie(cookieStore)}`,
+        Authorization: `Bearer ${token}`,
       },
     });
+    const data = await response.json();
 
-    return await response.json();
+    return { response, data };
   }
 
   protected static async fetchWithoutAuth<T>(
-    url: string,
-    options?: RequestInit
-  ): Promise<T> {
-    const response = await fetch(url, options);
-    return await response.json();
+    endpoint: string,
+    options?: RequestInit,
+  ): Promise<{ data: T; response: Response }> {
+    const response = await fetch(`${this.API_BASE_URL}${endpoint}`, options);
+    const data = await response.json();
+
+    return { response, data };
   }
 }

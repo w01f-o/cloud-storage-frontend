@@ -10,19 +10,23 @@ import clsx from "clsx";
 const NavBar: FC = () => {
   const pathname = usePathname();
   const [activeBarPosition, setActiveBarPosition] = useState<number | null>(
-    null
+    null,
   );
   const navListRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
+    if (pathname === "/auth/login" || pathname === "/auth/register") {
+      setActiveBarPosition(null);
+    }
+
     const activeLink = document.querySelector(
-      `.${styles.link}.${styles.active}`
+      `.${styles.link}.${styles.active}`,
     );
 
     if (activeLink && navListRef.current) {
       setActiveBarPosition(
         activeLink.getBoundingClientRect().top -
-          navListRef.current.getBoundingClientRect().top
+          navListRef.current.getBoundingClientRect().top,
       );
     }
   }, [pathname]);
