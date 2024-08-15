@@ -67,10 +67,14 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
           &nbsp;{formType === "login" ? "Зарегистрироваться" : "Войти"}
         </Link>
       </p>
-      <Button type="submit" title={formTitle} role="primary">
+      <Button
+        type="submit"
+        title={formTitle}
+        role="primary"
+        isPending={isLoading}
+      >
         {formTitle}
       </Button>
-      {isLoading && <p>Загрузка...</p>}
       {error && <p>{error}</p>}
     </form>
   );

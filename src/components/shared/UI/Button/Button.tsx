@@ -7,17 +7,28 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   children: ReactNode;
   role: "primary" | "secondary";
+  isPending?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ type, title, children, role, ...props }) => {
+const Button: FC<ButtonProps> = ({
+  type,
+  title,
+  children,
+  role,
+  isPending,
+  ...props
+}) => {
   return (
     <button
       type={type}
       title={title}
       {...props}
-      className={clsx(styles.button, styles[role])}
+      className={clsx(styles.button, styles[role], {
+        [styles.pending]: isPending,
+      })}
+      disabled={isPending}
     >
-      {children}
+      {isPending ? <div className={styles.loader}></div> : children}
     </button>
   );
 };

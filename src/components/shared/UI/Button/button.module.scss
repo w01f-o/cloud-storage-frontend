@@ -6,6 +6,7 @@
   justify-content: center;
   gap: 6px;
   $transitionTime: 0.1s;
+  height: 48px;
 
   border-radius: 10px;
   padding: 12px 40px;
@@ -30,20 +31,19 @@
     color: var(--color-white);
 
     @include hover-screen {
-      &:hover {
+      &:not(.pending):hover {
         background: var(--color-blue_light_100);
         color: var(--color-blue_light);
 
         svg {
           path {
-            transition: $transitionTime;
             stroke: var(--color-blue_light);
           }
         }
       }
     }
 
-    &:active {
+    &:not(.pending):active {
       background: var(--color-blue_light_200);
     }
   }
@@ -53,14 +53,65 @@
     color: var(--color-blue_light);
 
     @include hover-screen {
-      &:hover {
+      &:not(.pending):hover {
         background: var(--color-blue_light);
         color: var(--color-white);
+
+        svg {
+          path {
+            stroke: var(--color-white);
+          }
+        }
       }
     }
 
-    &:active {
+    &:not(.pending):active {
       background: var(--color-blue_light_800);
     }
+  }
+
+  &.pending {
+  }
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite;
+}
+
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  animation: prixClipFix 2s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes prixClipFix {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
 }
