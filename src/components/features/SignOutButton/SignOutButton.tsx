@@ -1,5 +1,5 @@
 import { FC } from "react";
-import LogoutIcon from "@/components/shared/Icons/LogoutIcon/LogoutIcon";
+import LogoutIcon from "@/components/shared/Icons/LogoutIcon";
 import styles from "./signOutButton.module.scss";
 import { signOutAction } from "@/actions/auth.actions";
 import { auth } from "@/services/auth/auth";

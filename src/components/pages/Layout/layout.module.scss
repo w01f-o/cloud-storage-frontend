@@ -2,6 +2,7 @@
   height: calc(100vh - 60px);
   border-radius: 45px;
   padding: 65px 0 40px 40px;
+  position: relative;
 
   background: var(--color-white);
 }
@@ -9,6 +10,7 @@
 .scrollContainer {
   height: 100%;
   overflow: auto;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 6px;

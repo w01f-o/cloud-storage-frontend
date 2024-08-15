@@ -1,33 +1,10 @@
-"use client";
-
-import {
-  ChangeEvent,
-  Dispatch,
-  FC,
-  InputHTMLAttributes,
-  SetStateAction,
-} from "react";
+import { FC, InputHTMLAttributes } from "react";
 import styles from "./field.module.scss";
 
-interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  value?: string;
-  setValue?: Dispatch<SetStateAction<string>>;
-}
+interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-const Field: FC<FieldProps> = ({ value, setValue, ...props }) => {
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue && setValue(e.target.value);
-  };
-
-  return (
-    <input
-      type="text"
-      className={styles.input}
-      value={value}
-      onChange={changeHandler}
-      {...props}
-    />
-  );
+const Field: FC<FieldProps> = ({ ...props }) => {
+  return <input type="text" className={styles.input} {...props} />;
 };
 
 export default Field;

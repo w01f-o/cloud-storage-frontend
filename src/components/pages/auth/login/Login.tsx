@@ -1,9 +1,6 @@
-"use client";
-
 import { FC } from "react";
 import Field from "@/components/shared/UI/Field/Field";
 import { signInAction } from "@/actions/auth.actions";
-import Link from "next/link";
 
 const Login: FC = () => {
   return (
@@ -18,12 +15,6 @@ const Login: FC = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-      <Link
-        href={"/auth/registration"}
-        style={{ marginTop: 20, fontSize: 20, display: "block" }}
-      >
-        Регистрация
-      </Link>
     </>
   );
 };

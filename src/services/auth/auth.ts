@@ -2,6 +2,7 @@ import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "@auth/core/providers/credentials";
 import { AuthApi } from "@/services/auth/auth.api";
 import { SignInDto } from "@/types/dtos/signIn.dto";
+import { UserData } from "@/types/userData.type";
 
 declare module "next-auth" {
   interface Session {
@@ -11,10 +12,7 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 
-  interface User {
-    accessToken: string;
-    refreshToken: string;
-  }
+  interface User extends UserData {}
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -39,11 +37,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const { response, data } = await AuthApi.signIn(signInDto);
 
         if (response.ok && data) {
-          return {
+          const userData: UserData = {
             ...data.user,
             accessToken: data.accessToken,
             refreshToken: data.refreshToken,
           };
+
+          return userData;
         }
 
         return null;
@@ -54,6 +54,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: "jwt",
   },
   jwt: {
+    maxAge: 30 * 24 * 60 * 60,
     encode: async ({ secret: _, token }) => {
       return JSON.stringify(token);
     },

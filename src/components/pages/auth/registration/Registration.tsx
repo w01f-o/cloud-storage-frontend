@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { registerAction } from "@/actions/auth.actions";
 import Field from "@/components/shared/UI/Field/Field";
-import Link from "next/link";
 
 const Registration: FC = () => {
   return (
@@ -19,12 +18,6 @@ const Registration: FC = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-      <Link
-        href={"/auth/login"}
-        style={{ marginTop: 20, fontSize: 20, display: "block" }}
-      >
-        Войти
-      </Link>
     </>
   );
 };

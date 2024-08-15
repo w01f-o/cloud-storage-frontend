@@ -1,0 +1,66 @@
+@import "@/styles/utils/mixins.scss";
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  $transitionTime: 0.1s;
+
+  border-radius: 10px;
+  padding: 12px 40px;
+
+  font: {
+    size: 18px;
+    weight: 700;
+  }
+
+  background: none;
+  border: none;
+  transition: $transitionTime;
+
+  svg {
+    path {
+      transition: $transitionTime;
+    }
+  }
+
+  &.primary {
+    background: var(--color-blue_light);
+    color: var(--color-white);
+
+    @include hover-screen {
+      &:hover {
+        background: var(--color-blue_light_100);
+        color: var(--color-blue_light);
+
+        svg {
+          path {
+            transition: $transitionTime;
+            stroke: var(--color-blue_light);
+          }
+        }
+      }
+    }
+
+    &:active {
+      background: var(--color-blue_light_200);
+    }
+  }
+
+  &.secondary {
+    background: var(--color-blue_light_100);
+    color: var(--color-blue_light);
+
+    @include hover-screen {
+      &:hover {
+        background: var(--color-blue_light);
+        color: var(--color-white);
+      }
+    }
+
+    &:active {
+      background: var(--color-blue_light_800);
+    }
+  }
+}

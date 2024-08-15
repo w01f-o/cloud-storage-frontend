@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.svg {
+  margin-bottom: 8px;
+}
+
+.title {
+  font: {
+    size: 32px;
+  }
+}
+
+.subTitle {
+  font: {
+    size: 46px;
+  }
+}
+
+.description {
+  font: {
+    size: 20px;
+  }
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+}
+
+.animatedBox {
+  position: absolute;
+}
+
+.welcome {
+  text-align: center;
+}
