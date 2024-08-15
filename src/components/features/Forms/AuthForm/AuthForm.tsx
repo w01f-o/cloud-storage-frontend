@@ -1,7 +1,7 @@
 "use client";
 
 import { Lock, Mail, User } from "lucide-react";
-import styles from "./AuthForm.module.scss";
+import styles from "./authForm.module.scss";
 import Link from "next/link";
 import { loginAction, registerAction } from "@/actions/auth.actions";
 import Field from "@/components/shared/UI/Field/Field";

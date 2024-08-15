@@ -1,6 +1,6 @@
 import { FC } from "react";
 import SadEmojiIcon from "@/components/shared/Icons/SadEmojiIcon";
-import styles from "./NotFound.module.scss";
+import styles from "./notFound.module.scss";
 
 const NotFound: FC = () => {
   return (
