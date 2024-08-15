@@ -1,7 +1,7 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "@auth/core/providers/credentials";
 import { AuthApi } from "@/services/auth/auth.api";
-import { SignInDto } from "@/types/dtos/signIn.dto";
+import { LoginDto } from "@/types/dtos/loginDto";
 import { UserData } from "@/types/userData.type";
 
 declare module "next-auth" {
@@ -30,11 +30,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
       },
       authorize: async (credentials) => {
-        const signInDto: SignInDto = {
+        const signInDto: LoginDto = {
           email: credentials?.email as string,
           password: credentials?.password as string,
         };
-        const { response, data } = await AuthApi.signIn(signInDto);
+        const { response, data } = await AuthApi.login(signInDto);
 
         if (response.ok && data) {
           const userData: UserData = {

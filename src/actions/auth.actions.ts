@@ -3,7 +3,7 @@
 import { auth, signIn, signOut } from "@/services/auth/auth";
 import { AuthApi } from "@/services/auth/auth.api";
 
-export const signInAction = async (formData: FormData) => {
+export const loginAction = async (formData: FormData) => {
   const body = {
     email: formData.get("email"),
     password: formData.get("password"),
@@ -25,8 +25,8 @@ export const registerAction = async (formData: FormData) => {
   }
 };
 
-export const signOutAction = async () => {
+export const logoutAction = async () => {
   const session = await auth();
   await AuthApi.logout(session!.user.refreshToken);
-  await signOut({ redirectTo: "/auth/signIn" });
+  await signOut({ redirectTo: "/welcome" });
 };

@@ -1,14 +1,12 @@
 import { CloudStoreApi } from "@/services/index.api";
 import { RegisterDto } from "@/types/dtos/register.dto";
-import { SignInDto } from "@/types/dtos/signIn.dto";
+import { LoginDto } from "@/types/dtos/loginDto";
 import { AuthResponse } from "@/types/authResponse.type";
 
 export class AuthApi extends CloudStoreApi {
   protected static API_ENDPOINT: string = "/auth";
 
-  public static async signIn(
-    signInDto: SignInDto,
-  ): Promise<{ data: AuthResponse; response: Response }> {
+  public static async login(loginDto: LoginDto) {
     return await this.fetchWithoutAuth<AuthResponse>(
       `${this.API_ENDPOINT}/login`,
       {
@@ -16,14 +14,13 @@ export class AuthApi extends CloudStoreApi {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(signInDto),
+        cache: "no-store",
+        body: JSON.stringify(loginDto),
       },
     );
   }
 
-  public static async register(
-    registerDto: RegisterDto,
-  ): Promise<{ data: AuthResponse; response: Response }> {
+  public static async register(registerDto: RegisterDto) {
     return await this.fetchWithoutAuth<AuthResponse>(
       `${this.API_ENDPOINT}/registration`,
       {
@@ -31,20 +28,23 @@ export class AuthApi extends CloudStoreApi {
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-store",
         body: JSON.stringify(registerDto),
       },
     );
   }
 
-  public static async logout(
-    token: string,
-  ): Promise<{ data: any; response: Response }> {
-    return await this.fetchWithoutAuth(`${this.API_ENDPOINT}/logout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  public static async logout(token: string) {
+    return await this.fetchWithoutAuth<{ token: string }>(
+      `${this.API_ENDPOINT}/logout`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+        body: JSON.stringify({ token }),
       },
-      body: JSON.stringify({ token }),
-    });
+    );
   }
 }

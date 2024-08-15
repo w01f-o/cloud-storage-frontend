@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { registerAction, signInAction } from "@/actions/auth.actions";
+import { registerAction, loginAction } from "@/actions/auth.actions";
 import Field from "@/components/shared/UI/Field/Field";
 import { Lock, Mail, User } from "lucide-react";
 import styles from "./authForm.module.scss";
@@ -12,7 +12,7 @@ interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = ({ type }) => {
   return type === "signIn" ? (
-    <form action={signInAction} className={styles.form}>
+    <form action={loginAction} className={styles.form}>
       <h1>Войти</h1>
       <Field
         icon={{ element: <Mail />, position: "left" }}

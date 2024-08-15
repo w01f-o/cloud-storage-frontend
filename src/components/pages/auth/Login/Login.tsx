@@ -3,7 +3,7 @@ import { Col, Row } from "@w01f-o/react-grid-layout";
 import AuthForm from "@/components/features/Forms/AuthForm/AuthForm";
 import styles from "../auth.module.scss";
 
-const SignIn: FC = () => {
+const Login: FC = () => {
   return (
     <Row className={styles.row}>
       <Col xs={4}>
@@ -13,4 +13,4 @@ const SignIn: FC = () => {
   );
 };
 
-export default SignIn;
+export default Login;

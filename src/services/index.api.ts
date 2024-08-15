@@ -1,5 +1,7 @@
+type FetchResponse<T> = { data: T; response: Response };
+
 export class CloudStoreApi {
-  protected static readonly API_BASE_URL: string = process.env
+  private static readonly API_BASE_URL: string = process.env
     .NEXT_PUBLIC_API_BASE_URL as string;
   protected static API_ENDPOINT: string;
 
@@ -7,7 +9,7 @@ export class CloudStoreApi {
     endpoint: string,
     token: string,
     options?: RequestInit,
-  ): Promise<{ data: T; response: Response }> {
+  ): Promise<FetchResponse<T>> {
     const response = await fetch(`${this.API_BASE_URL}${endpoint}`, {
       ...options,
       headers: {
@@ -22,7 +24,7 @@ export class CloudStoreApi {
   protected static async fetchWithoutAuth<T>(
     endpoint: string,
     options?: RequestInit,
-  ): Promise<{ data: T; response: Response }> {
+  ): Promise<FetchResponse<T>> {
     const response = await fetch(`${this.API_BASE_URL}${endpoint}`, options);
     const data = await response.json();
 
