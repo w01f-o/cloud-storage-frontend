@@ -2,6 +2,7 @@
 
 import { auth, signIn, signOut } from "@/services/auth/auth";
 import { AuthApi } from "@/services/auth/auth.api";
+import { CustomAuthError } from "@/services/auth/auth.error";
 
 export const loginAction = async (formData: FormData) => {
   const body = {
@@ -9,7 +10,7 @@ export const loginAction = async (formData: FormData) => {
     password: formData.get("password"),
   };
 
-  await signIn("credentials", { redirectTo: "/", ...body });
+  return await signIn("credentials", { redirectTo: "/", ...body });
 };
 
 export const registerAction = async (formData: FormData) => {
@@ -18,15 +19,17 @@ export const registerAction = async (formData: FormData) => {
     email: formData.get("email"),
     password: formData.get("password"),
   };
-  const { response } = await AuthApi.register(body);
+  const { response, data } = await AuthApi.register(body);
 
   if (response.ok) {
-    await signIn("credentials", { redirectTo: "/", ...body });
+    return await signIn("credentials", { redirectTo: "/", ...body });
+  } else {
+    throw new CustomAuthError(JSON.stringify({ data, response }));
   }
 };
 
 export const logoutAction = async () => {
   const session = await auth();
   await AuthApi.logout(session!.user.refreshToken);
-  await signOut({ redirectTo: "/welcome" });
+  return await signOut({ redirectTo: "/welcome" });
 };

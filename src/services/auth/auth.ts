@@ -3,6 +3,7 @@ import Credentials from "@auth/core/providers/credentials";
 import { AuthApi } from "@/services/auth/auth.api";
 import { LoginDto } from "@/types/dtos/loginDto";
 import { UserData } from "@/types/userData.type";
+import { CustomAuthError } from "@/services/auth/auth.error";
 
 declare module "next-auth" {
   interface Session {
@@ -46,7 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return userData;
         }
 
-        return null;
+        throw new CustomAuthError(JSON.stringify({ data, response }));
       },
     }),
   ],
