@@ -19,7 +19,7 @@ const CurrentUser: FC = async () => {
   return (
     <Link
       className={styles.wrapper}
-      href={`${user ? "/profile" : "/auth/login"}`}
+      href={`${user ? "/profile" : "/auth/signIn"}`}
     >
       <div className={styles.avatar}>
         <Image

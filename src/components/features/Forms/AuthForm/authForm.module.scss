@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  h1 {
+    font: {
+      size: 36px;
+    }
+    text-align: center;
+  }
+
+  p {
+    font: {
+      size: 18px;
+    }
+
+    a {
+      color: var(--color-blue_dark);
+    }
+  }
+}

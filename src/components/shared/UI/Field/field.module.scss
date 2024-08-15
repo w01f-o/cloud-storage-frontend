@@ -1,2 +1,57 @@
 .input {
+  border: 2px solid #eef2fe;
+  border-radius: 10px;
+  padding: 12px 20px;
+  width: 100%;
+
+  font: {
+    size: 18px;
+    weight: 500;
+  }
+
+  color: var(--color-blue_dark);
+
+  &::placeholder {
+    color: var(--color-blue_dark);
+    line-height: 0;
+  }
+
+  &:focus {
+    outline: none;
+    border: 2px solid var(--color-blue_light);
+  }
+}
+
+.label {
+  position: relative;
+  width: 100%;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    stroke: var(--color-blue_dark);
+  }
+
+  &.iconOffset {
+    &.iconLeft {
+      .input {
+        padding-left: 40px;
+      }
+
+      svg {
+        left: 12px;
+      }
+    }
+
+    &.iconRight {
+      .input {
+        padding-right: 40px;
+      }
+
+      svg {
+        right: 12px;
+      }
+    }
+  }
 }

@@ -28,5 +28,5 @@ export const registerAction = async (formData: FormData) => {
 export const signOutAction = async () => {
   const session = await auth();
   await AuthApi.logout(session!.user.refreshToken);
-  await signOut({ redirectTo: "/auth/login" });
+  await signOut({ redirectTo: "/auth/signIn" });
 };

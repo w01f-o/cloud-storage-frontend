@@ -1,16 +1,16 @@
 import { FC } from "react";
 import { Col, Row } from "@w01f-o/react-grid-layout";
-import styles from "../auth.module.scss";
 import AuthForm from "@/components/features/Forms/AuthForm/AuthForm";
+import styles from "../auth.module.scss";
 
-const Registration: FC = () => {
+const SignIn: FC = () => {
   return (
     <Row className={styles.row}>
       <Col xs={4}>
-        <AuthForm type="register" />
+        <AuthForm type="signIn" />
       </Col>
     </Row>
   );
 };
 
-export default Registration;
+export default SignIn;
