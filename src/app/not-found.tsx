@@ -1,7 +1,12 @@
-import { FC } from "react";
+import NotFound from "@/components/pages/NotFound/NotFound";
+import { Metadata, NextPage } from "next";
 
-const NotFound: FC = () => {
-  return <div className="not-found">404 Error</div>;
+export const metadata: Metadata = {
+  title: "Страница не найдена - Cloud Storage",
+};
+
+const page: NextPage = () => {
+  return <NotFound />;
 };
 
 export default NotFound;
