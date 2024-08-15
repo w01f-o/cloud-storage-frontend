@@ -7,7 +7,7 @@ const Registration: FC = () => {
   return (
     <Row className={styles.row}>
       <Col xs={4}>
-        <AuthForm type="register" />
+        <AuthForm formType="register" />
       </Col>
     </Row>
   );

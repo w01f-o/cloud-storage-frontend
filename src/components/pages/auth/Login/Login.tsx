@@ -7,7 +7,7 @@ const Login: FC = () => {
   return (
     <Row className={styles.row}>
       <Col xs={4}>
-        <AuthForm type="signIn" />
+        <AuthForm formType="login" />
       </Col>
     </Row>
   );

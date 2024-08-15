@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, ReactNode } from "react";
+import React, { FC, InputHTMLAttributes, ReactNode } from "react";
 import styles from "./field.module.scss";
 import clsx from "clsx";
 
