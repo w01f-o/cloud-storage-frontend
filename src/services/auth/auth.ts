@@ -47,7 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return userData;
         }
 
-        throw new CustomAuthError(JSON.stringify({ data, response }));
+        throw new CustomAuthError(JSON.stringify(data));
       },
     }),
   ],

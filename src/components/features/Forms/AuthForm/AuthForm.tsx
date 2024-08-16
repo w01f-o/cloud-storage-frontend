@@ -24,16 +24,13 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
     setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const result = await formAction(formData);
 
-    try {
-      await formAction(formData);
-    } catch (err) {
-      //@ts-ignore
-      const error = JSON.parse(err.message).data.message;
-      setError(JSON.stringify(error));
-    } finally {
-      setIsLoading(false);
+    if (result !== undefined && !result.success) {
+      setError(result.error);
     }
+
+    setIsLoading(false);
   };
 
   return (

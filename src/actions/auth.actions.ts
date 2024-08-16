@@ -2,18 +2,18 @@
 
 import { auth, signIn, signOut } from "@/services/auth/auth";
 import { AuthApi } from "@/services/auth/auth.api";
-import { CustomAuthError } from "@/services/auth/auth.error";
+import { createServerAction, ServerActionError } from "@/actions/actions.utils";
 
-export const loginAction = async (formData: FormData) => {
+export const loginAction = createServerAction(async (formData: FormData) => {
   const body = {
     email: formData.get("email"),
     password: formData.get("password"),
   };
 
-  return await signIn("credentials", { redirectTo: "/", ...body });
-};
+  await signIn("credentials", { redirectTo: "/", ...body });
+});
 
-export const registerAction = async (formData: FormData) => {
+export const registerAction = createServerAction(async (formData: FormData) => {
   const body = {
     name: formData.get("name"),
     email: formData.get("email"),
@@ -21,15 +21,20 @@ export const registerAction = async (formData: FormData) => {
   };
   const { response, data } = await AuthApi.register(body);
 
-  if (response.ok) {
-    return await signIn("credentials", { redirectTo: "/", ...body });
-  } else {
-    throw new CustomAuthError(JSON.stringify({ data, response }));
+  if (!response.ok) {
+    throw new ServerActionError(JSON.stringify(data));
   }
-};
 
-export const logoutAction = async () => {
+  await signIn("credentials", { redirectTo: "/", ...body });
+});
+
+export const logoutAction = createServerAction(async () => {
   const session = await auth();
-  await AuthApi.logout(session!.user.refreshToken);
-  return await signOut({ redirectTo: "/welcome" });
-};
+  const { response, data } = await AuthApi.logout(session!.user.refreshToken);
+
+  if (!response.ok) {
+    throw new ServerActionError(JSON.stringify(data));
+  }
+
+  await signOut({ redirectTo: "/welcome" });
+});
