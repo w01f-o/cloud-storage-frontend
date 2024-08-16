@@ -10,6 +10,9 @@ import { nanoid } from "nanoid";
 const PageTitle: FC = () => {
   const pageName = usePageName();
   const dispatch = useAppDispatch();
+
+  // TODO: Remove dev handler and style
+
   return (
     <h1
       className={styles.title}
@@ -19,7 +22,12 @@ const PageTitle: FC = () => {
       onClick={() => {
         dispatch(
           addToast({
-            type: "info",
+            //@ts-expect-error
+            type: ["success", "error", "info", "warning"][
+              Math.floor(
+                Math.random() * ["success", "error", "info", "warning"].length,
+              )
+            ],
             message: nanoid(),
           }),
         );
