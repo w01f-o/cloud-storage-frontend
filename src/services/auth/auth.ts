@@ -1,9 +1,9 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "@auth/core/providers/credentials";
 import { AuthApi } from "@/services/auth/auth.api";
-import { LoginDto } from "@/types/dtos/loginDto";
 import { UserData } from "@/types/userData.type";
 import { CustomAuthError } from "@/services/auth/auth.error";
+import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
 
 declare module "next-auth" {
   interface Session {
@@ -31,7 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
       },
       authorize: async (credentials) => {
-        const signInDto: LoginDto = {
+        const signInDto: AuthLoginDto = {
           email: credentials?.email as string,
           password: credentials?.password as string,
         };
@@ -77,6 +77,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.refreshToken = token.refreshToken as string;
 
       return session;
+    },
+  },
+  logger: {
+    error(error) {
+      if (process.env.NODE_ENV === "development") {
+        console.error(`[auth][error] ${error}`);
+      }
+    },
+    warn(code) {
+      if (process.env.NODE_ENV === "development") {
+        console.warn(`[auth][warn] ${code}`);
+      }
+    },
+    debug(code, metadata) {
+      if (process.env.NODE_ENV === "development") {
+        console.debug(`[auth][debug] ${code}:`, metadata);
+      }
     },
   },
 });

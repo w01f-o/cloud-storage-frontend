@@ -3,30 +3,36 @@
 import { auth, signIn, signOut } from "@/services/auth/auth";
 import { AuthApi } from "@/services/auth/auth.api";
 import { createServerAction, ServerActionError } from "@/actions/actions.utils";
+import { AuthFormDto } from "@/types/dtos/authFormDto.type";
+import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
+import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
+import { redirect } from "next/navigation";
 
-export const loginAction = createServerAction(async (formData: FormData) => {
-  const body = {
-    email: formData.get("email"),
-    password: formData.get("password"),
+export const loginAction = createServerAction(async (formData: AuthFormDto) => {
+  const body: AuthLoginDto = {
+    email: formData.email,
+    password: formData.password,
   };
 
-  await signIn("credentials", { redirectTo: "/", ...body });
+  await signIn("credentials", { redirect: false, ...body });
 });
 
-export const registerAction = createServerAction(async (formData: FormData) => {
-  const body = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    password: formData.get("password"),
-  };
-  const { response, data } = await AuthApi.register(body);
+export const registerAction = createServerAction(
+  async (formData: AuthFormDto) => {
+    const body: AuthRegistrationDto = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    };
+    const { response, data } = await AuthApi.register(body);
 
-  if (!response.ok) {
-    throw new ServerActionError(JSON.stringify(data));
-  }
+    if (!response.ok) {
+      throw new ServerActionError(JSON.stringify(data));
+    }
 
-  await signIn("credentials", { redirectTo: "/", ...body });
-});
+    await signIn("credentials", { redirect: false, ...body });
+  },
+);
 
 export const logoutAction = createServerAction(async () => {
   const session = await auth();
@@ -37,4 +43,8 @@ export const logoutAction = createServerAction(async () => {
   }
 
   await signOut({ redirectTo: "/welcome" });
+});
+
+export const redirectAction = createServerAction(async (path: string) => {
+  redirect(path);
 });

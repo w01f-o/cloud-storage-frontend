@@ -1,7 +1,12 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+
+  label {
+    &:not(:last-child) {
+      margin: 16px 0 8px;
+    }
+  }
 
   h1 {
     font: {
@@ -14,7 +19,7 @@
     font: {
       size: 18px;
     }
-
+    padding: 16px 0;
     a {
       color: var(--color-blue_dark);
     }

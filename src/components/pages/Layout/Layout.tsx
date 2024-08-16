@@ -4,6 +4,7 @@ import styles from "./layout.module.scss";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import NextTopLoader from "nextjs-toploader";
 import SideBar from "@/components/widgets/Sidebar/SideBar";
+import Toast from "@/components/features/Toast/Toast";
 
 interface LayoutProps {
   children: ReactNode;
@@ -28,7 +29,8 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           </div>
         </Col>
       </Row>
-      <div className="root-portal"></div>
+      <div id="root-portal"></div>
+      <Toast />
     </>
   );
 };

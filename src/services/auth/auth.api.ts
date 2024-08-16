@@ -1,12 +1,12 @@
 import { CloudStoreApi } from "@/services/index.api";
-import { RegisterDto } from "@/types/dtos/register.dto";
-import { LoginDto } from "@/types/dtos/loginDto";
 import { AuthResponse } from "@/types/authResponse.type";
+import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
+import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
 
 export class AuthApi extends CloudStoreApi {
   protected static API_ENDPOINT: string = "/auth";
 
-  public static async login(loginDto: LoginDto) {
+  public static async login(loginDto: AuthLoginDto) {
     return await this.fetchWithoutAuth<AuthResponse>(
       `${this.API_ENDPOINT}/login`,
       {
@@ -20,7 +20,7 @@ export class AuthApi extends CloudStoreApi {
     );
   }
 
-  public static async register(registerDto: RegisterDto) {
+  public static async register(registerDto: AuthRegistrationDto) {
     return await this.fetchWithoutAuth<AuthResponse>(
       `${this.API_ENDPOINT}/registration`,
       {
