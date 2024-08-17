@@ -34,7 +34,11 @@ const Modal: FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
   });
 
   useEffect(() => {
-    document.body.classList.toggle("body-backdrop");
+    if (isOpen) {
+      document.body.classList.add("body-backdrop");
+    } else {
+      document.body.classList.remove("body-backdrop");
+    }
   }, [isOpen]);
 
   return transition(

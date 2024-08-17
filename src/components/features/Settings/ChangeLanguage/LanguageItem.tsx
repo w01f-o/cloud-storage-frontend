@@ -12,10 +12,12 @@ interface LanguageItemProps {
 }
 
 const LanguageItem: FC<LanguageItemProps> = ({ language, dict }) => {
-  const { push } = useRouter();
+  const router = useRouter();
   const { lang } = useParams();
-  const clickHandler = () => {
-    push(`/${language.code}/settings`);
+
+  const clickHandler = async () => {
+    router.push(`/${language.code}/settings`);
+    router.refresh();
   };
 
   return (
