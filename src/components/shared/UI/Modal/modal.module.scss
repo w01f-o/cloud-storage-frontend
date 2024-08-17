@@ -6,15 +6,22 @@
   height: 100vh;
   position: fixed;
   inset: 0;
-
-  background: var(--color-hover);
+  z-index: 1000;
 }
 
 .content {
+  position: relative;
   width: 100%;
   max-width: 600px;
   height: 400px;
   background: var(--color-white);
   border-radius: 15px;
   padding: 20px;
+}
+
+.closeButton {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  cursor: pointer;
 }

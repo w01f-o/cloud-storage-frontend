@@ -3,15 +3,16 @@ export interface RootDictionary {
   auth: Auth;
   pages: Pages;
   help: Help;
+  settings: Settings;
 }
 
-export interface Welcome {
+interface Welcome {
   title: string;
   subtitle: string;
   description: string;
 }
 
-export interface Auth {
+interface Auth {
   login: string;
   registration: string;
   register: string;
@@ -27,7 +28,7 @@ export interface Auth {
   passwordPattern: string;
 }
 
-export interface Pages {
+interface Pages {
   home: string;
   profile: string;
   storage: string;
@@ -38,12 +39,40 @@ export interface Pages {
   registration: string;
 }
 
-export interface Help {
+interface Help {
   accordion: Accordion[];
 }
 
-export interface Accordion {
+interface Accordion {
   id: number;
   title: string;
   body: string;
+}
+
+interface Settings {
+  language: Language;
+  password: Password;
+  plan: Plan;
+  avatar: Avatar;
+}
+
+interface Language {
+  change: string;
+  english: string;
+  russian: string;
+}
+
+interface Password {
+  current: string;
+  new: string;
+  repeat: string;
+  change: string;
+}
+
+interface Plan {
+  improve: string;
+}
+
+interface Avatar {
+  change: string;
 }

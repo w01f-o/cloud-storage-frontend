@@ -1,0 +1,16 @@
+.modalContent {
+  padding: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 16px;
+
+  &.active {
+    background: var(--color-blue_light_200);
+  }
+}

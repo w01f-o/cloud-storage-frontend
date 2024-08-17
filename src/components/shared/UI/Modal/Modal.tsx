@@ -1,7 +1,15 @@
-import { Dispatch, FC, MouseEvent, ReactNode, SetStateAction } from "react";
+import {
+  Dispatch,
+  FC,
+  MouseEvent,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+} from "react";
 import styles from "./modal.module.scss";
 import { animated, useTransition } from "@react-spring/web";
 import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
+import { X } from "lucide-react";
 
 interface ModalProps {
   children: ReactNode;
@@ -10,7 +18,7 @@ interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
-  const modalMouseDownHandler = () => {
+  const closeModal = () => {
     setIsOpen(false);
   };
 
@@ -19,11 +27,15 @@ const Modal: FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
   };
 
   const transition = useTransition(isOpen, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
+    from: { opacity: 0, x: "14px" },
+    enter: { opacity: 1, x: "0" },
+    leave: { opacity: 0, x: "14px" },
     config: { duration: 200 },
   });
+
+  useEffect(() => {
+    document.body.classList.toggle("body-backdrop");
+  }, [isOpen]);
 
   return transition(
     (props, item) =>
@@ -32,12 +44,13 @@ const Modal: FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
           <animated.div
             className={styles.modal}
             style={props}
-            onMouseDown={modalMouseDownHandler}
+            onMouseDown={closeModal}
           >
             <div
               className={styles.content}
               onMouseDown={contentMouseDownHandler}
             >
+              <X className={styles.closeButton} onClick={closeModal} />
               {children}
             </div>
           </animated.div>

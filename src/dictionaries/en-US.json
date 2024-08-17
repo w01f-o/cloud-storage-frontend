@@ -57,5 +57,24 @@
         "body": "In my Github profile you can find links for communication: w01f-o"
       }
     ]
+  },
+  "settings": {
+    "language": {
+      "change": "Change language",
+      "english": "English",
+      "russian": "Russian"
+    },
+    "password": {
+      "current": "Current password",
+      "new": "New password",
+      "repeat": "Repeat password",
+      "change": "Change password"
+    },
+    "avatar": {
+      "change": "Change avatar"
+    },
+    "plan": {
+      "improve": "Improve plan"
+    }
   }
 }
