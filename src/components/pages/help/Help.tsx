@@ -3,12 +3,10 @@ import styles from "./help.module.scss";
 import { Col } from "@w01f-o/react-grid-layout";
 import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 import Accordion from "@/components/shared/UI/Accordion/Accordion";
-import { cookies } from "next/headers";
-import { getDictionary } from "@/dictionaries/dictionaries";
+import { getDictionary } from "@/actions/lang.action";
 
 const Help: FC = async () => {
-  const cookie = cookies();
-  const dict = await getDictionary(cookie.get("NEXT_LOCALE")?.value as string);
+  const dict = await getDictionary();
 
   return (
     <>

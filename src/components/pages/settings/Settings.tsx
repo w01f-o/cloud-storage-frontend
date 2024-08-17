@@ -1,18 +1,18 @@
 import { FC } from "react";
 import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 import { cookies } from "next/headers";
-import { getDictionary } from "@/dictionaries/dictionaries";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import styles from "./settings.module.scss";
 import ChangeLanguage from "@/components/features/Settings/ChangeLanguage/ChangeLanguage";
 import ChangePassword from "@/components/features/Settings/ChangePassword/ChangePassword";
 import ImprovePlan from "@/components/features/Settings/ImpovePlan/ImprovePlan";
 import ChangeAvatar from "@/components/features/Settings/ChangeAvatar/ChangeAvatar";
+import { getDictionary } from "@/actions/lang.action";
 
 const Settings: FC = async () => {
   const cookie = cookies();
   const lang = cookie.get("NEXT_LOCALE")?.value as string;
-  const dict = await getDictionary(lang);
+  const dict = await getDictionary();
 
   return (
     <Row>

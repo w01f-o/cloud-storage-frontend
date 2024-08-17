@@ -4,7 +4,6 @@ import { RootDictionary } from "@/types/dictionaries.type";
 type DictionaryLoader = () => Promise<RootDictionary>;
 
 // TODO: Add translate for Error from backend and add other languages
-// TODO: Add .env variable for "NEXT_LOCALE" cookie
 
 const dictionaries: Record<string, DictionaryLoader> = {
   ["en-US"]: () =>
@@ -17,5 +16,5 @@ const dictionaries: Record<string, DictionaryLoader> = {
     ),
 };
 
-export const getDictionary = async (locale: string): Promise<RootDictionary> =>
+export const loadDictionary = async (locale: string): Promise<RootDictionary> =>
   dictionaries[locale]();

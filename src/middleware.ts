@@ -12,9 +12,13 @@ function getLocale(req: NextRequest): string {
 
   let headers = { "accept-language": "en-US,en;q=0.5" };
   let languages = new Negotiator({ headers }).languages();
-  let defaultLocale = "en-US";
+  let defaultLocale = process.env.DEFAULT_LOCALE;
 
-  return match(languages, locales, defaultLocale);
+  if (!defaultLocale) {
+    throw new Error("defaultLocale is not defined");
+  }
+  return defaultLocale;
+  // return match(languages, locales, defaultLocale);
 }
 
 export async function middleware(req: NextRequest) {

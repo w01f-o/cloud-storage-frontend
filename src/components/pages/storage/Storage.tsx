@@ -1,11 +1,9 @@
 import { FC } from "react";
 import PageTitle from "@/components/widgets/PageTitle/PageTitle";
-import { cookies } from "next/headers";
-import { getDictionary } from "@/dictionaries/dictionaries";
+import { getDictionary } from "@/actions/lang.action";
 
 const Storage: FC = async () => {
-  const cookie = cookies();
-  const dict = await getDictionary(cookie.get("NEXT_LOCALE")?.value as string);
+  const dict = await getDictionary();
 
   return (
     <>
