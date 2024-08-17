@@ -1,41 +1,12 @@
-"use client";
-
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import styles from "./pageTitle.module.scss";
-import { usePageName } from "@/hooks/usePageName";
-import { useAppDispatch } from "@/hooks/redux";
-import { addToast } from "@/redux/reducers/toastSlice";
-import { nanoid } from "nanoid";
 
-const PageTitle: FC = () => {
-  const pageName = usePageName();
-  const dispatch = useAppDispatch();
+interface PageTitleProps {
+  children: ReactNode;
+}
 
-  // TODO: Remove dev handler and style
-
-  return (
-    <h1
-      className={styles.title}
-      style={{
-        userSelect: "none",
-      }}
-      onClick={() => {
-        dispatch(
-          addToast({
-            //@ts-expect-error
-            type: ["success", "error", "info", "warning"][
-              Math.floor(
-                Math.random() * ["success", "error", "info", "warning"].length,
-              )
-            ],
-            message: nanoid(),
-          }),
-        );
-      }}
-    >
-      {pageName}
-    </h1>
-  );
+const PageTitle: FC<PageTitleProps> = ({ children }) => {
+  return <h1 className={styles.title}>{children}</h1>;
 };
 
 export default PageTitle;

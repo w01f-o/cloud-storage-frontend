@@ -6,10 +6,15 @@ import WelcomeIcon from "@/components/shared/Icons/WelcomeIcon";
 import Button from "@/components/shared/UI/Button/Button";
 import Link from "next/link";
 import ArrowIcon from "@/components/shared/Icons/ArrowIcon";
-import WelcomeBackground from "@/components/widgets/WelcomeBackground/WelcomeBackground";
-import { useSpring, animated } from "@react-spring/web";
+import WelcomeBackground from "@/components/widgets/Welcome/Background/WelcomeBackground";
+import { animated, useSpring } from "@react-spring/web";
+import { RootDictionary } from "@/types/dictionaries.type";
 
-const Welcome: FC = () => {
+interface WelcomeProps {
+  dict: RootDictionary;
+}
+
+const Welcome: FC<WelcomeProps> = ({ dict }) => {
   const leftButtonStyle = useSpring({
     from: { opacity: 0, x: "-50%" },
     to: { opacity: 1, x: "0" },
@@ -32,28 +37,30 @@ const Welcome: FC = () => {
     <div className={styles.wrapper}>
       <WelcomeBackground />
       <animated.div className={styles.welcome} style={animatedBoxStyle}>
-        <WelcomeIcon className={styles.svg} />
-        <h1 className={styles.title}>Добро пожаловать в</h1>
-        <h2 className={styles.subTitle}>Cloud Storage</h2>
-        <p className={styles.description}>
-          Надежное и удобное облачное хранилище <br />
-          для ваших файлов с неограниченным <br />
-          доступом из любой точки мира.
-        </p>
+        <div className={styles.welcome}>
+          <WelcomeIcon className={styles.svg} />
+          <h1 className={styles.title}>{dict.welcome.title}</h1>
+          <h2 className={styles.subTitle}>{dict.welcome.subtitle}</h2>
+          <p className={styles.description}>{dict.welcome.description}</p>
+        </div>
       </animated.div>
       <div className={styles.links}>
         <animated.div style={leftButtonStyle}>
           <Link href="/auth/login">
-            <Button type="button" title="Войти" role="primary">
-              Войти
+            <Button type="button" title={dict.auth.login} role="primary">
+              {dict.auth.login}
               <ArrowIcon />
             </Button>
           </Link>
         </animated.div>
         <animated.div style={rightButtonStyle}>
           <Link href="/auth/registration">
-            <Button type="button" title="Войти" role="secondary">
-              Зарегистрироваться
+            <Button
+              type="button"
+              title={dict.auth.registration}
+              role="secondary"
+            >
+              {dict.auth.registration}
             </Button>
           </Link>
         </animated.div>

@@ -42,7 +42,7 @@ export const logoutAction = createServerAction(async () => {
     throw new ServerActionError(JSON.stringify(data));
   }
 
-  await signOut({ redirectTo: "/welcome" });
+  await signOut({ redirect: false });
 });
 
 export const redirectAction = createServerAction(async (path: string) => {

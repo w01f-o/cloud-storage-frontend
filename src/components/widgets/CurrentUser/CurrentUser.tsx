@@ -3,8 +3,13 @@ import styles from "./currentUser.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/services/auth/auth";
+import { RootDictionary } from "@/types/dictionaries.type";
 
-const CurrentUser: FC = async () => {
+interface CurrentUserProps {
+  dict: RootDictionary;
+}
+
+const CurrentUser: FC<CurrentUserProps> = async ({ dict }) => {
   const session = await auth();
   const user = session?.user;
 
@@ -37,7 +42,7 @@ const CurrentUser: FC = async () => {
             <div className={styles.email}>{user.email}</div>
           </>
         ) : (
-          <div className={styles.login}>Войти</div>
+          <div className={styles.login}>{dict.auth.login}</div>
         )}
       </div>
     </Link>

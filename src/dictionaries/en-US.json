@@ -1,0 +1,61 @@
+{
+  "welcome": {
+    "title": "Welcome to",
+    "subtitle": "Cloud Storage",
+    "description": "Reliable and convenient cloud storage for your files with unlimited access from any point of the world."
+  },
+  "auth": {
+    "login": "Login",
+    "registration": "Registration",
+    "register": "Register",
+    "logout": "Logout",
+    "password": "Password",
+    "email": "Email",
+    "name": "Name",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "required": "Field is required",
+    "passwordMinLength": "Password must contain at least 8 characters",
+    "passwordMaxLength": "Password must contain at most 16 characters",
+    "passwordPattern": "Password must not contain spaces"
+  },
+  "pages": {
+    "home": "Home",
+    "profile": "Profile",
+    "storage": "Storage",
+    "shared": "Shared",
+    "settings": "Settings",
+    "help": "Help",
+    "login": "Login",
+    "registration": "Registration"
+  },
+  "help": {
+    "accordion": [
+      {
+        "id": 1,
+        "title": "How to create an account?",
+        "body": "To create an account, go to the registration page and fill out all the required fields, including name, email and password. "
+      },
+      {
+        "id": 2,
+        "title": "How to upload files?",
+        "body": "After logging into your account, go to the 'Home' page, select the desired folder, or create one if it does not exist. "
+      },
+      {
+        "id": 3,
+        "title": "How to share files?",
+        "body": "To share a file, select it and click 'Make public'"
+      },
+      {
+        "id": 4,
+        "title": "How can I change my password?",
+        "body": "To change your password, go to 'Settings', and click 'Change Password'. "
+      },
+      {
+        "id": 5,
+        "title": "How to contact the developer?",
+        "body": "In my Github profile you can find links for communication: w01f-o"
+      }
+    ]
+  }
+}

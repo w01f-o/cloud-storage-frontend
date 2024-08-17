@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.4",
     "@react-spring/web": "^9.7.4",
     "@reduxjs/toolkit": "^2.2.7",
+    "@types/negotiator": "^0.6.3",
     "@w01f-o/react-grid-layout": "^1.0.3",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "lucide-react": "^0.427.0",
     "nanoid": "^5.0.7",
+    "negotiator": "^0.6.3",
     "next": "14.2.5",
     "next-auth": "5.0.0-beta.18",
     "nextjs-toploader": "^1.6.12",

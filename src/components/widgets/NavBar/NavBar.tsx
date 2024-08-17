@@ -2,20 +2,28 @@
 
 import { FC, useEffect, useRef, useState } from "react";
 import styles from "./navbar.module.scss";
-import { appRoutes } from "@/routes/routes";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
+import { routes } from "@/components/widgets/NavBar/routes";
+import NavBarItem from "@/components/widgets/NavBar/NavBarItem";
+import { useParams, usePathname } from "next/navigation";
+import { Utils } from "@/services/utils";
+import { RootDictionary } from "@/types/dictionaries.type";
 
-const NavBar: FC = () => {
-  const pathname = usePathname();
+interface NavBarProps {
+  dict: RootDictionary;
+}
+
+const NavBar: FC<NavBarProps> = ({ dict }) => {
   const [activeBarPosition, setActiveBarPosition] = useState<number | null>(
     null,
   );
   const navListRef = useRef<HTMLUListElement | null>(null);
+  const { lang } = useParams();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (appRoutes.every((route) => route.path !== pathname)) {
+    if (
+      routes.every((route) => !Utils.checkLinkForActive(route, pathname, lang))
+    ) {
       setActiveBarPosition(null);
     }
 
@@ -29,7 +37,7 @@ const NavBar: FC = () => {
           navListRef.current.getBoundingClientRect().top,
       );
     }
-  }, [pathname]);
+  }, [lang, pathname]);
 
   return (
     <nav className={styles.nav}>
@@ -40,19 +48,18 @@ const NavBar: FC = () => {
         />
       )}
       <ul className={styles.list} ref={navListRef}>
-        {appRoutes.map((route) => (
-          <li key={route.path} className={styles.item}>
-            <Link
-              href={route.path}
-              className={clsx(styles.link, {
-                [styles.active]: pathname === route.path,
-                [styles.tempActive]:
-                  activeBarPosition === null && pathname === route.path,
-              })}
-            >
-              {route.name}
-            </Link>
-          </li>
+        {routes.map((route) => (
+          <NavBarItem
+            path={route.path}
+            //@ts-expect-error
+            name={dict.pages[route.name]}
+            key={route.path}
+            isActive={Utils.checkLinkForActive(route, pathname, lang)}
+            isTempActive={
+              activeBarPosition === null &&
+              Utils.checkLinkForActive(route, pathname, lang)
+            }
+          />
         ))}
       </ul>
     </nav>

@@ -12,10 +12,16 @@ const nunitoSans: NextFont = Nunito_Sans({
   preload: true,
 });
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
+const RootLayout = ({
+  children,
+  params: { lang },
+}: {
+  children: ReactNode;
+  params: { lang: string };
+}) => {
   return (
     <StoreProvider>
-      <html lang="ru">
+      <html lang={lang}>
         <body className={nunitoSans.className}>
           <Layout>{children}</Layout>
         </body>

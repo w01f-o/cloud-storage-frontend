@@ -17,15 +17,18 @@ import FormError from "@/components/features/Forms/FormError/FormError";
 import { useAppDispatch } from "@/hooks/redux";
 import { addToast } from "@/redux/reducers/toastSlice";
 import { Errors } from "@/services/errors";
-import { Utils } from "@/services/utils";
+import { useParams } from "next/navigation";
+import { RootDictionary } from "@/types/dictionaries.type";
 
 interface AuthFormProps {
   formType: "registration" | "login";
+  dict: RootDictionary;
 }
 
-const AuthForm: FC<AuthFormProps> = ({ formType }) => {
+const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
   const formAction = formType === "login" ? loginAction : registerAction;
-  const formTitle = formType === "login" ? "Войти" : "Зарегистрироваться";
+  const formTitle =
+    formType === "login" ? dict.auth.login : dict.auth.registration;
 
   const {
     register,
@@ -34,6 +37,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
   } = useForm<AuthFormDto>();
   const dispatch = useAppDispatch();
   const [formIsPending, setFormIsPending] = useState<boolean>(false);
+  const { lang } = useParams();
 
   const submitHandler: SubmitHandler<AuthFormDto> = async (data) => {
     setFormIsPending(true);
@@ -58,8 +62,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
         addToast({ type: "success", message: "Вы успешно авторизовались" }),
       );
 
-      await Utils.sleep(200);
-      await redirectAction("/");
+      await redirectAction(`/${lang}`);
     }
   };
 
@@ -70,10 +73,10 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
         <>
           <Field
             icon={{ element: <User />, position: "left" }}
-            placeholder="Имя"
+            placeholder={dict.auth.name}
             type="text"
             {...register("name", {
-              required: "Поле обязательно для заполнения",
+              required: dict.auth.required,
             })}
             aria-invalid={errors.name ? "true" : "false"}
           />
@@ -83,31 +86,31 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
       <>
         <Field
           icon={{ element: <Mail />, position: "left" }}
-          placeholder="Email"
+          placeholder={dict.auth.email}
           type="email"
           {...register("email", {
-            required: "Поле обязательно для заполнения",
+            required: dict.auth.required,
           })}
           aria-invalid={errors.email ? "true" : "false"}
         />
         {errors.email && <FormError message={errors.email.message as string} />}
         <Field
           icon={{ element: <Lock />, position: "left" }}
-          placeholder="Пароль"
+          placeholder={dict.auth.password}
           type="password"
           {...register("password", {
-            required: "Поле обязательно для заполнения",
+            required: dict.auth.required,
             minLength: {
               value: 8,
-              message: "Пароль должен содержать не менее 8 символов",
+              message: dict.auth.passwordMinLength,
             },
             maxLength: {
               value: 16,
-              message: "Пароль должен содержать не более 16 символов",
+              message: dict.auth.passwordMaxLength,
             },
             pattern: {
               value: /^\S+$/,
-              message: "Пароль не должен содержать пробелы",
+              message: dict.auth.passwordPattern,
             },
           })}
           aria-invalid={errors.password ? "true" : "false"}
@@ -117,9 +120,12 @@ const AuthForm: FC<AuthFormProps> = ({ formType }) => {
         )}
       </>
       <p>
-        {formType === "login" ? "Ещё нет аккаунта?" : "Уже зарегистрированы?"}
+        {formType === "login"
+          ? dict.auth.dontHaveAccount
+          : dict.auth.alreadyHaveAccount}
         <Link href={`/auth/${formType === "login" ? "registration" : "login"}`}>
-          &nbsp;{formType === "login" ? "Зарегистрироваться" : "Войти"}
+          &nbsp;
+          {formType === "login" ? dict.auth.register : dict.auth.login}
         </Link>
       </p>
       <Button
