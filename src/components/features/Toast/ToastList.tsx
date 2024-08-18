@@ -1,14 +1,14 @@
 "use client";
 
 import { FC } from "react";
-import { useAppSelector } from "@/hooks/redux";
 import ToastItem from "@/components/features/Toast/ToastItem";
 import { animated, useTransition } from "@react-spring/web";
+import { useToast } from "@/hooks/useToast";
 
 const ToastList: FC = () => {
-  const items = useAppSelector((state) => state.toast.items);
+  const { list } = useToast();
 
-  const transitions = useTransition(items, {
+  const transitions = useTransition(list, {
     from: { opacity: 0, transform: "translate3d(150px, 0, 0)" },
     enter: { opacity: 1, transform: "translate3d(0, 0, 0)" },
     leave: { opacity: 0, transform: "translate3d(150px, 0, 0)" },

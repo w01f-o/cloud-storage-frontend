@@ -16,7 +16,7 @@ const LanguageItem: FC<LanguageItemProps> = ({ language, dict }) => {
   const { lang } = useParams();
 
   const clickHandler = async () => {
-    router.push(`/${language.code}/settings`);
+    router.replace(`/${language.code}/settings`);
     router.refresh();
   };
 

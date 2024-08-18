@@ -4,10 +4,12 @@ import { nanoid } from "nanoid";
 
 interface State {
   items: Toast[];
+  isEnabled: boolean;
 }
 
 const initialState: State = {
   items: [],
+  isEnabled: true,
 };
 
 export const toastSlice = createSlice({
@@ -15,19 +17,28 @@ export const toastSlice = createSlice({
   initialState,
   reducers: {
     addToast: (state, action: PayloadAction<Omit<Toast, "id">>) => {
-      const { type, message } = action.payload;
-      state.items.push({
-        id: nanoid(),
-        type,
-        message,
-      });
+      if (state.isEnabled) {
+        const { type, message } = action.payload;
+        state.items.push({
+          id: nanoid(),
+          type,
+          message,
+        });
+      }
     },
     removeToast: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
+    enableToast: (state) => {
+      state.isEnabled = true;
+    },
+    disableToast: (state) => {
+      state.isEnabled = false;
+    },
   },
 });
 
-export const { addToast, removeToast } = toastSlice.actions;
+export const { addToast, removeToast, enableToast, disableToast } =
+  toastSlice.actions;
 
 export default toastSlice.reducer;

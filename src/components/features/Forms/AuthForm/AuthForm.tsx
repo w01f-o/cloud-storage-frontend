@@ -14,11 +14,10 @@ import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AuthFormDto } from "@/types/dtos/authFormDto.type";
 import FormError from "@/components/features/Forms/FormError/FormError";
-import { useAppDispatch } from "@/hooks/redux";
-import { addToast } from "@/redux/reducers/toastSlice";
 import { Errors } from "@/services/errors";
 import { useParams } from "next/navigation";
 import { RootDictionary } from "@/types/dictionaries.type";
+import { useToast } from "@/hooks/useToast";
 
 interface AuthFormProps {
   formType: "registration" | "login";
@@ -35,7 +34,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<AuthFormDto>();
-  const dispatch = useAppDispatch();
+  const toast = useToast();
   const [formIsPending, setFormIsPending] = useState<boolean>(false);
   const { lang } = useParams();
 
@@ -51,16 +50,12 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
     if (!result.success) {
       const error = JSON.parse(result.error);
 
-      dispatch(
-        addToast({
-          type: "error",
-          message: Errors.generateError(error.type),
-        }),
-      );
+      toast.add({
+        type: "error",
+        message: Errors.generateError(error.type),
+      });
     } else {
-      dispatch(
-        addToast({ type: "success", message: "Вы успешно авторизовались" }),
-      );
+      toast.add({ type: "success", message: "Вы успешно авторизовались" });
 
       await redirectAction(`/${lang}`);
     }
