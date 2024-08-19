@@ -7,7 +7,7 @@ import {
   removeToast,
 } from "@/redux/reducers/toastSlice";
 
-type ReturnType = {
+type useToastReturn = {
   list: Toast[];
   add: (toast: Omit<Toast, "id">) => void;
   remove: (id: string) => void;
@@ -15,10 +15,10 @@ type ReturnType = {
   enable: () => void;
 };
 
-export const useToast = (): ReturnType => {
+export const useToast = (): useToastReturn => {
   const dispatch = useAppDispatch();
 
-  const toastList = useAppSelector((state) => state.toast);
+  const { items } = useAppSelector((state) => state.toast);
 
   const add = (toast: Omit<Toast, "id">): void => {
     dispatch(addToast(toast));
@@ -35,7 +35,7 @@ export const useToast = (): ReturnType => {
   };
 
   return {
-    list: toastList.items,
+    list: items,
     add,
     remove,
     disable,

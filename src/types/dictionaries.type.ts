@@ -37,6 +37,7 @@ interface Pages {
   help: string;
   login: string;
   registration: string;
+  welcome: string;
 }
 
 interface Help {

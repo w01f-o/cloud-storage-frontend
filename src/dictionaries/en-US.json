@@ -27,7 +27,8 @@
     "settings": "Settings",
     "help": "Help",
     "login": "Login",
-    "registration": "Registration"
+    "registration": "Registration",
+    "welcome": "Welcome"
   },
   "help": {
     "accordion": [

@@ -1,7 +1,14 @@
 import { Metadata, NextPage } from "next";
 import Storage from "@/components/pages/storage/Storage";
+import { getDictionary } from "@/actions/lang.action";
 
-export const metadata: Metadata = { title: "Хранилище - Cloud Storage" };
+export async function generateMetadata(): Promise<Metadata> {
+  const dict = await getDictionary();
+
+  return {
+    title: `${dict.pages.storage} - Cloud Storage`,
+  };
+}
 
 const Page: NextPage = () => {
   return <Storage />;

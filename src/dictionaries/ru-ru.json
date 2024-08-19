@@ -27,7 +27,8 @@
     "settings": "Настройки",
     "help": "Помощь",
     "login": "Вход",
-    "registration": "Регистрация"
+    "registration": "Регистрация",
+    "welcome": "Добро пожаловать"
   },
   "help": {
     "accordion": [
