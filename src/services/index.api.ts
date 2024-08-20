@@ -1,3 +1,5 @@
+import { auth } from "@/services/auth/auth";
+
 type FetchResponse<T> = { data: T; response: Response };
 
 export class CloudStoreApi {
@@ -5,7 +7,7 @@ export class CloudStoreApi {
     .NEXT_PUBLIC_API_BASE_URL as string;
   protected static API_ENDPOINT: string;
 
-  protected static async fetchWithAuth<T>(
+  private static async fetchWithAuth<T>(
     endpoint: string,
     token: string,
     options?: RequestInit,
@@ -21,7 +23,7 @@ export class CloudStoreApi {
     return { response, data };
   }
 
-  protected static async fetchWithoutAuth<T>(
+  private static async fetchWithoutAuth<T>(
     endpoint: string,
     options?: RequestInit,
   ): Promise<FetchResponse<T>> {
@@ -29,5 +31,28 @@ export class CloudStoreApi {
     const data = await response.json();
 
     return { response, data };
+  }
+
+  protected static async fetch<T>(options: {
+    withAuth: boolean;
+    endpoint: string;
+    fetchOptions?: RequestInit;
+  }): Promise<FetchResponse<T>> {
+    const session = await auth();
+    const { withAuth, fetchOptions, endpoint } = options;
+
+    if (withAuth && !session) {
+      throw new Error("Unauthorized");
+    }
+
+    if (withAuth) {
+      return await this.fetchWithAuth<T>(
+        endpoint,
+        session?.user.accessToken as string,
+        fetchOptions,
+      );
+    } else {
+      return await this.fetchWithoutAuth<T>(endpoint, fetchOptions);
+    }
   }
 }

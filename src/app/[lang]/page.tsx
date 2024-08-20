@@ -11,6 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${dict.pages.home} - Cloud Storage`,
   };
 }
+
 const Page: NextPage = async () => {
   const session = await auth();
 

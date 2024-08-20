@@ -7,9 +7,10 @@ export class AuthApi extends CloudStoreApi {
   protected static API_ENDPOINT: string = "/auth";
 
   public static async login(loginDto: AuthLoginDto) {
-    return await this.fetchWithoutAuth<AuthResponse>(
-      `${this.API_ENDPOINT}/login`,
-      {
+    return await this.fetch<AuthResponse>({
+      withAuth: false,
+      endpoint: `${this.API_ENDPOINT}/login`,
+      fetchOptions: {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -17,13 +18,14 @@ export class AuthApi extends CloudStoreApi {
         cache: "no-store",
         body: JSON.stringify(loginDto),
       },
-    );
+    });
   }
 
   public static async register(registerDto: AuthRegistrationDto) {
-    return await this.fetchWithoutAuth<AuthResponse>(
-      `${this.API_ENDPOINT}/registration`,
-      {
+    return await this.fetch<AuthResponse>({
+      withAuth: false,
+      endpoint: `${this.API_ENDPOINT}/registration`,
+      fetchOptions: {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,13 +33,14 @@ export class AuthApi extends CloudStoreApi {
         cache: "no-store",
         body: JSON.stringify(registerDto),
       },
-    );
+    });
   }
 
   public static async logout(token: string) {
-    return await this.fetchWithoutAuth<{ token: string }>(
-      `${this.API_ENDPOINT}/logout`,
-      {
+    return await this.fetch<{ token: string }>({
+      withAuth: false,
+      endpoint: `${this.API_ENDPOINT}/logout`,
+      fetchOptions: {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,6 +48,6 @@ export class AuthApi extends CloudStoreApi {
         cache: "no-store",
         body: JSON.stringify({ token }),
       },
-    );
+    });
   }
 }
