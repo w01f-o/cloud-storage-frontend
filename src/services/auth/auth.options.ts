@@ -83,7 +83,6 @@ export const authOptions: NextAuthConfig = {
           refreshExpiresAt: Date.now() + 1000 * 60 * 60 * 24 * 30,
         };
       } else if (Date.now() < token.accessExpiresAt) {
-        console.log(trigger);
         return token;
       } else {
         return token;
@@ -115,4 +114,5 @@ export const authOptions: NextAuthConfig = {
       }
     },
   },
+  basePath: "/api/auth",
 };
