@@ -26,19 +26,19 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const session = await auth();
 
-  if (session && session.user.accessExpiresAt < Date.now()) {
-    // const refreshResponse = await fetch(
-    //   `${req.nextUrl.origin}/auth/refresh-tokens`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(session),
-    //   },
-    // );
-    return NextResponse.next();
-  }
+  // if (session && session.user.accessExpiresAt < Date.now()) {
+  //   // const refreshResponse = await fetch(
+  //   //   `${req.nextUrl.origin}/auth/refresh-tokens`,
+  //   //   {
+  //   //     method: "POST",
+  //   //     headers: {
+  //   //       "Content-Type": "application/json",
+  //   //     },
+  //   //     body: JSON.stringify(session),
+  //   //   },
+  //   // );
+  //   return NextResponse.next();
+  // }
 
   const urlLocale = locales.find((locale) => pathname.startsWith(`/${locale}`));
   const cookieLocale = req.cookies.get("NEXT_LOCALE")?.value;

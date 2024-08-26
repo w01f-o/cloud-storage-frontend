@@ -5,7 +5,7 @@ import "@w01f-o/react-grid-layout/css";
 import { Nunito_Sans } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
 import Layout from "@/components/pages/Layout/Layout";
-import StoreProvider from "@/redux/StoreProvider";
+import Providers from "@/components/Providers";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
@@ -20,13 +20,13 @@ const RootLayout = ({
   params: { lang: string };
 }) => {
   return (
-    <StoreProvider>
+    <Providers>
       <html lang={lang}>
         <body className={nunitoSans.className}>
           <Layout>{children}</Layout>
         </body>
       </html>
-    </StoreProvider>
+    </Providers>
   );
 };
 
