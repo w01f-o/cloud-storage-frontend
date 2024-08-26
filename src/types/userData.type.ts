@@ -6,4 +6,6 @@ export interface UserData {
   isActivated: boolean;
   accessToken: string;
   refreshToken: string;
+  accessExpiresAt: number;
+  refreshExpiresAt: number;
 }

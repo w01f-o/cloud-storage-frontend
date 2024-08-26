@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/services/auth/auth";
-import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
 const locales = ["en-US", "ru-ru", "kk-KZ"];
@@ -17,6 +16,7 @@ function getLocale(req: NextRequest): string {
   if (!defaultLocale) {
     throw new Error("defaultLocale is not defined");
   }
+
   return defaultLocale;
   // return match(languages, locales, defaultLocale);
 }
@@ -24,6 +24,21 @@ function getLocale(req: NextRequest): string {
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const session = await auth();
+
+  if (session && session.user.accessExpiresAt < Date.now()) {
+    const refreshResponse = await fetch(
+      `${req.nextUrl.origin}/auth/refresh-tokens`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(session),
+      },
+    );
+
+    return NextResponse.next();
+  }
 
   const urlLocale = locales.find((locale) => pathname.startsWith(`/${locale}`));
   const cookieLocale = req.cookies.get("NEXT_LOCALE")?.value;

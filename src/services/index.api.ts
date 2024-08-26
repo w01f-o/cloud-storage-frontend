@@ -1,7 +1,5 @@
 import { auth } from "@/services/auth/auth";
 import { ErrorsEnum } from "@/types/apiErrors.enum";
-import { AuthApi } from "@/services/auth/auth.api";
-import { Session } from "next-auth";
 
 type FetchResponse<T> = { data: T; response: Response };
 
@@ -24,12 +22,6 @@ export class CloudStoreApi {
     const data = await response.json();
 
     if (!response.ok && data.type === ErrorsEnum.EXPIRED_ACCESS_TOKEN) {
-      // const session = (await auth()) as Session;
-      // const {
-      //   data: { accessToken, refreshToken },
-      // } = await AuthApi.refresh(session.user.refreshToken);
-      //
-      // return await this.fetchWithAuth<T>(endpoint, token, options);
     }
 
     return { response, data };

@@ -1,6 +1,6 @@
 "use server";
 
-import { auth, signIn, signOut } from "@/services/auth/auth";
+import { auth, signIn, signOut, unstable_update } from "@/services/auth/auth";
 import { AuthApi } from "@/services/auth/auth.api";
 import { createServerAction, ServerActionError } from "@/actions/actions.utils";
 import { AuthFormDto } from "@/types/dtos/authFormDto.type";
