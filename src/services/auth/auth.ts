@@ -4,6 +4,9 @@ import { AuthApi } from "@/services/auth/auth.api";
 import { UserData } from "@/types/userData.type";
 import { CustomAuthError } from "@/services/auth/auth.error";
 import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
+import { logoutAction } from "@/actions/auth.actions";
+import { JWT } from "@auth/core/jwt";
+import { Auth } from "@auth/core";
 
 declare module "next-auth" {
   interface Session {
@@ -14,6 +17,15 @@ declare module "next-auth" {
   }
 
   interface User extends UserData {}
+}
+
+declare module "@auth/core/jwt" {
+  interface JWT {
+    accessToken: string;
+    refreshToken: string;
+    accessExpiresAt: number;
+    refreshExpiresAt: number;
+  }
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -66,11 +78,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.accessToken = user.accessToken;
-        token.refreshToken = user.refreshToken;
-      }
+        return {
+          ...token,
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken,
+          accessExpiresAt: Date.now() + 1000 * 20,
+          refreshExpiresAt: Date.now() + 1000 * 60 * 60 * 24 * 30,
+        };
+      } else if (Date.now() < token.accessExpiresAt) {
+        return token;
+      } else {
+        try {
+          const {
+            data: { accessToken, refreshToken },
+          } = await AuthApi.refresh(token.refreshToken);
 
-      return token;
+          token.accessToken = accessToken;
+          token.refreshToken = refreshToken;
+          token.accessExpiresAt = Date.now() + 1000 * 20;
+          token.refreshExpiresAt = Date.now() + 1000 * 60 * 60 * 24 * 30;
+
+          return token;
+        } catch (e) {
+          return token;
+        }
+      }
     },
     async session({ session, token }) {
       session.user.accessToken = token.accessToken as string;

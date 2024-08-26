@@ -3,7 +3,7 @@ import { auth } from "@/services/auth/auth";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
-const locales = ["en-US", "ru-ru"];
+const locales = ["en-US", "ru-ru", "kk-KZ"];
 
 function getLocale(req: NextRequest): string {
   const cookieLocale = req.cookies.get("NEXT_LOCALE")?.value;

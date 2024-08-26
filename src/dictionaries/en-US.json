@@ -17,7 +17,8 @@
     "required": "Field is required",
     "passwordMinLength": "Password must contain at least 8 characters",
     "passwordMaxLength": "Password must contain at most 16 characters",
-    "passwordPattern": "Password must not contain spaces"
+    "passwordPattern": "Password must not contain spaces",
+    "success": "You have successfully authenticated"
   },
   "pages": {
     "home": "Home",
@@ -77,5 +78,17 @@
     "plan": {
       "improve": "Improve plan"
     }
+  },
+  "errors": {
+    "mailer_error": "An error occurred while sending the letter. ",
+    "user_with_such_email_already_exists": "A user with this email already exists",
+    "user_with_such_email_not_found": "User with this email was not found",
+    "wrong_email_or_password": "Invalid email or password",
+    "wrong_code": "Invalid activation code",
+    "user_not_activated": "User is not activated",
+    "no_refresh_token": "No refresh token",
+    "no_access_token": "No access token",
+    "wrong_refresh_token": "Invalid refresh token",
+    "wrong_access_token": "Invalid access token"
   }
 }

@@ -1,4 +1,7 @@
 import { auth } from "@/services/auth/auth";
+import { ErrorsEnum } from "@/types/apiErrors.enum";
+import { AuthApi } from "@/services/auth/auth.api";
+import { Session } from "next-auth";
 
 type FetchResponse<T> = { data: T; response: Response };
 
@@ -20,6 +23,15 @@ export class CloudStoreApi {
     });
     const data = await response.json();
 
+    if (!response.ok && data.type === ErrorsEnum.EXPIRED_ACCESS_TOKEN) {
+      // const session = (await auth()) as Session;
+      // const {
+      //   data: { accessToken, refreshToken },
+      // } = await AuthApi.refresh(session.user.refreshToken);
+      //
+      // return await this.fetchWithAuth<T>(endpoint, token, options);
+    }
+
     return { response, data };
   }
 
@@ -38,21 +50,28 @@ export class CloudStoreApi {
     endpoint: string;
     fetchOptions?: RequestInit;
   }): Promise<FetchResponse<T>> {
-    const session = await auth();
     const { withAuth, fetchOptions, endpoint } = options;
 
-    if (withAuth && !session) {
-      throw new Error("Unauthorized");
-    }
-
     if (withAuth) {
+      const session = await auth();
+
+      if (!session) {
+        throw new Error("Unauthorized");
+      }
+
       return await this.fetchWithAuth<T>(
         endpoint,
         session?.user.accessToken as string,
-        fetchOptions,
+        {
+          cache: "no-store",
+          ...fetchOptions,
+        },
       );
     } else {
-      return await this.fetchWithoutAuth<T>(endpoint, fetchOptions);
+      return await this.fetchWithoutAuth<T>(endpoint, {
+        cache: "no-store",
+        ...fetchOptions,
+      });
     }
   }
 }

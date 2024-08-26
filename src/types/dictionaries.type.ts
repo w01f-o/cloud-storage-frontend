@@ -4,6 +4,7 @@ export interface RootDictionary {
   pages: Pages;
   help: Help;
   settings: Settings;
+  errors: Errors;
 }
 
 interface Welcome {
@@ -26,6 +27,7 @@ interface Auth {
   passwordMinLength: string;
   passwordMaxLength: string;
   passwordPattern: string;
+  success: string;
 }
 
 interface Pages {
@@ -76,4 +78,17 @@ interface Plan {
 
 interface Avatar {
   change: string;
+}
+
+interface Errors {
+  mailer_error: string;
+  user_with_such_email_already_exists: string;
+  user_with_such_email_not_found: string;
+  wrong_email_or_password: string;
+  wrong_code: string;
+  user_not_activated: string;
+  no_refresh_token: string;
+  no_access_token: string;
+  wrong_refresh_token: string;
+  wrong_access_token: string;
 }

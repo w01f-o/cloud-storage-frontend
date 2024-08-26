@@ -14,7 +14,6 @@ import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AuthFormDto } from "@/types/dtos/authFormDto.type";
 import FormError from "@/components/features/Forms/FormError/FormError";
-import { Errors } from "@/services/errors";
 import { useParams } from "next/navigation";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useToast } from "@/hooks/useToast";
@@ -52,10 +51,11 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
 
       toast.add({
         type: "error",
-        message: Errors.generateError(error.type),
+        // @ts-expect-error
+        message: dict.errors[error.type],
       });
     } else {
-      toast.add({ type: "success", message: "Вы успешно авторизовались" });
+      toast.add({ type: "success", message: dict.auth.success });
 
       await redirectAction(`/${lang}`);
     }

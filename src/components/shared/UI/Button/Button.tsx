@@ -16,6 +16,7 @@ const Button: FC<ButtonProps> = ({
   children,
   role,
   isPending,
+  className,
   ...props
 }) => {
   return (
@@ -23,7 +24,7 @@ const Button: FC<ButtonProps> = ({
       type={type}
       title={title}
       {...props}
-      className={clsx(styles.button, styles[role], {
+      className={clsx(styles.button, styles[role], className, {
         [styles.pending]: isPending,
       })}
       disabled={isPending}

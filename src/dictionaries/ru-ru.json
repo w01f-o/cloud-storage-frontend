@@ -17,7 +17,8 @@
     "required": "Поле обязательно для заполнения",
     "passwordMinLength": "Пароль должен содержать не менее 8 символов",
     "passwordMaxLength": "Пароль должен содержать не более 16 символов",
-    "passwordPattern": "Пароль не должен содержать пробелы"
+    "passwordPattern": "Пароль не должен содержать пробелы",
+    "success": "Вы успешно авторизовались"
   },
   "pages": {
     "home": "Главная",
@@ -77,5 +78,17 @@
     "plan": {
       "improve": "Улучшить план"
     }
+  },
+  "errors": {
+    "mailer_error": "Возникла ошибка при отправке письма. Попробуйте ещё раз позже.",
+    "user_with_such_email_already_exists": "Пользователь с таким email уже существует",
+    "user_with_such_email_not_found": "Пользователь с таким email не найден",
+    "wrong_email_or_password": "Неверный email или пароль",
+    "wrong_code": "Неверный код активации",
+    "user_not_activated": "Пользователь не активирован",
+    "no_refresh_token": "Нет refresh токена",
+    "no_access_token": "Нет access токена",
+    "wrong_refresh_token": "Неверный refresh токен",
+    "wrong_access_token": "Неверный access токен"
   }
 }

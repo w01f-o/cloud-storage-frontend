@@ -50,4 +50,19 @@ export class AuthApi extends CloudStoreApi {
       },
     });
   }
+
+  public static async refresh(token: string) {
+    return await this.fetch<AuthResponse>({
+      withAuth: false,
+      endpoint: `${this.API_ENDPOINT}/refresh`,
+      fetchOptions: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+        body: JSON.stringify({ token }),
+      },
+    });
+  }
 }

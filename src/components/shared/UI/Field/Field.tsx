@@ -10,7 +10,7 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Field: FC<FieldProps> = forwardRef<HTMLInputElement, FieldProps>(
-  ({ icon, ...props }, ref) => {
+  ({ icon, className, ...props }, ref) => {
     return (
       <label
         className={clsx(styles.label, {
@@ -20,7 +20,12 @@ const Field: FC<FieldProps> = forwardRef<HTMLInputElement, FieldProps>(
         })}
       >
         {icon && icon.element}
-        <input type="text" className={styles.input} ref={ref} {...props} />
+        <input
+          type="text"
+          className={clsx(styles.input, className)}
+          ref={ref}
+          {...props}
+        />
       </label>
     );
   },
