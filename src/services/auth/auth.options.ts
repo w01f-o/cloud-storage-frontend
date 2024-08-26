@@ -73,7 +73,7 @@ export const authOptions: NextAuthConfig = {
     },
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         return {
           ...token,
@@ -83,12 +83,13 @@ export const authOptions: NextAuthConfig = {
           refreshExpiresAt: Date.now() + 1000 * 60 * 60 * 24 * 30,
         };
       } else if (Date.now() < token.accessExpiresAt) {
+        console.log(trigger);
         return token;
       } else {
         return token;
       }
     },
-    async session({ session, token }) {
+    async session({ session, token, trigger }) {
       session.user.accessToken = token.accessToken as string;
       session.user.refreshToken = token.refreshToken as string;
       session.user.accessExpiresAt = token.accessExpiresAt as number;

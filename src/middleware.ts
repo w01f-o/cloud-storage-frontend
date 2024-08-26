@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/services/auth/auth";
 import Negotiator from "negotiator";
+import { logoutAction } from "@/actions/auth.actions";
 
 const locales = ["en-US", "ru-ru", "kk-KZ"];
 
@@ -26,17 +27,16 @@ export async function middleware(req: NextRequest) {
   const session = await auth();
 
   if (session && session.user.accessExpiresAt < Date.now()) {
-    const refreshResponse = await fetch(
-      `${req.nextUrl.origin}/auth/refresh-tokens`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(session),
-      },
-    );
-
+    // const refreshResponse = await fetch(
+    //   `${req.nextUrl.origin}/auth/refresh-tokens`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(session),
+    //   },
+    // );
     return NextResponse.next();
   }
 
