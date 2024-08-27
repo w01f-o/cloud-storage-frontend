@@ -3,7 +3,7 @@ import { RootDictionary } from "@/types/dictionaries.type";
 
 export type ServerActionResult<T> =
   | { success: true; value: T }
-  | { success: false; error: keyof RootDictionary["errors"] };
+  | { success: false; error: string };
 
 export class ServerActionError extends Error {
   public constructor(message: string) {
@@ -27,7 +27,7 @@ export function createServerAction<Return, Args extends unknown[]>(
       ) {
         return {
           success: false,
-          error: error.message as keyof RootDictionary["errors"],
+          error: error.message,
         };
       }
 
