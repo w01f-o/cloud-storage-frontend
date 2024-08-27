@@ -22,6 +22,7 @@ export class CloudStoreApi {
     const data = await response.json();
 
     if (!response.ok && data.type === ErrorsEnum.EXPIRED_ACCESS_TOKEN) {
+      // return await this.fetchWithAuth<T>(endpoint, token, options);
     }
 
     return { response, data };

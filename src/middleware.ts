@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/services/auth/auth";
 import Negotiator from "negotiator";
-import { logoutAction } from "@/actions/auth.actions";
+import { AuthApi } from "@/services/auth/auth.api";
 
 const locales = ["en-US", "ru-ru", "kk-KZ"];
 
@@ -22,16 +22,37 @@ function getLocale(req: NextRequest): string {
   // return match(languages, locales, defaultLocale);
 }
 
+// TODO: REFACTORING ALL NAHUI
+
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const sessionCookie = process.env.NEXTAUTH_URL?.startsWith("https://")
+    ? "__Secure-next-auth.session-token"
+    : "authjs.session-token";
   const session = await auth();
 
   if (session && session.user.accessExpiresAt < Date.now()) {
-    const refreshResponse = await fetch(
-      `${req.nextUrl.origin}/auth/refresh-tokens`,
-    );
+    const response = NextResponse.redirect(req.nextUrl);
 
-    return NextResponse.next();
+    console.log("Token expired");
+    const oldTokenData = JSON.parse(
+      req.cookies.get(sessionCookie)?.value as string,
+    );
+    const {
+      data: { accessToken, refreshToken },
+    } = await AuthApi.refresh(oldTokenData.refreshToken);
+    const newSession = {
+      ...oldTokenData,
+      accessToken,
+      refreshToken,
+      accessExpiresAt: Date.now() + 1000 * 10,
+      refreshExpiresAt: Date.now() + 1000 * 60 * 60 * 24 * 30,
+    };
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    response.cookies.set(sessionCookie, JSON.stringify(newSession));
+
+    return response;
   }
 
   const urlLocale = locales.find((locale) => pathname.startsWith(`/${locale}`));
