@@ -1,9 +1,10 @@
+import { RootDictionary } from "@/types/dictionaries.type";
 import { CredentialsSignin } from "next-auth";
 
 export class CustomAuthError extends CredentialsSignin {
-  message: string;
+  message: keyof RootDictionary["errors"];
 
-  public constructor(message: string) {
+  public constructor(message: keyof RootDictionary["errors"]) {
     super();
     this.message = message;
   }

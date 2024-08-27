@@ -1,8 +1,9 @@
 import { CustomAuthError } from "@/services/auth/auth.error";
+import { RootDictionary } from "@/types/dictionaries.type";
 
 export type ServerActionResult<T> =
   | { success: true; value: T }
-  | { success: false; error: string };
+  | { success: false; error: keyof RootDictionary["errors"] };
 
 export class ServerActionError extends Error {
   public constructor(message: string) {
@@ -12,7 +13,7 @@ export class ServerActionError extends Error {
 }
 
 export function createServerAction<Return, Args extends unknown[]>(
-  callback: (...args: Args) => Promise<Return>,
+  callback: (...args: Args) => Promise<Return>
 ): (...args: Args) => Promise<ServerActionResult<Return>> {
   return async (...args: Args) => {
     try {
@@ -24,7 +25,10 @@ export function createServerAction<Return, Args extends unknown[]>(
         error instanceof ServerActionError ||
         error instanceof CustomAuthError
       ) {
-        return { success: false, error: error.message };
+        return {
+          success: false,
+          error: error.message as keyof RootDictionary["errors"],
+        };
       }
 
       throw error;

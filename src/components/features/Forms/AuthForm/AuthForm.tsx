@@ -47,11 +47,10 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
 
     if (!result.success) {
       const error = JSON.parse(result.error);
-
+      const type = error.type as keyof RootDictionary["errors"];
       toast.add({
         type: "error",
-        // @ts-expect-error
-        message: dict.errors[error.type],
+        message: dict.errors[type],
       });
     } else {
       toast.add({ type: "success", message: dict.auth.success });
