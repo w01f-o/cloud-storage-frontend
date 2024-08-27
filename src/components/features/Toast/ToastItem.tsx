@@ -45,7 +45,7 @@ const ToastItem: FC<ToastItemProps> = ({ item }) => {
 
   const index = items.findIndex((i) => i.id === item.id);
 
-  const closeMouseUpHandler = (e: MouseEvent<HTMLDivElement>) => {
+  const closeMouseUpHandler = () => {
     remove(item.id);
   };
 

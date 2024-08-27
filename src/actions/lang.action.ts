@@ -12,7 +12,7 @@ export const getDictionary = async (): Promise<RootDictionary> => {
   }
 
   if (!defaultLocale) {
-    throw new Error("defaultLocale is not defined");
+    throw new Error("process.env.DEFAULT_LOCALE is not defined");
   }
 
   return await loadDictionary(cookie.get(cookieLocale)?.value || defaultLocale);

@@ -15,7 +15,7 @@ function getLocale(req: NextRequest): string {
   let defaultLocale = process.env.DEFAULT_LOCALE;
 
   if (!defaultLocale) {
-    throw new Error("defaultLocale is not defined");
+    throw new Error("process.env.DEFAULT_LOCALE is not defined");
   }
 
   return defaultLocale;
@@ -34,7 +34,7 @@ export async function middleware(req: NextRequest) {
 
     console.log("Token expired");
     const oldTokenData = JSON.parse(
-      req.cookies.get(sessionCookie)?.value as string,
+      req.cookies.get(sessionCookie)?.value as string
     );
     const {
       data: { accessToken, refreshToken, accessExpiresIn, refreshExpiresIn },
@@ -71,7 +71,7 @@ export async function middleware(req: NextRequest) {
   const locale = getLocale(req);
 
   const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
   if (pathnameHasLocale) return;
 
