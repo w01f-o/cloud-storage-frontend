@@ -13,7 +13,6 @@ import Button from "@/components/shared/UI/Button/Button";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AuthFormDto } from "@/types/dtos/authFormDto.type";
-import FormError from "@/components/features/Forms/FormError/FormError";
 import { useParams } from "next/navigation";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useToast } from "@/hooks/useToast";
@@ -75,7 +74,9 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
             })}
             aria-invalid={errors.name ? "true" : "false"}
           />
-          {errors.name && <FormError message={errors.name.message as string} />}
+          {errors.name && (
+            <div className={styles.error}>{errors.name.message}</div>
+          )}
         </>
       )}
       <>
@@ -88,7 +89,9 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
           })}
           aria-invalid={errors.email ? "true" : "false"}
         />
-        {errors.email && <FormError message={errors.email.message as string} />}
+        {errors.email && (
+          <div className={styles.error}>{errors.email.message}</div>
+        )}
         <Field
           icon={{ element: <Lock />, position: "left" }}
           placeholder={dict.auth.password}
@@ -111,7 +114,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
           aria-invalid={errors.password ? "true" : "false"}
         />
         {errors.password && (
-          <FormError message={errors.password.message as string} />
+          <div className={styles.error}>{errors.password.message}</div>
         )}
       </>
       <p>

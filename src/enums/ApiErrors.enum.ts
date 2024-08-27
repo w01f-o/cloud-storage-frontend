@@ -1,4 +1,4 @@
-export enum ErrorsEnum {
+export enum ApiErrors {
   MAILER_ERROR = "mailer_error",
   USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = "user_with_such_email_already_exists",
   USER_WITH_SUCH_EMAIL_NOT_FOUND = "user_with_such_email_not_found",

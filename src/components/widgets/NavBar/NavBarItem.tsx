@@ -2,7 +2,6 @@ import { FC } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import styles from "./navbar.module.scss";
-import { Route } from "@/components/widgets/NavBar/routes";
 
 interface NavBarItemProps {
   path: string;

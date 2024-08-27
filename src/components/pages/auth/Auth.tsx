@@ -1,12 +1,16 @@
 import { FC } from "react";
-import { Col, Row } from "@w01f-o/react-grid-layout";
-import styles from "../auth.module.scss";
-import AuthForm from "@/components/features/Forms/AuthForm/AuthForm";
 import { auth } from "@/services/auth/auth";
 import { redirect } from "next/navigation";
 import { getDictionary } from "@/actions/lang.action";
+import { Col, Row } from "@w01f-o/react-grid-layout";
+import styles from "@/components/pages/auth/auth.module.scss";
+import AuthForm from "@/components/features/Forms/AuthForm/AuthForm";
 
-const Registration: FC = async () => {
+interface AuthProps {
+  type: "login" | "registration";
+}
+
+const Auth: FC<AuthProps> = async ({ type }) => {
   const session = await auth();
   if (session) {
     redirect("/");
@@ -17,10 +21,10 @@ const Registration: FC = async () => {
   return (
     <Row className={styles.row}>
       <Col xs={4}>
-        <AuthForm formType="registration" dict={dict} />
+        <AuthForm formType={type} dict={dict} />
       </Col>
     </Row>
   );
 };
 
-export default Registration;
+export default Auth;

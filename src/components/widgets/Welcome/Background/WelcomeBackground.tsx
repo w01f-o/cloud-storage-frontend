@@ -28,16 +28,16 @@ const WelcomeBackground: FC = () => {
     <div className={styles.box}>
       <animated.div style={{ ...styleFromLeft, top: 50, right: 40 }}>
         <CloudIcon size="large" />
-      </animated.div>{" "}
+      </animated.div>
       <animated.div style={{ ...styleFromTop, top: 70, left: 40 }}>
         <CloudIcon size="large" />
-      </animated.div>{" "}
+      </animated.div>
       <animated.div style={{ ...styleFromTop, top: 200, right: 270 }}>
         <CloudIcon size="large" />
-      </animated.div>{" "}
+      </animated.div>
       <animated.div style={{ ...styleFromTop, top: 150, left: 270 }}>
         <CloudIcon size="large" />
-      </animated.div>{" "}
+      </animated.div>
       <animated.div style={{ ...styleFromRight, top: 100, right: 600 }}>
         <CloudIcon size="large" />
       </animated.div>

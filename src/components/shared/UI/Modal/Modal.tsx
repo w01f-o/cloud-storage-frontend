@@ -10,14 +10,23 @@ import styles from "./modal.module.scss";
 import { animated, useTransition } from "@react-spring/web";
 import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
 import { X } from "lucide-react";
+import clsx from "clsx";
 
 interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  wrapperClassName?: string;
+  contentClassName?: string;
 }
 
-const Modal: FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
+const Modal: FC<ModalProps> = ({
+  children,
+  isOpen,
+  setIsOpen,
+  contentClassName,
+  wrapperClassName,
+}) => {
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -46,12 +55,12 @@ const Modal: FC<ModalProps> = ({ children, isOpen, setIsOpen }) => {
       item && (
         <ReactPortal>
           <animated.div
-            className={styles.modal}
+            className={clsx(styles.modal, wrapperClassName)}
             style={props}
             onMouseDown={closeModal}
           >
             <div
-              className={styles.content}
+              className={clsx(styles.content, contentClassName)}
               onMouseDown={contentMouseDownHandler}
             >
               <X className={styles.closeButton} onClick={closeModal} />

@@ -1,6 +1,6 @@
 import { Metadata, NextPage } from "next";
-import Login from "@/components/pages/auth/Login/Login";
 import { getDictionary } from "@/actions/lang.action";
+import Auth from "@/components/pages/auth/Auth";
 
 export async function generateMetadata(): Promise<Metadata> {
   const dict = await getDictionary();
@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page: NextPage = () => {
-  return <Login />;
+  return <Auth type="login" />;
 };
 
 export default Page;

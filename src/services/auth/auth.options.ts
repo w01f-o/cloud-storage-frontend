@@ -1,9 +1,9 @@
 import { type DefaultSession, NextAuthConfig } from "next-auth";
 import Credentials from "@auth/core/providers/credentials";
 import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
-import { AuthApi } from "@/services/auth/auth.api";
 import { UserData } from "@/types/userData.type";
 import { CustomAuthError } from "@/services/auth/auth.error";
+import { AuthApi } from "@/services/api/index.api";
 
 declare module "next-auth" {
   interface Session {
@@ -20,8 +20,8 @@ declare module "@auth/core/jwt" {
   interface JWT {
     accessToken: string;
     refreshToken: string;
-    accessExpiresAt: number;
-    refreshExpiresAt: number;
+    accessExpiresIn: number;
+    refreshExpiresIn: number;
   }
 }
 
@@ -51,6 +51,8 @@ export const authOptions: NextAuthConfig = {
             ...data.user,
             accessToken: data.accessToken,
             refreshToken: data.refreshToken,
+            accessExpiresIn: data.accessExpiresIn,
+            refreshExpiresIn: data.refreshExpiresIn,
           };
 
           return userData;
@@ -73,26 +75,21 @@ export const authOptions: NextAuthConfig = {
     },
   },
   callbacks: {
-    async jwt({ token, user, trigger }) {
+    async jwt({ token, user }) {
       if (user) {
-        return {
-          ...token,
-          accessToken: user.accessToken,
-          refreshToken: user.refreshToken,
-          accessExpiresAt: Date.now() + 1000 * 10,
-          refreshExpiresAt: Date.now() + 1000 * 60 * 60 * 24 * 30,
-        };
-      } else if (Date.now() < token.accessExpiresAt) {
-        return token;
-      } else {
-        return token;
+        token.accessToken = user.accessToken;
+        token.refreshToken = user.refreshToken;
+        token.accessExpiresIn = user.accessExpiresIn;
+        token.refreshExpiresIn = user.refreshExpiresIn;
       }
+
+      return token;
     },
-    async session({ session, token, trigger }) {
+    async session({ session, token }) {
       session.user.accessToken = token.accessToken as string;
       session.user.refreshToken = token.refreshToken as string;
-      session.user.accessExpiresAt = token.accessExpiresAt as number;
-      session.user.refreshExpiresAt = token.refreshExpiresAt as number;
+      session.user.accessExpiresIn = token.accessExpiresIn as number;
+      session.user.refreshExpiresIn = token.refreshExpiresIn as number;
 
       return session;
     },
@@ -114,5 +111,4 @@ export const authOptions: NextAuthConfig = {
       }
     },
   },
-  basePath: "/api/auth",
 };

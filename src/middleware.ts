@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/services/auth/auth";
 import Negotiator from "negotiator";
-import { AuthApi } from "@/services/auth/auth.api";
+import { AuthApi } from "@/services/api/index.api";
 
 const locales = ["en-US", "ru-ru", "kk-KZ"];
 
@@ -22,8 +22,6 @@ function getLocale(req: NextRequest): string {
   // return match(languages, locales, defaultLocale);
 }
 
-// TODO: REFACTORING ALL NAHUI
-
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const sessionCookie = process.env.NEXTAUTH_URL?.startsWith("https://")
@@ -31,7 +29,7 @@ export async function middleware(req: NextRequest) {
     : "authjs.session-token";
   const session = await auth();
 
-  if (session && session.user.accessExpiresAt < Date.now()) {
+  if (session && session.user.accessExpiresIn < Date.now()) {
     const response = NextResponse.redirect(req.nextUrl);
 
     console.log("Token expired");
@@ -39,28 +37,33 @@ export async function middleware(req: NextRequest) {
       req.cookies.get(sessionCookie)?.value as string,
     );
     const {
-      data: { accessToken, refreshToken },
+      data: { accessToken, refreshToken, accessExpiresIn, refreshExpiresIn },
     } = await AuthApi.refresh(oldTokenData.refreshToken);
     const newSession = {
       ...oldTokenData,
       accessToken,
       refreshToken,
-      accessExpiresAt: Date.now() + 1000 * 10,
-      refreshExpiresAt: Date.now() + 1000 * 60 * 60 * 24 * 30,
+      accessExpiresIn,
+      refreshExpiresIn,
     };
 
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    response.cookies.set(sessionCookie, JSON.stringify(newSession));
+    response.cookies.set(sessionCookie, JSON.stringify(newSession), {
+      httpOnly: true,
+    });
 
     return response;
   }
 
+  if (!process.env.COOKIE_NEXT_LOCALE) {
+    throw new Error("COOKIE_NEXT_LOCALE is not defined");
+  }
+
   const urlLocale = locales.find((locale) => pathname.startsWith(`/${locale}`));
-  const cookieLocale = req.cookies.get("NEXT_LOCALE")?.value;
+  const cookieLocale = req.cookies.get(process.env.COOKIE_NEXT_LOCALE)?.value;
 
   if (urlLocale && urlLocale !== cookieLocale) {
     const response = NextResponse.next();
-    response.cookies.set("NEXT_LOCALE", urlLocale);
+    response.cookies.set(process.env.COOKIE_NEXT_LOCALE, urlLocale);
 
     return response;
   }

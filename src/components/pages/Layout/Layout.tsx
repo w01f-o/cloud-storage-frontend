@@ -4,15 +4,12 @@ import { Col, Row } from "@w01f-o/react-grid-layout";
 import NextTopLoader from "nextjs-toploader";
 import SideBar from "@/components/widgets/Sidebar/SideBar";
 import Toast from "@/components/features/Toast/Toast";
-import { cookies } from "next/headers";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: FC<LayoutProps> = async ({ children }) => {
-  const cookie = cookies();
-
   return (
     <>
       <NextTopLoader showSpinner={false} />

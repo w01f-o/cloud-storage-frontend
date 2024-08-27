@@ -5,7 +5,7 @@ import "@w01f-o/react-grid-layout/css";
 import { Nunito_Sans } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
 import Layout from "@/components/pages/Layout/Layout";
-import Providers from "@/components/Providers";
+import Providers from "@/components/features/Providers/Providers";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
