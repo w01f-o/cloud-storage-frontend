@@ -1,2 +1,38 @@
+.wrapper {
+  position: relative;
+}
+
 .folder {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 130px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 20px 18px;
+}
+
+.name {
+  font: {
+    size: 18px;
+    weight: 600;
+  }
+}
+
+.date {
+  font: {
+    size: 14px;
+  }
+}
+
+.contextButton {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  width: 35px;
+  height: 35px;
+  background: none;
+  border: none;
 }

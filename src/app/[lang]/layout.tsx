@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import "@/styles/variables.scss";
 import "@/styles/global.scss";
 import "@w01f-o/react-grid-layout/css";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Nunito_Sans } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
 import Layout from "@/components/pages/Layout/Layout";

@@ -3,9 +3,17 @@ import { FC, SVGAttributes } from "react";
 interface RowModeProps extends SVGAttributes<HTMLOrSVGElement> {
   width?: number;
   height?: number;
+  isActive: boolean;
 }
 
-const RowMode: FC<RowModeProps> = ({ width, height, ...props }) => {
+const RowModeIcon: FC<RowModeProps> = ({
+  width,
+  height,
+  isActive,
+  ...props
+}) => {
+  const fill = isActive ? "#22215B" : "#B0C0D0";
+
   return (
     <svg
       width={width ?? 25}
@@ -18,10 +26,10 @@ const RowMode: FC<RowModeProps> = ({ width, height, ...props }) => {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M0 .667h25v1.5H0v-1.5Zm0 11.666h25v1.5H0v-1.5ZM25 24H0v1.5h25V24Z"
-        fill="#B0C0D0"
+        fill={fill}
       />
     </svg>
   );
 };
 
-export default RowMode;
+export default RowModeIcon;

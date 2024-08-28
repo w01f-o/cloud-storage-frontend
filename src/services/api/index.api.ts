@@ -6,6 +6,7 @@ import { AuthResponse } from "@/types/authResponse.type";
 import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
 import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
+import { QueryParams } from "@/types/queryParams.type";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -17,11 +18,12 @@ class CloudStoreApi {
   private static async fetchWithAuth<T>(
     endpoint: string,
     token: string,
-    options?: RequestInit,
+    options?: RequestInit
   ): Promise<FetchResponse<T>> {
     const response = await fetch(`${this.API_BASE_URL}${endpoint}`, {
       ...options,
       headers: {
+        ...options?.headers,
         Authorization: `Bearer ${token}`,
       },
     });
@@ -37,7 +39,7 @@ class CloudStoreApi {
 
   private static async fetchWithoutAuth<T>(
     endpoint: string,
-    options?: RequestInit,
+    options?: RequestInit
   ): Promise<FetchResponse<T>> {
     const response = await fetch(`${this.API_BASE_URL}${endpoint}`, options);
     const data = await response.json();
@@ -65,7 +67,7 @@ class CloudStoreApi {
         {
           cache: "no-store",
           ...fetchOptions,
-        },
+        }
       );
     } else {
       return await this.fetchWithoutAuth<T>(endpoint, {
@@ -79,9 +81,12 @@ class CloudStoreApi {
 export class FoldersApi extends CloudStoreApi {
   protected static API_ENDPOINT: string = "/folder";
 
-  public static async getAll() {
+  public static async getAll(params: QueryParams) {
+    const searchParams =
+      params.search && new URLSearchParams({ search: params.search });
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
     return await this.fetch<Folder[]>({
-      endpoint: this.API_ENDPOINT,
+      endpoint: `${this.API_ENDPOINT}${searchParams ? `?${searchParams}` : ""}`,
       withAuth: true,
     });
   }

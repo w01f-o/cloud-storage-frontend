@@ -5,8 +5,13 @@ import { SearchIcon } from "lucide-react";
 import Field from "@/components/shared/UI/Field/Field";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebounceCallback } from "usehooks-ts";
+import { RootDictionary } from "@/types/dictionaries.type";
 
-const SearchFoldersForm: FC = () => {
+interface SearchFoldersProps {
+  dict: RootDictionary;
+}
+
+const SearchFolders: FC<SearchFoldersProps> = ({ dict }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -20,21 +25,22 @@ const SearchFoldersForm: FC = () => {
       params.set("search", value);
 
       if (value === "") {
-        router.push(`${pathname}`);
-      } else {
-        router.push(`${pathname}?${params.toString()}`);
+        params.delete("search");
       }
+
+      router.push(`${pathname}?${params.toString()}`);
     },
-    500,
+    200,
   );
 
   return (
     <Field
-      placeholder="Поиск папок"
+      placeholder={dict.folders.search}
       icon={{ element: <SearchIcon />, position: "left" }}
       onChange={debouncedChangeHandler}
+      defaultValue={searchParams.get("search") || ""}
     />
   );
 };
 
-export default SearchFoldersForm;
+export default SearchFolders;

@@ -3,10 +3,11 @@ import styles from "./button.module.scss";
 import clsx from "clsx";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  type: "submit" | "reset" | "button";
-  title: string;
   children: ReactNode;
+  type: "submit" | "reset" | "button";
   role: "primary" | "secondary";
+  rounded?: boolean;
+  title: string;
   isPending?: boolean;
 }
 
@@ -15,6 +16,7 @@ const Button: FC<ButtonProps> = ({
   title,
   children,
   role,
+  rounded,
   isPending,
   className,
   ...props
@@ -26,6 +28,7 @@ const Button: FC<ButtonProps> = ({
       {...props}
       className={clsx(styles.button, styles[role], className, {
         [styles.pending]: isPending,
+        [styles.rounded]: rounded,
       })}
       disabled={isPending}
     >

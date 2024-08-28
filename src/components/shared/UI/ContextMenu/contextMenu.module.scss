@@ -1,0 +1,27 @@
+@import "@/styles/utils/mixins.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  position: fixed;
+  background: var(--color-white);
+  z-index: 1;
+  width: 200px;
+  position: absolute;
+}
+
+.item {
+  padding: 16px 20px;
+  cursor: pointer;
+
+  @include hover-screen {
+    &:hover {
+      background: var(--color-hover);
+    }
+  }
+}
+
+.button {
+}

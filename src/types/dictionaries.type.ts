@@ -5,6 +5,8 @@ export interface RootDictionary {
   help: Help;
   settings: Settings;
   errors: Errors;
+  folders: Folders;
+  date: Date;
 }
 
 interface Welcome {
@@ -91,4 +93,37 @@ interface Errors {
   no_access_token: string;
   wrong_refresh_token: string;
   wrong_access_token: string;
+}
+
+interface Folders {
+  error: string;
+  success: string;
+  create: Create;
+  notFound: string;
+  title: string;
+  name: string;
+  color: string;
+  search: string;
+  view: View;
+  empty: Empty;
+}
+
+interface Create {
+  full: string;
+  partial: string;
+}
+
+interface View {
+  row: string;
+  cells: string;
+}
+
+interface Empty {
+  title: string;
+  description: string;
+  create: string;
+}
+
+interface Date {
+  month: string[];
 }
