@@ -1,7 +1,7 @@
 import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 import styles from "./contextMenu.module.scss";
 import ContextMenuItem from "./ContextMenuItem";
-import TrippleDotsIcon from "../../Icons/TrippleDotsIcon";
+import TripleDotsIcon from "../../Icons/TrippleDotsIcon";
 import clsx from "clsx";
 import { useTransition, animated } from "@react-spring/web";
 import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
@@ -30,11 +30,11 @@ const ContextMenu: FC<ContextMenuProps> = ({
     y: 0,
   });
 
-  const clickHandler = (e: MouseEvent<HTMLButtonElement>) => {
+  const clickHandler = () => {
     setIsOpen(!isOpen);
   };
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  useOnClickOutside([buttonRef], (e) => setIsOpen(false));
+  useOnClickOutside([buttonRef], () => setIsOpen(false));
 
   const transition = useTransition(isOpen, {
     from: { opacity: 0 },
@@ -52,7 +52,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
     };
 
     resizeHandler();
-    // TODO: FIX THIS SHIT
+    // TODO: перепиши эту хуетень, не позорься...
     document
       .querySelector(".layout_scrollContainer__ElUkH")!
       .addEventListener("resize", resizeHandler);
@@ -79,7 +79,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
         type="button"
         ref={buttonRef}
       >
-        <TrippleDotsIcon fill={color} />
+        <TripleDotsIcon fill={color} />
       </button>
       {transition(
         (props, item) =>
@@ -102,7 +102,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
                 </div>
               </animated.div>
             </ReactPortal>
-          )
+          ),
       )}
     </>
   );

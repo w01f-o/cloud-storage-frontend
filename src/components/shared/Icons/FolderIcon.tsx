@@ -1,5 +1,4 @@
 import { FC, SVGAttributes } from "react";
-import Color from "colorjs.io";
 import { Utils } from "@/services/utils";
 
 interface FolderIconProps extends SVGAttributes<HTMLOrSVGElement> {

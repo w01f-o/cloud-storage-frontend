@@ -84,7 +84,7 @@ export class FoldersApi extends CloudStoreApi {
   public static async getAll(params: QueryParams) {
     const searchParams =
       params.search && new URLSearchParams({ search: params.search });
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
+
     return await this.fetch<Folder[]>({
       endpoint: `${this.API_ENDPOINT}${searchParams ? `?${searchParams}` : ""}`,
       withAuth: true,

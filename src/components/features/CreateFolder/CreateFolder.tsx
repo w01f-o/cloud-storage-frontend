@@ -69,11 +69,14 @@ const CreateFolder: FC<CreateFolderProps> = ({ dict }) => {
               required: true,
             })}
           />
-          <input
+          <Field
             type="color"
             {...register("color", {
               required: true,
             })}
+            style={{
+              height: 52,
+            }}
           />
           <Button
             type={"submit"}
