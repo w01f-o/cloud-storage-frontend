@@ -15,10 +15,7 @@ interface FoldersListProps {
 }
 
 const FoldersList: FC<FoldersListProps> = async ({ params, dict }) => {
-  let { data: folders } = await FoldersApi.getAll(params);
-  folders = folders.sort(
-    (a, b) => new Date(b.editedAt).getTime() - new Date(a.editedAt).getTime(),
-  );
+  const { data: folders } = await FoldersApi.getAll(params);
 
   return (
     <>
