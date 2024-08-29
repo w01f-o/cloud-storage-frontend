@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Toast } from "@/types/toast.type";
 import styles from "@/components/features/Toast/toast.module.scss";
 import { useAppSelector } from "@/hooks/redux";
@@ -34,9 +34,12 @@ const ToastItem: FC<ToastItemProps> = ({ item }) => {
   }, [item]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      remove(item.id);
-    }, 1000 + items.length * 200);
+    const timeout = setTimeout(
+      () => {
+        remove(item.id);
+      },
+      2000 + items.length * 200,
+    );
 
     return () => {
       clearTimeout(timeout);

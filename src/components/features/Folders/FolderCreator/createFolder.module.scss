@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  gap: 12px;
+
+  h5 {
+    align-self: center;
+    font: {
+      size: 28px;
+    }
+  }
+
+  button {
+    margin-top: 12px;
+  }
+}

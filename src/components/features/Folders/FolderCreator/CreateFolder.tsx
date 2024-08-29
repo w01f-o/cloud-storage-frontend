@@ -1,17 +1,16 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Button from "@/components/shared/UI/Button/Button";
 import { Plus } from "lucide-react";
 import styles from "./createFolder.module.scss";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { useForm } from "react-hook-form";
 import Field from "@/components/shared/UI/Field/Field";
-import { useRouter } from "next/navigation";
 import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
-import { createFolderAction } from "@/actions/folders.actions";
 import { RootDictionary } from "@/types/dictionaries.type";
-import { useToast } from "@/hooks/useToast";
+import { useSubmit } from "@/hooks/useSubmit";
+import { createFolderAction } from "@/actions/folders.actions";
 
 interface CreateFolderProps {
   dict: RootDictionary;
@@ -19,34 +18,37 @@ interface CreateFolderProps {
 
 const CreateFolder: FC<CreateFolderProps> = ({ dict }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const router = useRouter();
 
-  const clickHandler = () => {
-    setModalIsOpen(true);
+  const toggleModal = () => {
+    setModalIsOpen(!modalIsOpen);
   };
 
-  const { register, handleSubmit, reset } = useForm<CreateFolderDto>();
-  const [isPending, setIsPending] = useState<boolean>(false);
-  const toast = useToast();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+    setFocus,
+  } = useForm<CreateFolderDto>();
 
-  const submitHandler = async (data: CreateFolderDto) => {
-    router.push(`/?${new URLSearchParams({ create: data.name }).toString()}`);
-    setIsPending(true);
-    const result = await createFolderAction(data);
-    setIsPending(false);
+  const { isPending, submitHandler } = useSubmit(
+    createFolderAction,
+    {
+      reset,
+      successMessage: dict.folders.success.create,
+      errorMessage: () => dict.folders.error.create,
+      type: "create",
+    },
+    {
+      onEnd: () => setModalIsOpen(false),
+    },
+  );
 
-    if (!result.success) {
-      toast.add({
-        type: "error",
-        message: dict.folders.error,
-      });
-    } else {
-      setModalIsOpen(false);
-      toast.add({ type: "success", message: dict.folders.success });
-      reset();
-      router.refresh();
-    }
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      modalIsOpen && setFocus("name");
+    });
+  }, [modalIsOpen, setFocus]);
 
   return (
     <div className={styles.wrapper}>
@@ -55,11 +57,11 @@ const CreateFolder: FC<CreateFolderProps> = ({ dict }) => {
         role={"secondary"}
         title={dict.folders.create.full}
         rounded={true}
-        onClick={clickHandler}
+        onClick={toggleModal}
       >
         <Plus />
       </Button>
-      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
+      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
         <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
           <h5>{dict.folders.title}</h5>
           <Field
@@ -68,20 +70,21 @@ const CreateFolder: FC<CreateFolderProps> = ({ dict }) => {
             {...register("name", {
               required: true,
             })}
+            title={dict.folders.name}
+            aria-invalid={errors.name ? "true" : "false"}
           />
           <Field
             type="color"
             {...register("color", {
               required: true,
             })}
-            style={{
-              height: 52,
-            }}
+            title={dict.folders.color}
+            aria-invalid={errors.color ? "true" : "false"}
           />
           <Button
             type={"submit"}
             role={"primary"}
-            title={"Создать"}
+            title={dict.folders.create.full}
             isPending={isPending}
           >
             {dict.folders.create.partial}

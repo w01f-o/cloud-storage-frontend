@@ -5,11 +5,11 @@ import { RootDictionary } from "@/types/dictionaries.type";
 import Button from "@/components/shared/UI/Button/Button";
 import Modal from "@/components/shared/UI/Modal/Modal";
 
-interface ChangeAvatarProps {
+interface ChangePasswordProps {
   dict: RootDictionary;
 }
 
-const ChangeAvatar: FC<ChangeAvatarProps> = ({ dict }) => {
+const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const clickHandler = () => {
@@ -20,18 +20,18 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({ dict }) => {
     <>
       <Button
         role="secondary"
-        title={dict.settings.avatar.change}
+        title={dict.settings.password.change}
         type="button"
         onClick={clickHandler}
       >
-        {dict.settings.avatar.change}
+        {dict.settings.password.change}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-        {/* TODO: Add avatar change form */}
+        {/* TODO: Add password change form */}
         ...
       </Modal>
     </>
   );
 };
 
-export default ChangeAvatar;
+export default PasswordChanger;

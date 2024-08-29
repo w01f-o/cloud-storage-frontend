@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { getDictionary } from "@/actions/lang.action";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import styles from "@/components/pages/auth/auth.module.scss";
-import AuthForm from "@/components/features/Forms/AuthForm/AuthForm";
+import AuthForm from "@/components/features/Auth/AuthForm/AuthForm";
 
 interface AuthProps {
   type: "login" | "registration";

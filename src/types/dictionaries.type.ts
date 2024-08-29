@@ -96,9 +96,19 @@ interface Errors {
 }
 
 interface Folders {
-  error: string;
-  success: string;
+  error: {
+    create: string;
+    update: string;
+    delete: string;
+  };
+  success: {
+    create: string;
+    update: string;
+    delete: string;
+  };
   create: Create;
+  delete: Delete;
+  update: Update;
   notFound: string;
   title: string;
   name: string;
@@ -106,6 +116,7 @@ interface Folders {
   search: string;
   view: View;
   empty: Empty;
+  contextMenu: FoldersContextMenu;
 }
 
 interface Create {
@@ -121,9 +132,29 @@ interface View {
 interface Empty {
   title: string;
   description: string;
-  create: string;
 }
 
 interface Date {
   month: string[];
+}
+
+interface Delete {
+  full: string;
+  partial: string;
+  warning: string;
+  confirm: string;
+  question: string;
+  success: string;
+}
+
+interface Update {
+  full: string;
+  partial: string;
+  title: string;
+}
+
+interface FoldersContextMenu {
+  open: string;
+  update: string;
+  delete: string;
 }

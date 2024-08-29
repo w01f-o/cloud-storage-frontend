@@ -18,6 +18,8 @@ interface HomeProps {
 const Home: FC<HomeProps> = async ({ params }) => {
   const dict = await getDictionary();
 
+  // TODO: Create dict redux-reducer
+
   return (
     <>
       <PageTitle>{dict.pages.home}</PageTitle>

@@ -92,12 +92,32 @@
     "wrong_access_token": "Invalid access token"
   },
   "folders": {
-    "error": "An error occurred while creating the folder",
-    "success": "Folder created successfully",
+    "error": {
+      "create": "An error occurred while creating a folder",
+      "update": "An error occurred while updating a folder",
+      "delete": "An error occurred while deleting a folder"
+    },
+    "success": {
+      "create": "Folder created successfully",
+      "update": "Folder updated successfully",
+      "delete": "Folder deleted successfully"
+    },
     "title": "Create folder",
     "create": {
       "full": "Create folder",
       "partial": "Create"
+    },
+    "delete": {
+      "full": "Delete folder",
+      "partial": "Delete",
+      "warning": "All files in the folder will be deleted",
+      "question": "Are you sure you want to delete the folder?",
+      "confirm": "To confirm, enter the folder name below and click the button"
+    },
+    "update": {
+      "full": "Update folder",
+      "partial": "Update",
+      "title": "Enter the new data"
     },
     "notFound": "By your request, nothing were not found",
     "name": "Name",
@@ -109,8 +129,12 @@
     },
     "empty": {
       "title": "You don't have folders yet",
-      "description": "Click the button below to create",
-      "create": "Create a folder"
+      "description": "Click the button below to create"
+    },
+    "contextMenu": {
+      "open": "Open",
+      "update": "Update",
+      "delete": "Delete"
     }
   },
   "date": {

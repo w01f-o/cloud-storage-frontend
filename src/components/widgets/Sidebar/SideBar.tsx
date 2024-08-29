@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./sidebar.module.scss";
 import NavBar from "@/components/widgets/NavBar/NavBar";
-import SignOutButton from "@/components/features/SignOutButton/SignOutButton";
+import SignOutButton from "@/components/features/Auth/SignOutButton/SignOutButton";
 import CurrentUser from "@/components/widgets/CurrentUser/CurrentUser";
 import { auth } from "@/services/auth/auth";
 import { getDictionary } from "@/actions/lang.action";

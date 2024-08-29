@@ -5,22 +5,26 @@ import type { ContextMenuItemType } from "./ContextMenu";
 
 interface ContextMenuItemProps {
   item: ContextMenuItemType;
+  position?: "left" | "right";
 }
 
-const ContextMenuItem: FC<ContextMenuItemProps> = ({ item }) => {
+const ContextMenuItem: FC<ContextMenuItemProps> = ({ item, position }) => {
   const clickHandler = () => {
     item.action();
   };
 
   return (
-    <div
+    <button
       className={clsx(styles.item, {
         [styles.danger]: item.isDanger,
+        [styles.right]: position === "right",
       })}
       onClick={clickHandler}
+      title={item.name}
+      type="button"
     >
       {item.name}
-    </div>
+    </button>
   );
 };
 

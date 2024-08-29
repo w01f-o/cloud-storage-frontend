@@ -4,7 +4,7 @@ import styles from "./foldersList.module.scss";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import { FoldersApi } from "@/services/api/index.api";
 import { QueryParams } from "@/types/queryParams.type";
-import CreateFolder from "@/components/features/CreateFolder/CreateFolder";
+import CreateFolder from "@/components/features/Folders/FolderCreator/CreateFolder";
 import { RootDictionary } from "@/types/dictionaries.type";
 
 interface FoldersListProps {
@@ -15,7 +15,10 @@ interface FoldersListProps {
 }
 
 const FoldersList: FC<FoldersListProps> = async ({ params, dict }) => {
-  const { data: folders } = await FoldersApi.getAll(params);
+  let { data: folders } = await FoldersApi.getAll(params);
+  folders = folders.sort(
+    (a, b) => new Date(b.editedAt).getTime() - new Date(a.editedAt).getTime(),
+  );
 
   return (
     <>

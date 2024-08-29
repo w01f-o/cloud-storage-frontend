@@ -6,7 +6,7 @@ interface ImprovePlanProps {
   dict: RootDictionary;
 }
 
-const ImprovePlan: FC<ImprovePlanProps> = ({ dict }) => {
+const PlanImprover: FC<ImprovePlanProps> = ({ dict }) => {
   return (
     <Button role="secondary" title={dict.settings.plan.improve} type="button">
       {dict.settings.plan.improve}
@@ -14,4 +14,4 @@ const ImprovePlan: FC<ImprovePlanProps> = ({ dict }) => {
   );
 };
 
-export default ImprovePlan;
+export default PlanImprover;

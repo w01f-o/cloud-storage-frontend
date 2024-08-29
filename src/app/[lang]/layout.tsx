@@ -6,7 +6,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Nunito_Sans } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
 import Layout from "@/components/pages/Layout/Layout";
-import Providers from "@/components/features/Providers/Providers";
+import RootProvider from "@/components/features/Providers/RootProvider";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
@@ -21,13 +21,13 @@ const RootLayout = ({
   params: { lang: string };
 }) => {
   return (
-    <Providers>
+    <RootProvider>
       <html lang={lang}>
         <body className={nunitoSans.className}>
           <Layout>{children}</Layout>
         </body>
       </html>
-    </Providers>
+    </RootProvider>
   );
 };
 

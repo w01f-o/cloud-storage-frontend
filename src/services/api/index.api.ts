@@ -7,6 +7,7 @@ import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
 import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
 import { QueryParams } from "@/types/queryParams.type";
+import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -18,7 +19,7 @@ class CloudStoreApi {
   private static async fetchWithAuth<T>(
     endpoint: string,
     token: string,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<FetchResponse<T>> {
     const response = await fetch(`${this.API_BASE_URL}${endpoint}`, {
       ...options,
@@ -28,6 +29,8 @@ class CloudStoreApi {
       },
     });
     const data = await response.json();
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     if (data.type === ApiErrors.EXPIRED_ACCESS_TOKEN) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -39,7 +42,7 @@ class CloudStoreApi {
 
   private static async fetchWithoutAuth<T>(
     endpoint: string,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<FetchResponse<T>> {
     const response = await fetch(`${this.API_BASE_URL}${endpoint}`, options);
     const data = await response.json();
@@ -67,7 +70,7 @@ class CloudStoreApi {
         {
           cache: "no-store",
           ...fetchOptions,
-        }
+        },
       );
     } else {
       return await this.fetchWithoutAuth<T>(endpoint, {
@@ -110,14 +113,14 @@ export class FoldersApi extends CloudStoreApi {
     });
   }
 
-  public static async changeColor(id: string, newColor: string) {
+  public static async update(id: string, updateFolderDto: UpdateFolderDto) {
     return await this.fetch<Folder>({
-      endpoint: `${this.API_ENDPOINT}/color/${id}`,
+      endpoint: `${this.API_ENDPOINT}/${id}`,
       withAuth: true,
       fetchOptions: {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ newColor }),
+        body: JSON.stringify(updateFolderDto),
       },
     });
   }

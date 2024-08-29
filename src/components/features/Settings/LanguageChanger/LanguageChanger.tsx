@@ -4,16 +4,16 @@ import { FC, useState } from "react";
 import Button from "@/components/shared/UI/Button/Button";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Modal from "@/components/shared/UI/Modal/Modal";
-import styles from "./changeLanguage.module.scss";
-import { languages } from "@/components/features/Settings/ChangeLanguage/languages";
-import LanguageItem from "@/components/features/Settings/ChangeLanguage/LanguageItem";
+import styles from "./languageChanger.module.scss";
+import { languages } from "@/components/features/Settings/LanguageChanger/languages";
+import LanguageItem from "@/components/features/Settings/LanguageChanger/LanguageItem";
 
 interface ChangeLanguageProps {
   dict: RootDictionary;
   lang: string;
 }
 
-const ChangeLanguage: FC<ChangeLanguageProps> = ({ dict }) => {
+const LanguageChanger: FC<ChangeLanguageProps> = ({ dict }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const clickHandler = () => {
@@ -41,4 +41,4 @@ const ChangeLanguage: FC<ChangeLanguageProps> = ({ dict }) => {
   );
 };
 
-export default ChangeLanguage;
+export default LanguageChanger;

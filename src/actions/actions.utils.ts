@@ -1,5 +1,4 @@
 import { CustomAuthError } from "@/services/auth/auth.error";
-import { RootDictionary } from "@/types/dictionaries.type";
 
 export type ServerActionResult<T> =
   | { success: true; value: T }
@@ -13,7 +12,7 @@ export class ServerActionError extends Error {
 }
 
 export function createServerAction<Return, Args extends unknown[]>(
-  callback: (...args: Args) => Promise<Return>
+  callback: (...args: Args) => Promise<Return>,
 ): (...args: Args) => Promise<ServerActionResult<Return>> {
   return async (...args: Args) => {
     try {

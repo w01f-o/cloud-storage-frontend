@@ -5,8 +5,8 @@ interface ProvidersProps {
   children: ReactNode;
 }
 
-const Providers: FC<ProvidersProps> = ({ children }) => {
+const RootProvider: FC<ProvidersProps> = ({ children }) => {
   return <StoreProvider>{children}</StoreProvider>;
 };
 
-export default Providers;
+export default RootProvider;

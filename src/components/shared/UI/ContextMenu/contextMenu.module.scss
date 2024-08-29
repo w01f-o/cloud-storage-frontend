@@ -5,15 +5,22 @@
   flex-direction: column;
   border-radius: 20px;
   overflow: hidden;
-  position: fixed;
   background: var(--color-white);
   width: 200px;
-  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.05);
   position: relative;
   right: 0;
+  z-index: 2000;
 }
 
 .item {
+  background: transparent;
+  border: none;
+  text-align: left;
+
+  font: {
+    size: 16px;
+  }
   padding: 16px 20px;
   cursor: pointer;
 
@@ -25,5 +32,8 @@
 
   &.danger {
     color: var(--color-red);
+    font: {
+      weight: 600;
+    }
   }
 }

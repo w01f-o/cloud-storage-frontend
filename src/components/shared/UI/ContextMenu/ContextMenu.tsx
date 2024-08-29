@@ -1,7 +1,7 @@
-import { Dispatch, FC, RefObject, SetStateAction, useEffect } from "react";
+import { Dispatch, FC, RefObject, SetStateAction } from "react";
 import styles from "./contextMenu.module.scss";
 import ContextMenuItem from "./ContextMenuItem";
-import { useTransition, animated } from "@react-spring/web";
+import { animated, useTransition } from "@react-spring/web";
 import { useOnClickOutside } from "usehooks-ts";
 import layoutStyles from "@/components/pages/Layout/layout.module.scss";
 
@@ -28,7 +28,6 @@ const ContextMenu: FC<ContextMenuProps> = ({
   useOnClickOutside(buttonRef, () => {
     setIsOpen(false);
   });
-
   const transition = useTransition(isOpen, {
     from: { opacity: 0, y: "-2px" },
     enter: { opacity: 1, y: "0" },
@@ -39,7 +38,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
   const getPosition = () => {
     const rect = buttonRef.current!.getBoundingClientRect();
     const scrollContainer = document.querySelector(
-      `.${layoutStyles.scrollContainer}`
+      `.${layoutStyles.scrollContainer}`,
     ) as HTMLDivElement;
 
     if (rect.x > scrollContainer.offsetWidth) {
@@ -68,11 +67,15 @@ const ContextMenu: FC<ContextMenuProps> = ({
         >
           <div className={styles.wrapper}>
             {items.map((item) => (
-              <ContextMenuItem item={item} key={item.id} />
+              <ContextMenuItem
+                item={item}
+                key={item.id}
+                position={getPosition().right ? "right" : "left"}
+              />
             ))}
           </div>
         </animated.div>
-      )
+      ),
   );
 };
 

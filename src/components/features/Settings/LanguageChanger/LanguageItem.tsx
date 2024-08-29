@@ -1,6 +1,6 @@
 import { FC } from "react";
-import styles from "./changeLanguage.module.scss";
-import { Language } from "@/components/features/Settings/ChangeLanguage/languages";
+import styles from "./languageChanger.module.scss";
+import { Language } from "@/components/features/Settings/LanguageChanger/languages";
 import FlagIcon from "@/components/shared/Icons/FlagIcon";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useParams, useRouter } from "next/navigation";

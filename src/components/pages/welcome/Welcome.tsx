@@ -6,7 +6,7 @@ import WelcomeIcon from "@/components/shared/Icons/WelcomeIcon";
 import Button from "@/components/shared/UI/Button/Button";
 import Link from "next/link";
 import ArrowIcon from "@/components/shared/Icons/ArrowIcon";
-import WelcomeBackground from "@/components/widgets/Welcome/Background/WelcomeBackground";
+import WelcomeBackground from "@/components/widgets/WelcomeBackground/WelcomeBackground";
 import { animated, useSpring } from "@react-spring/web";
 import { RootDictionary } from "@/types/dictionaries.type";
 

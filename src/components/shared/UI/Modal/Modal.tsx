@@ -16,6 +16,7 @@ interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onClose?: () => void;
   wrapperClassName?: string;
   contentClassName?: string;
 }
@@ -26,13 +27,14 @@ const Modal: FC<ModalProps> = ({
   setIsOpen,
   contentClassName,
   wrapperClassName,
+  onClose,
 }) => {
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
   const contentMouseDownHandler = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
+  };
+
+  const mouseHandler = () => {
+    setIsOpen(false);
   };
 
   const transition = useTransition(isOpen, {
@@ -43,12 +45,22 @@ const Modal: FC<ModalProps> = ({
   });
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("body-backdrop");
-    } else {
+    const keyDownHandler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    isOpen && document.body.classList.add("body-backdrop");
+    document.body.addEventListener("keydown", keyDownHandler);
+
+    return () => {
       document.body.classList.remove("body-backdrop");
-    }
-  }, [isOpen]);
+      document.body.removeEventListener("keydown", keyDownHandler);
+
+      onClose && onClose();
+    };
+  }, [isOpen, onClose, setIsOpen]);
 
   return transition(
     (props, item) =>
@@ -57,13 +69,13 @@ const Modal: FC<ModalProps> = ({
           <animated.div
             className={clsx(styles.modal, wrapperClassName)}
             style={props}
-            onMouseDown={closeModal}
+            onMouseDown={mouseHandler}
           >
             <div
               className={clsx(styles.content, contentClassName)}
               onMouseDown={contentMouseDownHandler}
             >
-              <X className={styles.closeButton} onClick={closeModal} />
+              <X className={styles.closeButton} onClick={mouseHandler} />
               {children}
             </div>
           </animated.div>

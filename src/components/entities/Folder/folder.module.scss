@@ -17,6 +17,10 @@
     size: 18px;
     weight: 600;
   }
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .date {
