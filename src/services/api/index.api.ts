@@ -8,6 +8,7 @@ import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
 import { QueryParams } from "@/types/queryParams.type";
 import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
+import { User } from "@/types/uset.type";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -59,10 +60,6 @@ class CloudStoreApi {
 
     if (withAuth) {
       const session = await auth();
-
-      if (!session) {
-        throw new Error("Unauthorized");
-      }
 
       return await this.fetchWithAuth<T>(
         endpoint,
@@ -219,7 +216,12 @@ export class SharedFilesApi extends CloudStoreApi {
 export class UserApi extends CloudStoreApi {
   protected static API_ENDPOINT: string = "/user";
 
-  static async getUser(id: string) {}
+  static async getUser() {
+    return await this.fetch<User>({
+      endpoint: this.API_ENDPOINT,
+      withAuth: true,
+    });
+  }
 
   static async updateEmail(id: string, email: string) {}
 

@@ -4,20 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/services/auth/auth";
 import { RootDictionary } from "@/types/dictionaries.type";
+import { UserApi } from "@/services/api/index.api";
 
 interface CurrentUserProps {
   dict: RootDictionary;
 }
 
 const CurrentUser: FC<CurrentUserProps> = async ({ dict }) => {
-  const session = await auth();
-  const user = session?.user;
+  const { data: user } = await UserApi.getUser();
 
   const getAvatar = () => {
-    if (user) {
-      return `http://localhost:5000/${user.image}`;
+    if (user?.avatar) {
+      return `${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/${user.avatar}`;
     } else {
-      return `http://localhost:5000/no-avatar.svg`;
+      return `${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/no-avatar.svg`;
     }
   };
 
@@ -36,7 +36,7 @@ const CurrentUser: FC<CurrentUserProps> = async ({ dict }) => {
         />
       </div>
       <div className={styles.info}>
-        {user ? (
+        {user?.name ? (
           <>
             <div className={styles.name}>{user.name}</div>
             <div className={styles.email}>{user.email}</div>

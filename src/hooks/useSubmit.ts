@@ -22,15 +22,18 @@ interface useSubmitEvents {
 
 interface useSubmitReturn<T extends FieldValues> {
   isPending: boolean;
+  isError: boolean;
   submitHandler: SubmitHandler<T>;
 }
 
 export function useSubmit<T extends FieldValues>(
   callback: useSubmitCallback<T>,
   { type, reset, successMessage, errorMessage }: useSubmitOptions,
-  { onSuccess, onError, onEnd }: useSubmitEvents,
+  { onSuccess, onError, onEnd }: useSubmitEvents
 ): useSubmitReturn<T> {
   const [isPending, setIsPending] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+
   const router = useRouter();
   const toast = useToast();
   const pathname = usePathname();
@@ -46,11 +49,14 @@ export function useSubmit<T extends FieldValues>(
         message: errorMessage(result.error),
       });
 
+      setIsError(true);
       onError && onError(result.error);
     } else {
       type &&
         router.push(
-          `${pathname}/?${new URLSearchParams({ [type]: nanoid(4) }).toString()}`,
+          `${pathname}/?${new URLSearchParams({
+            [type]: nanoid(4),
+          }).toString()}`
         );
 
       toast.add({ type: "success", message: successMessage });
@@ -65,6 +71,7 @@ export function useSubmit<T extends FieldValues>(
 
   return {
     isPending,
+    isError,
     submitHandler,
   };
 }

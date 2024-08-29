@@ -1,4 +1,11 @@
-import { Dispatch, FC, RefObject, SetStateAction } from "react";
+import {
+  Dispatch,
+  FC,
+  MouseEvent,
+  RefObject,
+  SetStateAction,
+  useEffect,
+} from "react";
 import styles from "./contextMenu.module.scss";
 import ContextMenuItem from "./ContextMenuItem";
 import { animated, useTransition } from "@react-spring/web";
@@ -25,9 +32,20 @@ const ContextMenu: FC<ContextMenuProps> = ({
   setIsOpen,
   buttonRef,
 }) => {
-  useOnClickOutside(buttonRef, () => {
-    setIsOpen(false);
-  });
+  useEffect(() => {
+    const clickHandler = (e: any) => {
+      if (!buttonRef.current?.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.body.addEventListener("click", clickHandler);
+
+    return () => {
+      document.body.removeEventListener("click", clickHandler);
+    };
+  }, []);
+
   const transition = useTransition(isOpen, {
     from: { opacity: 0, y: "-2px" },
     enter: { opacity: 1, y: "0" },
@@ -38,7 +56,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
   const getPosition = () => {
     const rect = buttonRef.current!.getBoundingClientRect();
     const scrollContainer = document.querySelector(
-      `.${layoutStyles.scrollContainer}`,
+      `.${layoutStyles.scrollContainer}`
     ) as HTMLDivElement;
 
     if (rect.x > scrollContainer.offsetWidth) {
@@ -75,7 +93,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
             ))}
           </div>
         </animated.div>
-      ),
+      )
   );
 };
 

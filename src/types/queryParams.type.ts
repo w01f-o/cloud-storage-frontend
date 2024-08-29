@@ -1,5 +1,5 @@
 export interface QueryParams {
-  search: string | undefined;
+  search: string;
   // page: string | undefined;
   // limit: string | undefined;
 }

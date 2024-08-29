@@ -6,6 +6,7 @@ import { FoldersApi } from "@/services/api/index.api";
 import { QueryParams } from "@/types/queryParams.type";
 import CreateFolder from "@/components/features/Folders/FolderCreator/CreateFolder";
 import { RootDictionary } from "@/types/dictionaries.type";
+import folder from "@/components/entities/Folder/Folder";
 
 interface FoldersListProps {
   params: QueryParams & {
