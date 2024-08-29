@@ -7,9 +7,10 @@
   overflow: hidden;
   position: fixed;
   background: var(--color-white);
-  z-index: 1;
   width: 200px;
-  position: absolute;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  right: 0;
 }
 
 .item {
@@ -21,7 +22,8 @@
       background: var(--color-hover);
     }
   }
-}
 
-.button {
+  &.danger {
+    color: var(--color-red);
+  }
 }

@@ -1,15 +1,15 @@
 "use client";
 
-import { FC } from "react";
+import { FC, MouseEvent, useRef, useState } from "react";
 import styles from "./folder.module.scss";
 import type { Folder } from "@/types/folder.type";
 import Link from "next/link";
 import FolderIcon from "@/components/shared/Icons/FolderIcon";
 import { getDictionary } from "@/actions/lang.action";
-import TrippleDotsIcon from "@/components/shared/Icons/TrippleDotsIcon";
 import { Utils } from "@/services/utils";
 import ContextMenu from "@/components/shared/UI/ContextMenu/ContextMenu";
 import { RootDictionary } from "@/types/dictionaries.type";
+import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
 
 interface FolderProps {
   folder: Folder;
@@ -17,8 +17,16 @@ interface FolderProps {
 }
 
 const Folder: FC<FolderProps> = ({ folder, dict }) => {
+  const [contextIsOpen, setContextIsOpen] = useState<boolean>(false);
+  const contextButtonRef = useRef<HTMLButtonElement | null>(null);
+  const clickHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setContextIsOpen(!contextIsOpen);
+  };
+
   const getDate = (date: Date) => {
-    const now = new Date();
+    const now = new Date(date);
 
     return `${
       dict.date.month[now.getMonth()]
@@ -38,13 +46,26 @@ const Folder: FC<FolderProps> = ({ folder, dict }) => {
           <div className={styles.date}>{getDate(folder.editedAt)}</div>
         </div>
       </Link>
+      <button
+        className={styles.contextButton}
+        onClick={clickHandler}
+        onContextMenu={clickHandler}
+        ref={contextButtonRef}
+        title="Контекстное меню"
+        type="button"
+        aria-label="Открыть контекстное меню"
+      >
+        <TripleDotsIcon fill={Utils.saturateColor(folder.color, 0.2)} />
+      </button>
       <ContextMenu
-        color={Utils.saturateColor(folder.color, 0.2)}
-        buttonClassName={styles.contextButton}
         items={[
-          { id: 1, name: "Удалить папку", action: () => {} },
+          { id: 1, name: "Открыть", action: () => {} },
           { id: 2, name: "Изменить цвет", action: () => {} },
+          { id: 3, name: "Удалить папку", action: () => {}, isDanger: true },
         ]}
+        isOpen={contextIsOpen}
+        setIsOpen={setContextIsOpen}
+        buttonRef={contextButtonRef}
       />
     </div>
   );

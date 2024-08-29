@@ -1,10 +1,10 @@
 import { FC, SVGAttributes } from "react";
 
-interface TrippleDotsIconProps extends SVGAttributes<HTMLOrSVGElement> {
+interface TripleDotsIconProps extends SVGAttributes<HTMLOrSVGElement> {
   fill: string;
 }
 
-const TrippleDotsIcon: FC<TrippleDotsIconProps> = ({ fill, ...props }) => {
+const TripleDotsIcon: FC<TripleDotsIconProps> = ({ fill, ...props }) => {
   return (
     <svg
       width="4"
@@ -23,4 +23,4 @@ const TrippleDotsIcon: FC<TrippleDotsIconProps> = ({ fill, ...props }) => {
   );
 };
 
-export default TrippleDotsIcon;
+export default TripleDotsIcon;

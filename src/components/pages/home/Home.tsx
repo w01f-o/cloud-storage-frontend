@@ -17,7 +17,6 @@ interface HomeProps {
 
 const Home: FC<HomeProps> = async ({ params }) => {
   const dict = await getDictionary();
-  console.log(params);
 
   return (
     <>

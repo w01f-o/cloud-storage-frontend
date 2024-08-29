@@ -35,4 +35,8 @@
   height: 35px;
   background: none;
   border: none;
+
+  svg {
+    pointer-events: none;
+  }
 }

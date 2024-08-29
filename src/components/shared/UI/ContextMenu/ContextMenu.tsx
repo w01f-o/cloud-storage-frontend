@@ -1,110 +1,78 @@
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import { Dispatch, FC, RefObject, SetStateAction, useEffect } from "react";
 import styles from "./contextMenu.module.scss";
 import ContextMenuItem from "./ContextMenuItem";
-import TripleDotsIcon from "../../Icons/TrippleDotsIcon";
-import clsx from "clsx";
 import { useTransition, animated } from "@react-spring/web";
-import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
 import { useOnClickOutside } from "usehooks-ts";
-import { useSearchParams } from "next/navigation";
+import layoutStyles from "@/components/pages/Layout/layout.module.scss";
+
+export interface ContextMenuItemType {
+  id: number;
+  name: string;
+  action: () => void;
+  isDanger?: boolean;
+}
 
 interface ContextMenuProps {
-  items: Array<{
-    id: number;
-    name: string;
-    action: () => void;
-  }>;
-  color: string;
-  buttonClassName?: string;
+  items: ContextMenuItemType[];
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  buttonRef: RefObject<HTMLButtonElement>;
 }
 
 const ContextMenu: FC<ContextMenuProps> = ({
   items,
-  color,
-  buttonClassName,
+  isOpen,
+  setIsOpen,
+  buttonRef,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const searchParams = useSearchParams();
-  const [menuPosition, setMenuPosition] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
+  useOnClickOutside(buttonRef, () => {
+    setIsOpen(false);
   });
-
-  const clickHandler = () => {
-    setIsOpen(!isOpen);
-  };
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  useOnClickOutside([buttonRef], () => setIsOpen(false));
 
   const transition = useTransition(isOpen, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 200 },
+    from: { opacity: 0, y: "-2px" },
+    enter: { opacity: 1, y: "0" },
+    leave: { opacity: 0, y: "-2px" },
+    config: { duration: 100 },
   });
 
-  useEffect(() => {
-    const resizeHandler = () => {
-      if (buttonRef.current) {
-        const rect = buttonRef.current.getBoundingClientRect();
-        setMenuPosition({ x: rect.left, y: rect.y });
-      }
+  const getPosition = () => {
+    const rect = buttonRef.current!.getBoundingClientRect();
+    const scrollContainer = document.querySelector(
+      `.${layoutStyles.scrollContainer}`
+    ) as HTMLDivElement;
+
+    if (rect.x > scrollContainer.offsetWidth) {
+      return {
+        right: "35px",
+        top: "35px",
+      };
+    }
+
+    return {
+      left: "calc(100% - 15px)",
+      top: "35px",
     };
+  };
 
-    resizeHandler();
-    // TODO: перепиши эту хуетень, не позорься...
-    document
-      .querySelector(".layout_scrollContainer__ElUkH")!
-      .addEventListener("resize", resizeHandler);
-    document
-      .querySelector(".layout_scrollContainer__ElUkH")!
-      .addEventListener("scroll", resizeHandler);
-
-    return () => {
-      document
-        .querySelector(".layout_scrollContainer__ElUkH")!
-        .removeEventListener("resize", resizeHandler);
-      document
-        .querySelector(".layout_scrollContainer__ElUkH")!
-        .removeEventListener("scroll", resizeHandler);
-    };
-  }, []);
-
-  return (
-    <>
-      <button
-        className={clsx(clsx(buttonClassName), styles.button)}
-        onClick={clickHandler}
-        title="Открыть контекстное меню"
-        type="button"
-        ref={buttonRef}
-      >
-        <TripleDotsIcon fill={color} />
-      </button>
-      {transition(
-        (props, item) =>
-          item && (
-            <ReactPortal>
-              <animated.div style={props}>
-                <div
-                  className={styles.wrapper}
-                  style={{
-                    top: menuPosition.y,
-                    left:
-                      searchParams.get("view") === "row"
-                        ? menuPosition.x - 200
-                        : menuPosition.x,
-                  }}
-                >
-                  {items.map((item) => (
-                    <ContextMenuItem item={item} key={item.id} />
-                  ))}
-                </div>
-              </animated.div>
-            </ReactPortal>
-          ),
-      )}
-    </>
+  return transition(
+    (props, item) =>
+      item && (
+        <animated.div
+          style={{
+            ...props,
+            position: "absolute",
+            zIndex: 1000,
+            ...getPosition(),
+          }}
+        >
+          <div className={styles.wrapper}>
+            {items.map((item) => (
+              <ContextMenuItem item={item} key={item.id} />
+            ))}
+          </div>
+        </animated.div>
+      )
   );
 };
 

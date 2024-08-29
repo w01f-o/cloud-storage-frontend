@@ -1,12 +1,10 @@
 import { FC } from "react";
 import styles from "./contextMenu.module.scss";
+import clsx from "clsx";
+import type { ContextMenuItemType } from "./ContextMenu";
 
 interface ContextMenuItemProps {
-  item: {
-    id: number;
-    name: string;
-    action: () => void;
-  };
+  item: ContextMenuItemType;
 }
 
 const ContextMenuItem: FC<ContextMenuItemProps> = ({ item }) => {
@@ -15,7 +13,12 @@ const ContextMenuItem: FC<ContextMenuItemProps> = ({ item }) => {
   };
 
   return (
-    <div className={styles.item} onClick={clickHandler}>
+    <div
+      className={clsx(styles.item, {
+        [styles.danger]: item.isDanger,
+      })}
+      onClick={clickHandler}
+    >
       {item.name}
     </div>
   );

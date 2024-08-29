@@ -57,13 +57,6 @@ body {
   }
 }
 
-.root-portal {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  inset: 0;
-}
-
 .body-backdrop {
   &::before {
     opacity: 1;
