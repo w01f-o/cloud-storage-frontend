@@ -9,6 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${dict.pages.help} - Cloud Storage`,
   };
 }
+
 const Page: NextPage = () => {
   return <Help />;
 };

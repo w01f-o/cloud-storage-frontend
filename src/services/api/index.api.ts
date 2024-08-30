@@ -1,5 +1,6 @@
 import { auth } from "@/services/auth/auth";
 import { Folder } from "@/types/folder.type";
+import { File } from "@/types/file.type";
 import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
 import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
 import { AuthResponse } from "@/types/authResponse.type";
@@ -8,7 +9,8 @@ import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
 import { QueryParams } from "@/types/queryParams.type";
 import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
-import { User } from "@/types/uset.type";
+import { User } from "@/types/user.type";
+import { Utils } from "@/services/utils";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -29,12 +31,13 @@ class CloudStoreApi {
         Authorization: `Bearer ${token}`,
       },
     });
+
     const data = await response.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await Utils.sleep(3000);
 
     if (data.type === ApiErrors.EXPIRED_ACCESS_TOKEN) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await Utils.sleep(1000);
       return await this.fetchWithAuth<T>(endpoint, token, options);
     }
 
@@ -196,9 +199,27 @@ export class AuthApi extends CloudStoreApi {
 export class FilesApi extends CloudStoreApi {
   protected static API_ENDPOINT: string = "/file";
 
+  static async getAll(folderId: string) {
+    const params = new URLSearchParams({ folder: folderId });
+
+    return await this.fetch<File[]>({
+      endpoint: `${this.API_ENDPOINT}?${params.toString()}`,
+      withAuth: true,
+    });
+  }
+
   static async download(fileId: string) {}
 
-  static async upload(uploadFileDto: UploadFileDto) {}
+  static async upload(uploadFileData: FormData) {
+    return this.fetch<File>({
+      endpoint: `${this.API_ENDPOINT}/upload`,
+      withAuth: true,
+      fetchOptions: {
+        method: "POST",
+        body: uploadFileData,
+      },
+    });
+  }
 
   static async delete(fileId: string) {}
 }

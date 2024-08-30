@@ -32,9 +32,12 @@ export async function middleware(req: NextRequest) {
   if (session && session.user.accessExpiresIn < Date.now()) {
     const response = NextResponse.redirect(req.nextUrl);
 
-    console.log("Token expired");
+    if (process.env.NODE_ENV === "development") {
+      console.log("Token expired");
+    }
+
     const oldTokenData = JSON.parse(
-      req.cookies.get(sessionCookie)?.value as string
+      req.cookies.get(sessionCookie)?.value as string,
     );
     const {
       data: { accessToken, refreshToken, accessExpiresIn, refreshExpiresIn },
@@ -71,7 +74,7 @@ export async function middleware(req: NextRequest) {
   const locale = getLocale(req);
 
   const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
   if (pathnameHasLocale) return;
 
@@ -85,5 +88,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next).*)"],
+  matcher: ["/((?!_next).*)", "/api/:path*"],
 };

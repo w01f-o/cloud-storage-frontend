@@ -29,7 +29,7 @@ interface useSubmitReturn<T extends FieldValues> {
 export function useSubmit<T extends FieldValues>(
   callback: useSubmitCallback<T>,
   { type, reset, successMessage, errorMessage }: useSubmitOptions,
-  { onSuccess, onError, onEnd }: useSubmitEvents
+  { onSuccess, onError, onEnd }: useSubmitEvents,
 ): useSubmitReturn<T> {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -39,7 +39,15 @@ export function useSubmit<T extends FieldValues>(
   const pathname = usePathname();
 
   const submitHandler: SubmitHandler<T> = async (data: T) => {
+    type &&
+      router.push(
+        `${pathname}/?${new URLSearchParams({
+          [type]: nanoid(4),
+        }).toString()}`,
+      );
+
     setIsPending(true);
+    console.log("fetching...");
     const result = await callback(data);
     setIsPending(false);
 
@@ -52,20 +60,13 @@ export function useSubmit<T extends FieldValues>(
       setIsError(true);
       onError && onError(result.error);
     } else {
-      type &&
-        router.push(
-          `${pathname}/?${new URLSearchParams({
-            [type]: nanoid(4),
-          }).toString()}`
-        );
-
       toast.add({ type: "success", message: successMessage });
 
       reset && reset();
       onSuccess && onSuccess();
     }
 
-    router.refresh();
+    // router.refresh();
     onEnd && onEnd();
   };
 

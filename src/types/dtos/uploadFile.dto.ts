@@ -1,4 +1,4 @@
 export interface UploadFileDto {
   name: string;
-  folderId: string;
+  file: File[];
 }

@@ -5,7 +5,7 @@ export class Utils {
   public static checkLinkForActive(
     route: Route,
     pathname: string,
-    lang: string | string[]
+    lang: string | string[],
   ): boolean {
     return (
       `/${lang}${route.path}` === pathname ||
@@ -20,5 +20,9 @@ export class Utils {
     newColor.oklch.l = Math.max(0, newColor.oklch.l - amount);
 
     return newColor.toString({ format: "hex" });
+  }
+
+  public static sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }

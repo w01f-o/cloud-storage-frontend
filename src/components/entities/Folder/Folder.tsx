@@ -12,8 +12,8 @@ import ContextMenu, {
 import { RootDictionary } from "@/types/dictionaries.type";
 import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
 import { useRouter } from "next/navigation";
-import DeleteFolder from "@/components/features/Folders/FolderDeleter/DeleteFolder";
-import UpdateFolder from "@/components/features/Folders/FolderUpdater/UpdateFolder";
+import FolderDeleter from "@/components/features/Folders/FolderDeleter/FolderDeleter";
+import FolderUpdater from "@/components/features/Folders/FolderUpdater/FolderUpdater";
 
 interface FolderProps {
   folder: Folder;
@@ -112,13 +112,13 @@ const Folder: FC<FolderProps> = ({ folder, dict }) => {
         setIsOpen={setContextIsOpen}
         buttonRef={contextButtonRef}
       />
-      <DeleteFolder
+      <FolderDeleter
         folder={folder}
         modalIsOpen={deleteModalIsOpen}
         setModalIsOpen={setDeleteModalIsOpen}
         dict={dict}
       />
-      <UpdateFolder
+      <FolderUpdater
         folder={folder}
         modalIsOpen={updateModalIsOpen}
         setModalIsOpen={setUpdateModalIsOpen}

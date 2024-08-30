@@ -48,3 +48,7 @@ export const logoutAction = createServerAction(async () => {
 export const redirectAction = createServerAction(async (path: string) => {
   redirect(path);
 });
+
+export const getAccessTokenAction = createServerAction(async () => {
+  return (await auth())?.user.accessToken;
+});

@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import Button from "@/components/shared/UI/Button/Button";
 import { Plus } from "lucide-react";
-import styles from "./createFolder.module.scss";
+import styles from "./folderCreator.module.scss";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { useForm } from "react-hook-form";
 import Field from "@/components/shared/UI/Field/Field";
@@ -16,7 +16,7 @@ interface CreateFolderProps {
   dict: RootDictionary;
 }
 
-const CreateFolder: FC<CreateFolderProps> = ({ dict }) => {
+const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const toggleModal = () => {
@@ -31,7 +31,7 @@ const CreateFolder: FC<CreateFolderProps> = ({ dict }) => {
     setFocus,
   } = useForm<CreateFolderDto>();
 
-  const { isPending, submitHandler } = useSubmit(
+  const { isPending, submitHandler } = useSubmit<CreateFolderDto>(
     createFolderAction,
     {
       reset,
@@ -95,4 +95,4 @@ const CreateFolder: FC<CreateFolderProps> = ({ dict }) => {
   );
 };
 
-export default CreateFolder;
+export default FolderCreator;
