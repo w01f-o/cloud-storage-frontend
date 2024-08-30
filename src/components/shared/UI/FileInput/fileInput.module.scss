@@ -1,0 +1,17 @@
+.label {
+  display: none;
+}
+
+.uploader {
+  display: grid;
+  place-items: center;
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--color-blue_light_800);
+  border-radius: 12px;
+  cursor: pointer;
+
+  svg {
+    stroke-width: 1;
+  }
+}

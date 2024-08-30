@@ -18,11 +18,9 @@ const FolderPage: FC<FolderPageProps> = async ({ id, params }) => {
   return (
     <>
       <PageTitle>{folder.name}</PageTitle>
-      <Row className={styles.row}>
-        <Suspense key={JSON.stringify(params)} fallback={<FilesListLoader />}>
-          <FilesList folderId={folder.id} />
-        </Suspense>
-      </Row>
+      <Suspense key={JSON.stringify(params)} fallback={<FilesListLoader />}>
+        <FilesList folderId={folder.id} />
+      </Suspense>
     </>
   );
 };

@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import { uploadFileAction } from "@/actions/files.actions";
 import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
 import { useSubmit } from "@/hooks/useSubmit";
+import styles from "./fileUploader.module.scss";
+import FileInput from "@/components/shared/UI/FileInput/FileInput";
 
 interface FileUploaderProps {
   folderId: string;
@@ -20,7 +22,13 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
   const clickHandler = () => {
     setModalIsOpen(true);
   };
-  const { register, handleSubmit, reset, setValue } = useForm<UploadFileDto>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<UploadFileDto>();
 
   const { isPending, submitHandler } = useSubmit(
     (data: UploadFileDto) => {
@@ -42,7 +50,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
   );
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <Button
         role={"primary"}
         title={"Upload"}
@@ -53,19 +61,19 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
         <PlusIcon />
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-        <form onSubmit={handleSubmit(submitHandler)}>
-          <Field
-            type={"file"}
-            {...register("file", {
-              required: true,
-              onChange: (e) =>
-                setValue("name", e.target.files?.[0].name ?? "file-test"),
-            })}
+        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
+          <h5>Загрузка файла</h5>
+          <FileInput
+            {...register("file")}
+            aria-invalid={errors.file ? "true" : "false"}
+            setValue={setValue}
           />
           <Field
             {...register("name", {
               required: true,
             })}
+            aria-invalid={errors.name ? "true" : "false"}
+            placeholder={"Имя файла"}
           />
           <Button
             type={"submit"}
@@ -77,7 +85,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
           </Button>
         </form>
       </Modal>
-    </>
+    </div>
   );
 };
 

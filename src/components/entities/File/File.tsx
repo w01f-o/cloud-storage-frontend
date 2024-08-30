@@ -33,8 +33,15 @@ const File: FC<FileProps> = ({ file, dict, color }) => {
     setContextIsOpen(true);
   };
 
-  const downloadFile = () => {
-    router.replace(`/api/file/${file.id}`);
+  const downloadFile = async () => {
+    try {
+      const res = await fetch(`/api/file/${file.id}`);
+      if (res.ok) {
+        router.replace(`/api/file/${file.id}`);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const deleteFile = () => {
