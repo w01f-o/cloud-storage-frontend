@@ -40,14 +40,14 @@ export function useSubmit<T extends FieldValues>(
 
   const submitHandler: SubmitHandler<T> = async (data: T) => {
     type &&
-      router.push(
+      router.replace(
         `${pathname}/?${new URLSearchParams({
           [type]: nanoid(4),
         }).toString()}`,
       );
 
     setIsPending(true);
-    console.log("fetching...");
+
     const result = await callback(data);
     setIsPending(false);
 

@@ -11,7 +11,7 @@ interface FileProps {
 const File: FC<FileProps> = ({ file }) => {
   const router = useRouter();
   const clickHandler = async () => {
-    router.push(`/api/file/${file.id}`);
+    router.replace(`/api/file/${file.id}`);
   };
 
   return (
