@@ -2,16 +2,36 @@
 
 import { FC } from "react";
 import { File as FileType } from "@/types/file.type";
-import { useRouter } from "next/navigation";
+import { getAccessTokenAction } from "@/actions/auth.actions";
 
 interface FileProps {
   file: FileType;
 }
 
 const File: FC<FileProps> = ({ file }) => {
-  const router = useRouter();
   const clickHandler = async () => {
-    router.push(`/api/file/${file.id}`);
+    const tokenResult = await getAccessTokenAction();
+
+    if (tokenResult.success) {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/file/${file.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenResult.value}`,
+          },
+        },
+      );
+      const blob = await res.blob();
+
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = file.localName;
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(blobUrl);
+    }
   };
 
   return (
