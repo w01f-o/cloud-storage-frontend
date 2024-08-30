@@ -1,0 +1,35 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 160px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 20px 18px;
+}
+
+.name {
+  font: {
+    size: 24px;
+  }
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.contextButton {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  right: 8px;
+  top: 16px;
+  width: 35px;
+  height: 35px;
+  background: none;
+  border: none;
+
+  svg {
+    pointer-events: none;
+  }
+}

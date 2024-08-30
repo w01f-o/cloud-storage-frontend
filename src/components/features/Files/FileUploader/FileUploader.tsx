@@ -20,7 +20,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
   const clickHandler = () => {
     setModalIsOpen(true);
   };
-  const { register, handleSubmit, reset } = useForm<UploadFileDto>();
+  const { register, handleSubmit, reset, setValue } = useForm<UploadFileDto>();
 
   const { isPending, submitHandler } = useSubmit(
     (data: UploadFileDto) => {
@@ -54,8 +54,19 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
         <form onSubmit={handleSubmit(submitHandler)}>
-          <Field type={"file"} {...register("file")} />
-          <Field {...register("name")} defaultValue={"file-test"} />
+          <Field
+            type={"file"}
+            {...register("file", {
+              required: true,
+              onChange: (e) =>
+                setValue("name", e.target.files?.[0].name ?? "file-test"),
+            })}
+          />
+          <Field
+            {...register("name", {
+              required: true,
+            })}
+          />
           <Button
             type={"submit"}
             role={"primary"}

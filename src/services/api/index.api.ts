@@ -5,12 +5,12 @@ import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
 import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
 import { AuthResponse } from "@/types/authResponse.type";
 import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
-import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
 import { QueryParams } from "@/types/queryParams.type";
 import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
 import { User } from "@/types/user.type";
 import { Utils } from "@/services/utils";
+import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -212,7 +212,7 @@ export class FilesApi extends CloudStoreApi {
 
   static async upload(uploadFileData: FormData) {
     return this.fetch<File>({
-      endpoint: `${this.API_ENDPOINT}/upload`,
+      endpoint: `${this.API_ENDPOINT}`,
       withAuth: true,
       fetchOptions: {
         method: "POST",
@@ -221,7 +221,27 @@ export class FilesApi extends CloudStoreApi {
     });
   }
 
-  static async delete(fileId: string) {}
+  static async delete(fileId: string) {
+    return await this.fetch<File>({
+      endpoint: `${this.API_ENDPOINT}/${fileId}`,
+      withAuth: true,
+      fetchOptions: {
+        method: "DELETE",
+      },
+    });
+  }
+
+  static async update(fileId: string, updateFileDto: UpdateFileDto) {
+    return await this.fetch<File>({
+      endpoint: `${this.API_ENDPOINT}/${fileId}`,
+      withAuth: true,
+      fetchOptions: {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateFileDto),
+      },
+    });
+  }
 }
 
 export class SharedFilesApi extends CloudStoreApi {

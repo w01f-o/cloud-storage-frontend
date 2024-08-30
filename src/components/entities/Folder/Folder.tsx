@@ -35,14 +35,6 @@ const Folder: FC<FolderProps> = ({ folder, dict }) => {
     setContextIsOpen(!contextIsOpen);
   };
 
-  const getDate = (date: Date) => {
-    const now = new Date(date);
-
-    return `${
-      dict.date.month[now.getMonth()]
-    } ${now.getDate()}, ${now.getFullYear()}`;
-  };
-
   const contextMenuHandler =
     (action: "open" | "update" | "delete") => (): void => {
       switch (action) {
@@ -92,7 +84,9 @@ const Folder: FC<FolderProps> = ({ folder, dict }) => {
         <FolderIcon color={folder.color} className={styles.icon} />
         <div className={styles.info}>
           <div className={styles.name}>{folder.name}</div>
-          <div className={styles.date}>{getDate(folder.editedAt)}</div>
+          <div className={styles.date}>
+            {Utils.getDate(folder.editedAt, dict)}
+          </div>
         </div>
       </Link>
       <button

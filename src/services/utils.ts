@@ -1,5 +1,6 @@
 import { Route } from "@/components/widgets/NavBar/routes";
 import Color from "colorjs.io";
+import { RootDictionary } from "@/types/dictionaries.type";
 
 export class Utils {
   public static checkLinkForActive(
@@ -24,5 +25,11 @@ export class Utils {
 
   public static sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  public static getDate(date: Date, dict: RootDictionary) {
+    const now = new Date(date);
+
+    return `${dict.date.month[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
   }
 }

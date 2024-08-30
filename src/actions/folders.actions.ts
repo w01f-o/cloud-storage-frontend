@@ -2,7 +2,7 @@
 
 import { createServerAction, ServerActionError } from "@/actions/actions.utils";
 import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
-import { FoldersApi } from "@/services/api/index.api";
+import { FilesApi, FoldersApi } from "@/services/api/index.api";
 import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
 
 export const createFolderAction = createServerAction(
@@ -18,7 +18,7 @@ export const createFolderAction = createServerAction(
 );
 
 export const deleteFolderAction = createServerAction(async (id: string) => {
-  const { data, response } = await FoldersApi.delete(id);
+  const { data, response } = await FilesApi.delete(id);
 
   if (!response.ok) {
     throw new ServerActionError(JSON.stringify(data));
