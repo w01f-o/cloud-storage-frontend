@@ -3,7 +3,19 @@ import { auth } from "@/services/auth/auth";
 import Negotiator from "negotiator";
 import { AuthApi } from "@/services/api/index.api";
 
-const locales = ["en-US", "ru-ru", "kk-KZ"];
+const locales = [
+  "en-US",
+  "ru-ru",
+  "es-ES",
+  "fr-FR",
+  "de-DE",
+  "it-IT",
+  "pt-PT",
+  "zh-CN",
+  "ja-JP",
+  "ko-KR",
+  "kk-KZ",
+];
 
 function getLocale(req: NextRequest): string {
   const cookieLocale = req.cookies.get("NEXT_LOCALE")?.value;

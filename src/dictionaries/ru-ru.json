@@ -62,9 +62,18 @@
   },
   "settings": {
     "language": {
-      "change": "Изменить язык",
+      "change": "Сменить язык",
       "english": "Английский",
-      "russian": "Русский"
+      "russian": "Русский",
+      "spanish": "Испанский",
+      "french": "Французский",
+      "german": "Немецкий",
+      "italian": "Итальянский",
+      "portuguese": "Португальский",
+      "japanese": "Японский",
+      "korean": "Корейский",
+      "chinese": "Китайский",
+      "kazakhstan": "Казахский"
     },
     "password": {
       "current": "Текущий пароль",

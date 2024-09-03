@@ -2,32 +2,32 @@
   "welcome": {
     "title": "Welcome to",
     "subtitle": "Cloud Storage",
-    "description": "Reliable and convenient cloud storage for your files with unlimited access from any point of the world."
+    "description": "Reliable and convenient cloud storage for your files with unlimited access from anywhere in the world."
   },
   "auth": {
     "login": "Login",
     "registration": "Registration",
     "register": "Register",
-    "logout": "Logout",
+    "logout": "Log out",
     "password": "Password",
     "email": "Email",
     "name": "Name",
-    "dontHaveAccount": "Don't have an account?",
+    "dontHaveAccount": "Don't have an account yet?",
     "alreadyHaveAccount": "Already have an account?",
-    "required": "Field is required",
-    "passwordMinLength": "Password must contain at least 8 characters",
-    "passwordMaxLength": "Password must contain at most 16 characters",
-    "passwordPattern": "Password must not contain spaces",
-    "success": "You have successfully authenticated"
+    "required": "This field is required",
+    "passwordMinLength": "The password must contain at least 8 characters",
+    "passwordMaxLength": "The password must contain no more than 16 characters",
+    "passwordPattern": "The password must not contain spaces",
+    "success": "You have successfully logged in"
   },
   "pages": {
     "home": "Home",
     "profile": "Profile",
     "storage": "Storage",
-    "shared": "Shared",
+    "shared": "General",
     "settings": "Settings",
     "help": "Help",
-    "login": "Login",
+    "login": "Entrance",
     "registration": "Registration",
     "welcome": "Welcome"
   },
@@ -50,7 +50,7 @@
       },
       {
         "id": 4,
-        "title": "How can I change my password?",
+        "title": "How do I change my password?",
         "body": "To change your password, go to 'Settings', and click 'Change Password'. "
       },
       {
@@ -64,11 +64,20 @@
     "language": {
       "change": "Change language",
       "english": "English",
-      "russian": "Russian"
+      "russian": "Russian",
+      "spanish": "Spanish",
+      "french": "French",
+      "german": "German",
+      "italian": "Italian",
+      "portuguese": "Portuguese",
+      "japanese": "Japanese",
+      "korean": "Korean",
+      "chinese": "Chinese",
+      "kazakhstan": "Kazakh"
     },
     "password": {
-      "current": "Current password",
-      "new": "New password",
+      "current": "Current Password",
+      "new": "New Password",
       "repeat": "Repeat password",
       "change": "Change password"
     },
@@ -76,7 +85,7 @@
       "change": "Change avatar"
     },
     "plan": {
-      "improve": "Improve plan"
+      "improve": "Improve the plan"
     }
   },
   "errors": {
@@ -93,33 +102,33 @@
   },
   "folders": {
     "error": {
-      "create": "An error occurred while creating a folder",
-      "update": "An error occurred while updating a folder",
+      "create": "An error occurred while creating the folder",
+      "update": "An error occurred while updating the folder",
       "delete": "An error occurred while deleting a folder"
     },
     "success": {
       "create": "Folder created successfully",
       "update": "Folder updated successfully",
-      "delete": "Folder deleted successfully"
+      "delete": "Folder successfully deleted"
     },
-    "title": "Create folder",
+    "title": "Creating a folder",
     "create": {
-      "full": "Create folder",
+      "full": "Create a folder",
       "partial": "Create"
     },
     "delete": {
       "full": "Delete folder",
       "partial": "Delete",
-      "warning": "All files in the folder will be deleted",
+      "warning": "All attached files will be deleted",
       "question": "Are you sure you want to delete the folder?",
       "confirm": "To confirm, enter the folder name below and click the button"
     },
     "update": {
-      "full": "Update folder",
-      "partial": "Update",
-      "title": "Enter the new data"
+      "full": "Change folder",
+      "partial": "Change",
+      "title": "Enter new data"
     },
-    "notFound": "By your request, nothing were not found",
+    "notFound": "No results were found for your request",
     "name": "Name",
     "color": "Color",
     "search": "Search folders",
@@ -133,7 +142,7 @@
     },
     "actions": {
       "open": "Open",
-      "update": "Update",
+      "update": "Change",
       "delete": "Delete"
     }
   },
@@ -154,13 +163,14 @@
     ]
   },
   "profile": {
-    "folders": "Last updated folders",
-    "files": "Last updated files"
+    "folders": "Latest updated folders",
+    "files": "Latest uploaded files"
   },
   "files": {
     "empty": {
-      "title": "It's empty here. Click the button below to upload."
+      "title": "It's empty here for now. "
     },
+    "contextMenu": "Context menu",
     "actions": {
       "download": "Download",
       "delete": "Delete",
@@ -171,20 +181,20 @@
       "warning": "Are you sure you want to delete the file?",
       "full": "Delete file",
       "partial": "Delete",
-      "success": "File successfully deleted",
+      "success": "File deleted successfully",
       "error": "An error occurred while deleting the file"
     },
     "update": {
       "full": "Rename file",
       "partial": "Rename",
-      "success": "File successfully renamed",
+      "success": "The file was successfully renamed",
       "error": "An error occurred while renaming the file"
     },
     "upload": {
       "full": "Upload file",
-      "partial": "Upload",
-      "success": "File successfully uploaded",
-      "error": "An error occurred while uploading the file"
+      "partial": "Download",
+      "success": "File uploaded successfully",
+      "error": "An error occurred while downloading the file"
     }
   },
   "contextMenu": {

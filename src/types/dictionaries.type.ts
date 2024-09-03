@@ -7,8 +7,8 @@ export interface RootDictionary {
   errors: Errors;
   folders: Folders;
   date: Date;
-  files: Files;
   profile: Profile;
+  files: Files;
   contextMenu: ContextMenu;
 }
 
@@ -60,8 +60,8 @@ interface Accordion {
 interface Settings {
   language: Language;
   password: Password;
-  plan: Plan;
   avatar: Avatar;
+  plan: Plan;
 }
 
 interface Language {
@@ -77,12 +77,12 @@ interface Password {
   change: string;
 }
 
-interface Plan {
-  improve: string;
-}
-
 interface Avatar {
   change: string;
+}
+
+interface Plan {
+  improve: string;
 }
 
 interface Errors {
@@ -99,32 +99,50 @@ interface Errors {
 }
 
 interface Folders {
-  error: {
-    create: string;
-    update: string;
-    delete: string;
-  };
-  success: {
-    create: string;
-    update: string;
-    delete: string;
-  };
+  error: Error;
+  success: Success;
+  title: string;
   create: Create;
   delete: Delete;
   update: Update;
   notFound: string;
-  title: string;
   name: string;
   color: string;
   search: string;
   view: View;
   empty: Empty;
-  actions: FoldersActions;
+  actions: Actions;
+}
+
+interface Error {
+  create: string;
+  update: string;
+  delete: string;
+}
+
+interface Success {
+  create: string;
+  update: string;
+  delete: string;
 }
 
 interface Create {
   full: string;
   partial: string;
+}
+
+interface Delete {
+  full: string;
+  partial: string;
+  warning: string;
+  question: string;
+  confirm: string;
+}
+
+interface Update {
+  full: string;
+  partial: string;
+  title: string;
 }
 
 interface View {
@@ -137,29 +155,14 @@ interface Empty {
   description: string;
 }
 
-interface Date {
-  month: string[];
-}
-
-interface Delete {
-  full: string;
-  partial: string;
-  warning: string;
-  confirm: string;
-  question: string;
-  success: string;
-}
-
-interface Update {
-  full: string;
-  partial: string;
-  title: string;
-}
-
-interface FoldersActions {
+interface Actions {
   open: string;
   update: string;
   delete: string;
+}
+
+interface Date {
+  month: string[];
 }
 
 interface Profile {
@@ -168,39 +171,48 @@ interface Profile {
 }
 
 interface Files {
-  empty: {
-    title: string;
-  };
-  actions: {
-    download: string;
-    delete: string;
-    rename: string;
-    share: string;
-  };
-  delete: {
-    warning: string;
-    full: string;
-    partial: string;
-    success: string;
-    error: string;
-  };
-  update: {
-    full: string;
-    partial: string;
-    success: string;
-    error: string;
-  };
-  upload: UploadFile;
+  empty: Empty2;
+  contextMenu: string;
+  actions: Actions2;
+  delete: Delete2;
+  update: Update2;
+  upload: Upload;
+}
+
+interface Empty2 {
+  title: string;
+}
+
+interface Actions2 {
+  download: string;
+  delete: string;
+  rename: string;
+  share: string;
+}
+
+interface Delete2 {
+  warning: string;
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
+}
+
+interface Update2 {
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
+}
+
+interface Upload {
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
 }
 
 interface ContextMenu {
   title: string;
   ariaLabel: string;
-}
-
-interface UploadFile {
-  full: string;
-  partial: string;
-  success: string;
-  error: string;
 }

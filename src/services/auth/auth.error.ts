@@ -1,4 +1,3 @@
-import { RootDictionary } from "@/types/dictionaries.type";
 import { CredentialsSignin } from "next-auth";
 
 export class CustomAuthError extends CredentialsSignin {

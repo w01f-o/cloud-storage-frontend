@@ -17,6 +17,8 @@
   background: var(--color-white);
   border-radius: 15px;
   padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .closeButton {
