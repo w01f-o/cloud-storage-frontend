@@ -20,7 +20,7 @@ const Profile: FC = async () => {
           <UserProfile />
         </Col>
         <Col xs={6} className={styles.foldersCol}>
-          <h3 className={styles.title}>Последние обновленные папки</h3>
+          <h3 className={styles.title}>{dict.profile.folders}</h3>
           <Suspense
             fallback={<FoldersListLoader view={"cells"} length={7} width={4} />}
           >
@@ -30,7 +30,7 @@ const Profile: FC = async () => {
           </Suspense>
         </Col>
         <Col xs={6} className={styles.filesCol}>
-          <h3 className={styles.title}>Последние загруженные</h3>
+          <h3 className={styles.title}>{dict.profile.files}</h3>
           <Suspense fallback={<FilesListLoader length={5} height={45} />}>
             <Row>
               <LastUploadedFiles />

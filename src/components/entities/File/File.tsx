@@ -53,10 +53,18 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
     setUpdaterIsOpen(true);
   };
 
+  const shareFile = () => {};
+
   const contextMenuItems: ContextMenuItemType[] = [
-    { id: 1, name: "Загрузить", action: downloadFile },
-    { id: 2, name: "Переименовать", action: updateFile },
-    { id: 3, name: "Удалить", action: deleteFile, isDanger: true },
+    { id: 1, name: dict.files.actions.download, action: downloadFile },
+    { id: 2, name: dict.files.actions.rename, action: updateFile },
+    { id: 3, name: dict.files.actions.share, action: shareFile },
+    {
+      id: 4,
+      name: dict.files.actions.delete,
+      action: deleteFile,
+      isDanger: true,
+    },
   ];
 
   return (
@@ -98,9 +106,9 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
             ref={contextButtonRef}
             onClick={contextButtonClickHandler}
             onContextMenu={contextButtonClickHandler}
-            title="Контекстное меню"
+            title={dict.contextMenu.title}
             type="button"
-            aria-label="Открыть контекстное меню"
+            aria-label={dict.contextMenu.ariaLabel}
           >
             <TripleDotsIcon fill={"#567df4"} />
           </button>

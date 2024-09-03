@@ -7,6 +7,9 @@ export interface RootDictionary {
   errors: Errors;
   folders: Folders;
   date: Date;
+  files: Files;
+  profile: Profile;
+  contextMenu: ContextMenu;
 }
 
 interface Welcome {
@@ -116,7 +119,7 @@ interface Folders {
   search: string;
   view: View;
   empty: Empty;
-  contextMenu: FoldersContextMenu;
+  actions: FoldersActions;
 }
 
 interface Create {
@@ -153,8 +156,51 @@ interface Update {
   title: string;
 }
 
-interface FoldersContextMenu {
+interface FoldersActions {
   open: string;
   update: string;
   delete: string;
+}
+
+interface Profile {
+  folders: string;
+  files: string;
+}
+
+interface Files {
+  empty: {
+    title: string;
+  };
+  actions: {
+    download: string;
+    delete: string;
+    rename: string;
+    share: string;
+  };
+  delete: {
+    warning: string;
+    full: string;
+    partial: string;
+    success: string;
+    error: string;
+  };
+  update: {
+    full: string;
+    partial: string;
+    success: string;
+    error: string;
+  };
+  upload: UploadFile;
+}
+
+interface ContextMenu {
+  title: string;
+  ariaLabel: string;
+}
+
+interface UploadFile {
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
 }

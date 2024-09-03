@@ -131,7 +131,7 @@
       "title": "You don't have folders yet",
       "description": "Click the button below to create"
     },
-    "contextMenu": {
+    "actions": {
       "open": "Open",
       "update": "Update",
       "delete": "Delete"
@@ -152,5 +152,43 @@
       "November",
       "December"
     ]
+  },
+  "profile": {
+    "folders": "Last updated folders",
+    "files": "Last updated files"
+  },
+  "files": {
+    "empty": {
+      "title": "It's empty here. Click the button below to upload."
+    },
+    "actions": {
+      "download": "Download",
+      "delete": "Delete",
+      "rename": "Rename",
+      "share": "Share"
+    },
+    "delete": {
+      "warning": "Are you sure you want to delete the file?",
+      "full": "Delete file",
+      "partial": "Delete",
+      "success": "File successfully deleted",
+      "error": "An error occurred while deleting the file"
+    },
+    "update": {
+      "full": "Rename file",
+      "partial": "Rename",
+      "success": "File successfully renamed",
+      "error": "An error occurred while renaming the file"
+    },
+    "upload": {
+      "full": "Upload file",
+      "partial": "Upload",
+      "success": "File successfully uploaded",
+      "error": "An error occurred while uploading the file"
+    }
+  },
+  "contextMenu": {
+    "title": "Context menu",
+    "ariaLabel": "Open context menu"
   }
 }

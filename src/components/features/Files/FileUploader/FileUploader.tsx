@@ -12,24 +12,20 @@ import { useSubmit } from "@/hooks/useSubmit";
 import styles from "./fileUploader.module.scss";
 import { useDropzone } from "react-dropzone";
 import clsx from "clsx";
+import { RootDictionary } from "@/types/dictionaries.type";
 
 interface FileUploaderProps {
   folderId: string;
+  dict: RootDictionary;
 }
 
-const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
+const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const clickHandler = () => {
     setModalIsOpen(true);
   };
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm<UploadFileDto>();
+  const { register, handleSubmit, reset, setValue } = useForm<UploadFileDto>();
 
   const { isPending, submitHandler } = useSubmit(
     (data: UploadFileDto) => {
@@ -43,8 +39,8 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
     },
     {
       reset,
-      successMessage: "File uploaded",
-      errorMessage: () => "Error",
+      successMessage: dict.files.upload.success,
+      errorMessage: () => dict.files.upload.error,
       type: "upload",
     },
     { onEnd: () => setModalIsOpen(false) },
@@ -82,7 +78,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
         onClose={closeModalHandler}
       >
         <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-          <h5>Загрузка файла</h5>
+          <h5>{dict.files.upload.full}</h5>
           <div
             {...getRootProps()}
             className={clsx(styles.file, {
@@ -101,16 +97,14 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
               required: true,
             })}
             hidden
-            aria-invalid={errors.name ? "true" : "false"}
-            placeholder={"Имя файла"}
           />
           <Button
             type={"submit"}
             role={"primary"}
-            title={"Upload"}
+            title={dict.files.upload.full}
             isPending={isPending}
           >
-            Upload
+            {dict.files.upload.partial}
           </Button>
         </form>
       </Modal>

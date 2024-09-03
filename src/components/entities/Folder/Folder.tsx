@@ -60,17 +60,17 @@ const Folder: FC<FolderProps> = ({ folder, dict, extended }) => {
   const contextMenuItems: ContextMenuItemType[] = [
     {
       id: 1,
-      name: dict.folders.contextMenu.open,
+      name: dict.folders.actions.open,
       action: contextMenuHandler("open"),
     },
     {
       id: 2,
-      name: dict.folders.contextMenu.update,
+      name: dict.folders.actions.update,
       action: contextMenuHandler("update"),
     },
     {
       id: 3,
-      name: dict.folders.contextMenu.delete,
+      name: dict.folders.actions.delete,
       action: contextMenuHandler("delete"),
       isDanger: true,
     },
@@ -100,9 +100,9 @@ const Folder: FC<FolderProps> = ({ folder, dict, extended }) => {
             onClick={contextMenuClickHandler}
             onContextMenu={contextMenuClickHandler}
             ref={contextButtonRef}
-            title="Контекстное меню"
+            title={dict.contextMenu.title}
             type="button"
-            aria-label="Открыть контекстное меню"
+            aria-label={dict.contextMenu.ariaLabel}
           >
             <TripleDotsIcon fill={Utils.saturateColor(folder.color, 0.2)} />
           </button>

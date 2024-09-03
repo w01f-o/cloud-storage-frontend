@@ -6,6 +6,7 @@ import Button from "@/components/shared/UI/Button/Button";
 import { useForm } from "react-hook-form";
 import { useSubmit } from "@/hooks/useSubmit";
 import { deleteFileAction } from "@/actions/files.actions";
+import styles from "./fileDeleter.module.scss";
 
 interface FileDeleterProps {
   modalIsOpen: boolean;
@@ -18,6 +19,7 @@ const FileDeleter: FC<FileDeleterProps> = ({
   file,
   setModalIsOpen,
   modalIsOpen,
+  dict,
 }) => {
   const { handleSubmit } = useForm();
 
@@ -25,22 +27,23 @@ const FileDeleter: FC<FileDeleterProps> = ({
     () => deleteFileAction(file.id),
     {
       type: "delete",
-      errorMessage: () => "Error",
-      successMessage: "Folder deleted",
+      errorMessage: () => dict.files.delete.error,
+      successMessage: dict.files.delete.success,
     },
     { onEnd: () => setModalIsOpen(false) },
   );
 
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
+        <h5>{dict.files.delete.warning}</h5>
         <Button
           type={"submit"}
           role={"primary"}
-          title={"Delete"}
+          title={dict.files.delete.full}
           isPending={isPending}
         >
-          Delete
+          {dict.files.delete.partial}
         </Button>
       </form>
     </Modal>

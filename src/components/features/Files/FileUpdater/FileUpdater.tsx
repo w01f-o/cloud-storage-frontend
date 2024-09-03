@@ -21,6 +21,7 @@ const FileUpdater: FC<FileUpdaterProps> = ({
   file,
   setModalIsOpen,
   modalIsOpen,
+  dict,
 }) => {
   const { handleSubmit, reset, register, setFocus } = useForm<UpdateFileDto>();
   const { submitHandler, isPending } = useSubmit<UpdateFileDto>(
@@ -28,8 +29,8 @@ const FileUpdater: FC<FileUpdaterProps> = ({
     {
       reset,
       type: "update",
-      errorMessage: () => "Error",
-      successMessage: "File updated",
+      errorMessage: () => dict.files.update.error,
+      successMessage: dict.files.update.success,
     },
     {
       onEnd: () => setModalIsOpen(false),
@@ -44,7 +45,8 @@ const FileUpdater: FC<FileUpdaterProps> = ({
 
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
+        <h5> {dict.files.update.full}</h5>
         <Field
           {...register("name", {
             required: true,
@@ -54,10 +56,10 @@ const FileUpdater: FC<FileUpdaterProps> = ({
         <Button
           type={"submit"}
           role={"primary"}
-          title={"Update"}
+          title={dict.files.update.full}
           isPending={isPending}
         >
-          Update
+          {dict.files.update.partial}
         </Button>
       </form>
     </Modal>

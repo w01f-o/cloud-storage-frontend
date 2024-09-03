@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 24px;
+  gap: 24px;
+
+  h5 {
+    text-align: center;
+    color: var(--color-red);
+    font: {
+      size: 24px;
+    }
+  }
+}

@@ -18,9 +18,7 @@ const FilesList: FC<FilesListProps> = async ({ folderId }) => {
     <>
       <Row className={styles.row}>
         {!files.length && (
-          <div className={styles.empty}>
-            Здесь пока пусто. Хотите загрузить новый файл?
-          </div>
+          <div className={styles.empty}>{dict.files.empty.title}</div>
         )}
         {!!files.length &&
           files.map((file) => (
@@ -29,7 +27,7 @@ const FilesList: FC<FilesListProps> = async ({ folderId }) => {
             </Col>
           ))}
       </Row>
-      <FileUploader folderId={folderId} />
+      <FileUploader folderId={folderId} dict={dict} />
     </>
   );
 };
