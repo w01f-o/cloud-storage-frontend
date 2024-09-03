@@ -16,6 +16,7 @@
     "@types/negotiator": "^0.6.3",
     "@w01f-o/react-grid-layout": "^1.0.3",
     "autoprefixer": "^10.4.20",
+    "chart.js": "^4.4.4",
     "clsx": "^2.1.1",
     "colorjs.io": "^0.5.2",
     "dotenv": "^16.4.5",

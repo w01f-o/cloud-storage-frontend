@@ -11,6 +11,7 @@ import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
 import { User } from "@/types/user.type";
 import { Utils } from "@/services/utils";
 import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
+import { Storage } from "@/types/storage.type";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -272,6 +273,13 @@ export class UserApi extends CloudStoreApi {
   static async getUser() {
     return await this.fetch<User>({
       endpoint: this.API_ENDPOINT,
+      withAuth: true,
+    });
+  }
+
+  static async getStorage() {
+    return await this.fetch<Storage>({
+      endpoint: `${this.API_ENDPOINT}/storage`,
       withAuth: true,
     });
   }
