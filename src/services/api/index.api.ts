@@ -34,8 +34,6 @@ class CloudStoreApi {
 
     const data = await response.json();
 
-    // await Utils.sleep(3000);
-
     if (data.type === ApiErrors.EXPIRED_ACCESS_TOKEN) {
       await Utils.sleep(1000);
       return await this.fetchWithAuth<T>(endpoint, token, options);
@@ -97,6 +95,13 @@ export class FoldersApi extends CloudStoreApi {
   public static async getById(id: string) {
     return await this.fetch<Folder>({
       endpoint: `${this.API_ENDPOINT}/${id}`,
+      withAuth: true,
+    });
+  }
+
+  public static async getLastUpdated() {
+    return await this.fetch<Folder[]>({
+      endpoint: `${this.API_ENDPOINT}/last_updated`,
       withAuth: true,
     });
   }
@@ -204,6 +209,13 @@ export class FilesApi extends CloudStoreApi {
 
     return await this.fetch<File[]>({
       endpoint: `${this.API_ENDPOINT}?${params.toString()}`,
+      withAuth: true,
+    });
+  }
+
+  static async getLastUploaded() {
+    return await this.fetch<File[]>({
+      endpoint: `${this.API_ENDPOINT}/last_uploaded`,
       withAuth: true,
     });
   }

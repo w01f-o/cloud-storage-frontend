@@ -11,11 +11,50 @@
   align-items: center;
   height: 100%;
   padding: 24px;
-  gap: 12px;
 
   h5 {
     font: {
       size: 24px;
     }
+  }
+}
+
+.file {
+  display: grid;
+  place-items: center;
+  width: 120px;
+  height: 120px;
+  border: 2px dashed var(--color-blue_light_800);
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 24px 0;
+
+  svg {
+    stroke-width: 1;
+  }
+
+  &.dragEnter {
+    border-color: var(--color-blue_dark_600);
+  }
+
+  &.error {
+    border-color: var(--color-red_600);
+  }
+
+  &.ready {
+    border-color: var(--color-green);
+  }
+}
+
+.fileName {
+  padding-bottom: 24px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+
+  font: {
+    size: 20px;
   }
 }

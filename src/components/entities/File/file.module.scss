@@ -1,29 +1,56 @@
 .wrapper {
   position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 160px;
+  align-items: center;
+  gap: 20px;
+  height: 60px;
   border-radius: 20px;
   margin-bottom: 20px;
-  padding: 20px 18px;
+
+  &.minify {
+    height: 45px;
+    padding: 0;
+
+    .name {
+      font: {
+        size: 18px;
+      }
+    }
+
+    .date {
+      font: {
+        size: 14px;
+      }
+    }
+
+    .size {
+      color: var(--color-gray);
+      font: {
+        size: 14px;
+      }
+      width: 15%;
+    }
+
+    .info {
+      align-items: flex-start;
+      width: 65%;
+    }
+  }
 }
 
 .name {
   font: {
-    size: 24px;
+    size: 22px;
   }
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  max-width: 80%;
 }
 
 .contextButton {
   display: grid;
   place-items: center;
-  position: absolute;
-  right: 8px;
-  top: 16px;
   width: 35px;
   height: 35px;
   background: none;
@@ -31,5 +58,19 @@
 
   svg {
     pointer-events: none;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-grow: 1;
+}
+
+.size {
+  color: var(--color-gray);
+  font: {
+    size: 14px;
   }
 }

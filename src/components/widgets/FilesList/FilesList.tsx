@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FilesApi, FoldersApi } from "@/services/api/index.api";
+import { FilesApi } from "@/services/api/index.api";
 import FileUploader from "@/components/features/Files/FileUploader/FileUploader";
 import File from "@/components/entities/File/File";
 import { Col, Row } from "@w01f-o/react-grid-layout";
@@ -12,21 +12,20 @@ interface FilesListProps {
 
 const FilesList: FC<FilesListProps> = async ({ folderId }) => {
   const { data: files } = await FilesApi.getAll(folderId);
-  const {
-    data: { color },
-  } = await FoldersApi.getById(folderId);
   const dict = await getDictionary();
 
   return (
     <>
       <Row className={styles.row}>
         {!files.length && (
-          <div>Здесь пока пусто. Хотите загрузить новый файл?</div>
+          <div className={styles.empty}>
+            Здесь пока пусто. Хотите загрузить новый файл?
+          </div>
         )}
         {!!files.length &&
           files.map((file) => (
-            <Col xs={2} key={file.id}>
-              <File file={file} dict={dict} color={color} />
+            <Col xs={12} key={file.id}>
+              <File file={file} dict={dict} extended />
             </Col>
           ))}
       </Row>

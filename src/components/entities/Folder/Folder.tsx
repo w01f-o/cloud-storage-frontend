@@ -14,13 +14,15 @@ import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
 import { useRouter } from "next/navigation";
 import FolderDeleter from "@/components/features/Folders/FolderDeleter/FolderDeleter";
 import FolderUpdater from "@/components/features/Folders/FolderUpdater/FolderUpdater";
+import clsx from "clsx";
 
 interface FolderProps {
   folder: Folder;
   dict: RootDictionary;
+  extended: boolean;
 }
 
-const Folder: FC<FolderProps> = ({ folder, dict }) => {
+const Folder: FC<FolderProps> = ({ folder, dict, extended }) => {
   const [contextIsOpen, setContextIsOpen] = useState<boolean>(false);
 
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState<boolean>(false);
@@ -77,7 +79,9 @@ const Folder: FC<FolderProps> = ({ folder, dict }) => {
   return (
     <div className={styles.wrapper}>
       <Link
-        className={styles.folder}
+        className={clsx(styles.folder, {
+          [styles.minify]: !extended,
+        })}
         style={{ background: folder.color }}
         href={`/folder/${folder.id}`}
       >
@@ -89,35 +93,39 @@ const Folder: FC<FolderProps> = ({ folder, dict }) => {
           </div>
         </div>
       </Link>
-      <button
-        className={styles.contextButton}
-        onClick={contextMenuClickHandler}
-        onContextMenu={contextMenuClickHandler}
-        ref={contextButtonRef}
-        title="Контекстное меню"
-        type="button"
-        aria-label="Открыть контекстное меню"
-      >
-        <TripleDotsIcon fill={Utils.saturateColor(folder.color, 0.2)} />
-      </button>
-      <ContextMenu
-        items={contextMenuItems}
-        isOpen={contextIsOpen}
-        setIsOpen={setContextIsOpen}
-        buttonRef={contextButtonRef}
-      />
-      <FolderDeleter
-        folder={folder}
-        modalIsOpen={deleteModalIsOpen}
-        setModalIsOpen={setDeleteModalIsOpen}
-        dict={dict}
-      />
-      <FolderUpdater
-        folder={folder}
-        modalIsOpen={updateModalIsOpen}
-        setModalIsOpen={setUpdateModalIsOpen}
-        dict={dict}
-      />
+      {extended && (
+        <>
+          <button
+            className={styles.contextButton}
+            onClick={contextMenuClickHandler}
+            onContextMenu={contextMenuClickHandler}
+            ref={contextButtonRef}
+            title="Контекстное меню"
+            type="button"
+            aria-label="Открыть контекстное меню"
+          >
+            <TripleDotsIcon fill={Utils.saturateColor(folder.color, 0.2)} />
+          </button>
+          <ContextMenu
+            items={contextMenuItems}
+            isOpen={contextIsOpen}
+            setIsOpen={setContextIsOpen}
+            buttonRef={contextButtonRef}
+          />
+          <FolderDeleter
+            folder={folder}
+            modalIsOpen={deleteModalIsOpen}
+            setModalIsOpen={setDeleteModalIsOpen}
+            dict={dict}
+          />
+          <FolderUpdater
+            folder={folder}
+            modalIsOpen={updateModalIsOpen}
+            setModalIsOpen={setUpdateModalIsOpen}
+            dict={dict}
+          />
+        </>
+      )}
     </div>
   );
 };

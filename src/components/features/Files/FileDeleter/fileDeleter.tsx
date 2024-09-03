@@ -1,12 +1,11 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import styles from "./fileDeleter.module.scss";
 import { File } from "@/types/file.type";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Button from "@/components/shared/UI/Button/Button";
 import { useForm } from "react-hook-form";
 import { useSubmit } from "@/hooks/useSubmit";
-import { deleteFolderAction } from "@/actions/folders.actions";
+import { deleteFileAction } from "@/actions/files.actions";
 
 interface FileDeleterProps {
   modalIsOpen: boolean;
@@ -23,7 +22,7 @@ const FileDeleter: FC<FileDeleterProps> = ({
   const { handleSubmit } = useForm();
 
   const { isPending, submitHandler } = useSubmit(
-    () => deleteFolderAction(file.id),
+    () => deleteFileAction(file.id),
     {
       type: "delete",
       errorMessage: () => "Error",

@@ -1,8 +1,8 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import Button from "@/components/shared/UI/Button/Button";
-import { PlusIcon } from "lucide-react";
+import { FileIcon, PlusIcon } from "lucide-react";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import Field from "@/components/shared/UI/Field/Field";
 import { useForm } from "react-hook-form";
@@ -10,7 +10,8 @@ import { uploadFileAction } from "@/actions/files.actions";
 import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
 import { useSubmit } from "@/hooks/useSubmit";
 import styles from "./fileUploader.module.scss";
-import FileInput from "@/components/shared/UI/FileInput/FileInput";
+import { useDropzone } from "react-dropzone";
+import clsx from "clsx";
 
 interface FileUploaderProps {
   folderId: string;
@@ -49,6 +50,21 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
     { onEnd: () => setModalIsOpen(false) },
   );
 
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+
+  const onDrop = (acceptedFiles: File[]) => {
+    setValue("file", acceptedFiles);
+    setUploadedFile(acceptedFiles[0]);
+    setValue("name", acceptedFiles[0].name);
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const closeModalHandler = useCallback(() => {
+    reset();
+    setUploadedFile(null);
+  }, [reset]);
+
   return (
     <div className={styles.wrapper}>
       <Button
@@ -60,18 +76,31 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId }) => {
       >
         <PlusIcon />
       </Button>
-      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
+      <Modal
+        isOpen={modalIsOpen}
+        setIsOpen={setModalIsOpen}
+        onClose={closeModalHandler}
+      >
         <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
           <h5>Загрузка файла</h5>
-          <FileInput
-            {...register("file")}
-            aria-invalid={errors.file ? "true" : "false"}
-            setValue={setValue}
-          />
+          <div
+            {...getRootProps()}
+            className={clsx(styles.file, {
+              [styles.dragEnter]: isDragActive,
+              [styles.ready]: uploadedFile,
+            })}
+          >
+            <FileIcon />
+            <input type="file" {...getInputProps()} />
+          </div>
+          {uploadedFile && (
+            <div className={styles.fileName}>{uploadedFile.name}</div>
+          )}
           <Field
             {...register("name", {
               required: true,
             })}
+            hidden
             aria-invalid={errors.name ? "true" : "false"}
             placeholder={"Имя файла"}
           />

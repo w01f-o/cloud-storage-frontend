@@ -36,7 +36,7 @@ const FoldersList: FC<FoldersListProps> = async ({ params, dict }) => {
         <Row className={styles.row}>
           {folders.map((folder) => (
             <Col key={folder.id} xs={params.view === "row" ? 12 : 2}>
-              <Folder folder={folder} dict={dict} />
+              <Folder folder={folder} dict={dict} extended />
             </Col>
           ))}
           <Col xs={12}>

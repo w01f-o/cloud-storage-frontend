@@ -1,26 +1,27 @@
 "use client";
 
-import { FC, useRef, useState, MouseEvent } from "react";
+import { FC, MouseEvent, useRef, useState } from "react";
 import { File as FileType } from "@/types/file.type";
 import { useRouter } from "next/navigation";
 import styles from "./file.module.scss";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { Utils } from "@/services/utils";
-import { File as FileIcon } from "lucide-react";
 import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
 import ContextMenu, {
   ContextMenuItemType,
 } from "@/components/shared/UI/ContextMenu/ContextMenu";
 import FileDeleter from "@/components/features/Files/FileDeleter/fileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
+import FileIcons from "@/components/widgets/FileIcons/FileIcons";
+import clsx from "clsx";
 
 interface FileProps {
   file: FileType;
   dict: RootDictionary;
-  color: string;
+  extended: boolean;
 }
 
-const File: FC<FileProps> = ({ file, dict, color }) => {
+const File: FC<FileProps> = ({ file, dict, extended }) => {
   const router = useRouter();
   const [contextIsOpen, setContextIsOpen] = useState<boolean>(false);
   const contextButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -30,7 +31,7 @@ const File: FC<FileProps> = ({ file, dict, color }) => {
 
   const contextButtonClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setContextIsOpen(true);
+    setContextIsOpen(!contextIsOpen);
   };
 
   const downloadFile = async () => {
@@ -59,39 +60,70 @@ const File: FC<FileProps> = ({ file, dict, color }) => {
   ];
 
   return (
-    <div className={styles.wrapper} style={{ background: color }}>
-      <FileIcon width={32} height={32} />
-      <div className={styles.name}>{file.name}</div>
-      <div className={styles.date}>{Utils.getDate(file.addedAt, dict)}</div>
-      <button
-        className={styles.contextButton}
-        ref={contextButtonRef}
-        onClick={contextButtonClickHandler}
-        onContextMenu={contextButtonClickHandler}
-        title="Контекстное меню"
-        type="button"
-        aria-label="Открыть контекстное меню"
-      >
-        <TripleDotsIcon fill={Utils.saturateColor(color, 0.2)} />
-      </button>
-      <ContextMenu
-        items={contextMenuItems}
-        isOpen={contextIsOpen}
-        setIsOpen={setContextIsOpen}
-        buttonRef={contextButtonRef}
-      />
-      <FileDeleter
-        modalIsOpen={deleterIsOpen}
-        setModalIsOpen={setDeleterIsOpen}
-        file={file}
-        dict={dict}
-      />
-      <FileUpdater
-        modalIsOpen={updaterIsOpen}
-        setModalIsOpen={setUpdaterIsOpen}
-        file={file}
-        dict={dict}
-      />
+    <div
+      className={clsx(styles.wrapper, {
+        [styles.minify]: !extended,
+      })}
+    >
+      <FileIcons fileType={file.type} />
+      {extended ? (
+        <>
+          <div className={styles.name}>{file.name}</div>
+          <div className={styles.info}>
+            <div className={styles.date}>
+              {Utils.getDate(file.addedAt, dict)}
+            </div>
+            <div className={styles.size}>
+              {Math.round(file.size / 1024)} кбайт
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.info}>
+            <div className={styles.name}> {file.name}</div>
+            <div className={styles.date}>
+              {Utils.getDate(file.addedAt, dict)}
+            </div>
+          </div>
+          <div className={styles.size}>
+            {Math.round(file.size / 1024)} кбайт
+          </div>
+        </>
+      )}
+      {extended && (
+        <>
+          <button
+            className={styles.contextButton}
+            ref={contextButtonRef}
+            onClick={contextButtonClickHandler}
+            onContextMenu={contextButtonClickHandler}
+            title="Контекстное меню"
+            type="button"
+            aria-label="Открыть контекстное меню"
+          >
+            <TripleDotsIcon fill={"#567df4"} />
+          </button>
+          <ContextMenu
+            items={contextMenuItems}
+            isOpen={contextIsOpen}
+            setIsOpen={setContextIsOpen}
+            buttonRef={contextButtonRef}
+          />
+          <FileDeleter
+            modalIsOpen={deleterIsOpen}
+            setModalIsOpen={setDeleterIsOpen}
+            file={file}
+            dict={dict}
+          />
+          <FileUpdater
+            modalIsOpen={updaterIsOpen}
+            setModalIsOpen={setUpdaterIsOpen}
+            file={file}
+            dict={dict}
+          />
+        </>
+      )}
     </div>
   );
 };

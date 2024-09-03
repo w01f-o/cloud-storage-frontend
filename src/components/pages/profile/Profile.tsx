@@ -1,10 +1,13 @@
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 import { getDictionary } from "@/actions/lang.action";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import UserProfile from "@/components/widgets/UserProfile/UserProfile";
-import FoldersList from "@/components/widgets/FoldersList/FoldersList";
-import MyFolders from "@/components/widgets/MyFolders/MyFolders";
+import LastUpdatedFolders from "@/components/widgets/MyFolders/LastUpdatedFolders";
+import LastUploadedFiles from "@/components/widgets/LastUploadedFiles/LastUploadedFiles";
+import styles from "./profile.module.scss";
+import FoldersListLoader from "@/components/widgets/Loaders/FoldersListLoader/FoldersListLoader";
+import FilesListLoader from "@/components/widgets/Loaders/FilesListLoader/FilesListLoader";
 
 const Profile: FC = async () => {
   const dict = await getDictionary();
@@ -12,14 +15,28 @@ const Profile: FC = async () => {
   return (
     <>
       <PageTitle>{dict.pages.profile}</PageTitle>
-      <Row>
+      <Row className={styles.row}>
         <Col xs={12}>
           <UserProfile />
         </Col>
-        <Col xs={6}>
-          <Row>{/* <MyFolders /> */}</Row>
+        <Col xs={6} className={styles.foldersCol}>
+          <h3 className={styles.title}>Последние обновленные папки</h3>
+          <Suspense
+            fallback={<FoldersListLoader view={"cells"} length={7} width={4} />}
+          >
+            <Row>
+              <LastUpdatedFolders />
+            </Row>
+          </Suspense>
         </Col>
-        <Col xs={6}></Col>
+        <Col xs={6} className={styles.filesCol}>
+          <h3 className={styles.title}>Последние загруженные</h3>
+          <Suspense fallback={<FilesListLoader length={5} height={45} />}>
+            <Row>
+              <LastUploadedFiles />
+            </Row>
+          </Suspense>
+        </Col>
       </Row>
     </>
   );
