@@ -5,7 +5,6 @@ import { Storage } from "@/types/storage.type";
 import styles from "./storageDoughnut.module.scss";
 import { Chart, registerables } from "chart.js";
 import { Utils } from "@/services/utils";
-import { useRouter } from "next/navigation";
 
 Chart.register(...registerables);
 
