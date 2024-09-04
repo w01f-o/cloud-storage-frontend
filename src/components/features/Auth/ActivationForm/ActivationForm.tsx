@@ -8,7 +8,7 @@ import {
   useEffect,
 } from "react";
 import { RootDictionary } from "@/types/dictionaries.type";
-import styles from "./activateForm.module.scss";
+import styles from "./activationForm.module.scss";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import Field from "@/components/shared/UI/Field/Field";
 import { useForm } from "react-hook-form";
@@ -27,7 +27,7 @@ interface FormState {
   input4: string;
 }
 
-const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
+const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
   const {
     handleSubmit,
     register,
@@ -79,9 +79,11 @@ const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
     e: KeyboardEvent<HTMLInputElement>,
     prevInput: keyof FormState | null,
   ) => {
+    const key = e.key || e.code;
+
     if (
       prevInput &&
-      e.code === "Backspace" &&
+      key === "Backspace" &&
       !(e.target as HTMLInputElement).value
     ) {
       setFocus(prevInput);
@@ -90,6 +92,7 @@ const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
 
   const pasteHandler = (e: ClipboardEvent<HTMLInputElement>) => {
     const code = e.clipboardData?.getData("Text").split("");
+
     if (code?.length === 4 && code.every((char) => !isNaN(+char))) {
       setFocus("input4");
       setValue("input1", code[0] || "");
@@ -118,8 +121,8 @@ const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
     <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
       <h5>{dict.activation.title}</h5>
       <p>{dict.activation.description}</p>
-      <Row>
-        <Col xs={3}>
+      <Row className={styles.fieldsRow}>
+        <Col xs={12}>
           <Field
             type="number"
             {...register("input1", {
@@ -134,7 +137,7 @@ const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
             autoFocus
           />
         </Col>
-        <Col xs={3}>
+        <Col xs={12}>
           <Field
             type="number"
             {...register("input2", {
@@ -149,7 +152,7 @@ const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
             single
           />
         </Col>
-        <Col xs={3}>
+        <Col xs={12}>
           <Field
             type="number"
             {...register("input3", {
@@ -164,7 +167,7 @@ const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
             single
           />
         </Col>
-        <Col xs={3}>
+        <Col xs={12}>
           <Field
             type="number"
             {...register("input4", {
@@ -192,4 +195,4 @@ const ActivateForm: FC<ActivateFormProps> = ({ dict }) => {
   );
 };
 
-export default ActivateForm;
+export default ActivationForm;

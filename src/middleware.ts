@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/services/auth/auth";
 import Negotiator from "negotiator";
-import { AuthApi } from "@/services/api/index.api";
+import { AuthApi, UserApi } from "@/services/api/index.api";
 
 const locales = [
   "en-US",
@@ -40,6 +40,14 @@ export async function middleware(req: NextRequest) {
     ? "__Secure-next-auth.session-token"
     : "authjs.session-token";
   const session = await auth();
+
+  const locale = getLocale(req);
+
+  // const { data: user } = await UserApi.getUser();
+  // if (!user?.isActivated && !pathname.startsWith(`/${locale}/activation`)) {
+  //   req.nextUrl.pathname = `/${locale}/activation`;
+  //   return NextResponse.redirect(req.nextUrl);
+  // }
 
   if (session && session.user.accessExpiresIn < Date.now()) {
     const response = NextResponse.redirect(req.nextUrl);
@@ -83,14 +91,13 @@ export async function middleware(req: NextRequest) {
     return response;
   }
 
-  const locale = getLocale(req);
-
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
   if (pathnameHasLocale) return;
 
   req.nextUrl.pathname = `/${locale}${pathname}`;
+
   const protectedRoutes = ["/", "/profile", "/storage", "/shared", "/settings"];
   if (!session && protectedRoutes.includes(pathname)) {
     req.nextUrl.pathname = `/${locale}/welcome`;
