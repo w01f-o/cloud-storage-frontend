@@ -1,15 +1,7 @@
-import {
-  Dispatch,
-  FC,
-  MouseEvent,
-  RefObject,
-  SetStateAction,
-  useEffect,
-} from "react";
+import { Dispatch, FC, RefObject, SetStateAction } from "react";
 import styles from "./contextMenu.module.scss";
 import ContextMenuItem from "./ContextMenuItem";
 import { animated, useTransition } from "@react-spring/web";
-import { useOnClickOutside } from "usehooks-ts";
 import layoutStyles from "@/components/pages/Layout/layout.module.scss";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
@@ -49,9 +41,23 @@ const ContextMenu: FC<ContextMenuProps> = ({
     ) as HTMLDivElement;
 
     if (rect.x > scrollContainer.offsetWidth) {
+      if (rect.bottom + 50 * items.length > scrollContainer.offsetHeight) {
+        return {
+          right: "35px",
+          bottom: "35px",
+        };
+      }
+      // TODO: FIX THIS SHIT
       return {
         right: "35px",
         top: "35px",
+      };
+    }
+
+    if (rect.bottom + 50 * items.length > scrollContainer.offsetHeight) {
+      return {
+        left: "35px",
+        bottom: "35px",
       };
     }
 

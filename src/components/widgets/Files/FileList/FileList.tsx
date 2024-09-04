@@ -2,15 +2,15 @@ import { FC } from "react";
 import { FilesApi } from "@/services/api/index.api";
 import FileUploader from "@/components/features/Files/FileUploader/FileUploader";
 import File from "@/components/entities/File/File";
-import { Col, Row } from "@w01f-o/react-grid-layout";
+import { Col } from "@w01f-o/react-grid-layout";
 import { getDictionary } from "@/actions/lang.action";
 import styles from "@/components/pages/folder/folderPage.module.scss";
 
-interface FilesListProps {
+interface FileListProps {
   folderId: string;
 }
 
-const FilesList: FC<FilesListProps> = async ({ folderId }) => {
+const FileList: FC<FileListProps> = async ({ folderId }) => {
   const { data: files } = await FilesApi.getAll(folderId);
   const dict = await getDictionary();
 
@@ -32,4 +32,4 @@ const FilesList: FC<FilesListProps> = async ({ folderId }) => {
   );
 };
 
-export default FilesList;
+export default FileList;

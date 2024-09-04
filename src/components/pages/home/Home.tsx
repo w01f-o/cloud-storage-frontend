@@ -6,7 +6,7 @@ import { Col, Row } from "@w01f-o/react-grid-layout";
 import styles from "./home.module.scss";
 import ViewModeSwitcher from "@/components/widgets/Folders/ViewModeSwitcher/ViewModeSwitcher";
 import SearchFolders from "@/components/widgets/Folders/SearchFolders/SearchFolders";
-import FoldersList from "@/components/widgets/Folders/FoldersList/FoldersList";
+import FolderList from "@/components/widgets/Folders/FolderList/FolderList";
 import FoldersListLoader from "@/components/widgets/Loaders/FoldersListLoader/FoldersListLoader";
 
 interface HomeProps {
@@ -33,7 +33,7 @@ const Home: FC<HomeProps> = async ({ params }) => {
         key={JSON.stringify(params)}
         fallback={<FoldersListLoader view={params.view} length={15} />}
       >
-        <FoldersList params={params} dict={dict} />
+        <FolderList params={params} dict={dict} />
       </Suspense>
     </>
   );

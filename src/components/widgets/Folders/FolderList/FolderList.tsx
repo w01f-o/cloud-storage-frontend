@@ -1,20 +1,20 @@
 import { FC } from "react";
 import Folder from "@/components/entities/Folder/Folder";
-import styles from "./foldersList.module.scss";
+import styles from "./folderList.module.scss";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import { FoldersApi } from "@/services/api/index.api";
 import { QueryParams } from "@/types/queryParams.type";
 import FolderCreator from "@/components/features/Folders/FolderCreator/FolderCreator";
 import { RootDictionary } from "@/types/dictionaries.type";
 
-interface FoldersListProps {
+interface FolderListProps {
   params: QueryParams & {
     view: "row" | "cells";
   };
   dict: RootDictionary;
 }
 
-const FoldersList: FC<FoldersListProps> = async ({ params, dict }) => {
+const FolderList: FC<FolderListProps> = async ({ params, dict }) => {
   const { data: folders } = await FoldersApi.getAll(params);
 
   return (
@@ -47,4 +47,4 @@ const FoldersList: FC<FoldersListProps> = async ({ params, dict }) => {
   );
 };
 
-export default FoldersList;
+export default FolderList;

@@ -2,7 +2,7 @@ import { FoldersApi } from "@/services/api/index.api";
 import { FC, Suspense } from "react";
 import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 import FilesListLoader from "@/components/widgets/Loaders/FilesListLoader/FilesListLoader";
-import FilesList from "@/components/widgets/Files/FilesList/FilesList";
+import FileList from "@/components/widgets/Files/FileList/FileList";
 import { QueryParams } from "@/types/queryParams.type";
 import { Row } from "@w01f-o/react-grid-layout";
 import styles from "./folderPage.module.scss";
@@ -23,7 +23,7 @@ const FolderPage: FC<FolderPageProps> = async ({ id, params }) => {
           key={JSON.stringify(params)}
           fallback={<FilesListLoader length={15} />}
         >
-          <FilesList folderId={folder.id} />
+          <FileList folderId={folder.id} />
         </Suspense>
       </Row>
     </>
