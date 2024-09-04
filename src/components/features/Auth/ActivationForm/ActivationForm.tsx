@@ -122,7 +122,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
       <h5>{dict.activation.title}</h5>
       <p>{dict.activation.description}</p>
       <Row className={styles.fieldsRow}>
-        <Col xs={12}>
+        <Col xs={3}>
           <Field
             type="number"
             {...register("input1", {
@@ -137,7 +137,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
             autoFocus
           />
         </Col>
-        <Col xs={12}>
+        <Col xs={3}>
           <Field
             type="number"
             {...register("input2", {
@@ -152,7 +152,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
             single
           />
         </Col>
-        <Col xs={12}>
+        <Col xs={3}>
           <Field
             type="number"
             {...register("input3", {
@@ -167,7 +167,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
             single
           />
         </Col>
-        <Col xs={12}>
+        <Col xs={3}>
           <Field
             type="number"
             {...register("input4", {
