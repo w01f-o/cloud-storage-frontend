@@ -24,7 +24,7 @@
     "home": "Home",
     "profile": "Profile",
     "storage": "Storage",
-    "shared": "General",
+    "shared": "Shared",
     "settings": "Settings",
     "help": "Help",
     "login": "Entrance",
@@ -200,5 +200,28 @@
   "contextMenu": {
     "title": "Context menu",
     "ariaLabel": "Open context menu"
+  },
+  "storage": {
+    "space": {
+      "free": "Available",
+      "total": "Total",
+      "used": "Used"
+    },
+    "fileTypes": {
+      "image": "Images",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Documents",
+      "jar": "Java packages",
+      "exe": "Executable files",
+      "other": "Other"
+    },
+    "sizes": {
+      "b": "B",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB",
+      "tb": "TB"
+    }
   }
 }

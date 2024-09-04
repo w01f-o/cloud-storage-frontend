@@ -1,6 +1,7 @@
 import { Route } from "@/components/widgets/NavBar/routes";
 import Color from "colorjs.io";
 import { RootDictionary } from "@/types/dictionaries.type";
+import JavaIcon from "@/components/shared/Icons/JavaIcon";
 
 export class Utils {
   public static checkLinkForActive(
@@ -27,9 +28,73 @@ export class Utils {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  public static formatBytes(
+    bytes: number,
+    dict: RootDictionary,
+    to?: keyof RootDictionary["storage"]["sizes"],
+  ): string {
+    const format = (to: keyof RootDictionary["storage"]["sizes"]) => {
+      switch (to) {
+        case "kb":
+          return bytes / 1024;
+        case "mb":
+          return bytes / 1024 / 1024;
+        case "gb":
+          return bytes / 1024 / 1024 / 1024;
+        case "tb":
+          return bytes / 1024 / 1024 / 1024 / 1024;
+
+        default:
+          return bytes;
+      }
+    };
+
+    if (to) {
+      return `${format(to).toFixed(2)} ${dict.storage.sizes[to]}`;
+    }
+
+    const temptResult = format("mb");
+
+    if (temptResult < 1) {
+      return `${format("kb").toFixed(2)} ${dict.storage.sizes.kb}`;
+    }
+
+    if (temptResult > 500) {
+      return `${format("gb").toFixed(2)} ${dict.storage.sizes.gb}`;
+    }
+
+    return `${format("mb").toFixed(2)} ${dict.storage.sizes.mb}`;
+  }
+
   public static getDate(date: Date, dict: RootDictionary) {
     const now = new Date(date);
 
     return `${dict.date.month[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+  }
+
+  public static getInfoStyles(type: string) {
+    switch (type) {
+      case "image":
+        return {
+          color: "#ffbf00",
+        };
+      case "video":
+        return {
+          color: "#68afd3",
+        };
+      case "jar":
+        return {
+          color: "#f87070",
+        };
+      case "msword":
+        return {
+          color: "#EEF7FE",
+        };
+
+      default:
+        return {
+          color: "#567df4",
+        };
+    }
   }
 }

@@ -1,7 +1,15 @@
-import { File } from "@/types/file.type";
+export interface Category {
+  type: string;
+  size: number;
+}
+
+export interface Space {
+  used: number;
+  free: number;
+  total: number;
+}
 
 export interface Storage {
-  usedSpace: bigint;
-  freeSpace: bigint;
-  files: Pick<File, "type" | "size">[];
+  category: Category[];
+  space: Space;
 }

@@ -1,0 +1,37 @@
+.row {
+  flex-grow: 1;
+  align-items: center;
+}
+
+.free {
+  margin-bottom: 12px;
+  color: var(--color-blue_dark);
+  text-align: center;
+  font: {
+    size: 26px;
+    weight: 800;
+  }
+}
+
+.total {
+  margin-bottom: 6px;
+  color: var(--color-blue_dark);
+  text-align: center;
+  font: {
+    size: 18px;
+  }
+}
+
+.used {
+  color: var(--color-blue_dark);
+  text-align: center;
+  font: {
+    size: 18px;
+  }
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

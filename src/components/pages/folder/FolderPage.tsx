@@ -4,6 +4,8 @@ import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 import FilesListLoader from "@/components/widgets/Loaders/FilesListLoader/FilesListLoader";
 import FilesList from "@/components/widgets/FilesList/FilesList";
 import { QueryParams } from "@/types/queryParams.type";
+import { Row } from "@w01f-o/react-grid-layout";
+import styles from "./folderPage.module.scss";
 
 interface FolderPageProps {
   id: string;
@@ -16,12 +18,14 @@ const FolderPage: FC<FolderPageProps> = async ({ id, params }) => {
   return (
     <>
       <PageTitle>{folder.name}</PageTitle>
-      <Suspense
-        key={JSON.stringify(params)}
-        fallback={<FilesListLoader length={15} />}
-      >
-        <FilesList folderId={folder.id} />
-      </Suspense>
+      <Row className={styles.row}>
+        <Suspense
+          key={JSON.stringify(params)}
+          fallback={<FilesListLoader length={15} />}
+        >
+          <FilesList folderId={folder.id} />
+        </Suspense>
+      </Row>
     </>
   );
 };

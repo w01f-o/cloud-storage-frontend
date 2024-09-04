@@ -16,18 +16,18 @@ const FilesList: FC<FilesListProps> = async ({ folderId }) => {
 
   return (
     <>
-      <Row className={styles.row}>
-        {!files.length && (
-          <div className={styles.empty}>{dict.files.empty.title}</div>
-        )}
-        {!!files.length &&
-          files.map((file) => (
-            <Col xs={12} key={file.id}>
-              <File file={file} dict={dict} extended />
-            </Col>
-          ))}
-      </Row>
-      <FileUploader folderId={folderId} dict={dict} />
+      {!files.length && (
+        <div className={styles.empty}>{dict.files.empty.title}</div>
+      )}
+      {!!files.length &&
+        files.map((file) => (
+          <Col xs={12} key={file.id}>
+            <File file={file} dict={dict} extended />
+          </Col>
+        ))}
+      <Col xs={12}>
+        <FileUploader folderId={folderId} dict={dict} />
+      </Col>
     </>
   );
 };

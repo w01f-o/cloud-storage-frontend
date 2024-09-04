@@ -12,7 +12,7 @@ import ContextMenu, {
 } from "@/components/shared/UI/ContextMenu/ContextMenu";
 import FileDeleter from "@/components/features/Files/FileDeleter/fileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
-import FileIcons from "@/components/widgets/FileIcons/FileIcons";
+import FileIcons from "@/components/widgets/FileIcon/FileIcons";
 import clsx from "clsx";
 
 interface FileProps {
@@ -82,20 +82,20 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
               {Utils.getDate(file.addedAt, dict)}
             </div>
             <div className={styles.size}>
-              {Math.round(file.size / 1024)} кбайт
+              {Utils.formatBytes(file.size, dict)}
             </div>
           </div>
         </>
       ) : (
         <>
           <div className={styles.info}>
-            <div className={styles.name}> {file.name}</div>
+            <div className={styles.name}>{file.name}</div>
             <div className={styles.date}>
               {Utils.getDate(file.addedAt, dict)}
             </div>
           </div>
           <div className={styles.size}>
-            {Math.round(file.size / 1024)} кбайт
+            {Utils.formatBytes(file.size, dict)}
           </div>
         </>
       )}

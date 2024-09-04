@@ -277,11 +277,18 @@ export class UserApi extends CloudStoreApi {
     });
   }
 
-  static async getStorage() {
-    return await this.fetch<Storage>({
+  static async getUserStorage() {
+    const result = await this.fetch<Storage>({
       endpoint: `${this.API_ENDPOINT}/storage`,
       withAuth: true,
     });
+
+    for (const key in result.data.space) {
+      result.data.space[key as keyof typeof result.data.space] =
+        +result.data.space[key as keyof typeof result.data.space];
+    }
+
+    return result;
   }
 
   static async updateEmail(id: string, email: string) {}

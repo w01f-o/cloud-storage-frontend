@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dot {
+  $size: 10px;
+
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.line {
+  width: 50%;
+  height: 6px;
+  border-radius: 16px;
+  background: var(--color-blue_light_200);
+  position: relative;
+}
+
+.progress {
+  position: absolute;
+  height: inherit;
+  border-radius: inherit;
+  top: 0;
+  right: 0;
+  background: var(--color-red);
+}
+
+.size {
+  font: {
+    size: 18px;
+  }
+}
+
+.type {
+  font: {
+    size: 22px;
+  }
+}

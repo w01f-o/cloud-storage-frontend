@@ -3,7 +3,10 @@
 import { FC, useEffect } from "react";
 import { Storage } from "@/types/storage.type";
 import styles from "./doughnutStorage.module.scss";
-import Chart from "chart.js/auto";
+import { Chart, registerables } from "chart.js";
+import { Utils } from "@/services/utils";
+
+Chart.register(...registerables);
 
 interface DoughnutStorageProps {
   storage: Storage;
@@ -12,35 +15,41 @@ interface DoughnutStorageProps {
 const DoughnutStorage: FC<DoughnutStorageProps> = ({ storage }) => {
   useEffect(() => {
     const canvas = document.querySelector<HTMLCanvasElement>(
-      `.${styles.canvas}`,
+      `#doughnut-canvas`,
     ) as HTMLCanvasElement;
+    const data = storage.category.map((item) => item.size);
+    const labels = storage.category.map((item) => item.type);
+    const colors = labels.map((label) => Utils.getInfoStyles(label).color);
 
-    const data = Array.from(
-      new Set(storage.files.map((file) => file.type)),
-    ).map((type) => {
-      return storage.files.reduce((acc, current) => {
-        if (current.type === type) {
-          return acc + current.size;
-        }
-
-        return acc;
-      }, 0);
-    });
-
-    new Chart(canvas, {
+    const chart = new Chart(canvas, {
       type: "doughnut",
       data: {
         datasets: [
           {
             data,
-            backgroundColor: ["#4caf50", "#f44336"],
+            backgroundColor: colors,
           },
         ],
       },
+      options: {
+        plugins: {
+          tooltip: {
+            enabled: false,
+          },
+        },
+      },
     });
-  }, [storage.files, storage.freeSpace, storage.usedSpace]);
 
-  return <canvas className={styles.canvas}></canvas>;
+    return () => {
+      chart.destroy();
+    };
+  }, [storage.category]);
+
+  return (
+    <div className={styles.wrapper}>
+      <canvas id="doughnut-canvas"></canvas>
+    </div>
+  );
 };
 
 export default DoughnutStorage;

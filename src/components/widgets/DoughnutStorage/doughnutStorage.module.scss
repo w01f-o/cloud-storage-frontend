@@ -1,3 +1,7 @@
-.canvas {
-  width: 100%;
+.wrapper {
+  display: grid;
+  place-items: center;
+  width: 60%;
+  height: 280px;
+  margin-bottom: 12px;
 }

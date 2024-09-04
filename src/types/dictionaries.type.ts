@@ -10,6 +10,7 @@ export interface RootDictionary {
   profile: Profile;
   files: Files;
   contextMenu: ContextMenu;
+  storage: Storage;
 }
 
 interface Welcome {
@@ -215,4 +216,34 @@ interface Upload {
 interface ContextMenu {
   title: string;
   ariaLabel: string;
+}
+
+interface Storage {
+  space: Space;
+  fileTypes: FileTypes;
+  sizes: Sizes;
+}
+
+interface Space {
+  used: string;
+  free: string;
+  total: string;
+}
+
+interface FileTypes {
+  image: string;
+  video: string;
+  audio: string;
+  document: string;
+  jar: string;
+  exe: string;
+  other: string;
+}
+
+interface Sizes {
+  b: string;
+  kb: string;
+  mb: string;
+  gb: string;
+  tb: string;
 }

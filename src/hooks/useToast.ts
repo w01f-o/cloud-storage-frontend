@@ -17,12 +17,12 @@ type useToastReturn = {
 
 export const useToast = (): useToastReturn => {
   const dispatch = useAppDispatch();
-
   const { items } = useAppSelector((state) => state.toast);
 
   const add = (toast: Omit<Toast, "id">): void => {
     dispatch(addToast(toast));
   };
+
   const remove = (id: string): void => {
     dispatch(removeToast(id));
   };
@@ -30,6 +30,7 @@ export const useToast = (): useToastReturn => {
   const disable = (): void => {
     dispatch(disableToast());
   };
+
   const enable = (): void => {
     dispatch(enableToast());
   };

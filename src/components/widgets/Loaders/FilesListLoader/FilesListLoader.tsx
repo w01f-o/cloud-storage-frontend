@@ -10,15 +10,13 @@ interface FilesListLoader {
 
 const FilesListLoader: FC<FilesListLoader> = ({ length, height }) => {
   return Array.from({ length }).map((_, index) => (
-    <Row key={index}>
-      <Col xs={12}>
-        <Skeleton
-          height={height ?? 60}
-          borderRadius={20}
-          containerClassName={styles.container}
-        ></Skeleton>
-      </Col>
-    </Row>
+    <Col xs={12} key={index}>
+      <Skeleton
+        height={height ?? 60}
+        borderRadius={20}
+        containerClassName={styles.container}
+      ></Skeleton>
+    </Col>
   ));
 };
 
