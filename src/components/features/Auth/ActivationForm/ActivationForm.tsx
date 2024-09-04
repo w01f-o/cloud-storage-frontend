@@ -66,11 +66,11 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
     }
 
     if (!!value.length) {
+      const newValue = `${value.length > 1 ? value.split("").shift() : value}`;
+
       clearErrors();
-      setValue(
-        currentInput,
-        `${e.target.value.length > 1 ? e.target.value.split("").shift() : e.target.value}`,
-      );
+      setValue(currentInput, newValue);
+
       nextInput && setFocus(nextInput);
     }
   };
@@ -80,6 +80,10 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
     prevInput: keyof FormState | null,
   ) => {
     const key = e.key || e.code;
+
+    if (key === "e" || key === "-") {
+      e.preventDefault();
+    }
 
     if (
       prevInput &&
@@ -91,6 +95,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
   };
 
   const pasteHandler = (e: ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const code = e.clipboardData?.getData("Text").split("");
 
     if (code?.length === 4 && code.every((char) => !isNaN(+char))) {
@@ -129,8 +134,11 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
               required: true,
               maxLength: 1,
             })}
+            min={0}
+            max={9}
             isValid={watch("input1")?.length === 1}
             aria-invalid={errors.input1 ? "true" : "false"}
+            onKeyDown={(e) => keyDownHandler(e, null)}
             onChange={(e) => changeHandler(e, "input1", "input2")}
             onPaste={pasteHandler}
             single
@@ -144,6 +152,8 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
               required: true,
               maxLength: 1,
             })}
+            min={0}
+            max={9}
             isValid={watch("input2")?.length === 1}
             aria-invalid={errors.input2 ? "true" : "false"}
             onChange={(e) => changeHandler(e, "input2", "input3")}
@@ -159,6 +169,8 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
               required: true,
               maxLength: 1,
             })}
+            min={0}
+            max={9}
             isValid={watch("input3")?.length === 1}
             aria-invalid={errors.input3 ? "true" : "false"}
             onChange={(e) => changeHandler(e, "input3", "input4")}
@@ -174,6 +186,8 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
               required: true,
               maxLength: 1,
             })}
+            min={0}
+            max={9}
             isValid={watch("input4")?.length === 1}
             aria-invalid={errors.input4 ? "true" : "false"}
             onKeyDown={(e) => keyDownHandler(e, "input3")}
