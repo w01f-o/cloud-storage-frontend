@@ -20,7 +20,7 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
     to: { width: `${width}%` },
     config: { mass: 2, tension: 120, friction: 40 },
   });
-
+  console.log(category);
   return (
     <div className={styles.item}>
       <i

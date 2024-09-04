@@ -234,9 +234,11 @@ interface FileTypes {
   image: string;
   video: string;
   audio: string;
+  pdf: string;
   document: string;
-  jar: string;
+  source_code: string;
   exe: string;
+  archive: string;
   other: string;
 }
 

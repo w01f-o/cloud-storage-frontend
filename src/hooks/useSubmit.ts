@@ -66,7 +66,7 @@ export function useSubmit<T extends FieldValues>(
       onSuccess && onSuccess();
     }
 
-    // router.refresh();
+    type && router.refresh();
     onEnd && onEnd();
   };
 

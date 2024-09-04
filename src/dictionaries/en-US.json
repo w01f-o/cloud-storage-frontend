@@ -211,9 +211,11 @@
       "image": "Images",
       "video": "Video",
       "audio": "Audio",
+      "pdf": "PDF",
       "document": "Documents",
-      "jar": "Java packages",
+      "source_code": "Sources",
       "exe": "Executable files",
+      "archive": "Archives",
       "other": "Other"
     },
     "sizes": {
