@@ -1,7 +1,7 @@
 import { Route } from "@/components/widgets/NavBar/routes";
 import Color from "colorjs.io";
 import { RootDictionary } from "@/types/dictionaries.type";
-import JavaIcon from "@/components/shared/Icons/JavaIcon";
+import { FileTypes } from "@/enums/FileTypes.enum";
 
 export class Utils {
   public static checkLinkForActive(
@@ -72,29 +72,39 @@ export class Utils {
     return `${dict.date.month[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
   }
 
-  public static getInfoStyles(type: string) {
-    switch (type) {
-      case "image":
-        return {
-          color: "#ffbf00",
-        };
-      case "video":
-        return {
-          color: "#68afd3",
-        };
-      case "jar":
-        return {
-          color: "#f87070",
-        };
-      case "msword":
-        return {
-          color: "#EEF7FE",
-        };
+  public static getFileStyles(type: FileTypes, opacityColor?: number) {
+    opacityColor = opacityColor ?? 0.08;
 
-      default:
-        return {
-          color: "#567df4",
-        };
-    }
+    const filesStyles: Record<FileTypes, { color: string }> = {
+      document: {
+        color: `rgba(0,114,255,${opacityColor})`,
+      },
+      image: {
+        color: `rgba(0,198,80,${opacityColor})`,
+      },
+      video: {
+        color: `rgba(161,64,255,${opacityColor})`,
+      },
+      source_code: {
+        color: `rgba(255,62,76,${opacityColor})`,
+      },
+      exe: {
+        color: `rgba(0,114,255,${opacityColor})`,
+      },
+      pdf: {
+        color: `rgba(255,62,76,${opacityColor})`,
+      },
+      archive: {
+        color: `rgba(161,64,255,${opacityColor})`,
+      },
+      other: {
+        color: `rgba(255,153,8,${opacityColor})`,
+      },
+      audio: {
+        color: `rgba(0,95,173,${opacityColor})`,
+      },
+    };
+
+    return filesStyles[type] ?? filesStyles["other"];
   }
 }

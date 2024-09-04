@@ -17,7 +17,7 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
   const width = (category.size / space.used) * 100;
   const widthStyles = useSpring({
     from: { width: "0%" },
-    to: { width: `${width < 0.02 ? width * 10 : width}%` },
+    to: { width: `${width}%` },
     config: { mass: 2, tension: 120, friction: 40 },
   });
 
@@ -25,7 +25,7 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
     <div className={styles.item}>
       <i
         className={styles.dot}
-        style={{ background: Utils.getInfoStyles(category.type).color }}
+        style={{ background: Utils.getFileStyles(category.type, 1).color }}
       ></i>
       <div className={styles.info}>
         <div className={styles.type}>
@@ -43,7 +43,7 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
         <animated.div
           className={styles.progress}
           style={{
-            background: Utils.getInfoStyles(category.type).color,
+            background: Utils.getFileStyles(category.type, 1).color,
             ...widthStyles,
           }}
         ></animated.div>

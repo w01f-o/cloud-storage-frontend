@@ -1,5 +1,7 @@
+import { FileTypes } from "@/enums/FileTypes.enum";
+
 export interface Category {
-  type: string;
+  type: FileTypes;
   size: number;
 }
 

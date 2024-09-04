@@ -12,6 +12,7 @@ import { User } from "@/types/user.type";
 import { Utils } from "@/services/utils";
 import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
 import { Storage } from "@/types/storage.type";
+import { unstable_noStore } from "next/cache";
 
 export type FetchResponse<T> = { data: T; response: Response };
 

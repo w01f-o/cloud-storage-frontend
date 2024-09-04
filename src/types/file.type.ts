@@ -1,3 +1,5 @@
+import { FileTypes } from "@/enums/FileTypes.enum";
+
 export interface File {
   id: string;
   name: string;
@@ -6,5 +8,5 @@ export interface File {
   userId: string;
   addedAt: Date;
   size: number;
-  type: string;
+  type: FileTypes;
 }

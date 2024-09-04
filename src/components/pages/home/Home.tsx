@@ -4,9 +4,9 @@ import { getDictionary } from "@/actions/lang.action";
 import { QueryParams } from "@/types/queryParams.type";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import styles from "./home.module.scss";
-import ViewModeSwitcher from "@/components/widgets/ViewModeSwitcher/ViewModeSwitcher";
-import SearchFolders from "@/components/widgets/SearchFolders/SearchFolders";
-import FoldersList from "@/components/widgets/FoldersList/FoldersList";
+import ViewModeSwitcher from "@/components/widgets/Folders/ViewModeSwitcher/ViewModeSwitcher";
+import SearchFolders from "@/components/widgets/Folders/SearchFolders/SearchFolders";
+import FoldersList from "@/components/widgets/Folders/FoldersList/FoldersList";
 import FoldersListLoader from "@/components/widgets/Loaders/FoldersListLoader/FoldersListLoader";
 
 interface HomeProps {

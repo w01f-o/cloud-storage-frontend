@@ -12,7 +12,7 @@ import ContextMenu, {
 } from "@/components/shared/UI/ContextMenu/ContextMenu";
 import FileDeleter from "@/components/features/Files/FileDeleter/fileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
-import FileIcons from "@/components/widgets/FileIcon/FileIcons";
+import FileIcon from "@/components/shared/Icons/FileIcon/FileIcon";
 import clsx from "clsx";
 
 interface FileProps {
@@ -73,7 +73,7 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
         [styles.minify]: !extended,
       })}
     >
-      <FileIcons fileType={file.type} />
+      <FileIcon fileType={file.type} />
       {extended ? (
         <>
           <div className={styles.name}>{file.name}</div>

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Storage } from "@/types/storage.type";
 import styles from "./storageLines.module.scss";
 import { RootDictionary } from "@/types/dictionaries.type";
-import LineItem from "@/components/widgets/StorageLines/LineItem";
+import LineItem from "@/components/widgets/Storage/StorageLines/LineItem";
 
 interface StorageLinesProps {
   storage: Storage;

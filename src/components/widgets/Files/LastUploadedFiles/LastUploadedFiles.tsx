@@ -4,6 +4,7 @@ import File from "@/components/entities/File/File";
 import { getDictionary } from "@/actions/lang.action";
 import Link from "next/link";
 import { Col } from "@w01f-o/react-grid-layout";
+import styles from "./lastUploadedFiles.module.scss";
 
 interface LastUploadedFilesProps {}
 
@@ -13,14 +14,17 @@ const LastUploadedFiles: FC<LastUploadedFilesProps> = async ({}) => {
 
   return (
     <>
-      {files.length &&
+      {!!files.length ? (
         files.map((file) => (
           <Col xs={12} key={file.id}>
             <Link href={`/folder/${file.folderId}`}>
               <File file={file} dict={dict} extended={false} />
             </Link>
           </Col>
-        ))}
+        ))
+      ) : (
+        <div className={styles.empty}>Здесь пока ничего нет</div>
+      )}
     </>
   );
 };
