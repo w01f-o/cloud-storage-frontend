@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { Folder } from "@/types/folder.type";
 import { useForm } from "react-hook-form";
 import { updateFolderAction } from "@/actions/folders.actions";
@@ -28,7 +28,6 @@ const FolderUpdater: FC<ChangeColorProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
-    setFocus,
   } = useForm<UpdateFolderDto>();
 
   const { isPending, submitHandler } = useSubmit<UpdateFolderDto>(
@@ -44,12 +43,6 @@ const FolderUpdater: FC<ChangeColorProps> = ({
     },
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      modalIsOpen && setFocus("name");
-    });
-  }, [modalIsOpen, setFocus]);
-
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
       <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
@@ -61,6 +54,7 @@ const FolderUpdater: FC<ChangeColorProps> = ({
           title={dict.folders.name}
           defaultValue={folder.name}
           aria-invalid={errors.name ? "true" : "false"}
+          autoFocus
         />
         <Field
           {...register("color", {

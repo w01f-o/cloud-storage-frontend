@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { File } from "@/types/file.type";
 import styles from "./fileUpdater.module.scss";
 import Modal from "@/components/shared/UI/Modal/Modal";
@@ -23,7 +23,7 @@ const FileUpdater: FC<FileUpdaterProps> = ({
   modalIsOpen,
   dict,
 }) => {
-  const { handleSubmit, reset, register, setFocus } = useForm<UpdateFileDto>();
+  const { handleSubmit, reset, register } = useForm<UpdateFileDto>();
   const { submitHandler, isPending } = useSubmit<UpdateFileDto>(
     (data: UpdateFileDto) => updateFileAction(file.id, data),
     {
@@ -37,12 +37,6 @@ const FileUpdater: FC<FileUpdaterProps> = ({
     },
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      modalIsOpen && setFocus("name");
-    });
-  }, [modalIsOpen, setFocus]);
-
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
       <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
@@ -52,6 +46,7 @@ const FileUpdater: FC<FileUpdaterProps> = ({
             required: true,
           })}
           defaultValue={file.name}
+          autoFocus
         />
         <Button
           type={"submit"}

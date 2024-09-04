@@ -12,7 +12,7 @@ import { User } from "@/types/user.type";
 import { Utils } from "@/services/utils";
 import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
 import { Storage } from "@/types/storage.type";
-import { unstable_noStore } from "next/cache";
+import { ActivateDto } from "@/types/activateDto.type";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -198,6 +198,20 @@ export class AuthApi extends CloudStoreApi {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ token }),
+      },
+    });
+  }
+
+  public static async activate(activateDto: ActivateDto) {
+    return await this.fetch<AuthResponse>({
+      withAuth: false,
+      endpoint: `${this.API_ENDPOINT}/activate`,
+      fetchOptions: {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(activateDto),
       },
     });
   }

@@ -7,10 +7,12 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
     element: ReactNode;
     position: "left" | "right";
   };
+  single?: boolean;
+  isValid?: boolean;
 }
 
 const Field: FC<FieldProps> = forwardRef<HTMLInputElement, FieldProps>(
-  ({ icon, className, ...props }, ref) => {
+  ({ icon, className, single, isValid, ...props }, ref) => {
     return (
       <label
         className={clsx(styles.label, {
@@ -22,8 +24,11 @@ const Field: FC<FieldProps> = forwardRef<HTMLInputElement, FieldProps>(
         {icon && icon.element}
         <input
           type="text"
-          className={clsx(styles.input, className)}
           ref={ref}
+          className={clsx(styles.input, className, {
+            [styles.single]: single,
+            [styles.valid]: isValid,
+          })}
           {...props}
         />
       </label>

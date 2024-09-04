@@ -11,6 +11,7 @@ export interface RootDictionary {
   files: Files;
   contextMenu: ContextMenu;
   storage: Storage;
+  activation: Activation;
 }
 
 interface Welcome {
@@ -46,6 +47,7 @@ interface Pages {
   login: string;
   registration: string;
   welcome: string;
+  activation: string;
 }
 
 interface Help {
@@ -248,4 +250,13 @@ interface Sizes {
   mb: string;
   gb: string;
   tb: string;
+}
+
+interface Activation {
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
+  title: string;
+  description: string;
 }

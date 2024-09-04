@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import Button from "@/components/shared/UI/Button/Button";
 import { Plus } from "lucide-react";
 import styles from "./folderCreator.module.scss";
@@ -28,7 +28,6 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
     handleSubmit,
     reset,
     formState: { errors },
-    setFocus,
   } = useForm<CreateFolderDto>();
 
   const { isPending, submitHandler } = useSubmit<CreateFolderDto>(
@@ -43,12 +42,6 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
       onEnd: () => setModalIsOpen(false),
     },
   );
-
-  useEffect(() => {
-    setTimeout(() => {
-      modalIsOpen && setFocus("name");
-    });
-  }, [modalIsOpen, setFocus]);
 
   return (
     <div className={styles.wrapper}>
@@ -72,6 +65,7 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
             })}
             title={dict.folders.name}
             aria-invalid={errors.name ? "true" : "false"}
+            autoFocus
           />
           <Field
             type="color"

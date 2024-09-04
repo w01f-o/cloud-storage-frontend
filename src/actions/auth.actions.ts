@@ -45,6 +45,20 @@ export const logoutAction = createServerAction(async () => {
   await signOut({ redirect: false });
 });
 
+export const activateAction = createServerAction(async (code: number) => {
+  const session = await auth();
+  const { data, response } = await AuthApi.activate({
+    code,
+    email: session?.user.email ?? "",
+  });
+
+  if (!response.ok) {
+    throw new ServerActionError(JSON.stringify(data));
+  }
+
+  return data;
+});
+
 export const redirectAction = createServerAction(async (path: string) => {
   redirect(path);
 });

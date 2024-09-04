@@ -20,12 +20,12 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
     to: { width: `${width}%` },
     config: { mass: 2, tension: 120, friction: 40 },
   });
-  console.log(category);
+
   return (
     <div className={styles.item}>
       <i
         className={styles.dot}
-        style={{ background: Utils.getFileStyles(category.type, 1).color }}
+        style={{ background: Utils.getFileStyles(category.type, 0.5).color }}
       ></i>
       <div className={styles.info}>
         <div className={styles.type}>
@@ -43,7 +43,7 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
         <animated.div
           className={styles.progress}
           style={{
-            background: Utils.getFileStyles(category.type, 1).color,
+            background: Utils.getFileStyles(category.type, 0.5).color,
             ...widthStyles,
           }}
         ></animated.div>

@@ -1,0 +1,24 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  h5 {
+    text-align: center;
+    margin-bottom: 4px;
+    font: {
+      size: 32px;
+    }
+  }
+
+  p {
+    font: {
+      size: 18px;
+    }
+    text-align: center;
+  }
+}
+
+.valid {
+  border: 2px solid var(--color-blue_light);
+}

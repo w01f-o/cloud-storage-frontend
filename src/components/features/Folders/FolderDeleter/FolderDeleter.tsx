@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { useForm } from "react-hook-form";
 import { Folder } from "@/types/folder.type";
@@ -27,7 +27,6 @@ const FolderDeleter: FC<DeleteFolderProps> = ({
     handleSubmit,
     reset,
     formState: { errors },
-    setFocus,
   } = useForm<{
     name: string;
   }>();
@@ -44,12 +43,6 @@ const FolderDeleter: FC<DeleteFolderProps> = ({
       onEnd: () => setModalIsOpen(false),
     },
   );
-
-  useEffect(() => {
-    setTimeout(() => {
-      modalIsOpen && setFocus("name");
-    });
-  }, [modalIsOpen, setFocus]);
 
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
@@ -68,6 +61,7 @@ const FolderDeleter: FC<DeleteFolderProps> = ({
           })}
           title={dict.folders.name}
           autoComplete={"off"}
+          autoFocus
           aria-invalid={errors.name ? "true" : "false"}
         />
         <Button

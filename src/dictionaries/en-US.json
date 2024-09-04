@@ -29,7 +29,8 @@
     "help": "Help",
     "login": "Entrance",
     "registration": "Registration",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "activation": "Account activation"
   },
   "help": {
     "accordion": [
@@ -225,5 +226,13 @@
       "gb": "GB",
       "tb": "TB"
     }
+  },
+  "activation": {
+    "full": "Activate",
+    "partial": "Activate",
+    "title": "Account activation",
+    "description": "To continue working, you need to activate your account - enter the activation code sent to your email below",
+    "error": "There was an error activating your account",
+    "success": "Account activated successfully"
   }
 }

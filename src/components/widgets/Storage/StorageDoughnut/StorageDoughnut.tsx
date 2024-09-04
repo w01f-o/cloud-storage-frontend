@@ -29,6 +29,8 @@ const StorageDoughnut: FC<StorageDoughnutProps> = ({ storage }) => {
           {
             data: data.length > 0 ? data : [1],
             backgroundColor: data.length > 0 ? colors : `rgba(161,64,255,0.5)`,
+            hoverOffset: 5,
+            borderRadius: 5,
           },
         ],
       },
