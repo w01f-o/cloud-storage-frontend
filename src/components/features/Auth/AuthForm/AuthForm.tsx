@@ -35,7 +35,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
   const toast = useToast();
   const [formIsPending, setFormIsPending] = useState<boolean>(false);
   const { lang } = useParams();
-
+  // TODO: Rewrite to useSubmit hook
   const submitHandler: SubmitHandler<AuthFormDto> = async (data) => {
     setFormIsPending(true);
     const result = await formAction(data);

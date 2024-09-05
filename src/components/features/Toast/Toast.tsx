@@ -4,7 +4,10 @@ import ToastList from "@/components/features/Toast/ToastList";
 
 const Toast: FC = () => {
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      style={{ zIndex: 200, position: "relative" }}
+    >
       <ToastList />
     </div>
   );

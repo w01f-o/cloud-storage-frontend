@@ -74,10 +74,15 @@ interface Language {
 }
 
 interface Password {
+  title: string;
+  full: string;
+  partial: string;
   current: string;
   new: string;
   repeat: string;
-  change: string;
+  success: string;
+  error: string;
+  unequal: string;
 }
 
 interface Avatar {
@@ -104,6 +109,7 @@ interface Errors {
   no_access_token: string;
   wrong_refresh_token: string;
   wrong_access_token: string;
+  wrong_old_password: string;
 }
 
 interface Folders {

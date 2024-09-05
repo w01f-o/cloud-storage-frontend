@@ -3,9 +3,10 @@
   flex-direction: column;
   height: 100%;
   align-items: center;
+  flex-grow: 1;
   justify-content: center;
   padding: 24px;
-  gap: 8px;
+  gap: 12px;
   text-align: center;
 
   h5 {
@@ -15,7 +16,7 @@
   }
 
   strong {
-    //user-select: none;
+    user-select: none;
   }
 
   button {

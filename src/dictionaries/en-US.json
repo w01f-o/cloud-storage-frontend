@@ -77,10 +77,15 @@
       "kazakhstan": "Kazakh"
     },
     "password": {
+      "title": "Change password",
+      "full": "Change password",
+      "partial": "Change",
       "current": "Current Password",
       "new": "New Password",
       "repeat": "Repeat password",
-      "change": "Change password"
+      "success": "Password changed successfully",
+      "error": "Cannot change password. ",
+      "unequal": "Passwords don't match"
     },
     "avatar": {
       "change": "Change avatar",
@@ -104,7 +109,8 @@
     "no_refresh_token": "No refresh token",
     "no_access_token": "No access token",
     "wrong_refresh_token": "Invalid refresh token",
-    "wrong_access_token": "Invalid access token"
+    "wrong_access_token": "Invalid access token",
+    "wrong_old_password": "Wrong old password"
   },
   "folders": {
     "error": {

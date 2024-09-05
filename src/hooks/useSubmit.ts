@@ -52,6 +52,7 @@ export function useSubmit<T extends FieldValues>(
     setIsPending(false);
 
     if (!result.success) {
+      console.log(result);
       toast.add({
         type: "error",
         message: errorMessage(result.error),

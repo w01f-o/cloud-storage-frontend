@@ -13,6 +13,7 @@ import { Utils } from "@/services/utils";
 import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
 import { Storage } from "@/types/storage.type";
 import { ActivateDto } from "@/types/activateDto.type";
+import { ChangePasswordDto } from "@/types/dtos/changePassword.dto";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -317,7 +318,17 @@ export class UserApi extends CloudStoreApi {
 
   static async updateName(id: string, name: string) {}
 
-  static async updatePassword(id: string, password: string) {}
+  static async updatePassword(changePasswordDto: ChangePasswordDto) {
+    return await this.fetch<AuthResponse>({
+      withAuth: true,
+      endpoint: `${this.API_ENDPOINT}/password`,
+      fetchOptions: {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(changePasswordDto),
+      },
+    });
+  }
 
   static async updateAvatar(formData: FormData) {
     return await this.fetch<AuthResponse>({

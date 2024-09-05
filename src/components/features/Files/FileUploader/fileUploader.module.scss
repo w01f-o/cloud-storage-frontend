@@ -10,12 +10,13 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  flex-grow: 1;
   padding: 24px;
 
   h5 {
     text-align: center;
     font: {
-      size: 24px;
+      size: 32px;
     }
   }
 }
@@ -23,8 +24,8 @@
 .file {
   display: grid;
   place-items: center;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border: 2px dashed var(--color-blue_light_800);
   border-radius: 12px;
   cursor: pointer;

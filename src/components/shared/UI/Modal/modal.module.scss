@@ -2,18 +2,18 @@
   display: grid;
   place-items: center;
 
-  width: 100vw;
-  height: 100vh;
   position: fixed;
   inset: 0;
   z-index: 1000;
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
-  max-width: 600px;
-  height: 400px;
+  max-width: 700px;
+  min-height: 500px;
   background: var(--color-white);
   border-radius: 15px;
   padding: 20px;

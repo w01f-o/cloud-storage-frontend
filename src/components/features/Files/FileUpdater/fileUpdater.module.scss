@@ -3,13 +3,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-grow: 1;
   height: 100%;
   padding: 24px;
   gap: 24px;
 
   h5 {
     font: {
-      size: 24px;
+      size: 32px;
     }
   }
 }

@@ -77,10 +77,15 @@
       "kazakhstan": "Казахский"
     },
     "password": {
+      "title": "Изменение пароля",
+      "full": "Изменить пароль",
+      "partial": "Изменить",
       "current": "Текущий пароль",
       "new": "Новый пароль",
       "repeat": "Повторите пароль",
-      "change": "Изменить пароль"
+      "success": "Пароль успешно изменен",
+      "error": "Невозможно изменить пароль. Попробуйте ещё раз позже.",
+      "unequal": "Пароли не совпадают"
     },
     "avatar": {
       "change": "Изменить аватар",
@@ -104,7 +109,8 @@
     "no_refresh_token": "Нет refresh токена",
     "no_access_token": "Нет access токена",
     "wrong_refresh_token": "Неверный refresh токен",
-    "wrong_access_token": "Неверный access токен"
+    "wrong_access_token": "Неверный access токен",
+    "wrong_old_password": "Неверный старый пароль"
   },
   "folders": {
     "error": {
