@@ -82,6 +82,11 @@ interface Password {
 
 interface Avatar {
   change: string;
+  title: string;
+  error: string;
+  success: string;
+  full: string;
+  partial: string;
 }
 
 interface Plan {

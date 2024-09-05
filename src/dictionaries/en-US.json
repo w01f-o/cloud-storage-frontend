@@ -83,7 +83,12 @@
       "change": "Change password"
     },
     "avatar": {
-      "change": "Change avatar"
+      "change": "Change avatar",
+      "title": "Choose a new avatar",
+      "error": "Can't update avatar. ",
+      "success": "Avatar updated",
+      "full": "Change avatar",
+      "partial": "Save"
     },
     "plan": {
       "improve": "Improve the plan"

@@ -34,7 +34,9 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
     if (
       acceptedFiles[0].type !== "image/png" &&
       acceptedFiles[0].type !== "image/jpeg" &&
-      acceptedFiles[0].type !== "image/jpg"
+      acceptedFiles[0].type !== "image/jpg" &&
+      acceptedFiles[0].type !== "image/webp" &&
+      acceptedFiles[0].type !== "image/gif"
     ) {
       return;
     }
@@ -90,7 +92,7 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
         <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
-          <h5>Выберите новый аватар</h5>
+          <h5>{dict.settings.avatar.title}</h5>
           <div
             className={clsx(styles.avatar, {
               [styles.dragActive]: isDragActive,
@@ -109,7 +111,7 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
               type="file"
               {...getInputProps()}
               {...register("file")}
-              accept="image/png, image/gif, image/jpeg"
+              accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
             />
             <input
               type="text"
@@ -123,10 +125,10 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
           <Button
             type={"submit"}
             role={"primary"}
-            title={"Save"}
+            title={dict.settings.avatar.full}
             isPending={isPending}
           >
-            Save
+            {dict.settings.avatar.partial}
           </Button>
         </form>
       </Modal>
