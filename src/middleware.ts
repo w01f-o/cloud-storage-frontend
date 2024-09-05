@@ -43,12 +43,6 @@ export async function middleware(req: NextRequest) {
 
   const locale = getLocale(req);
 
-  // const { data: user } = await UserApi.getUser();
-  // if (!user?.isActivated && !pathname.startsWith(`/${locale}/activation`)) {
-  //   req.nextUrl.pathname = `/${locale}/activation`;
-  //   return NextResponse.redirect(req.nextUrl);
-  // }
-
   if (session && session.user.accessExpiresIn < Date.now()) {
     const response = NextResponse.redirect(req.nextUrl);
 
@@ -75,6 +69,17 @@ export async function middleware(req: NextRequest) {
     });
 
     return response;
+  }
+
+  const { data: user } = await UserApi.getUser();
+
+  if (
+    session &&
+    !user?.isActivated &&
+    !pathname.startsWith(`/${locale}/activation`)
+  ) {
+    req.nextUrl.pathname = `/${locale}/activation`;
+    return NextResponse.redirect(req.nextUrl);
   }
 
   if (!process.env.COOKIE_NEXT_LOCALE) {

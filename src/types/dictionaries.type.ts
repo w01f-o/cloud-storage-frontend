@@ -259,4 +259,18 @@ interface Activation {
   error: string;
   title: string;
   description: string;
+  sendAgain: SendAgain;
+}
+
+interface Seconds {
+  one: string;
+  other: string;
+}
+
+interface SendAgain {
+  full: string;
+  partial: string;
+  seconds: Seconds;
+  success: string;
+  error: string;
 }

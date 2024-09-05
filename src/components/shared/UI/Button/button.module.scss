@@ -73,6 +73,10 @@
   &.pending {
   }
 
+  &.danger {
+    color: var(--color-red);
+  }
+
   &.rounded {
     border-radius: 50%;
     padding: 0;

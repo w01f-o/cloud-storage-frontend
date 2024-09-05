@@ -8,10 +8,10 @@ import { redirect } from "next/navigation";
 
 const Activation: FC = async () => {
   const dict = await getDictionary();
-  const { data } = await UserApi.getUser();
-
+  // const { data } = await UserApi.getUser();
+  //
   // if (!("isActivated" in data) || !data.isActivated) {
-  //   redirect("/");
+  //   console.log("pizda activiruy");
   // }
 
   return (

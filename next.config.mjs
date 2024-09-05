@@ -10,6 +10,9 @@ const nextConfig = {
     ],
   },
   reactStrictMode: false,
+  webpack(config) {
+    return config;
+  },
 };
 
 export default nextConfig;

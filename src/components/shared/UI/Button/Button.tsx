@@ -9,6 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rounded?: boolean;
   title: string;
   isPending?: boolean;
+  isDanger?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: FC<ButtonProps> = ({
   role,
   rounded,
   isPending,
+  isDanger,
   className,
   ...props
 }) => {
@@ -29,6 +31,7 @@ const Button: FC<ButtonProps> = ({
       className={clsx(styles.button, styles[role], className, {
         [styles.pending]: isPending,
         [styles.rounded]: rounded,
+        [styles.danger]: isDanger,
       })}
       disabled={isPending}
     >

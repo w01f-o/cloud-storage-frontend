@@ -233,6 +233,16 @@
     "title": "Account activation",
     "description": "To continue working, you need to activate your account - enter the activation code sent to your email below",
     "error": "There was an error activating your account",
-    "success": "Account activated successfully"
+    "success": "Account activated successfully",
+    "sendAgain": {
+      "full": "Resend code via",
+      "partial": "Resend code",
+      "seconds": {
+        "one": "second",
+        "other": "seconds"
+      },
+      "success": "Code sent successfully",
+      "error": "There was an error sending the code"
+    }
   }
 }

@@ -97,6 +97,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
               required: true,
             })}
             hidden
+            tabIndex={-1}
           />
           <Button
             type={"submit"}

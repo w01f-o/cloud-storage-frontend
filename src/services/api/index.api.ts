@@ -306,11 +306,27 @@ export class UserApi extends CloudStoreApi {
     return result;
   }
 
+  public static async sendActivationCodeAgain() {
+    return await this.fetch<AuthResponse>({
+      withAuth: true,
+      endpoint: `${this.API_ENDPOINT}/code`,
+    });
+  }
+
   static async updateEmail(id: string, email: string) {}
 
   static async updateName(id: string, name: string) {}
 
   static async updatePassword(id: string, password: string) {}
 
-  static async updateAvatar(id: string) {}
+  static async updateAvatar(formData: FormData) {
+    return await this.fetch<AuthResponse>({
+      withAuth: true,
+      endpoint: `${this.API_ENDPOINT}/avatar`,
+      fetchOptions: {
+        method: "PATCH",
+        body: formData,
+      },
+    });
+  }
 }

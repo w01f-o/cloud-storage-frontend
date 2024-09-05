@@ -8,11 +8,14 @@ import PasswordChanger from "@/components/features/Settings/PasswordChanger/Pass
 import PlanImprover from "@/components/features/Settings/PlanImprover/PlanImprover";
 import AvatarChanger from "@/components/features/Settings/AvatarChanger/AvatarChanger";
 import { getDictionary } from "@/actions/lang.action";
+import AccountDeleter from "@/components/features/Settings/AccountDeleter/AccountDeleter";
+import { UserApi } from "@/services/api/index.api";
 
 const Settings: FC = async () => {
   const cookie = cookies();
   const lang = cookie.get("NEXT_LOCALE")?.value as string;
   const dict = await getDictionary();
+  const { data: user } = await UserApi.getUser();
 
   return (
     <Row>
@@ -23,8 +26,12 @@ const Settings: FC = async () => {
         <div className={styles.buttons}>
           <LanguageChanger dict={dict} lang={lang} />
           <PasswordChanger dict={dict} />
-          <AvatarChanger dict={dict} />
+          <AvatarChanger
+            dict={dict}
+            oldAvatarUrl={`${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/${user.avatar}`}
+          />
           <PlanImprover dict={dict} />
+          <AccountDeleter dict={dict} />
         </div>
       </Col>
     </Row>

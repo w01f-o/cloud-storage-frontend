@@ -6,7 +6,7 @@ import { AuthFormDto } from "@/types/dtos/authFormDto.type";
 import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
 import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
 import { redirect } from "next/navigation";
-import { AuthApi } from "@/services/api/index.api";
+import { AuthApi, UserApi } from "@/services/api/index.api";
 
 export const loginAction = createServerAction(async (formData: AuthFormDto) => {
   const body: AuthLoginDto = {
@@ -51,6 +51,16 @@ export const activateAction = createServerAction(async (code: number) => {
     code,
     email: session?.user.email ?? "",
   });
+
+  if (!response.ok) {
+    throw new ServerActionError(JSON.stringify(data));
+  }
+
+  return data;
+});
+
+export const sendActivationCodeAgainAction = createServerAction(async () => {
+  const { data, response } = await UserApi.sendActivationCodeAgain();
 
   if (!response.ok) {
     throw new ServerActionError(JSON.stringify(data));

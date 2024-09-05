@@ -26,3 +26,21 @@
 .fieldsRow {
   margin-bottom: 8px;
 }
+
+.sendAgainForm {
+  padding: 8px 0;
+  text-align: center;
+}
+
+.sendAgainButton {
+  background: none;
+  border: none;
+  font: {
+    size: 14px;
+  }
+
+  &[disabled] {
+    color: var(--color-gray);
+    cursor: progress;
+  }
+}
