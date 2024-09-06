@@ -3,7 +3,7 @@
 import { createServerAction, ServerActionError } from "@/actions/actions.utils";
 import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
 import { FilesApi, FoldersApi } from "@/services/api/index.api";
-import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
+import { UpdateFolderDto } from "@/types/dtos/updateFolder.dto";
 
 export const createFolderAction = createServerAction(
   async (createFolderDto: CreateFolderDto) => {

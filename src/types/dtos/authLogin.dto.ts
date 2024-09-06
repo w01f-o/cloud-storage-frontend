@@ -1,3 +1,3 @@
-import { AuthFormDto } from "@/types/dtos/authFormDto.type";
+import { AuthFormDto } from "@/types/dtos/authForm.dto";
 
 export type AuthLoginDto = Omit<AuthFormDto, "name">;

@@ -2,9 +2,9 @@
 
 import { auth, signIn, signOut } from "@/services/auth/auth";
 import { createServerAction, ServerActionError } from "@/actions/actions.utils";
-import { AuthFormDto } from "@/types/dtos/authFormDto.type";
+import { AuthFormDto } from "@/types/dtos/authForm.dto";
 import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
-import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
+import { AuthRegistrationDto } from "@/types/dtos/authRegistration.dto";
 import { redirect } from "next/navigation";
 import { AuthApi, UserApi } from "@/services/api/index.api";
 

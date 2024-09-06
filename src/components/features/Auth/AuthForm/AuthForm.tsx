@@ -12,7 +12,7 @@ import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AuthFormDto } from "@/types/dtos/authFormDto.type";
+import { AuthFormDto } from "@/types/dtos/authForm.dto";
 import { useParams } from "next/navigation";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useToast } from "@/hooks/useToast";

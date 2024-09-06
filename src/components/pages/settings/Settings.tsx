@@ -10,6 +10,8 @@ import AvatarChanger from "@/components/features/Settings/AvatarChanger/AvatarCh
 import { getDictionary } from "@/actions/lang.action";
 import AccountDeleter from "@/components/features/Settings/AccountDeleter/AccountDeleter";
 import { UserApi } from "@/services/api/index.api";
+import EmailChanger from "@/components/features/Settings/EmailChanger/EmailChanger";
+import NameChanger from "@/components/features/Settings/NameChanger/NameChanger";
 
 const Settings: FC = async () => {
   const cookie = cookies();
@@ -25,6 +27,8 @@ const Settings: FC = async () => {
       <Col xs={4}>
         <div className={styles.buttons}>
           <LanguageChanger dict={dict} lang={lang} />
+          <NameChanger dict={dict} oldName={user.name} />
+          <EmailChanger dict={dict} />
           <PasswordChanger dict={dict} />
           <AvatarChanger
             dict={dict}

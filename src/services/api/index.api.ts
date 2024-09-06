@@ -4,16 +4,18 @@ import { File } from "@/types/file.type";
 import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
 import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
 import { AuthResponse } from "@/types/authResponse.type";
-import { AuthRegistrationDto } from "@/types/dtos/authRegistrationDto";
+import { AuthRegistrationDto } from "@/types/dtos/authRegistration.dto";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
 import { QueryParams } from "@/types/queryParams.type";
-import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
+import { UpdateFolderDto } from "@/types/dtos/updateFolder.dto";
 import { User } from "@/types/user.type";
 import { Utils } from "@/services/utils";
 import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
 import { Storage } from "@/types/storage.type";
 import { ActivateDto } from "@/types/activateDto.type";
 import { ChangePasswordDto } from "@/types/dtos/changePassword.dto";
+import { UpdateEmailDto } from "@/types/dtos/updateEmail.dto";
+import { UpdateNameDto } from "@/types/dtos/updateName.dto";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -314,9 +316,29 @@ export class UserApi extends CloudStoreApi {
     });
   }
 
-  static async updateEmail(id: string, email: string) {}
+  static async updateEmail(updateEmailDto: UpdateEmailDto) {
+    return await this.fetch<AuthResponse>({
+      withAuth: true,
+      endpoint: `${this.API_ENDPOINT}/email`,
+      fetchOptions: {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateEmailDto),
+      },
+    });
+  }
 
-  static async updateName(id: string, name: string) {}
+  static async updateName(updateNameDto: UpdateNameDto) {
+    return await this.fetch<AuthResponse>({
+      withAuth: true,
+      endpoint: `${this.API_ENDPOINT}/name`,
+      fetchOptions: {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateNameDto),
+      },
+    });
+  }
 
   static async updatePassword(changePasswordDto: ChangePasswordDto) {
     return await this.fetch<AuthResponse>({

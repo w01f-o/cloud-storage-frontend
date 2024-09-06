@@ -5,7 +5,7 @@ import { updateFolderAction } from "@/actions/folders.actions";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
-import { UpdateFolderDto } from "@/types/dtos/updateFolderDto";
+import { UpdateFolderDto } from "@/types/dtos/updateFolder.dto";
 import styles from "./folderUpdate.module.scss";
 import { useSubmit } from "@/hooks/useSubmit";
 import { RootDictionary } from "@/types/dictionaries.type";
