@@ -32,9 +32,19 @@ const LanguageChanger: FC<ChangeLanguageProps> = ({ dict }) => {
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
         <div className={styles.modalContent}>
-          {languages.map((lang) => (
-            <LanguageItem language={lang} key={lang.code} dict={dict} />
-          ))}
+          {languages
+            .sort((a, b) =>
+              dict.settings.language[
+                a.name as keyof RootDictionary["settings"]["language"]
+              ].localeCompare(
+                dict.settings.language[
+                  b.name as keyof RootDictionary["settings"]["language"]
+                ],
+              ),
+            )
+            .map((lang) => (
+              <LanguageItem language={lang} key={lang.code} dict={dict} />
+            ))}
         </div>
       </Modal>
     </>
