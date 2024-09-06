@@ -1,0 +1,294 @@
+{
+  "welcome": {
+    "title": "에 오신 것을 환영합니다",
+    "subtitle": "클라우드 스토리지",
+    "description": "전 세계 어디에서나 무제한으로 액세스할 수 있는 안정적이고 편리한 파일용 클라우드 스토리지입니다."
+  },
+  "auth": {
+    "login": "로그인",
+    "registration": "등록",
+    "register": "등록하다",
+    "logout": "로그아웃",
+    "password": "비밀번호",
+    "email": "이메일",
+    "name": "이름",
+    "dontHaveAccount": "아직 계정이 없나요?",
+    "alreadyHaveAccount": "이미 계정이 있나요?",
+    "required": "이 필드는 필수입니다",
+    "passwordMinLength": "비밀번호는 8자 이상이어야 합니다.",
+    "passwordMaxLength": "비밀번호는 16자 이하여야 합니다.",
+    "passwordPattern": "비밀번호에는 공백이 포함되어서는 안 됩니다.",
+    "success": "성공적으로 로그인되었습니다"
+  },
+  "pages": {
+    "home": "집",
+    "profile": "윤곽",
+    "storage": "저장",
+    "shared": "일반적인",
+    "settings": "설정",
+    "help": "돕다",
+    "login": "입구",
+    "registration": "등록",
+    "welcome": "환영",
+    "activation": "계정 활성화"
+  },
+  "help": {
+    "accordion": [
+      {
+        "id": 1,
+        "title": "계정을 만드는 방법은 무엇입니까?",
+        "body": "계정을 만들려면 등록 페이지로 이동하여 이름, 이메일, 비밀번호를 포함한 모든 필수 필드를 입력하세요. "
+      },
+      {
+        "id": 2,
+        "title": "파일을 업로드하는 방법은 무엇입니까?",
+        "body": "계정에 로그인한 후 '홈' 페이지로 이동하여 원하는 폴더를 선택하거나 폴더가 없으면 새로 만드세요. "
+      },
+      {
+        "id": 3,
+        "title": "파일을 공유하는 방법?",
+        "body": "파일을 공유하려면 해당 파일을 선택하고 '공개'를 클릭하세요."
+      },
+      {
+        "id": 4,
+        "title": "비밀번호를 어떻게 변경하나요?",
+        "body": "비밀번호를 변경하려면 '설정'으로 이동하여 '비밀번호 변경'을 클릭하세요. "
+      },
+      {
+        "id": 5,
+        "title": "개발자에게 어떻게 연락하나요?",
+        "body": "내 Github 프로필에서 통신 링크를 찾을 수 있습니다: w01f-o"
+      }
+    ]
+  },
+  "settings": {
+    "language": {
+      "change": "언어 변경",
+      "english": "영어",
+      "russian": "러시아인",
+      "spanish": "스페인 사람",
+      "french": "프랑스 국민",
+      "german": "독일 사람",
+      "italian": "이탈리아 사람",
+      "portuguese": "포르투갈 인",
+      "japanese": "일본어",
+      "korean": "한국인",
+      "chinese": "중국인",
+      "kazakhstan": "카자흐어"
+    },
+    "password": {
+      "title": "비밀번호 변경",
+      "full": "비밀번호 변경",
+      "partial": "변화",
+      "current": "현재 비밀번호",
+      "new": "새 비밀번호",
+      "repeat": "비밀번호를 반복하세요",
+      "success": "비밀번호가 성공적으로 변경되었습니다.",
+      "error": "비밀번호를 변경할 수 없습니다. ",
+      "unequal": "비밀번호가 일치하지 않습니다."
+    },
+    "avatar": {
+      "change": "아바타 변경",
+      "title": "새로운 아바타를 선택하세요",
+      "error": "아바타를 업데이트할 수 없습니다. ",
+      "success": "아바타가 업데이트되었습니다.",
+      "full": "아바타 변경",
+      "partial": "구하다"
+    },
+    "plan": {
+      "improve": "계획 개선"
+    },
+    "name": {
+      "title": "이름 변경",
+      "full": "이름 변경",
+      "partial": "변화",
+      "success": "이름이 변경됨",
+      "error": "이름을 변경할 수 없습니다. "
+    },
+    "email": {
+      "title": "이메일 변경",
+      "full": "이메일 변경",
+      "partial": "변화",
+      "success": "이메일이 변경되었습니다",
+      "error": "이메일 변경은 불가능합니다. "
+    },
+    "delete": {
+      "title": "계정 삭제",
+      "full": "계정 삭제",
+      "partial": "삭제",
+      "success": "계정이 삭제되었습니다.",
+      "warning": "정말로 계정을 삭제하시겠습니까? ",
+      "error": "계정을 삭제할 수 없습니다. "
+    },
+    "darkTheme": "어두운 테마"
+  },
+  "errors": {
+    "mailer_error": "편지를 보내는 동안 오류가 발생했습니다. ",
+    "user_with_such_email_already_exists": "이 이메일을 사용하는 사용자가 이미 존재합니다.",
+    "user_with_such_email_not_found": "이 이메일을 사용하는 사용자를 찾을 수 없습니다",
+    "wrong_email_or_password": "잘못된 이메일 또는 비밀번호",
+    "wrong_code": "유효하지 않은 활성화 코드",
+    "user_not_activated": "사용자가 활성화되지 않았습니다.",
+    "no_refresh_token": "새로 고침 토큰 없음",
+    "no_access_token": "액세스 토큰 없음",
+    "wrong_refresh_token": "잘못된 새로 고침 토큰",
+    "wrong_access_token": "잘못된 액세스 토큰",
+    "wrong_old_password": "잘못된 이전 비밀번호"
+  },
+  "folders": {
+    "error": {
+      "create": "폴더를 만드는 중 오류가 발생했습니다.",
+      "update": "폴더를 업데이트하는 중 오류가 발생했습니다.",
+      "delete": "폴더를 삭제하는 중 오류가 발생했습니다."
+    },
+    "success": {
+      "create": "폴더가 성공적으로 생성되었습니다.",
+      "update": "폴더가 업데이트되었습니다.",
+      "delete": "폴더가 삭제되었습니다."
+    },
+    "title": "폴더 만들기",
+    "create": {
+      "full": "폴더 만들기",
+      "partial": "만들다"
+    },
+    "delete": {
+      "full": "폴더 삭제",
+      "partial": "삭제",
+      "warning": "첨부파일은 모두 삭제됩니다",
+      "question": "폴더를 삭제하시겠습니까?",
+      "confirm": "확인하려면 아래 폴더 이름을 입력하고 버튼을 클릭하세요."
+    },
+    "update": {
+      "full": "폴더 변경",
+      "partial": "변화",
+      "title": "새 데이터 입력"
+    },
+    "notFound": "귀하의 요청에 대한 결과를 찾을 수 없습니다",
+    "name": "이름",
+    "color": "색상",
+    "search": "폴더 검색",
+    "view": {
+      "row": "보기 모드: 선",
+      "cells": "보기 모드: 셀"
+    },
+    "empty": {
+      "title": "아직 폴더가 없습니다.",
+      "description": "아래 버튼을 클릭하여 생성하세요."
+    },
+    "actions": {
+      "open": "열려 있는",
+      "update": "변화",
+      "delete": "삭제"
+    }
+  },
+  "date": {
+    "month": [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "칠월",
+      "팔월",
+      "구월",
+      "십월",
+      "십일월",
+      "12월"
+    ]
+  },
+  "profile": {
+    "folders": "최근 업데이트된 폴더",
+    "files": "최근 업로드된 파일"
+  },
+  "files": {
+    "empty": {
+      "title": "지금은 이곳이 비어 있습니다. "
+    },
+    "contextMenu": "상황에 맞는 메뉴",
+    "actions": {
+      "download": "다운로드",
+      "delete": "삭제",
+      "rename": "이름 바꾸기",
+      "share": "액세스 설정"
+    },
+    "delete": {
+      "warning": "파일을 삭제하시겠습니까?",
+      "full": "파일 삭제",
+      "partial": "삭제",
+      "success": "파일이 삭제되었습니다.",
+      "error": "파일을 삭제하는 중 오류가 발생했습니다."
+    },
+    "update": {
+      "full": "파일 이름 바꾸기",
+      "partial": "이름 바꾸기",
+      "success": "파일 이름이 성공적으로 변경되었습니다.",
+      "error": "파일 이름을 바꾸는 중 오류가 발생했습니다."
+    },
+    "upload": {
+      "full": "파일 업로드",
+      "partial": "다운로드",
+      "success": "파일이 성공적으로 업로드되었습니다.",
+      "error": "파일을 다운로드하는 동안 오류가 발생했습니다."
+    },
+    "share": {
+      "full": "액세스 설정",
+      "partial": "설정",
+      "shared": "파일이 공개되었습니다.",
+      "unshared": "파일이 성공적으로 비공개로 설정되었습니다.",
+      "error": "액세스 설정을 업데이트하는 중에 오류가 발생했습니다.",
+      "link": "파일 링크",
+      "switcher": "공공의",
+      "save": "변경사항 저장",
+      "empty": "아직 공개 파일이 없습니다.",
+      "copied": "링크가 클립보드에 복사되었습니다."
+    }
+  },
+  "contextMenu": {
+    "title": "상황에 맞는 메뉴",
+    "ariaLabel": "상황에 맞는 메뉴 열기"
+  },
+  "storage": {
+    "space": {
+      "free": "사용 가능",
+      "total": "총",
+      "used": "사용된"
+    },
+    "fileTypes": {
+      "image": "이미지",
+      "video": "동영상",
+      "audio": "오디오",
+      "pdf": "PDF",
+      "document": "서류",
+      "source_code": "출처",
+      "exe": "실행 파일",
+      "archive": "아카이브",
+      "other": "다른"
+    },
+    "sizes": {
+      "b": "비",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB",
+      "tb": "결핵"
+    }
+  },
+  "activation": {
+    "full": "활성화",
+    "partial": "활성화",
+    "title": "계정 활성화",
+    "description": "계속 작업하려면 계정을 활성화해야 합니다. 아래 이메일로 전송된 활성화 코드를 입력하세요.",
+    "error": "계정을 활성화하는 중에 오류가 발생했습니다.",
+    "success": "계정이 성공적으로 활성화되었습니다",
+    "sendAgain": {
+      "full": "다음을 통해 코드 재전송",
+      "partial": "코드 재전송",
+      "seconds": {
+        "one": "두번째",
+        "other": "초"
+      },
+      "success": "코드가 성공적으로 전송되었습니다",
+      "error": "코드를 보내는 중에 오류가 발생했습니다."
+    }
+  }
+}

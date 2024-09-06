@@ -12,17 +12,29 @@ export const languages: Language[] = [
     name: "russian",
     code: "ru-ru",
   },
-].sort((a, b) => a.name.localeCompare(b.name));
-
-/*
-* ,
   {
-    name: "spanish",
-    code: "es-ES",
+    name: "kazakhstan",
+    code: "kk-KZ",
+  },
+  {
+    name: "japanese",
+    code: "ja-JP",
+  },
+  {
+    name: "korean",
+    code: "ko-KR",
+  },
+  {
+    name: "chinese",
+    code: "zh-CN",
   },
   {
     name: "french",
     code: "fr-FR",
+  },
+  {
+    name: "spanish",
+    code: "es-ES",
   },
   {
     name: "german",
@@ -36,20 +48,5 @@ export const languages: Language[] = [
     name: "portuguese",
     code: "pt-PT",
   },
-  {
-    name: "chinese",
-    code: "zh-CN",
-  },
-  {
-    name: "japanese",
-    code: "ja-JP",
-  },
-  {
-    name: "korean",
-    code: "ko-KR",
-  },
-  {
-    name: "kazakhstan",
-    code: "kk-KZ",
-  },
-* */
+];
+//.sort((a, b) => a.name.localeCompare(b.name));

@@ -1,4 +1,11 @@
-import { Dispatch, FC, SetStateAction, useState, MouseEvent } from "react";
+import {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useState,
+  MouseEvent,
+  useCallback,
+} from "react";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { useSubmit } from "@/hooks/useSubmit";
@@ -13,6 +20,8 @@ import styles from "./fileSharer.module.scss";
 import { File } from "@/types/file.type";
 import Link from "next/link";
 import { useToast } from "@/hooks/useToast";
+import ToggleSwitcher from "@/components/shared/UI/ToggleSwitcher/ToggleSwitcher";
+import { usePathname } from "next/navigation";
 
 interface FileSharerProps {
   modalIsOpen: boolean;
@@ -29,22 +38,25 @@ const FileSharer: FC<FileSharerProps> = ({
 }) => {
   const [linkIsOpen, setLinkIsOpen] = useState<boolean>(false);
   const [link, setLink] = useState<string | null>(null);
-
-  const { handleSubmit } = useForm();
+  const [isShared, setIsShared] = useState<boolean>(file.isShared);
+  const pathname = usePathname();
+  const { handleSubmit, register, reset } = useForm<{ isShared: boolean }>();
   const { isPending, submitHandler } = useSubmit(
     () => {
-      return file.isShared
-        ? unShareFileAction(file.id)
-        : shareFileAction(file.id);
+      return isShared ? unShareFileAction(file.id) : shareFileAction(file.id);
     },
     {
-      type: "success",
-      successMessage: file.isShared
+      type: pathname.endsWith("/shared") ? "update" : undefined,
+      successMessage: isShared
         ? dict.files.share.unshared
         : dict.files.share.shared,
       errorMessage: (error) => error,
     },
-    {},
+    {
+      onSuccess: () => {
+        setIsShared(!isShared);
+      },
+    },
   );
 
   const toast = useToast();
@@ -65,7 +77,7 @@ const FileSharer: FC<FileSharerProps> = ({
           );
           toast.add({
             type: "success",
-            message: "copied",
+            message: dict.files.share.copied,
           });
         } catch (e) {
           console.log(e);
@@ -87,11 +99,20 @@ const FileSharer: FC<FileSharerProps> = ({
     }
   };
 
+  const modalCloseHandler = useCallback(() => {
+    reset();
+    setLinkIsOpen(false);
+  }, [reset]);
+
   return (
-    <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
+    <Modal
+      isOpen={modalIsOpen}
+      setIsOpen={setModalIsOpen}
+      onClose={modalCloseHandler}
+    >
       <form className={styles.form}>
         <h5>{dict.files.share.full}</h5>
-        {file.isShared && (
+        {isShared && (
           <div className={styles.linkWrapper}>
             {dict.files.share.link}:
             {linkIsOpen ? (
@@ -111,16 +132,23 @@ const FileSharer: FC<FileSharerProps> = ({
             )}
           </div>
         )}
+        <div className={styles.switcher}>
+          {dict.files.share.switcher}
+          <ToggleSwitcher
+            defaultChecked={isShared}
+            {...register("isShared", {
+              validate: (value) => value !== isShared,
+            })}
+          />
+        </div>
         <Button
           type="submit"
           onClick={handleSubmit(submitHandler)}
           role={"primary"}
-          title={
-            file.isShared ? dict.files.share.private : dict.files.share.public
-          }
+          title={dict.files.share.save}
           isPending={isPending}
         >
-          {file.isShared ? dict.files.share.private : dict.files.share.public}
+          {dict.files.share.save}
         </Button>
       </form>
     </Modal>

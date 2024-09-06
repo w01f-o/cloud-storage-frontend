@@ -23,9 +23,9 @@ function getLocale(req: NextRequest): string {
 
   if (cookieLocale) return cookieLocale;
 
-  let headers = { "accept-language": "en-US,en;q=0.5" };
-  let languages = new Negotiator({ headers }).languages();
-  let defaultLocale = process.env.DEFAULT_LOCALE;
+  const headers = { "accept-language": "en-US,en;q=0.5" };
+  const languages = new Negotiator({ headers }).languages();
+  const defaultLocale = process.env.DEFAULT_LOCALE;
 
   if (!defaultLocale) {
     throw new Error("process.env.DEFAULT_LOCALE is not defined");

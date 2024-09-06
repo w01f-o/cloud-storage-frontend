@@ -1,0 +1,294 @@
+{
+  "welcome": {
+    "title": "Willkommen bei",
+    "subtitle": "Cloud-Speicher",
+    "description": "Zuverlässiger und praktischer Cloud-Speicher für Ihre Dateien mit uneingeschränktem Zugriff von überall auf der Welt."
+  },
+  "auth": {
+    "login": "Login",
+    "registration": "Anmeldung",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "password": "Passwort",
+    "email": "E-Mail",
+    "name": "Name",
+    "dontHaveAccount": "Sie haben noch kein Konto?",
+    "alreadyHaveAccount": "Sie haben bereits ein Konto?",
+    "required": "Dieses Feld ist erforderlich",
+    "passwordMinLength": "Das Passwort muss mindestens 8 Zeichen enthalten",
+    "passwordMaxLength": "Das Passwort darf nicht mehr als 16 Zeichen enthalten",
+    "passwordPattern": "Das Passwort darf keine Leerzeichen enthalten",
+    "success": "Sie haben sich erfolgreich angemeldet"
+  },
+  "pages": {
+    "home": "Heim",
+    "profile": "Profil",
+    "storage": "Lagerung",
+    "shared": "Allgemein",
+    "settings": "Einstellungen",
+    "help": "Helfen",
+    "login": "Eingang",
+    "registration": "Anmeldung",
+    "welcome": "Willkommen",
+    "activation": "Kontoaktivierung"
+  },
+  "help": {
+    "accordion": [
+      {
+        "id": 1,
+        "title": "Wie erstelle ich ein Konto?",
+        "body": "Um ein Konto zu erstellen, gehen Sie zur Registrierungsseite und füllen Sie alle erforderlichen Felder aus, einschließlich Name, E-Mail-Adresse und Passwort. "
+      },
+      {
+        "id": 2,
+        "title": "Wie lade ich Dateien hoch?",
+        "body": "Nachdem Sie sich bei Ihrem Konto angemeldet haben, gehen Sie zur „Home“-Seite, wählen Sie den gewünschten Ordner aus oder erstellen Sie einen, falls dieser noch nicht vorhanden ist. "
+      },
+      {
+        "id": 3,
+        "title": "Wie teile ich Dateien?",
+        "body": "Um eine Datei freizugeben, wählen Sie sie aus und klicken Sie auf „Öffentlich machen“."
+      },
+      {
+        "id": 4,
+        "title": "Wie ändere ich mein Passwort?",
+        "body": "Um Ihr Passwort zu ändern, gehen Sie zu „Einstellungen“ und klicken Sie auf „Passwort ändern“. "
+      },
+      {
+        "id": 5,
+        "title": "Wie kann ich den Entwickler kontaktieren?",
+        "body": "In meinem Github-Profil finden Sie Links zur Kommunikation: w01f-o"
+      }
+    ]
+  },
+  "settings": {
+    "language": {
+      "change": "Sprache ändern",
+      "english": "Englisch",
+      "russian": "Russisch",
+      "spanish": "Spanisch",
+      "french": "Französisch",
+      "german": "Deutsch",
+      "italian": "Italienisch",
+      "portuguese": "Portugiesisch",
+      "japanese": "japanisch",
+      "korean": "Koreanisch",
+      "chinese": "chinesisch",
+      "kazakhstan": "Kasachisch"
+    },
+    "password": {
+      "title": "Ändern Sie Ihr Passwort",
+      "full": "Kennwort ändern",
+      "partial": "Ändern",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "repeat": "Passwort wiederholen",
+      "success": "Passwort erfolgreich geändert",
+      "error": "Passwort kann nicht geändert werden. ",
+      "unequal": "Passwörter stimmen nicht überein"
+    },
+    "avatar": {
+      "change": "Avatar ändern",
+      "title": "Wählen Sie einen neuen Avatar",
+      "error": "Avatar kann nicht aktualisiert werden. ",
+      "success": "Avatar aktualisiert",
+      "full": "Avatar ändern",
+      "partial": "Speichern"
+    },
+    "plan": {
+      "improve": "Verbessern Sie den Plan"
+    },
+    "name": {
+      "title": "Namen ändern",
+      "full": "Namen ändern",
+      "partial": "Ändern",
+      "success": "Name geändert",
+      "error": "Es ist nicht möglich, den Namen zu ändern. "
+    },
+    "email": {
+      "title": "E-Mail ändern",
+      "full": "E-Mail ändern",
+      "partial": "Ändern",
+      "success": "E-Mail geändert",
+      "error": "Es ist unmöglich, die E-Mail-Adresse zu ändern. "
+    },
+    "delete": {
+      "title": "Konto löschen",
+      "full": "Konto löschen",
+      "partial": "Löschen",
+      "success": "Konto erfolgreich gelöscht",
+      "warning": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? ",
+      "error": "Konto kann nicht gelöscht werden. "
+    },
+    "darkTheme": "Dunkles Thema"
+  },
+  "errors": {
+    "mailer_error": "Beim Versenden des Briefes ist ein Fehler aufgetreten. ",
+    "user_with_such_email_already_exists": "Ein Benutzer mit dieser E-Mail-Adresse existiert bereits",
+    "user_with_such_email_not_found": "Benutzer mit dieser E-Mail wurde nicht gefunden",
+    "wrong_email_or_password": "Ungültige E-Mail-Adresse oder ungültiges Passwort",
+    "wrong_code": "Ungültiger Aktivierungscode",
+    "user_not_activated": "Der Benutzer ist nicht aktiviert",
+    "no_refresh_token": "Kein Aktualisierungstoken",
+    "no_access_token": "Kein Zugriffstoken",
+    "wrong_refresh_token": "Ungültiges Aktualisierungstoken",
+    "wrong_access_token": "Ungültiges Zugriffstoken",
+    "wrong_old_password": "Ungültiges altes Passwort"
+  },
+  "folders": {
+    "error": {
+      "create": "Beim Erstellen des Ordners ist ein Fehler aufgetreten",
+      "update": "Beim Aktualisieren des Ordners ist ein Fehler aufgetreten",
+      "delete": "Beim Löschen eines Ordners ist ein Fehler aufgetreten"
+    },
+    "success": {
+      "create": "Ordner erfolgreich erstellt",
+      "update": "Ordner erfolgreich aktualisiert",
+      "delete": "Ordner erfolgreich gelöscht"
+    },
+    "title": "Einen Ordner erstellen",
+    "create": {
+      "full": "Erstellen Sie einen Ordner",
+      "partial": "Erstellen"
+    },
+    "delete": {
+      "full": "Ordner löschen",
+      "partial": "Löschen",
+      "warning": "Alle angehängten Dateien werden gelöscht",
+      "question": "Sind Sie sicher, dass Sie den Ordner löschen möchten?",
+      "confirm": "Geben Sie zur Bestätigung unten den Ordnernamen ein und klicken Sie auf die Schaltfläche"
+    },
+    "update": {
+      "full": "Ordner wechseln",
+      "partial": "Ändern",
+      "title": "Geben Sie neue Daten ein"
+    },
+    "notFound": "Für Ihre Anfrage wurden keine Ergebnisse gefunden",
+    "name": "Name",
+    "color": "Farbe",
+    "search": "Ordner durchsuchen",
+    "view": {
+      "row": "Ansichtsmodus: Linien",
+      "cells": "Ansichtsmodus: Zellen"
+    },
+    "empty": {
+      "title": "Sie haben noch keine Ordner",
+      "description": "Klicken Sie zum Erstellen auf die Schaltfläche unten"
+    },
+    "actions": {
+      "open": "Offen",
+      "update": "Ändern",
+      "delete": "Löschen"
+    }
+  },
+  "date": {
+    "month": [
+      "Januar",
+      "Februar",
+      "Marsch",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember"
+    ]
+  },
+  "profile": {
+    "folders": "Neueste aktualisierte Ordner",
+    "files": "Zuletzt hochgeladene Dateien"
+  },
+  "files": {
+    "empty": {
+      "title": "Hier ist es vorerst leer. "
+    },
+    "contextMenu": "Kontextmenü",
+    "actions": {
+      "download": "Herunterladen",
+      "delete": "Löschen",
+      "rename": "Umbenennen",
+      "share": "Greifen Sie auf Einstellungen zu"
+    },
+    "delete": {
+      "warning": "Sind Sie sicher, dass Sie die Datei löschen möchten?",
+      "full": "Datei löschen",
+      "partial": "Löschen",
+      "success": "Datei erfolgreich gelöscht",
+      "error": "Beim Löschen der Datei ist ein Fehler aufgetreten"
+    },
+    "update": {
+      "full": "Datei umbenennen",
+      "partial": "Umbenennen",
+      "success": "Die Datei wurde erfolgreich umbenannt",
+      "error": "Beim Umbenennen der Datei ist ein Fehler aufgetreten"
+    },
+    "upload": {
+      "full": "Datei hochladen",
+      "partial": "Herunterladen",
+      "success": "Datei erfolgreich hochgeladen",
+      "error": "Beim Herunterladen der Datei ist ein Fehler aufgetreten"
+    },
+    "share": {
+      "full": "Greifen Sie auf Einstellungen zu",
+      "partial": "Einstellungen",
+      "shared": "Die Datei wurde erfolgreich veröffentlicht",
+      "unshared": "Die Datei wurde erfolgreich privat gemacht",
+      "error": "Beim Aktualisieren der Zugriffseinstellungen ist ein Fehler aufgetreten",
+      "link": "Dateilink",
+      "switcher": "Öffentlich",
+      "save": "Änderungen speichern",
+      "empty": "Sie haben noch keine öffentlichen Dateien",
+      "copied": "Link in die Zwischenablage kopiert"
+    }
+  },
+  "contextMenu": {
+    "title": "Kontextmenü",
+    "ariaLabel": "Kontextmenü öffnen"
+  },
+  "storage": {
+    "space": {
+      "free": "Verfügbar",
+      "total": "Gesamt",
+      "used": "Gebraucht"
+    },
+    "fileTypes": {
+      "image": "Bilder",
+      "video": "Video",
+      "audio": "Audio",
+      "pdf": "PDF",
+      "document": "Unterlagen",
+      "source_code": "Quellen",
+      "exe": "Ausführbare Dateien",
+      "archive": "Archiv",
+      "other": "Andere"
+    },
+    "sizes": {
+      "b": "B",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB",
+      "tb": "TB"
+    }
+  },
+  "activation": {
+    "full": "Aktivieren",
+    "partial": "Aktivieren",
+    "title": "Kontoaktivierung",
+    "description": "Um weiterarbeiten zu können, müssen Sie Ihr Konto aktivieren. Geben Sie unten den Aktivierungscode ein, den Sie an Ihre E-Mail-Adresse erhalten haben",
+    "error": "Beim Aktivieren Ihres Kontos ist ein Fehler aufgetreten",
+    "success": "Konto erfolgreich aktiviert",
+    "sendAgain": {
+      "full": "Code erneut senden per",
+      "partial": "Code erneut senden",
+      "seconds": {
+        "one": "zweite",
+        "other": "Sekunden"
+      },
+      "success": "Code erfolgreich gesendet",
+      "error": "Beim Senden des Codes ist ein Fehler aufgetreten"
+    }
+  }
+}

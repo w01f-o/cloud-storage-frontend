@@ -19,7 +19,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ dict }) => {
 
   return (
     <div className={styles.wrapper}>
-      <div>Тёмная тема:</div>
+      <div>{dict.settings.darkTheme}:</div>
       <ToggleSwitcher
         onChange={changeHandler}
         checked={theme.current === "dark"}

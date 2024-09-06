@@ -68,37 +68,22 @@ interface Settings {
   name: Name;
   email: Email;
   delete: Delete;
-}
-
-interface Name {
-  title: string;
-  full: string;
-  partial: string;
-  success: string;
-  error: string;
-}
-
-interface Email {
-  title: string;
-  full: string;
-  partial: string;
-  success: string;
-  error: string;
+  darkTheme: string;
 }
 
 interface Language {
   change: string;
   english: string;
   russian: string;
-}
-
-interface Delete {
-  title: string;
-  full: string;
-  partial: string;
-  success: string;
-  error: string;
-  warning: string;
+  spanish: string;
+  french: string;
+  german: string;
+  italian: string;
+  portuguese: string;
+  japanese: string;
+  korean: string;
+  chinese: string;
+  kazakhstan: string;
 }
 
 interface Password {
@@ -126,6 +111,31 @@ interface Plan {
   improve: string;
 }
 
+interface Name {
+  title: string;
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
+}
+
+interface Email {
+  title: string;
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
+}
+
+interface Delete {
+  title: string;
+  full: string;
+  partial: string;
+  success: string;
+  warning: string;
+  error: string;
+}
+
 interface Errors {
   mailer_error: string;
   user_with_such_email_already_exists: string;
@@ -145,7 +155,7 @@ interface Folders {
   success: Success;
   title: string;
   create: Create;
-  delete: Delete;
+  delete: Delete2;
   update: Update;
   notFound: string;
   name: string;
@@ -173,7 +183,7 @@ interface Create {
   partial: string;
 }
 
-interface Delete {
+interface Delete2 {
   full: string;
   partial: string;
   warning: string;
@@ -216,22 +226,10 @@ interface Files {
   empty: Empty2;
   contextMenu: string;
   actions: Actions2;
-  delete: Delete2;
+  delete: Delete3;
   update: Update2;
   upload: Upload;
   share: Share;
-}
-
-interface Share {
-  full: string;
-  partial: string;
-  shared: string;
-  unshared: string;
-  error: string;
-  link: string;
-  public: string;
-  private: string;
-  empty: string;
 }
 
 interface Empty2 {
@@ -245,7 +243,7 @@ interface Actions2 {
   share: string;
 }
 
-interface Delete2 {
+interface Delete3 {
   warning: string;
   full: string;
   partial: string;
@@ -267,6 +265,19 @@ interface Upload {
   error: string;
 }
 
+interface Share {
+  full: string;
+  partial: string;
+  shared: string;
+  unshared: string;
+  error: string;
+  link: string;
+  switcher: string;
+  save: string;
+  empty: string;
+  copied: string;
+}
+
 interface ContextMenu {
   title: string;
   ariaLabel: string;
@@ -279,9 +290,9 @@ interface Storage {
 }
 
 interface Space {
-  used: string;
   free: string;
   total: string;
+  used: string;
 }
 
 interface FileTypes {
@@ -307,16 +318,11 @@ interface Sizes {
 interface Activation {
   full: string;
   partial: string;
-  success: string;
-  error: string;
   title: string;
   description: string;
+  error: string;
+  success: string;
   sendAgain: SendAgain;
-}
-
-interface Seconds {
-  one: string;
-  other: string;
 }
 
 interface SendAgain {
@@ -325,4 +331,9 @@ interface SendAgain {
   seconds: Seconds;
   success: string;
   error: string;
+}
+
+interface Seconds {
+  one: string;
+  other: string;
 }

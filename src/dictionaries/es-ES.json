@@ -1,0 +1,294 @@
+{
+  "welcome": {
+    "title": "Bienvenido a",
+    "subtitle": "Almacenamiento en la nube",
+    "description": "Almacenamiento en la nube confiable y conveniente para sus archivos con acceso ilimitado desde cualquier parte del mundo."
+  },
+  "auth": {
+    "login": "Acceso",
+    "registration": "Registro",
+    "register": "Registro",
+    "logout": "Finalizar la sesión",
+    "password": "Contraseña",
+    "email": "Correo electrónico",
+    "name": "Nombre",
+    "dontHaveAccount": "¿Aún no tienes una cuenta?",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "required": "Este campo es obligatorio",
+    "passwordMinLength": "La contraseña debe contener al menos 8 caracteres.",
+    "passwordMaxLength": "La contraseña no debe contener más de 16 caracteres.",
+    "passwordPattern": "La contraseña no debe contener espacios.",
+    "success": "Has iniciado sesión correctamente"
+  },
+  "pages": {
+    "home": "Hogar",
+    "profile": "Perfil",
+    "storage": "Almacenamiento",
+    "shared": "General",
+    "settings": "Ajustes",
+    "help": "Ayuda",
+    "login": "Entrada",
+    "registration": "Registro",
+    "welcome": "Bienvenido",
+    "activation": "Activación de cuenta"
+  },
+  "help": {
+    "accordion": [
+      {
+        "id": 1,
+        "title": "¿Cómo crear una cuenta?",
+        "body": "Para crear una cuenta, vaya a la página de registro y complete todos los campos obligatorios, incluido el nombre, el correo electrónico y la contraseña. "
+      },
+      {
+        "id": 2,
+        "title": "¿Cómo subir archivos?",
+        "body": "Después de iniciar sesión en su cuenta, vaya a la página 'Inicio', seleccione la carpeta deseada o cree una si no existe. "
+      },
+      {
+        "id": 3,
+        "title": "¿Cómo compartir archivos?",
+        "body": "Para compartir un archivo, selecciónelo y haga clic en \"Hacer público\"."
+      },
+      {
+        "id": 4,
+        "title": "¿Cómo cambio mi contraseña?",
+        "body": "Para cambiar su contraseña, vaya a \"Configuración\" y haga clic en \"Cambiar contraseña\". "
+      },
+      {
+        "id": 5,
+        "title": "¿Cómo contactar al desarrollador?",
+        "body": "En mi perfil de Github puedes encontrar enlaces para comunicación: w01f-o"
+      }
+    ]
+  },
+  "settings": {
+    "language": {
+      "change": "Cambiar idioma",
+      "english": "Inglés",
+      "russian": "ruso",
+      "spanish": "Español",
+      "french": "Francés",
+      "german": "Alemán",
+      "italian": "italiano",
+      "portuguese": "portugués",
+      "japanese": "japonés",
+      "korean": "coreano",
+      "chinese": "Chino",
+      "kazakhstan": "kazajo"
+    },
+    "password": {
+      "title": "Cambiando tu contraseña",
+      "full": "Cambiar la contraseña",
+      "partial": "Cambiar",
+      "current": "Contraseña actual",
+      "new": "Nueva contraseña",
+      "repeat": "Repita la contraseña",
+      "success": "La contraseña se cambió correctamente",
+      "error": "No se puede cambiar la contraseña. ",
+      "unequal": "Las contraseñas no coinciden"
+    },
+    "avatar": {
+      "change": "Cambiar avatar",
+      "title": "Elige un nuevo avatar",
+      "error": "No se puede actualizar el avatar. ",
+      "success": "Avatar actualizado",
+      "full": "Cambiar avatar",
+      "partial": "Ahorrar"
+    },
+    "plan": {
+      "improve": "mejorar el plan"
+    },
+    "name": {
+      "title": "Cambiar nombre",
+      "full": "Cambiar nombre",
+      "partial": "Cambiar",
+      "success": "nombre cambiado",
+      "error": "No es posible cambiar el nombre. "
+    },
+    "email": {
+      "title": "Cambiar correo electrónico",
+      "full": "Cambiar correo electrónico",
+      "partial": "Cambiar",
+      "success": "Correo electrónico cambiado",
+      "error": "Es imposible cambiar el correo electrónico. "
+    },
+    "delete": {
+      "title": "Eliminar cuenta",
+      "full": "Eliminar cuenta",
+      "partial": "Borrar",
+      "success": "Cuenta eliminada exitosamente",
+      "warning": "¿Estás seguro de que quieres eliminar tu cuenta? ",
+      "error": "No se puede eliminar la cuenta. "
+    },
+    "darkTheme": "tema oscuro"
+  },
+  "errors": {
+    "mailer_error": "Se produjo un error al enviar la carta. ",
+    "user_with_such_email_already_exists": "Ya existe un usuario con este correo electrónico",
+    "user_with_such_email_not_found": "No se encontró el usuario con este correo electrónico",
+    "wrong_email_or_password": "Correo electrónico o contraseña no válidos",
+    "wrong_code": "Código de activación no válido",
+    "user_not_activated": "El usuario no está activado",
+    "no_refresh_token": "Sin token de actualización",
+    "no_access_token": "Sin token de acceso",
+    "wrong_refresh_token": "Token de actualización no válido",
+    "wrong_access_token": "Token de acceso no válido",
+    "wrong_old_password": "Contraseña antigua no válida"
+  },
+  "folders": {
+    "error": {
+      "create": "Se produjo un error al crear la carpeta.",
+      "update": "Se produjo un error al actualizar la carpeta.",
+      "delete": "Se produjo un error al eliminar una carpeta."
+    },
+    "success": {
+      "create": "Carpeta creada exitosamente",
+      "update": "Carpeta actualizada correctamente",
+      "delete": "Carpeta eliminada exitosamente"
+    },
+    "title": "Creando una carpeta",
+    "create": {
+      "full": "Crear una carpeta",
+      "partial": "Crear"
+    },
+    "delete": {
+      "full": "Eliminar carpeta",
+      "partial": "Borrar",
+      "warning": "Todos los archivos adjuntos serán eliminados",
+      "question": "¿Está seguro de que desea eliminar la carpeta?",
+      "confirm": "Para confirmar, ingrese el nombre de la carpeta a continuación y haga clic en el botón"
+    },
+    "update": {
+      "full": "Cambiar carpeta",
+      "partial": "Cambiar",
+      "title": "Introduce nuevos datos"
+    },
+    "notFound": "No se encontraron resultados para su solicitud",
+    "name": "Nombre",
+    "color": "Color",
+    "search": "Buscar carpetas",
+    "view": {
+      "row": "Modo de visualización: líneas",
+      "cells": "Modo de visualización: celdas"
+    },
+    "empty": {
+      "title": "Aún no tienes carpetas",
+      "description": "Haga clic en el botón de abajo para crear"
+    },
+    "actions": {
+      "open": "Abierto",
+      "update": "Cambiar",
+      "delete": "Borrar"
+    }
+  },
+  "date": {
+    "month": [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Puede",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre"
+    ]
+  },
+  "profile": {
+    "folders": "Últimas carpetas actualizadas",
+    "files": "Últimos archivos subidos"
+  },
+  "files": {
+    "empty": {
+      "title": "Está vacío aquí por ahora. "
+    },
+    "contextMenu": "Menú contextual",
+    "actions": {
+      "download": "Descargar",
+      "delete": "Borrar",
+      "rename": "Rebautizar",
+      "share": "Configuración de acceso"
+    },
+    "delete": {
+      "warning": "¿Está seguro de que desea eliminar el archivo?",
+      "full": "Eliminar archivo",
+      "partial": "Borrar",
+      "success": "Archivo eliminado exitosamente",
+      "error": "Se produjo un error al eliminar el archivo."
+    },
+    "update": {
+      "full": "Cambiar nombre de archivo",
+      "partial": "Rebautizar",
+      "success": "El archivo fue renombrado exitosamente",
+      "error": "Se produjo un error al cambiar el nombre del archivo."
+    },
+    "upload": {
+      "full": "Subir archivo",
+      "partial": "Descargar",
+      "success": "Archivo cargado exitosamente",
+      "error": "Se produjo un error al descargar el archivo."
+    },
+    "share": {
+      "full": "Configuración de acceso",
+      "partial": "Ajustes",
+      "shared": "El archivo se ha hecho público con éxito.",
+      "unshared": "El archivo se ha hecho privado con éxito.",
+      "error": "Se produjo un error al actualizar la configuración de acceso.",
+      "link": "Enlace de archivo",
+      "switcher": "Público",
+      "save": "Guardar cambios",
+      "empty": "Aún no tienes archivos públicos",
+      "copied": "Enlace copiado al portapapeles"
+    }
+  },
+  "contextMenu": {
+    "title": "Menú contextual",
+    "ariaLabel": "Abrir menú contextual"
+  },
+  "storage": {
+    "space": {
+      "free": "Disponible",
+      "total": "Total",
+      "used": "Usado"
+    },
+    "fileTypes": {
+      "image": "Imágenes",
+      "video": "Video",
+      "audio": "Audio",
+      "pdf": "PDF",
+      "document": "Documentos",
+      "source_code": "Fuentes",
+      "exe": "Archivos ejecutables",
+      "archive": "Archivo",
+      "other": "Otro"
+    },
+    "sizes": {
+      "b": "B",
+      "kb": "KB",
+      "mb": "MEGABYTE",
+      "gb": "ES",
+      "tb": "tuberculosis"
+    }
+  },
+  "activation": {
+    "full": "Activar",
+    "partial": "Activar",
+    "title": "Activación de cuenta",
+    "description": "Para continuar trabajando, necesita activar su cuenta; ingrese el código de activación enviado a su correo electrónico a continuación",
+    "error": "Hubo un error al activar tu cuenta.",
+    "success": "Cuenta activada exitosamente",
+    "sendAgain": {
+      "full": "Reenviar código vía",
+      "partial": "Reenviar código",
+      "seconds": {
+        "one": "segundo",
+        "other": "artículos de segunda clase"
+      },
+      "success": "Código enviado exitosamente",
+      "error": "Hubo un error al enviar el código."
+    }
+  }
+}

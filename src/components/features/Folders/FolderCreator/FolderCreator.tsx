@@ -47,7 +47,7 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
     <div className={styles.wrapper}>
       <Button
         type={"button"}
-        role={"secondary"}
+        role={"primary"}
         title={dict.folders.create.full}
         rounded={true}
         onClick={toggleModal}
