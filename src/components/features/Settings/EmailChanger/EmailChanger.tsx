@@ -15,10 +15,6 @@ interface EmailChangerProps {
   dict: RootDictionary;
 }
 
-interface FormState {
-  email: string;
-}
-
 const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
@@ -34,7 +30,10 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
   } = useForm<UpdateEmailDto>();
   const { isPending, submitHandler } = useSubmit<UpdateEmailDto>(
     updateEmailAction,
-    { successMessage: "", errorMessage: (error) => error },
+    {
+      successMessage: dict.settings.email.success,
+      errorMessage: () => dict.settings.email.error,
+    },
     {},
   );
 
@@ -46,11 +45,11 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
         title={"email"}
         onClick={clickHandler}
       >
-        Изменить почту
+        {dict.settings.email.full}
       </Button>
-      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
+      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
         <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-          <h5>Смена почты</h5>
+          <h5> {dict.settings.email.title}</h5>
           <Field
             type="email"
             placeholder="Email"
@@ -66,10 +65,10 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
           <Button
             type={"submit"}
             role={"primary"}
-            title={"submit"}
+            title={dict.settings.email.full}
             isPending={isPending}
           >
-            Сменить
+            {dict.settings.email.partial}
           </Button>
         </form>
       </Modal>

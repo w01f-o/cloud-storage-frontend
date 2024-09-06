@@ -65,12 +65,40 @@ interface Settings {
   password: Password;
   avatar: Avatar;
   plan: Plan;
+  name: Name;
+  email: Email;
+  delete: Delete;
+}
+
+interface Name {
+  title: string;
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
+}
+
+interface Email {
+  title: string;
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
 }
 
 interface Language {
   change: string;
   english: string;
   russian: string;
+}
+
+interface Delete {
+  title: string;
+  full: string;
+  partial: string;
+  success: string;
+  error: string;
+  warning: string;
 }
 
 interface Password {
@@ -191,6 +219,19 @@ interface Files {
   delete: Delete2;
   update: Update2;
   upload: Upload;
+  share: Share;
+}
+
+interface Share {
+  full: string;
+  partial: string;
+  shared: string;
+  unshared: string;
+  error: string;
+  link: string;
+  public: string;
+  private: string;
+  empty: string;
 }
 
 interface Empty2 {

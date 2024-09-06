@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Col, Row } from "@w01f-o/react-grid-layout";
+import { Col } from "@w01f-o/react-grid-layout";
 import styles from "@/components/widgets/Loaders/FoldersListLoader/foldersListLoader.module.scss";
 import Skeleton from "react-loading-skeleton";
 

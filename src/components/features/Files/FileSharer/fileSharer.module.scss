@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  flex-grow: 1;
+
+  h5 {
+    text-align: center;
+
+    font: {
+      size: 24px;
+    }
+  }
+}
+
+.linkWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 70px;
+  gap: 10px;
+
+  font: {
+    size: 20px;
+  }
+
+  a {
+    flex-grow: 1;
+    font: {
+      size: 16px;
+    }
+  }
+}
+
+.blured {
+  flex-grow: 1;
+  border-radius: 12px;
+  width: 100%;
+  background: var(--color-hover);
+  border: none;
+}

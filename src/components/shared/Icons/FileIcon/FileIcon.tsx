@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC, SVGAttributes, useMemo } from "react";
 import styles from "./fileIcons.module.scss";
 import { Utils } from "@/services/utils";
 import WordIcon from "@/components/shared/Icons/WordIcon";
@@ -12,36 +12,36 @@ import ArchiveIcon from "@/components/shared/Icons/ArchiveIcon";
 import { FileTypes } from "@/enums/FileTypes.enum";
 import AudioIcon from "@/components/shared/Icons/AudioIcon";
 
-interface FileIconsProps {
+interface FileIconsProps extends SVGAttributes<HTMLOrSVGElement> {
   fileType: FileTypes;
 }
 
-const FileIcon: FC<FileIconsProps> = ({ fileType }) => {
+const FileIcon: FC<FileIconsProps> = ({ fileType, ...props }) => {
   const icon = useMemo(() => {
     switch (fileType) {
       case FileTypes.DOCUMENT:
-        return <WordIcon />;
+        return <WordIcon {...props} />;
       case FileTypes.IMAGE:
-        return <ImageIcon />;
+        return <ImageIcon {...props} />;
       case FileTypes.EXE:
-        return <ExeIcon />;
+        return <ExeIcon {...props} />;
       case FileTypes.SOURCE_CODE:
-        return <ProgramIcon />;
+        return <ProgramIcon {...props} />;
       case FileTypes.VIDEO:
-        return <VideoIcon />;
+        return <VideoIcon {...props} />;
       case FileTypes.PDF:
-        return <PdfIcon />;
+        return <PdfIcon {...props} />;
       case FileTypes.ARCHIVE:
-        return <ArchiveIcon />;
+        return <ArchiveIcon {...props} />;
       case FileTypes.AUDIO:
-        return <AudioIcon />;
+        return <AudioIcon {...props} />;
       case FileTypes.OTHER:
-        return <OtherIcon />;
+        return <OtherIcon {...props} />;
 
       default:
         return <OtherIcon />;
     }
-  }, [fileType]);
+  }, [fileType, props]);
 
   return (
     <div

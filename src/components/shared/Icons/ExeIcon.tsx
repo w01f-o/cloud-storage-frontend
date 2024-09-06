@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, SVGAttributes } from "react";
 
-interface ExeIconProps {}
+interface ExeIconProps extends SVGAttributes<HTMLOrSVGElement> {}
 
-const ExeIcon: FC<ExeIconProps> = ({}) => {
+const ExeIcon: FC<ExeIconProps> = ({ ...props }) => {
   return (
-    <svg width="23" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="23"
+      height="28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         opacity=".3"
         d="M18.984 6.384a2.809 2.809 0 0 1-1.951-.784 2.635 2.635 0 0 1-.81-1.89V0H3.891a3.66 3.66 0 0 0-2.546 1.022A3.434 3.434 0 0 0 .29 3.488v21.029c.001.924.381 1.81 1.057 2.463A3.66 3.66 0 0 0 3.89 28h14.798a3.66 3.66 0 0 0 2.546-1.022 3.434 3.434 0 0 0 1.055-2.466V6.379l-3.306.005Z"

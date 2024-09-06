@@ -107,8 +107,4 @@ export class Utils {
 
     return filesStyles[type] ?? filesStyles["other"];
   }
-
-  public static async readFileAsUrl(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {});
-  }
 }

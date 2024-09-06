@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, SVGAttributes } from "react";
 
-interface WordIconProps {}
+interface WordIconProps extends SVGAttributes<HTMLOrSVGElement> {}
 
-const WordIcon: FC<WordIconProps> = ({}) => {
+const WordIcon: FC<WordIconProps> = ({ ...props }) => {
   return (
-    <svg width="23" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="23"
+      height="28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         opacity=".3"
         d="M19.397 6.383a2.807 2.807 0 0 1-1.95-.783 2.633 2.633 0 0 1-.809-1.89V0H4.312c-.473 0-.942.09-1.379.265a3.61 3.61 0 0 0-1.168.756c-.334.324-.6.708-.78 1.132A3.393 3.393 0 0 0 .71 3.488v21.024c0 .458.093.912.274 1.335.181.423.447.808.781 1.132.334.324.732.58 1.168.756.437.175.906.265 1.379.265h14.797c.473 0 .941-.09 1.378-.265a3.61 3.61 0 0 0 1.168-.756c.335-.324.6-.709.78-1.132.182-.423.275-.877.275-1.335V6.383h-3.313Z"

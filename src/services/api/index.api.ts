@@ -16,6 +16,7 @@ import { ActivateDto } from "@/types/activateDto.type";
 import { ChangePasswordDto } from "@/types/dtos/changePassword.dto";
 import { UpdateEmailDto } from "@/types/dtos/updateEmail.dto";
 import { UpdateNameDto } from "@/types/dtos/updateName.dto";
+import { SharedFile } from "@/types/sharedFile.type";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -276,13 +277,48 @@ export class FilesApi extends CloudStoreApi {
 }
 
 export class SharedFilesApi extends CloudStoreApi {
-  protected static API_ENDPOINT: string = "/shared-file";
+  protected static API_ENDPOINT: string = "/shared_file";
 
-  static async getSharedFile() {}
+  static async getShared() {
+    return await this.fetch<File[]>({
+      endpoint: `${this.API_ENDPOINT}`,
+      withAuth: true,
+    });
+  }
 
-  static async deleteSharedFile() {}
+  static async getSharedById(fileId: string) {
+    return await this.fetch<SharedFile>({
+      endpoint: `${this.API_ENDPOINT}/${fileId}`,
+      withAuth: false,
+    });
+  }
 
-  static async shareFile() {}
+  static async getByLink(link: string) {
+    return await this.fetch<File>({
+      endpoint: `${this.API_ENDPOINT}/data/${link}`,
+      withAuth: false,
+    });
+  }
+
+  static async share(fileId: string) {
+    return await this.fetch<SharedFile>({
+      endpoint: `${this.API_ENDPOINT}/${fileId}`,
+      withAuth: true,
+      fetchOptions: {
+        method: "POST",
+      },
+    });
+  }
+
+  static async unShare(fileId: string) {
+    return await this.fetch<SharedFile>({
+      endpoint: `${this.API_ENDPOINT}/${fileId}`,
+      withAuth: true,
+      fetchOptions: {
+        method: "DELETE",
+      },
+    });
+  }
 }
 
 export class UserApi extends CloudStoreApi {
@@ -359,6 +395,16 @@ export class UserApi extends CloudStoreApi {
       fetchOptions: {
         method: "PATCH",
         body: formData,
+      },
+    });
+  }
+
+  static async delete() {
+    return await this.fetch<AuthResponse>({
+      withAuth: true,
+      endpoint: `${this.API_ENDPOINT}`,
+      fetchOptions: {
+        method: "DELETE",
       },
     });
   }

@@ -10,8 +10,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Page: NextPage = () => {
-  return <Shared />;
+interface NextPageProps {
+  searchParams: Record<string, any>;
+}
+
+const Page: NextPage<NextPageProps> = ({ searchParams }) => {
+  return <Shared searchParams={searchParams} />;
 };
 
 export default Page;

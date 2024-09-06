@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, SVGAttributes } from "react";
 
-interface ImageIconProps {}
+interface ImageIconProps extends SVGAttributes<HTMLOrSVGElement> {}
 
-const ImageIcon: FC<ImageIconProps> = ({}) => {
+const ImageIcon: FC<ImageIconProps> = ({ ...props }) => {
   return (
-    <svg width="23" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="23"
+      height="28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         opacity=".3"
         d="M19.118 6.381a2.806 2.806 0 0 1-1.95-.783 2.632 2.632 0 0 1-.809-1.889V0H4.031c-.473 0-.942.09-1.379.266a3.61 3.61 0 0 0-1.168.756c-.334.324-.6.709-.78 1.132C.523 2.577.43 3.03.43 3.489V24.51c0 .458.093.912.274 1.335.18.424.446.808.78 1.132.334.324.731.581 1.168.756.437.176.906.266 1.379.266h14.798c.473 0 .941-.09 1.378-.266a3.613 3.613 0 0 0 1.169-.756c.334-.324.6-.709.78-1.132.181-.423.274-.877.274-1.335V6.383l-3.312-.002Z"

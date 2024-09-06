@@ -97,6 +97,28 @@
     },
     "plan": {
       "improve": "Improve the plan"
+    },
+    "name": {
+      "title": "Change name",
+      "full": "Change name",
+      "partial": "Change",
+      "success": "Name changed",
+      "error": "It is not possible to change the name."
+    },
+    "email": {
+      "title": "Change email",
+      "full": "Change email",
+      "partial": "Change",
+      "success": "Email changed",
+      "error": "It is impossible to change email."
+    },
+    "delete": {
+      "title": "Delete account",
+      "full": "Delete account",
+      "partial": "Delete",
+      "success": "Account deleted successfully",
+      "warning": "Are you sure you want to delete your account? ",
+      "error": "Unable to delete account. "
     }
   },
   "errors": {
@@ -187,7 +209,7 @@
       "download": "Download",
       "delete": "Delete",
       "rename": "Rename",
-      "share": "Share"
+      "share": "Access settings"
     },
     "delete": {
       "warning": "Are you sure you want to delete the file?",
@@ -207,6 +229,17 @@
       "partial": "Download",
       "success": "File uploaded successfully",
       "error": "An error occurred while downloading the file"
+    },
+    "share": {
+      "full": "Access Settings",
+      "partial": "Settings",
+      "shared": "The file has successfully become public",
+      "unshared": "The file has been successfully made private",
+      "error": "An error occurred while updating the access settings",
+      "link": "Link to the file",
+      "public": "Make access for all",
+      "private": "Make only for me",
+      "empty": "You still don't have public files"
     }
   },
   "contextMenu": {

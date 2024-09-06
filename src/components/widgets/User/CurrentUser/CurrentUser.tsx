@@ -2,7 +2,6 @@ import { FC } from "react";
 import styles from "./currentUser.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { auth } from "@/services/auth/auth";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { UserApi } from "@/services/api/index.api";
 

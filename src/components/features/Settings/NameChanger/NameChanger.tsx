@@ -33,8 +33,8 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
     {
       reset,
       type: "update",
-      successMessage: "success",
-      errorMessage: (error) => error,
+      successMessage: dict.settings.name.success,
+      errorMessage: () => dict.settings.name.error,
     },
     {
       onEnd: () => setModalIsOpen(false),
@@ -46,14 +46,14 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
       <Button
         type={"button"}
         role={"secondary"}
-        title={"Change name"}
+        title={dict.settings.name.full}
         onClick={clickHandler}
       >
-        Изменить имя
+        {dict.settings.name.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
         <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
-          <h5>Изменить имя</h5>
+          <h5>{dict.settings.name.full}</h5>
           <Field
             {...register("name", {
               required: {
@@ -62,7 +62,7 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
               },
             })}
             type="text"
-            placeholder={"Имя"}
+            placeholder={dict.auth.name}
             defaultValue={oldName}
             aria-invalid={errors.name ? "true" : "false"}
           />
@@ -70,10 +70,10 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
           <Button
             type={"submit"}
             role={"primary"}
-            title={"Изменить имя"}
+            title={dict.settings.name.full}
             isPending={isPending}
           >
-            Изменить имя
+            {dict.settings.name.partial}
           </Button>
         </form>
       </Modal>

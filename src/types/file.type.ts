@@ -9,4 +9,5 @@ export interface File {
   addedAt: Date;
   size: number;
   type: FileTypes;
+  isShared: boolean;
 }

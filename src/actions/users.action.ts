@@ -53,3 +53,13 @@ export const updateNameAction = createServerAction(
     return data;
   },
 );
+
+export const deleteUserAction = createServerAction(async () => {
+  const { response, data } = await UserApi.delete();
+
+  if (!response.ok) {
+    throw new ServerActionError(JSON.stringify(data));
+  }
+
+  return data;
+});

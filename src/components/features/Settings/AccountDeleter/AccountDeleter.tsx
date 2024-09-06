@@ -5,6 +5,10 @@ import { RootDictionary } from "@/types/dictionaries.type";
 import Button from "@/components/shared/UI/Button/Button";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import styles from "./accountDeleter.module.scss";
+import { useSubmit } from "@/hooks/useSubmit";
+import { useForm } from "react-hook-form";
+import { UpdateNameDto } from "@/types/dtos/updateName.dto";
+import { deleteUserAction } from "@/actions/users.action";
 
 interface AccountDeleterProps {
   dict: RootDictionary;
@@ -17,19 +21,40 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
     setModalIsOpen(!modalIsOpen);
   };
 
+  const { isPending, submitHandler } = useSubmit<UpdateNameDto>(
+    deleteUserAction,
+    {
+      successMessage: "success",
+      errorMessage: (error) => error,
+    },
+    { onSuccess: () => setModalIsOpen(false) },
+  );
+  const { handleSubmit } = useForm<UpdateNameDto>();
+
   return (
     <>
       <Button
         role="secondary"
-        title={"Удалить"}
+        title={dict.settings.delete.full}
         type="button"
         onClick={clickHandler}
         isDanger
       >
-        Удалить аккаунт
+        {dict.settings.delete.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-        ...
+        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
+          <h5>{dict.settings.delete.title}</h5>
+          <div className={styles.warning}>{dict.settings.delete.warning}</div>
+          <Button
+            type={"submit"}
+            role={"primary"}
+            title={dict.settings.delete.full}
+            isPending={isPending}
+          >
+            {dict.settings.delete.partial}
+          </Button>
+        </form>
       </Modal>
     </>
   );

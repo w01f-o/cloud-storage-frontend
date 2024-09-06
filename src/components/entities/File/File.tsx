@@ -14,6 +14,7 @@ import FileDeleter from "@/components/features/Files/FileDeleter/fileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileIcon from "@/components/shared/Icons/FileIcon/FileIcon";
 import clsx from "clsx";
+import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
 
 interface FileProps {
   file: FileType;
@@ -28,6 +29,7 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
 
   const [updaterIsOpen, setUpdaterIsOpen] = useState<boolean>(false);
   const [deleterIsOpen, setDeleterIsOpen] = useState<boolean>(false);
+  const [sharerIsOpen, setSharerIsOpen] = useState<boolean>(false);
 
   const contextButtonClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -46,14 +48,16 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
   };
 
   const deleteFile = () => {
-    setDeleterIsOpen(true);
+    setDeleterIsOpen(!deleterIsOpen);
   };
 
   const updateFile = () => {
-    setUpdaterIsOpen(true);
+    setUpdaterIsOpen(!updaterIsOpen);
   };
 
-  const shareFile = () => {};
+  const shareFile = () => {
+    setSharerIsOpen(!sharerIsOpen);
+  };
 
   const contextMenuItems: ContextMenuItemType[] = [
     { id: 1, name: dict.files.actions.download, action: downloadFile },
@@ -129,6 +133,12 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
             setModalIsOpen={setUpdaterIsOpen}
             file={file}
             dict={dict}
+          />
+          <FileSharer
+            modalIsOpen={sharerIsOpen}
+            setModalIsOpen={setSharerIsOpen}
+            dict={dict}
+            file={file}
           />
         </>
       )}

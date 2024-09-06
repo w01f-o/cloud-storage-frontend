@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/services/auth/auth";
 import Negotiator from "negotiator";
 import { AuthApi, UserApi } from "@/services/api/index.api";
+import { match } from "@formatjs/intl-localematcher";
 
 const locales = [
   "en-US",
@@ -30,8 +31,9 @@ function getLocale(req: NextRequest): string {
     throw new Error("process.env.DEFAULT_LOCALE is not defined");
   }
 
-  return defaultLocale;
-  // return match(languages, locales, defaultLocale);
+  // return defaultLocale;
+
+  return match(languages, locales, defaultLocale);
 }
 
 export async function middleware(req: NextRequest) {
@@ -73,12 +75,9 @@ export async function middleware(req: NextRequest) {
 
   const { data: user } = await UserApi.getUser();
 
-  if (
-    session &&
-    !user?.isActivated &&
-    !pathname.startsWith(`/${locale}/activation`)
-  ) {
+  if (session && !user?.isActivated && !pathname.endsWith("activation")) {
     req.nextUrl.pathname = `/${locale}/activation`;
+
     return NextResponse.redirect(req.nextUrl);
   }
 
@@ -90,7 +89,7 @@ export async function middleware(req: NextRequest) {
   const cookieLocale = req.cookies.get(process.env.COOKIE_NEXT_LOCALE)?.value;
 
   if (urlLocale && urlLocale !== cookieLocale) {
-    const response = NextResponse.next();
+    const response = NextResponse.redirect(req.nextUrl);
     response.cookies.set(process.env.COOKIE_NEXT_LOCALE, urlLocale);
 
     return response;
