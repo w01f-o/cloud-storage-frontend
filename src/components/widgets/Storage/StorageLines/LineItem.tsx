@@ -6,6 +6,7 @@ import { Utils } from "@/services/utils";
 import styles from "./storageLines.module.scss";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useSpring, animated } from "@react-spring/web";
+import { useTheme } from "@/hooks/useTheme";
 
 interface LineItemProps {
   category: Category;
@@ -20,6 +21,8 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
     to: { width: `${width}%` },
     config: { mass: 2, tension: 120, friction: 40 },
   });
+
+  const theme = useTheme();
 
   return (
     <div className={styles.item}>
@@ -43,7 +46,10 @@ const LineItem: FC<LineItemProps> = ({ category, dict, space }) => {
         <animated.div
           className={styles.progress}
           style={{
-            background: Utils.getFileStyles(category.type, 0.5).color,
+            background: Utils.getFileStyles(
+              category.type,
+              theme.current === "light" ? 0.5 : 0.7,
+            ).color,
             ...widthStyles,
           }}
         ></animated.div>

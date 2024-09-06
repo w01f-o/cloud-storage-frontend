@@ -10,10 +10,10 @@
     weight: 500;
   }
 
-  color: var(--color-blue_dark);
+  color: var(--color-black_font);
 
   &::placeholder {
-    color: var(--color-blue_dark);
+    color: var(--color-black_400);
     line-height: 0;
   }
 
@@ -73,7 +73,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    stroke: var(--color-blue_dark);
+    stroke: var(--color-black_400);
   }
 
   &.iconOffset {

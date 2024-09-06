@@ -12,6 +12,7 @@ import AccountDeleter from "@/components/features/Settings/AccountDeleter/Accoun
 import { UserApi } from "@/services/api/index.api";
 import EmailChanger from "@/components/features/Settings/EmailChanger/EmailChanger";
 import NameChanger from "@/components/features/Settings/NameChanger/NameChanger";
+import ThemeSwitcher from "@/components/features/Settings/ThemeSwitcher/ThemeSwitcher";
 
 const Settings: FC = async () => {
   const cookie = cookies();
@@ -36,6 +37,7 @@ const Settings: FC = async () => {
           />
           <PlanImprover dict={dict} />
           <AccountDeleter dict={dict} />
+          <ThemeSwitcher dict={dict} />
         </div>
       </Col>
     </Row>

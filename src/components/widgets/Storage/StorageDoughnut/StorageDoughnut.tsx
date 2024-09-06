@@ -5,6 +5,7 @@ import { Storage } from "@/types/storage.type";
 import styles from "./storageDoughnut.module.scss";
 import { Chart, registerables } from "chart.js";
 import { Utils } from "@/services/utils";
+import { useTheme } from "@/hooks/useTheme";
 
 Chart.register(...registerables);
 
@@ -13,6 +14,8 @@ interface StorageDoughnutProps {
 }
 
 const StorageDoughnut: FC<StorageDoughnutProps> = ({ storage }) => {
+  const theme = useTheme();
+
   useEffect(() => {
     const canvas = document.querySelector<HTMLCanvasElement>(
       `#doughnut-canvas`,
@@ -20,7 +23,10 @@ const StorageDoughnut: FC<StorageDoughnutProps> = ({ storage }) => {
 
     const data = storage.category.map((item) => item.size);
     const labels = storage.category.map((item) => item.type);
-    const colors = labels.map((label) => Utils.getFileStyles(label, 0.5).color);
+    const colors = labels.map(
+      (label) =>
+        Utils.getFileStyles(label, theme.current === "light" ? 0.5 : 0.7).color,
+    );
 
     const chart = new Chart(canvas, {
       type: "doughnut",
@@ -31,6 +37,8 @@ const StorageDoughnut: FC<StorageDoughnutProps> = ({ storage }) => {
             backgroundColor: data.length > 0 ? colors : `rgba(161,64,255,0.5)`,
             hoverOffset: 5,
             borderRadius: 5,
+            borderColor: "#f1f3f6",
+            borderWidth: 1,
           },
         ],
       },
@@ -46,7 +54,7 @@ const StorageDoughnut: FC<StorageDoughnutProps> = ({ storage }) => {
     return () => {
       chart.destroy();
     };
-  }, [storage.category]);
+  }, [storage.category, theme]);
 
   return (
     <div className={styles.wrapper}>

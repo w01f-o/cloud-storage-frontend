@@ -22,7 +22,7 @@ const RootLayout = ({
 }) => {
   return (
     <RootProvider>
-      <html lang={lang}>
+      <html lang={lang} data-theme={"light"}>
         <body className={nunitoSans.className}>
           <Layout>{children}</Layout>
         </body>

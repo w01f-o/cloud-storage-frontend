@@ -12,4 +12,10 @@
     size: 20px;
     weight: 600;
   }
+
+  svg {
+    path {
+      fill: var(--color-black);
+    }
+  }
 }

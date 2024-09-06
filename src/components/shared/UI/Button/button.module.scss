@@ -22,6 +22,8 @@
 
   svg {
     path {
+      fill: var(--color-white);
+      stroke: var(--color-white);
       transition: $transitionTime;
     }
   }
@@ -55,7 +57,7 @@
     @include hover-screen {
       &:not(.pending):hover {
         background: var(--color-blue_light);
-        color: var(--color-white);
+        color: var(--color-white_font);
 
         svg {
           path {

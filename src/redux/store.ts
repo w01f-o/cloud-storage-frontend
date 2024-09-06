@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import toastReducer from "./reducers/toastSlice";
+import themeReducer from "./reducers/themeSlice";
 
 const rootReducer = combineReducers({
   toast: toastReducer,
+  theme: themeReducer,
 });
 
 export const makeStore = () => {

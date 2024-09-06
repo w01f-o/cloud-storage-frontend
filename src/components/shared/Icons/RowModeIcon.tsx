@@ -1,4 +1,7 @@
+"use client";
+
 import { FC, SVGAttributes } from "react";
+import { useTheme } from "@/hooks/useTheme";
 
 interface RowModeProps extends SVGAttributes<HTMLOrSVGElement> {
   width?: number;
@@ -12,7 +15,11 @@ const RowModeIcon: FC<RowModeProps> = ({
   isActive,
   ...props
 }) => {
-  const fill = isActive ? "#22215B" : "#B0C0D0";
+  const theme = useTheme();
+  const activeColor = theme.current === "dark" ? "#B0C0D0" : "#22215B";
+  const unActiveColor = theme.current === "dark" ? "#22215B" : "#B0C0D0";
+
+  const fill = isActive ? activeColor : unActiveColor;
 
   return (
     <svg

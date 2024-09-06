@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, SVGAttributes, useMemo } from "react";
 import styles from "./fileIcons.module.scss";
 import { Utils } from "@/services/utils";

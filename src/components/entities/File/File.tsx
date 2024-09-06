@@ -1,75 +1,19 @@
-"use client";
-
-import { FC, MouseEvent, useRef, useState } from "react";
+import { FC } from "react";
 import { File as FileType } from "@/types/file.type";
-import { useRouter } from "next/navigation";
 import styles from "./file.module.scss";
-import { RootDictionary } from "@/types/dictionaries.type";
 import { Utils } from "@/services/utils";
-import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
-import ContextMenu, {
-  ContextMenuItemType,
-} from "@/components/shared/UI/ContextMenu/ContextMenu";
-import FileDeleter from "@/components/features/Files/FileDeleter/fileDeleter";
-import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileIcon from "@/components/shared/Icons/FileIcon/FileIcon";
 import clsx from "clsx";
-import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
+import FileController from "@/components/features/Files/FileController/FileController";
+import { getDictionary } from "@/actions/lang.action";
 
 interface FileProps {
   file: FileType;
-  dict: RootDictionary;
   extended: boolean;
 }
 
-const File: FC<FileProps> = ({ file, dict, extended }) => {
-  const router = useRouter();
-  const [contextIsOpen, setContextIsOpen] = useState<boolean>(false);
-  const contextButtonRef = useRef<HTMLButtonElement | null>(null);
-
-  const [updaterIsOpen, setUpdaterIsOpen] = useState<boolean>(false);
-  const [deleterIsOpen, setDeleterIsOpen] = useState<boolean>(false);
-  const [sharerIsOpen, setSharerIsOpen] = useState<boolean>(false);
-
-  const contextButtonClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setContextIsOpen(!contextIsOpen);
-  };
-
-  const downloadFile = async () => {
-    try {
-      const res = await fetch(`/api/file/${file.id}`);
-      if (res.ok) {
-        router.replace(`/api/file/${file.id}`);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const deleteFile = () => {
-    setDeleterIsOpen(!deleterIsOpen);
-  };
-
-  const updateFile = () => {
-    setUpdaterIsOpen(!updaterIsOpen);
-  };
-
-  const shareFile = () => {
-    setSharerIsOpen(!sharerIsOpen);
-  };
-
-  const contextMenuItems: ContextMenuItemType[] = [
-    { id: 1, name: dict.files.actions.download, action: downloadFile },
-    { id: 2, name: dict.files.actions.rename, action: updateFile },
-    { id: 3, name: dict.files.actions.share, action: shareFile },
-    {
-      id: 4,
-      name: dict.files.actions.delete,
-      action: deleteFile,
-      isDanger: true,
-    },
-  ];
+const File: FC<FileProps> = async ({ file, extended }) => {
+  const dict = await getDictionary();
 
   return (
     <div
@@ -103,45 +47,7 @@ const File: FC<FileProps> = ({ file, dict, extended }) => {
           </div>
         </>
       )}
-      {extended && (
-        <>
-          <button
-            className={styles.contextButton}
-            ref={contextButtonRef}
-            onClick={contextButtonClickHandler}
-            onContextMenu={contextButtonClickHandler}
-            title={dict.contextMenu.title}
-            type="button"
-            aria-label={dict.contextMenu.ariaLabel}
-          >
-            <TripleDotsIcon fill={"#567df4"} />
-          </button>
-          <ContextMenu
-            items={contextMenuItems}
-            isOpen={contextIsOpen}
-            setIsOpen={setContextIsOpen}
-            buttonRef={contextButtonRef}
-          />
-          <FileDeleter
-            modalIsOpen={deleterIsOpen}
-            setModalIsOpen={setDeleterIsOpen}
-            file={file}
-            dict={dict}
-          />
-          <FileUpdater
-            modalIsOpen={updaterIsOpen}
-            setModalIsOpen={setUpdaterIsOpen}
-            file={file}
-            dict={dict}
-          />
-          <FileSharer
-            modalIsOpen={sharerIsOpen}
-            setModalIsOpen={setSharerIsOpen}
-            dict={dict}
-            file={file}
-          />
-        </>
-      )}
+      {extended && <FileController file={file} dict={dict} />}
     </div>
   );
 };
