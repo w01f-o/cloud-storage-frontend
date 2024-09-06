@@ -25,7 +25,7 @@ const Settings: FC = async () => {
       <Col xs={12}>
         <PageTitle>{dict.pages.settings}</PageTitle>
       </Col>
-      <Col xs={4}>
+      <Col xl={4} md={6} xs={12}>
         <div className={styles.buttons}>
           <LanguageChanger dict={dict} lang={lang} />
           <NameChanger dict={dict} oldName={user.name} />
