@@ -1,0 +1,26 @@
+.button {
+  display: grid;
+  place-items: center;
+  $size: 50px;
+
+  position: fixed;
+  right: 35px;
+  top: 70px;
+  width: $size;
+  height: $size;
+  z-index: 3;
+  border-radius: 12px;
+  background: var(--color-hover);
+  border: none;
+}
+
+.menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background: var(--color-body-backgroud);
+  padding: 65px;
+}

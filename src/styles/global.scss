@@ -42,7 +42,7 @@ body {
   &.body-mobile {
     padding: 0;
     background: var(--color-white);
-    overflow: auto;
+    overflow-y: auto;
   }
 }
 

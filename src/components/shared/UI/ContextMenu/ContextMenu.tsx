@@ -36,12 +36,12 @@ const ContextMenu: FC<ContextMenuProps> = ({
 
   const getPosition = () => {
     const rect = buttonRef.current!.getBoundingClientRect();
-    const scrollContainer = document.querySelector(
-      `.${layoutStyles.scrollContainer}`,
-    ) as HTMLDivElement;
+    const rootContainer: HTMLElement =
+      document.querySelector(`.${layoutStyles.scrollContainer}`) ??
+      document.body;
 
-    if (rect.x > scrollContainer.offsetWidth) {
-      if (rect.bottom + 50 * items.length > scrollContainer.offsetHeight) {
+    if (rect.x > rootContainer.offsetWidth) {
+      if (rect.bottom + 50 * items.length > rootContainer.offsetHeight) {
         return {
           right: "35px",
           bottom: "35px",
@@ -54,7 +54,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
       };
     }
 
-    if (rect.bottom + 50 * items.length > scrollContainer.offsetHeight) {
+    if (rect.bottom + 50 * items.length > rootContainer.offsetHeight) {
       return {
         left: "35px",
         bottom: "35px",

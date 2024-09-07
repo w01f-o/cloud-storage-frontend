@@ -4,20 +4,23 @@ import { Col, Container, Row } from "@w01f-o/react-grid-layout";
 import NextTopLoader from "nextjs-toploader";
 import SideBar from "@/components/widgets/Sidebar/SideBar";
 import Toast from "@/components/features/Toast/Toast";
-import { isMobileDevice } from "@/actions/actions.utils";
 import clsx from "clsx";
+import MobileOnly from "@/components/features/Responsive/MobileOnly";
+import DesktopOnly from "@/components/features/Responsive/DesktopOnly";
+import MobileMenu from "@/components/widgets/Sidebar/Mobile/MobileMenu";
+import { getDictionary } from "@/actions/lang.action";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: FC<LayoutProps> = async ({ children }) => {
-  const isMobile = isMobileDevice();
+  const dict = await getDictionary();
 
   return (
     <>
       <NextTopLoader showSpinner={false} />
-      {!isMobile && (
+      <DesktopOnly>
         <Row>
           <Col xs={2}>
             <SideBar />
@@ -30,8 +33,9 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
             </div>
           </Col>
         </Row>
-      )}
-      {isMobile && (
+      </DesktopOnly>
+      <MobileOnly>
+        <MobileMenu dict={dict} />
         <Container fluid>
           <Row>
             <Col xs={12}>
@@ -41,7 +45,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
             </Col>
           </Row>
         </Container>
-      )}
+      </MobileOnly>
       <div id="root-portal"></div>
       <Toast />
     </>
