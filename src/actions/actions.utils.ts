@@ -37,7 +37,7 @@ export function createServerAction<Return, Args extends unknown[]>(
   };
 }
 
-export const isMobileDevice = () => {
+export const isMobileDevice = (): boolean => {
   if (typeof process === "undefined") {
     throw new Error(
       "[Server method] you are importing a server-only module outside of server",

@@ -15,7 +15,7 @@
     "@types/mime-types": "^2.1.4",
     "@types/negotiator": "^0.6.3",
     "@types/ua-parser-js": "^0.7.39",
-    "@w01f-o/react-grid-layout": "^1.0.3",
+    "@w01f-o/react-grid-layout": "^1.1.4",
     "autoprefixer": "^10.4.20",
     "chart.js": "^4.4.4",
     "clsx": "^2.1.1",

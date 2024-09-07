@@ -5,6 +5,12 @@
   position: relative;
 
   background: var(--color-white);
+
+  &.mobileBox {
+    height: 100vh;
+    border-radius: 0;
+    background: transparent;
+  }
 }
 
 .scrollContainer {
@@ -37,4 +43,8 @@
   flex-direction: column;
   height: 100%;
   padding-right: 65px;
+
+  &.mobileContent {
+    padding: 55px 35px;
+  }
 }

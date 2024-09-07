@@ -9,3 +9,39 @@
     @content;
   }
 }
+
+@mixin xs-screen {
+  @media (max-width: var(--breakpoint-xs)) {
+    @content;
+  }
+}
+
+@mixin sm-screen {
+  @media (max-width: var(--breakpoint-sm)) {
+    @content;
+  }
+}
+
+@mixin md-screen {
+  @media (max-width: var(--breakpoint-md)) {
+    @content;
+  }
+}
+
+@mixin lg-screen {
+  @media (max-width: var(--breakpoint-lg)) {
+    @content;
+  }
+}
+
+@mixin xl-screen {
+  @media (max-width: var(--breakpoint-xl)) {
+    @content;
+  }
+}
+
+@mixin xxl-screen {
+  @media (max-width: var(--breakpoint-xxl)) {
+    @content;
+  }
+}

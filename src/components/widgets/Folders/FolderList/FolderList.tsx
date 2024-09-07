@@ -1,11 +1,12 @@
 import { FC } from "react";
 import Folder from "@/components/entities/Folder/Folder";
 import styles from "./folderList.module.scss";
-import { Col, Row } from "@w01f-o/react-grid-layout";
+import { Col, Container, Row } from "@w01f-o/react-grid-layout";
 import { FoldersApi } from "@/services/api/index.api";
 import { QueryParams } from "@/types/queryParams.type";
 import FolderCreator from "@/components/features/Folders/FolderCreator/FolderCreator";
 import { RootDictionary } from "@/types/dictionaries.type";
+import clsx from "clsx";
 
 interface FolderListProps {
   params: QueryParams & {
@@ -32,16 +33,25 @@ const FolderList: FC<FolderListProps> = async ({ params, dict }) => {
         </div>
       )}
       {!!folders.length && (
-        <Row className={styles.row}>
-          {folders.map((folder) => (
-            <Col key={folder.id} xs={params.view === "row" ? 12 : 2}>
-              <Folder folder={folder} dict={dict} extended />
+        <Container fluid>
+          <Row className={clsx(styles.row)}>
+            {folders.map((folder) => (
+              <Col
+                key={folder.id}
+                xxl={params.view === "row" ? 12 : 2}
+                xl={params.view === "row" ? 12 : 3}
+                lg={params.view === "row" ? 12 : 4}
+                md={4}
+                xs={6}
+              >
+                <Folder folder={folder} dict={dict} extended />
+              </Col>
+            ))}
+            <Col xs={12}>
+              <FolderCreator dict={dict} />
             </Col>
-          ))}
-          <Col xs={12}>
-            <FolderCreator dict={dict} />
-          </Col>
-        </Row>
+          </Row>
+        </Container>
       )}
     </>
   );

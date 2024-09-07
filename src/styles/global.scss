@@ -36,9 +36,14 @@ body {
   width: 100vw;
   overflow: hidden;
   padding: var(--offset-body-padding);
-
   background: var(--color-body-backgroud);
   color: var(--color-black);
+
+  &.body-mobile {
+    padding: 0;
+    background: var(--color-white);
+    overflow: auto;
+  }
 }
 
 body {
@@ -76,3 +81,7 @@ body {
     pointer-events: auto;
   }
 }
+
+//* {
+//  outline: 1px solid red;
+//}

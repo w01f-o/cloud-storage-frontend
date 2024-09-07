@@ -7,6 +7,8 @@ import { Nunito_Sans } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
 import Layout from "@/components/pages/Layout/Layout";
 import RootProvider from "@/components/features/Providers/RootProvider";
+import { isMobileDevice } from "@/actions/actions.utils";
+import clsx from "clsx";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
@@ -22,10 +24,16 @@ const RootLayout = ({
   children: ReactNode;
   params: { lang: string };
 }) => {
+  const isMobile = isMobileDevice();
+
   return (
     <RootProvider>
       <html lang={lang} data-theme={"light"}>
-        <body className={nunitoSans.className}>
+        <body
+          className={clsx(nunitoSans.className, {
+            "body-mobile": isMobile,
+          })}
+        >
           <Layout>{children}</Layout>
         </body>
       </html>

@@ -359,10 +359,10 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@w01f-o/react-grid-layout@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@w01f-o/react-grid-layout/-/react-grid-layout-1.0.3.tgz#cb4e780e60ecbadca6ade955b7cb7f52cbb06ccd"
-  integrity sha512-hH7t+Htny0s8OmkBogQWegVT3UTZKyMMkv8BO+PHchuqY5AR96cO447NuHk9Hu7uIL8F9336DJZYda7ohQ1hQg==
+"@w01f-o/react-grid-layout@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@w01f-o/react-grid-layout/-/react-grid-layout-1.1.4.tgz#9d52a163e726e5ba080580ac5f183ca7cb4f74ee"
+  integrity sha512-GvXhcWPWex/UAlX3lTSePbg0gJjrbm6QrWnsC1GaBhe+N6h06GVWJliB14oA9ILPRjpGncEyu3Mfd4PwEI2f+A==
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"
