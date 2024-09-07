@@ -5,10 +5,13 @@ import SignOutButton from "@/components/features/Auth/SignOutButton/SignOutButto
 import CurrentUser from "@/components/widgets/User/CurrentUser/CurrentUser";
 import { auth } from "@/services/auth/auth";
 import { getDictionary } from "@/actions/lang.action";
+import { headers } from "next/headers";
+import { isMobileDevice } from "@/actions/actions.utils";
 
 const SideBar: FC = async () => {
   const session = await auth();
   const dict = await getDictionary();
+  const isMobile = isMobileDevice();
 
   return (
     <aside className={styles.sidebar}>
