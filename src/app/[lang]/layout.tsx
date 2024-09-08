@@ -9,6 +9,7 @@ import Layout from "@/components/pages/Layout/Layout";
 import RootProvider from "@/components/features/Providers/RootProvider";
 import { isMobileDevice } from "@/actions/actions.utils";
 import clsx from "clsx";
+import { cookies } from "next/headers";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
@@ -25,10 +26,11 @@ const RootLayout = ({
   params: { lang: string };
 }) => {
   const isMobile = isMobileDevice();
+  const theme = cookies().get("theme")?.value || "light";
 
   return (
     <RootProvider>
-      <html lang={lang} data-theme={"light"}>
+      <html lang={lang} data-theme={theme}>
         <body
           className={clsx(nunitoSans.className, {
             "body-mobile": isMobile,

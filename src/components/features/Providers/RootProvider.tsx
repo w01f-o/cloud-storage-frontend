@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import StoreProvider from "@/redux/StoreProvider";
+import StoreProvider from "@/components/features/Providers/StoreProvider";
 import ThemeProvider from "@/components/features/Providers/ThemeProvider";
 
 interface ProvidersProps {

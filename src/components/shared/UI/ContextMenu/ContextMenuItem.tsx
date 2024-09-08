@@ -17,7 +17,6 @@ const ContextMenuItem: FC<ContextMenuItemProps> = ({ item, position }) => {
     <button
       className={clsx(styles.item, {
         [styles.danger]: item.isDanger,
-        [styles.right]: position === "right",
       })}
       onClick={clickHandler}
       title={item.name}
