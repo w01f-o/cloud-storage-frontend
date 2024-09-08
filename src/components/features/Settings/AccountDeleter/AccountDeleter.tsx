@@ -9,6 +9,7 @@ import { useSubmit } from "@/hooks/useSubmit";
 import { useForm } from "react-hook-form";
 import { UpdateNameDto } from "@/types/dtos/updateName.dto";
 import { deleteUserAction } from "@/actions/users.action";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface AccountDeleterProps {
   dict: RootDictionary;
@@ -26,8 +27,10 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
     {
       successMessage: "success",
       errorMessage: (error) => error,
+      events: {
+        onError: () => setModalIsOpen(false),
+      },
     },
-    { onSuccess: () => setModalIsOpen(false) },
   );
   const { handleSubmit } = useForm<UpdateNameDto>();
 
@@ -43,8 +46,10 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
         {dict.settings.delete.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-          <h5>{dict.settings.delete.title}</h5>
+        <Form
+          onSubmit={handleSubmit(submitHandler)}
+          title={dict.settings.delete.title}
+        >
           <div className={styles.warning}>{dict.settings.delete.warning}</div>
           <Button
             type={"submit"}
@@ -54,7 +59,7 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
           >
             {dict.settings.delete.partial}
           </Button>
-        </form>
+        </Form>
       </Modal>
     </>
   );

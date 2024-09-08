@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useToast } from "@/hooks/useToast";
 import ToggleSwitcher from "@/components/shared/UI/ToggleSwitcher/ToggleSwitcher";
 import { usePathname } from "next/navigation";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface FileSharerProps {
   modalIsOpen: boolean;
@@ -51,10 +52,10 @@ const FileSharer: FC<FileSharerProps> = ({
         ? dict.files.share.unshared
         : dict.files.share.shared,
       errorMessage: (error) => error,
-    },
-    {
-      onSuccess: () => {
-        setIsShared(!isShared);
+      events: {
+        onSuccess: () => {
+          setIsShared(!isShared);
+        },
       },
     },
   );
@@ -80,7 +81,7 @@ const FileSharer: FC<FileSharerProps> = ({
             message: dict.files.share.copied,
           });
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       }
     }
@@ -92,10 +93,10 @@ const FileSharer: FC<FileSharerProps> = ({
       await navigator.clipboard.writeText(link!);
       toast.add({
         type: "success",
-        message: "copied",
+        message: dict.files.share.copied,
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -110,8 +111,7 @@ const FileSharer: FC<FileSharerProps> = ({
       setIsOpen={setModalIsOpen}
       onClose={modalCloseHandler}
     >
-      <form className={styles.form}>
-        <h5>{dict.files.share.full}</h5>
+      <Form title={dict.files.share.full}>
         {isShared && (
           <div className={styles.linkWrapper}>
             {dict.files.share.link}:
@@ -150,7 +150,7 @@ const FileSharer: FC<FileSharerProps> = ({
         >
           {dict.files.share.save}
         </Button>
-      </form>
+      </Form>
     </Modal>
   );
 };

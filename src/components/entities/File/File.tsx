@@ -6,23 +6,25 @@ import FileIcon from "@/components/shared/Icons/FileIcon/FileIcon";
 import clsx from "clsx";
 import FileController from "@/components/features/Files/FileController/FileController";
 import { getDictionary } from "@/actions/lang.action";
+import { isMobileDevice } from "@/actions/actions.utils";
 
 interface FileProps {
   file: FileType;
-  extended: boolean;
+  isExtended: boolean;
 }
 
-const File: FC<FileProps> = async ({ file, extended }) => {
+const File: FC<FileProps> = async ({ file, isExtended }) => {
   const dict = await getDictionary();
+  const isMobile = isMobileDevice();
 
   return (
     <div
       className={clsx(styles.wrapper, {
-        [styles.minify]: !extended,
+        [styles.minify]: !isExtended,
       })}
     >
       <FileIcon fileType={file.type} />
-      {extended ? (
+      {isExtended ? (
         <>
           <div className={styles.name}>{file.name}</div>
           <div className={styles.info}>
@@ -47,7 +49,9 @@ const File: FC<FileProps> = async ({ file, extended }) => {
           </div>
         </>
       )}
-      {extended && <FileController file={file} dict={dict} />}
+      {isExtended && (
+        <FileController file={file} dict={dict} isMobile={isMobile} />
+      )}
     </div>
   );
 };

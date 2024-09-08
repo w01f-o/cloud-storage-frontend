@@ -3,19 +3,14 @@
 import { Lock, Mail, User } from "lucide-react";
 import styles from "./authForm.module.scss";
 import Link from "next/link";
-import {
-  loginAction,
-  redirectAction,
-  registerAction,
-} from "@/actions/auth.actions";
+import { loginAction, registerAction } from "@/actions/auth.actions";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
-import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 import { AuthFormDto } from "@/types/dtos/authForm.dto";
-import { useParams } from "next/navigation";
 import { RootDictionary } from "@/types/dictionaries.type";
-import { useToast } from "@/hooks/useToast";
+import { useSubmit } from "@/hooks/useSubmit";
 
 interface AuthFormProps {
   formType: "registration" | "login";
@@ -32,32 +27,12 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<AuthFormDto>();
-  const toast = useToast();
-  const [formIsPending, setFormIsPending] = useState<boolean>(false);
-  const { lang } = useParams();
-  // TODO: Rewrite to useSubmit hook
-  const submitHandler: SubmitHandler<AuthFormDto> = async (data) => {
-    setFormIsPending(true);
-    const result = await formAction(data);
-    setFormIsPending(false);
 
-    if (!result) {
-      return;
-    }
-
-    if (!result.success) {
-      const error = JSON.parse(result.error);
-      const type = error.type as keyof RootDictionary["errors"];
-      toast.add({
-        type: "error",
-        message: dict.errors[type],
-      });
-    } else {
-      toast.add({ type: "success", message: dict.auth.success });
-
-      await redirectAction(`/${lang}`);
-    }
-  };
+  const { submitHandler, isPending } = useSubmit(formAction, {
+    successMessage: dict.auth.success,
+    errorMessage: (error) =>
+      dict.errors[JSON.parse(error).type as keyof RootDictionary["errors"]],
+  });
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
@@ -129,7 +104,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
         type="submit"
         title={formTitle}
         role="primary"
-        isPending={formIsPending}
+        isPending={isPending}
       >
         {formTitle}
       </Button>

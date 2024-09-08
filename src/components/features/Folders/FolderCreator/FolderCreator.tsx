@@ -11,6 +11,7 @@ import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
 import { createFolderAction } from "@/actions/folders.actions";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface CreateFolderProps {
   dict: RootDictionary;
@@ -37,9 +38,9 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
       successMessage: dict.folders.success.create,
       errorMessage: () => dict.folders.error.create,
       type: "create",
-    },
-    {
-      onEnd: () => setModalIsOpen(false),
+      events: {
+        onEnd: () => setModalIsOpen(false),
+      },
     },
   );
 
@@ -55,8 +56,7 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
         <Plus />
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
-        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-          <h5>{dict.folders.title}</h5>
+        <Form onSubmit={handleSubmit(submitHandler)} title={dict.folders.title}>
           <Field
             placeholder={dict.folders.name}
             type="text"
@@ -83,7 +83,7 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
           >
             {dict.folders.create.partial}
           </Button>
-        </form>
+        </Form>
       </Modal>
     </div>
   );

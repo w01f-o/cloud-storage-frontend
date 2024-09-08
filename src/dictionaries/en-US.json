@@ -227,9 +227,9 @@
     },
     "upload": {
       "full": "Upload file",
-      "partial": "Download",
+      "partial": "Upload",
       "success": "File uploaded successfully",
-      "error": "An error occurred while downloading the file"
+      "error": "An error occurred while uploading the file"
     },
     "share": {
       "full": "Access Settings",

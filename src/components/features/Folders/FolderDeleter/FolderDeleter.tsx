@@ -8,6 +8,7 @@ import { deleteFolderAction } from "@/actions/folders.actions";
 import styles from "./folderDeleter.module.scss";
 import { useSubmit } from "@/hooks/useSubmit";
 import { RootDictionary } from "@/types/dictionaries.type";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface DeleteFolderProps {
   folder: Folder;
@@ -38,22 +39,25 @@ const FolderDeleter: FC<DeleteFolderProps> = ({
       successMessage: dict.folders.success.delete,
       errorMessage: () => dict.folders.error.delete,
       type: "delete",
-    },
-    {
-      onEnd: () => setModalIsOpen(false),
+      events: {
+        onEnd: () => setModalIsOpen(false),
+      },
     },
   );
 
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
-      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-        <h5>{dict.folders.delete.question}</h5>
+      <Form
+        onSubmit={handleSubmit(submitHandler)}
+        title={dict.folders.delete.question}
+        className={styles.form}
+      >
         <div className={styles.danger}>{dict.folders.delete.warning}</div>
         <div className={styles.confirm}>
           {dict.folders.delete.confirm}
           &quot;{dict.folders.delete.partial}&quot;
         </div>
-        <strong>{folder.name}</strong>
+        <strong className={styles.name}>{folder.name}</strong>
         <Field
           {...register("name", {
             required: true,
@@ -72,7 +76,7 @@ const FolderDeleter: FC<DeleteFolderProps> = ({
         >
           {dict.folders.delete.partial}
         </Button>
-      </form>
+      </Form>
     </Modal>
   );
 };

@@ -6,8 +6,8 @@ import UserProfile from "@/components/widgets/User/UserProfile/UserProfile";
 import LastUpdatedFolders from "@/components/widgets/Folders/LastUpdatedFolders/LastUpdatedFolders";
 import LastUploadedFiles from "@/components/widgets/Files/LastUploadedFiles/LastUploadedFiles";
 import styles from "./profile.module.scss";
-import FoldersListLoader from "@/components/widgets/Loaders/FoldersListLoader/FoldersListLoader";
-import FilesListLoader from "@/components/widgets/Loaders/FilesListLoader/FilesListLoader";
+import FolderListLoader from "@/components/widgets/Loaders/FolderListLoader/FolderListLoader";
+import FilesListLoader from "@/components/widgets/Loaders/FileListLoader/FileListLoader";
 
 const Profile: FC = async () => {
   const dict = await getDictionary();
@@ -22,7 +22,7 @@ const Profile: FC = async () => {
         <Col xs={6} className={styles.foldersCol}>
           <h3 className={styles.title}>{dict.profile.folders}</h3>
           <Suspense
-            fallback={<FoldersListLoader view={"cells"} length={7} width={4} />}
+            fallback={<FolderListLoader view={"cells"} length={7} width={4} />}
           >
             <Row>
               <LastUpdatedFolders />

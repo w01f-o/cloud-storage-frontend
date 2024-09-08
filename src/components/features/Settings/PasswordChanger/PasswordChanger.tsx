@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useSubmit } from "@/hooks/useSubmit";
 import { updatePasswordAction } from "@/actions/users.action";
 import styles from "./passwordChanger.module.scss";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface ChangePasswordProps {
   dict: RootDictionary;
@@ -48,9 +49,9 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
       errorMessage: (error) =>
         dict.errors[JSON.parse(error).type as keyof RootDictionary["errors"]] ??
         dict.settings.password.error,
-    },
-    {
-      onSuccess: () => setModalIsOpen(false),
+      events: {
+        onSuccess: () => setModalIsOpen(false),
+      },
     },
   );
 
@@ -64,9 +65,17 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
       >
         {dict.settings.password.full}
       </Button>
-      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
-        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-          <h5>{dict.settings.password.title}</h5>
+      <Modal
+        isOpen={modalIsOpen}
+        setIsOpen={setModalIsOpen}
+        onClose={reset}
+        contentClassName={styles.modal}
+      >
+        <Form
+          onSubmit={handleSubmit(submitHandler)}
+          title={dict.settings.password.title}
+          className={styles.form}
+        >
           <span>
             {dict.settings.password.current}:
             <Field
@@ -158,7 +167,7 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
           >
             {dict.settings.password.partial}
           </Button>
-        </form>
+        </Form>
       </Modal>
     </>
   );

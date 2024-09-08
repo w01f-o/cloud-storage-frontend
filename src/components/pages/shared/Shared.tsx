@@ -2,7 +2,7 @@ import { FC, Suspense } from "react";
 import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 import { Row } from "@w01f-o/react-grid-layout";
 import styles from "@/components/pages/folder/folderPage.module.scss";
-import FilesListLoader from "@/components/widgets/Loaders/FilesListLoader/FilesListLoader";
+import FilesListLoader from "@/components/widgets/Loaders/FileListLoader/FileListLoader";
 import { getDictionary } from "@/actions/lang.action";
 import SharedFileList from "@/components/widgets/Files/SharedFileList/SharedFileList";
 

@@ -1,14 +1,19 @@
-import { FC } from "react";
+import { FC, SVGAttributes } from "react";
 
-interface FlagIconProps {
+interface FlagIconProps extends SVGAttributes<HTMLOrSVGElement> {
   language: string;
 }
 
-const FlagIcon: FC<FlagIconProps> = ({ language }) => {
+const FlagIcon: FC<FlagIconProps> = ({ language, ...props }) => {
   switch (language) {
     case "ru-ru":
       return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          {...props}
+        >
           <path fill="#1435a1" d="M1 11h30v10H1z" />
           <path
             d="M5 4h22c2.208 0 4 1.792 4 4v4H1V8c0-2.208 1.792-4 4-4Z"

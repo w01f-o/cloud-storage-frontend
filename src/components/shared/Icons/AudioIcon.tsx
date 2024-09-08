@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, SVGAttributes } from "react";
 
-interface AudioIconProps {}
+interface AudioIconProps extends SVGAttributes<HTMLOrSVGElement> {}
 
-const AudioIcon: FC<AudioIconProps> = ({}) => {
+const AudioIcon: FC<AudioIconProps> = ({ ...props }) => {
   return (
-    <svg width="23" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="23"
+      height="28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         opacity=".3"
         d="M18.827 6.383a2.807 2.807 0 0 1-1.95-.784 2.634 2.634 0 0 1-.809-1.889V0H3.742C3.269 0 2.8.09 2.364.265a3.61 3.61 0 0 0-1.169.756c-.334.324-.6.709-.78 1.132A3.394 3.394 0 0 0 .14 3.488v21.029c.001.924.382 1.81 1.057 2.464A3.66 3.66 0 0 0 3.742 28H18.54a3.66 3.66 0 0 0 2.546-1.022 3.434 3.434 0 0 0 1.054-2.466V6.383h-3.313Z"

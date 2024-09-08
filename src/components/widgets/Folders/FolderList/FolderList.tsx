@@ -5,18 +5,18 @@ import { Col, Container, Row } from "@w01f-o/react-grid-layout";
 import { FoldersApi } from "@/services/api/index.api";
 import { QueryParams } from "@/types/queryParams.type";
 import FolderCreator from "@/components/features/Folders/FolderCreator/FolderCreator";
-import { RootDictionary } from "@/types/dictionaries.type";
 import clsx from "clsx";
+import { getDictionary } from "@/actions/lang.action";
 
 interface FolderListProps {
   params: QueryParams & {
     view: "row" | "cells";
   };
-  dict: RootDictionary;
 }
 
-const FolderList: FC<FolderListProps> = async ({ params, dict }) => {
+const FolderList: FC<FolderListProps> = async ({ params }) => {
   const { data: folders } = await FoldersApi.getAll(params);
+  const dict = await getDictionary();
 
   return (
     <>
@@ -44,7 +44,7 @@ const FolderList: FC<FolderListProps> = async ({ params, dict }) => {
                 md={4}
                 xs={6}
               >
-                <Folder folder={folder} dict={dict} extended />
+                <Folder folder={folder} isExtended />
               </Col>
             ))}
             <Col xs={12}>

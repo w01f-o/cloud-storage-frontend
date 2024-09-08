@@ -7,7 +7,7 @@ import styles from "./home.module.scss";
 import ViewModeSwitcher from "@/components/widgets/Folders/ViewModeSwitcher/ViewModeSwitcher";
 import SearchFolders from "@/components/widgets/Folders/SearchFolders/SearchFolders";
 import FolderList from "@/components/widgets/Folders/FolderList/FolderList";
-import FoldersListLoader from "@/components/widgets/Loaders/FoldersListLoader/FoldersListLoader";
+import FolderListLoader from "@/components/widgets/Loaders/FolderListLoader/FolderListLoader";
 import { isMobileDevice } from "@/actions/actions.utils";
 import clsx from "clsx";
 
@@ -38,9 +38,9 @@ const Home: FC<HomeProps> = async ({ params }) => {
       </Container>
       <Suspense
         key={JSON.stringify(params)}
-        fallback={<FoldersListLoader view={params.view} length={15} />}
+        fallback={<FolderListLoader view={params.view} length={15} />}
       >
-        <FolderList params={params} dict={dict} />
+        <FolderList params={params} />
       </Suspense>
     </>
   );

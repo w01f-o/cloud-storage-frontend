@@ -6,9 +6,9 @@ import Modal from "@/components/shared/UI/Modal/Modal";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
 import { UpdateFolderDto } from "@/types/dtos/updateFolder.dto";
-import styles from "./folderUpdate.module.scss";
 import { useSubmit } from "@/hooks/useSubmit";
 import { RootDictionary } from "@/types/dictionaries.type";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface ChangeColorProps {
   folder: Folder;
@@ -37,16 +37,18 @@ const FolderUpdater: FC<ChangeColorProps> = ({
       reset,
       successMessage: dict.folders.success.update,
       errorMessage: () => dict.folders.error.update,
-    },
-    {
-      onEnd: () => setModalIsOpen(false),
+      events: {
+        onEnd: () => setModalIsOpen(false),
+      },
     },
   );
 
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
-      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-        <h5>{dict.folders.update.title}</h5>
+      <Form
+        onSubmit={handleSubmit(submitHandler)}
+        title={dict.folders.update.title}
+      >
         <Field
           {...register("name", {
             required: true,
@@ -73,7 +75,7 @@ const FolderUpdater: FC<ChangeColorProps> = ({
         >
           {dict.folders.update.partial}
         </Button>
-      </form>
+      </Form>
     </Modal>
   );
 };

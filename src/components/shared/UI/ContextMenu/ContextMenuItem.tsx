@@ -5,10 +5,9 @@ import type { ContextMenuItemType } from "./ContextMenu";
 
 interface ContextMenuItemProps {
   item: ContextMenuItemType;
-  position?: "left" | "right";
 }
 
-const ContextMenuItem: FC<ContextMenuItemProps> = ({ item, position }) => {
+const ContextMenuItem: FC<ContextMenuItemProps> = ({ item }) => {
   const clickHandler = () => {
     item.action();
   };

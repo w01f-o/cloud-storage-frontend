@@ -10,6 +10,7 @@ import { updateNameAction } from "@/actions/users.action";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import Field from "@/components/shared/UI/Field/Field";
 import styles from "./nameChanger.module.scss";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface NameChangerProps {
   dict: RootDictionary;
@@ -28,18 +29,15 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
     formState: { errors },
     handleSubmit,
   } = useForm<UpdateNameDto>();
-  const { isPending, submitHandler } = useSubmit(
-    updateNameAction,
-    {
-      reset,
-      type: "update",
-      successMessage: dict.settings.name.success,
-      errorMessage: () => dict.settings.name.error,
-    },
-    {
+  const { isPending, submitHandler } = useSubmit(updateNameAction, {
+    reset,
+    type: "update",
+    successMessage: dict.settings.name.success,
+    errorMessage: () => dict.settings.name.error,
+    events: {
       onEnd: () => setModalIsOpen(false),
     },
-  );
+  });
 
   return (
     <>
@@ -52,8 +50,10 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
         {dict.settings.name.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
-        <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
-          <h5>{dict.settings.name.full}</h5>
+        <Form
+          title={dict.settings.name.full}
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <Field
             {...register("name", {
               required: {
@@ -75,7 +75,7 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
           >
             {dict.settings.name.partial}
           </Button>
-        </form>
+        </Form>
       </Modal>
     </>
   );

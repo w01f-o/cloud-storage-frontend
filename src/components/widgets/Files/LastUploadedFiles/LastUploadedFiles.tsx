@@ -16,7 +16,7 @@ const LastUploadedFiles: FC<LastUploadedFilesProps> = async ({}) => {
         files.map((file) => (
           <Col xs={12} key={file.id}>
             <Link href={`/folder/${file.folderId}`}>
-              <File file={file} extended={false} />
+              <File file={file} isExtended={false} />
             </Link>
           </Col>
         ))

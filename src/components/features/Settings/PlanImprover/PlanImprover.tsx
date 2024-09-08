@@ -3,6 +3,8 @@
 import { FC, useState } from "react";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Button from "@/components/shared/UI/Button/Button";
+import Modal from "@/components/shared/UI/Modal/Modal";
+import SadEmojiIcon from "@/components/shared/Icons/SadEmojiIcon";
 
 interface ImprovePlanProps {
   dict: RootDictionary;
@@ -25,14 +27,9 @@ const PlanImprover: FC<ImprovePlanProps> = ({ dict }) => {
       >
         {dict.settings.plan.improve}
       </Button>
-      {/*<Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>*/}
-      {/*  {Intl.DateTimeFormat().resolvedOptions().timeZone ===*/}
-      {/*  "Europe/Moscow" ? (*/}
-      {/*    <div>В вашем регионе эта услуга не доступно</div>*/}
-      {/*  ) : (*/}
-      {/*    <div>В вашем регионе эта услуга не доступно</div>*/}
-      {/*  )}*/}
-      {/*</Modal>*/}
+      <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
+        <SadEmojiIcon />
+      </Modal>
     </>
   );
 };

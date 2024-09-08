@@ -22,7 +22,7 @@ const FileList: FC<FileListProps> = async ({ folderId }) => {
       {!!files.length &&
         files.map((file) => (
           <Col xs={12} key={file.id}>
-            <File file={file} extended />
+            <File file={file} isExtended />
           </Col>
         ))}
       <Col xs={12}>

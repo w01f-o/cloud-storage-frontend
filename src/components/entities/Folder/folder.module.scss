@@ -56,3 +56,15 @@
     pointer-events: none;
   }
 }
+
+.modal {
+  max-height: 400px !important;
+
+  .mobileContext {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    height: 100%;
+  }
+}

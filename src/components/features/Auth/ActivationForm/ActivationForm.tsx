@@ -53,10 +53,10 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
       errorMessage: (error) =>
         dict.errors[JSON.parse(error).type as keyof RootDictionary["errors"]] ??
         dict.activation.error,
-    },
-    {
-      onSuccess: () => {
-        router.replace("/");
+      events: {
+        onSuccess: () => {
+          router.replace("/");
+        },
       },
     },
   );

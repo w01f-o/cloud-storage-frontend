@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, SVGAttributes } from "react";
 
-interface VideoIconProps {}
+interface VideoIconProps extends SVGAttributes<HTMLOrSVGElement> {}
 
-const VideoIcon: FC<VideoIconProps> = ({}) => {
+const VideoIcon: FC<VideoIconProps> = ({ ...props }) => {
   return (
-    <svg width="22" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="22"
+      height="28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         opacity=".3"
         d="M18.687 6.383a2.807 2.807 0 0 1-1.95-.784 2.634 2.634 0 0 1-.809-1.889V0H3.6a3.66 3.66 0 0 0-2.545 1.021A3.434 3.434 0 0 0 0 3.487v21.029c.001.924.38 1.81 1.056 2.464A3.66 3.66 0 0 0 3.6 28h14.798a3.7 3.7 0 0 0 1.378-.265 3.61 3.61 0 0 0 1.169-.756c.334-.324.6-.709.78-1.132.182-.423.275-.877.275-1.335V6.383h-3.313Z"

@@ -13,6 +13,7 @@ import styles from "./fileUploader.module.scss";
 import { useDropzone } from "react-dropzone";
 import clsx from "clsx";
 import { RootDictionary } from "@/types/dictionaries.type";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface FileUploaderProps {
   folderId: string;
@@ -42,8 +43,10 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
       successMessage: dict.files.upload.success,
       errorMessage: () => dict.files.upload.error,
       type: "upload",
+      events: {
+        onEnd: () => setModalIsOpen(false),
+      },
     },
-    { onEnd: () => setModalIsOpen(false) },
   );
 
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -54,7 +57,10 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
     setValue("name", acceptedFiles[0].name);
   };
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    maxFiles: 1,
+  });
 
   const closeModalHandler = useCallback(() => {
     reset();
@@ -77,8 +83,11 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
         setIsOpen={setModalIsOpen}
         onClose={closeModalHandler}
       >
-        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-          <h5>{dict.files.upload.full}</h5>
+        <Form
+          onSubmit={handleSubmit(submitHandler)}
+          title={dict.files.upload.full}
+          className={styles.form}
+        >
           <div
             {...getRootProps()}
             className={clsx(styles.file, {
@@ -107,7 +116,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
           >
             {dict.files.upload.partial}
           </Button>
-        </form>
+        </Form>
       </Modal>
     </div>
   );

@@ -36,18 +36,17 @@ const ContextMenu: FC<ContextMenuProps> = ({
 
   const getPosition = () => {
     const rect = buttonRef.current!.getBoundingClientRect();
-    const rootContainer: HTMLElement =
-      document.querySelector(`.${layoutStyles.scrollContainer}`) ??
-      document.body;
+    const rootContainer = document.querySelector(
+      `.${layoutStyles.scrollContainer}`,
+    ) as HTMLDivElement;
 
     if (rect.x > rootContainer.offsetWidth) {
       if (rect.bottom + 50 * items.length > rootContainer.offsetHeight) {
         return {
           right: "35px",
-          bottom: "35px",
+          bottom: "calc(100% - 25px)",
         };
       }
-      // TODO: FIX THIS SHIT
       return {
         right: "35px",
         top: "35px",
@@ -80,11 +79,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
         >
           <div className={styles.wrapper}>
             {items.map((item) => (
-              <ContextMenuItem
-                item={item}
-                key={item.id}
-                position={getPosition().right ? "right" : "left"}
-              />
+              <ContextMenuItem item={item} key={item.id} />
             ))}
           </div>
         </animated.div>

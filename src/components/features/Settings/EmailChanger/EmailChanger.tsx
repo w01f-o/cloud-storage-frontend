@@ -10,6 +10,7 @@ import { RootDictionary } from "@/types/dictionaries.type";
 import { updateEmailAction } from "@/actions/users.action";
 import { UpdateEmailDto } from "@/types/dtos/updateEmail.dto";
 import styles from "./emailChanger.module.scss";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface EmailChangerProps {
   dict: RootDictionary;
@@ -33,8 +34,10 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
     {
       successMessage: dict.settings.email.success,
       errorMessage: () => dict.settings.email.error,
+      events: {
+        onEnd: () => setModalIsOpen(false),
+      },
     },
-    {},
   );
 
   return (
@@ -48,8 +51,10 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
         {dict.settings.email.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
-        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-          <h5> {dict.settings.email.title}</h5>
+        <Form
+          onSubmit={handleSubmit(submitHandler)}
+          title={dict.settings.email.title}
+        >
           <Field
             type="email"
             placeholder="Email"
@@ -70,7 +75,7 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
           >
             {dict.settings.email.partial}
           </Button>
-        </form>
+        </Form>
       </Modal>
     </>
   );

@@ -1,32 +1,22 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
-  flex-grow: 1;
-  justify-content: center;
-  padding: 24px;
-  gap: 12px;
   text-align: center;
-
-  h5 {
-    font: {
-      size: 24px;
-    }
-  }
-
-  strong {
-    user-select: none;
-  }
-
-  button {
-    width: 100%;
-    margin-top: 8px;
-  }
 }
 
 .danger {
   color: var(--color-red);
+  font: {
+    size: 22px;
+  }
+}
+
+.name {
+  user-select: none;
+  font: {
+    size: 18px;
+  }
+}
+
+.confirm {
   font: {
     size: 18px;
   }

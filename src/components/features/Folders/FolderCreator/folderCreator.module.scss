@@ -2,25 +2,3 @@
   display: flex;
   justify-content: center;
 }
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  flex-grow: 1;
-  padding: 24px;
-  gap: 18px;
-
-  h5 {
-    align-self: center;
-    font: {
-      size: 28px;
-    }
-  }
-
-  button {
-    margin-top: 12px;
-  }
-}

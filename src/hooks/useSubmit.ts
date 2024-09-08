@@ -7,17 +7,18 @@ import { nanoid } from "nanoid";
 
 type useSubmitCallback<T> = (data: T) => Promise<ServerActionResult<unknown>>;
 
+interface useSubmitEvents {
+  onSuccess?: () => void;
+  onError?: (error: string) => void;
+  onEnd?: () => void;
+}
+
 interface useSubmitOptions {
   type?: string;
   reset?: () => void;
   successMessage: string;
   errorMessage: (error: string) => string;
-}
-
-interface useSubmitEvents {
-  onSuccess?: () => void;
-  onError?: (e: string) => void;
-  onEnd?: () => void;
+  events?: useSubmitEvents;
 }
 
 interface useSubmitReturn<T extends FieldValues> {
@@ -28,8 +29,7 @@ interface useSubmitReturn<T extends FieldValues> {
 
 export function useSubmit<T extends FieldValues>(
   callback: useSubmitCallback<T>,
-  { type, reset, successMessage, errorMessage }: useSubmitOptions,
-  { onSuccess, onError, onEnd }: useSubmitEvents,
+  { type, reset, successMessage, errorMessage, events }: useSubmitOptions,
 ): useSubmitReturn<T> {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -52,23 +52,22 @@ export function useSubmit<T extends FieldValues>(
     setIsPending(false);
 
     if (!result.success) {
-      console.log(result);
       toast.add({
         type: "error",
         message: errorMessage(result.error),
       });
 
       setIsError(true);
-      onError && onError(result.error);
+      events?.onError && events.onError(result.error);
     } else {
       toast.add({ type: "success", message: successMessage });
 
       reset && reset();
-      onSuccess && onSuccess();
+      events?.onSuccess && events?.onSuccess();
     }
 
     type && router.refresh();
-    onEnd && onEnd();
+    events?.onEnd && events?.onEnd();
   };
 
   return {

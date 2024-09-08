@@ -31,10 +31,10 @@ const SendCodeAgain: FC<SendCodeAgainProps> = ({ dict }) => {
     {
       successMessage: dict.activation.sendAgain.success,
       errorMessage: () => dict.activation.sendAgain.error,
-    },
-    {
-      onEnd: () => {
-        setSendCodeTimer(60);
+      events: {
+        onEnd: () => {
+          setSendCodeTimer(60);
+        },
       },
     },
   );

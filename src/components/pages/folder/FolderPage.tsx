@@ -1,7 +1,7 @@
 import { FoldersApi } from "@/services/api/index.api";
 import { FC, Suspense } from "react";
 import PageTitle from "@/components/widgets/PageTitle/PageTitle";
-import FilesListLoader from "@/components/widgets/Loaders/FilesListLoader/FilesListLoader";
+import FilesListLoader from "@/components/widgets/Loaders/FileListLoader/FileListLoader";
 import FileList from "@/components/widgets/Files/FileList/FileList";
 import { QueryParams } from "@/types/queryParams.type";
 import { Row } from "@w01f-o/react-grid-layout";

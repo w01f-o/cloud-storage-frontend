@@ -2,16 +2,16 @@
 
 import { FC } from "react";
 import { Col } from "@w01f-o/react-grid-layout";
-import styles from "@/components/widgets/Loaders/FoldersListLoader/foldersListLoader.module.scss";
+import styles from "@/components/widgets/Loaders/FolderListLoader/folderListLoader.module.scss";
 import Skeleton from "react-loading-skeleton";
 import { useTheme } from "@/hooks/useTheme";
 
-interface FilesListLoader {
+interface FileListLoader {
   length: number;
   height?: number;
 }
 
-const FilesListLoader: FC<FilesListLoader> = ({ length, height }) => {
+const FilesListLoader: FC<FileListLoader> = ({ length, height }) => {
   const theme = useTheme();
 
   return Array.from({ length }).map((_, index) => (

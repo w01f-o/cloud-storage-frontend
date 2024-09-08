@@ -240,8 +240,6 @@ export class FilesApi extends CloudStoreApi {
     });
   }
 
-  static async download(fileId: string) {}
-
   static async upload(uploadFileData: FormData) {
     return this.fetch<File>({
       endpoint: `${this.API_ENDPOINT}`,

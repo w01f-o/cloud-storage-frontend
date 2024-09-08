@@ -1,15 +1,15 @@
 import { FC } from "react";
 import styles from "./toast.module.scss";
 import ToastList from "@/components/features/Toast/ToastList";
+import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
 
 const Toast: FC = () => {
   return (
-    <div
-      className={styles.wrapper}
-      style={{ zIndex: 200, position: "relative" }}
-    >
-      <ToastList />
-    </div>
+    <ReactPortal>
+      <div className={styles.wrapper}>
+        <ToastList />
+      </div>
+    </ReactPortal>
   );
 };
 

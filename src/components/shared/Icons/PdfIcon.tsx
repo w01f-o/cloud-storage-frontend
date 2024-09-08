@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, SVGAttributes } from "react";
 
-interface PdfIconProps {}
+interface PdfIconProps extends SVGAttributes<HTMLOrSVGElement> {}
 
-const PdfIcon: FC<PdfIconProps> = ({}) => {
+const PdfIcon: FC<PdfIconProps> = ({ ...props }) => {
   return (
-    <svg width="23" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="23"
+      height="28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         opacity=".3"
         d="M19.257 6.384a2.807 2.807 0 0 1-1.95-.783 2.634 2.634 0 0 1-.809-1.89V0H4.17a3.66 3.66 0 0 0-2.545 1.022A3.434 3.434 0 0 0 .57 3.488v21.029c.001.924.381 1.81 1.056 2.463A3.66 3.66 0 0 0 4.17 28h14.8a3.66 3.66 0 0 0 2.544-1.02 3.435 3.435 0 0 0 1.056-2.463V6.384h-3.313Z"

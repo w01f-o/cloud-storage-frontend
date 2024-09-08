@@ -12,6 +12,7 @@ import { Pen } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSubmit } from "@/hooks/useSubmit";
 import { updateAvatarAction } from "@/actions/users.action";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface AvatarChangerProps {
   dict: RootDictionary;
@@ -31,16 +32,6 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
     file: File[];
   }>();
   const onDrop = (acceptedFiles: File[]) => {
-    if (
-      acceptedFiles[0].type !== "image/png" &&
-      acceptedFiles[0].type !== "image/jpeg" &&
-      acceptedFiles[0].type !== "image/jpg" &&
-      acceptedFiles[0].type !== "image/webp" &&
-      acceptedFiles[0].type !== "image/gif"
-    ) {
-      return;
-    }
-
     setValue("file", acceptedFiles);
 
     const reader = new FileReader();
@@ -51,7 +42,12 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
 
     setValue("name", acceptedFiles[0].name);
   };
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "image/png": [".png", ".jpeg", ".jpg", ".gif", ".webp"],
+    },
+  });
 
   const { isPending, submitHandler } = useSubmit<{
     name: string;
@@ -69,13 +65,13 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
       successMessage: "Success",
       reset,
       errorMessage: (error) => error,
-    },
-    {
-      onEnd: () => {
-        setModalIsOpen(false);
-      },
-      onError: () => {
-        setAvatarPreview(oldAvatarUrl);
+      events: {
+        onEnd: () => {
+          setModalIsOpen(false);
+        },
+        onError: () => {
+          setAvatarPreview(oldAvatarUrl);
+        },
       },
     },
   );
@@ -91,8 +87,11 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
         {dict.settings.avatar.change}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-        <form className={styles.form} onSubmit={handleSubmit(submitHandler)}>
-          <h5>{dict.settings.avatar.title}</h5>
+        <Form
+          className={styles.form}
+          title={dict.settings.avatar.title}
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <div
             className={clsx(styles.avatar, {
               [styles.dragActive]: isDragActive,
@@ -107,12 +106,7 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
               className={clsx(styles.image)}
             />
             <Pen className={styles.pen} width={30} height={30} />
-            <input
-              type="file"
-              {...getInputProps()}
-              {...register("file")}
-              accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
-            />
+            <input type="file" {...getInputProps()} {...register("file")} />
             <input
               type="text"
               {...register("name", {
@@ -130,7 +124,7 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
           >
             {dict.settings.avatar.partial}
           </Button>
-        </form>
+        </Form>
       </Modal>
     </>
   );

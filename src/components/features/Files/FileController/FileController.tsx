@@ -12,13 +12,16 @@ import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
 import { useRouter } from "next/navigation";
 import { File } from "@/types/file.type";
+import Modal from "@/components/shared/UI/Modal/Modal";
+import Button from "@/components/shared/UI/Button/Button";
 
 interface FileControllerProps {
   dict: RootDictionary;
   file: File;
+  isMobile: boolean;
 }
 
-const FileController: FC<FileControllerProps> = ({ dict, file }) => {
+const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
   const [contextIsOpen, setContextIsOpen] = useState<boolean>(false);
   const contextButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -81,12 +84,39 @@ const FileController: FC<FileControllerProps> = ({ dict, file }) => {
       >
         <TripleDotsIcon fill={"#567df4"} />
       </button>
-      <ContextMenu
-        items={contextMenuItems}
-        isOpen={contextIsOpen}
-        setIsOpen={setContextIsOpen}
-        buttonRef={contextButtonRef}
-      />
+      {!isMobile && (
+        <ContextMenu
+          items={contextMenuItems}
+          isOpen={contextIsOpen}
+          setIsOpen={setContextIsOpen}
+          buttonRef={contextButtonRef}
+        />
+      )}
+      {isMobile && (
+        <Modal
+          isOpen={contextIsOpen}
+          setIsOpen={setContextIsOpen}
+          contentClassName={styles.modal}
+        >
+          <div className={styles.mobileContext}>
+            {contextMenuItems.map((item) => (
+              <Button
+                key={item.id}
+                type={"button"}
+                role={"secondary"}
+                title={item.name}
+                onClick={() => {
+                  setContextIsOpen(false);
+                  item.action();
+                }}
+                isDanger={item.isDanger}
+              >
+                {item.name}
+              </Button>
+            ))}
+          </div>
+        </Modal>
+      )}
       <FileDeleter
         modalIsOpen={deleterIsOpen}
         setModalIsOpen={setDeleterIsOpen}

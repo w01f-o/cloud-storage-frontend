@@ -1,6 +1,5 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import { File } from "@/types/file.type";
-import styles from "./fileUpdater.module.scss";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
@@ -9,6 +8,7 @@ import { updateFileAction } from "@/actions/files.actions";
 import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
+import Form from "@/components/shared/UI/Form/Form";
 
 interface FileUpdaterProps {
   modalIsOpen: boolean;
@@ -31,16 +31,18 @@ const FileUpdater: FC<FileUpdaterProps> = ({
       type: "update",
       errorMessage: () => dict.files.update.error,
       successMessage: dict.files.update.success,
-    },
-    {
-      onEnd: () => setModalIsOpen(false),
+      events: {
+        onEnd: () => setModalIsOpen(false),
+      },
     },
   );
 
   return (
     <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
-      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-        <h5> {dict.files.update.full}</h5>
+      <Form
+        onSubmit={handleSubmit(submitHandler)}
+        title={dict.files.update.full}
+      >
         <Field
           {...register("name", {
             required: true,
@@ -56,7 +58,7 @@ const FileUpdater: FC<FileUpdaterProps> = ({
         >
           {dict.files.update.partial}
         </Button>
-      </form>
+      </Form>
     </Modal>
   );
 };

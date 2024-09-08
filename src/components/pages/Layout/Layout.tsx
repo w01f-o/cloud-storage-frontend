@@ -36,8 +36,8 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
       </DesktopOnly>
       <MobileOnly>
         <MobileMenu dict={dict} />
-        <Container fluid>
-          <Row>
+        <Container fluid className={styles.container}>
+          <Row className={styles.row}>
             <Col xs={12}>
               <div className={clsx(styles.content, styles.mobileContent)}>
                 {children}
