@@ -1,3 +1,5 @@
+@import "@/styles/utils/mixins";
+
 .wrapper {
   position: relative;
   display: flex;
@@ -34,6 +36,10 @@
     .info {
       align-items: flex-start;
       width: 65%;
+
+      @include max-sm-screen {
+        width: 35%;
+      }
     }
   }
 }

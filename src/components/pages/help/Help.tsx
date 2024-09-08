@@ -11,7 +11,7 @@ const Help: FC = async () => {
   return (
     <>
       <PageTitle>{dict.pages.help}</PageTitle>
-      <Col className={styles.faq} xs={8}>
+      <Col className={styles.faq} md={8} xs={12}>
         <Accordion data={dict.help.accordion} />
       </Col>
     </>

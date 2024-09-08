@@ -42,7 +42,7 @@ const FolderList: FC<FolderListProps> = async ({ params }) => {
                 xl={params.view === "row" ? 12 : 3}
                 lg={params.view === "row" ? 12 : 4}
                 md={4}
-                xs={6}
+                xs={12}
               >
                 <Folder folder={folder} isExtended />
               </Col>

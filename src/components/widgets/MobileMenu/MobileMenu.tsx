@@ -1,19 +1,17 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import styles from "./mobileMenu.module.scss";
 import MobileMenuIcon from "@/components/shared/Icons/MobileMenuIcon";
 import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
 import { animated, useTransition } from "@react-spring/web";
-import NavBar from "@/components/widgets/NavBar/NavBar";
-import { RootDictionary } from "@/types/dictionaries.type";
 import { usePathname } from "next/navigation";
 
 interface MobileMenuProps {
-  dict: RootDictionary;
+  children: ReactNode;
 }
 
-const MobileMenu: FC<MobileMenuProps> = ({ dict }) => {
+const MobileMenu: FC<MobileMenuProps> = ({ children }) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
   const buttonClickHandler = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -48,7 +46,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ dict }) => {
           item && (
             <ReactPortal>
               <animated.div className={styles.menu} style={style}>
-                <NavBar dict={dict} />
+                {children}
               </animated.div>
             </ReactPortal>
           ),

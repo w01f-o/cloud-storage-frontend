@@ -7,16 +7,14 @@ import Toast from "@/components/features/Toast/Toast";
 import clsx from "clsx";
 import MobileOnly from "@/components/features/Responsive/MobileOnly";
 import DesktopOnly from "@/components/features/Responsive/DesktopOnly";
-import MobileMenu from "@/components/widgets/Sidebar/Mobile/MobileMenu";
-import { getDictionary } from "@/actions/lang.action";
+import MobileMenu from "@/components/widgets/MobileMenu/MobileMenu";
+import MobileMenuContent from "@/components/widgets/MobileMenu/MobileMenuContent";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: FC<LayoutProps> = async ({ children }) => {
-  const dict = await getDictionary();
-
   return (
     <>
       <NextTopLoader showSpinner={false} />
@@ -35,7 +33,9 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
         </Row>
       </DesktopOnly>
       <MobileOnly>
-        <MobileMenu dict={dict} />
+        <MobileMenu>
+          <MobileMenuContent />
+        </MobileMenu>
         <Container fluid className={styles.container}>
           <Row className={styles.row}>
             <Col xs={12}>

@@ -1,3 +1,5 @@
+@import "@/styles/utils/mixins";
+
 .title {
   margin-bottom: 18px;
 
@@ -11,9 +13,17 @@
 }
 
 .foldersCol {
-  padding-right: 40px;
+  @include min-xl-screen {
+    padding-right: 40px;
+  }
+
+  @include max-xl-screen {
+    margin-bottom: 20px;
+  }
 }
 
 .filesCol {
-  padding-left: 40px;
+  @include min-xl-screen {
+    padding-left: 40px;
+  }
 }

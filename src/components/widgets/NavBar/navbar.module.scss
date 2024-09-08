@@ -47,6 +47,10 @@
   width: 4px;
   background: var(--color-blue_light);
   transition: 0.2s;
+
+  &.mobile {
+    left: -65px;
+  }
 }
 
 .active {

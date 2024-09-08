@@ -7,12 +7,14 @@ import NavBarItem from "@/components/widgets/NavBar/NavBarItem";
 import { useParams, usePathname } from "next/navigation";
 import { Utils } from "@/services/utils";
 import { RootDictionary } from "@/types/dictionaries.type";
+import clsx from "clsx";
 
 interface NavBarProps {
   dict: RootDictionary;
+  isMobile: boolean;
 }
 
-const NavBar: FC<NavBarProps> = ({ dict }) => {
+const NavBar: FC<NavBarProps> = ({ dict, isMobile }) => {
   const [activeBarPosition, setActiveBarPosition] = useState<number | null>(
     null,
   );
@@ -43,7 +45,7 @@ const NavBar: FC<NavBarProps> = ({ dict }) => {
     <nav className={styles.nav}>
       {activeBarPosition !== null && (
         <div
-          className={styles.activeBar}
+          className={clsx(styles.activeBar, { [styles.mobile]: isMobile })}
           style={{ top: `${activeBarPosition}px` }}
         />
       )}
@@ -51,8 +53,7 @@ const NavBar: FC<NavBarProps> = ({ dict }) => {
         {routes.map((route) => (
           <NavBarItem
             path={route.path}
-            //@ts-expect-error
-            name={dict.pages[route.name]}
+            name={dict.pages[route.name as keyof RootDictionary["pages"]]}
             key={route.path}
             isActive={Utils.checkLinkForActive(route, pathname, lang)}
             isTempActive={

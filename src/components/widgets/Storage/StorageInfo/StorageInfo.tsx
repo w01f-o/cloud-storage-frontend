@@ -13,7 +13,7 @@ const StorageInfo: FC = async () => {
 
   return (
     <Row className={styles.row}>
-      <Col xs={5} className={styles.leftCol}>
+      <Col md={5} xs={12} className={styles.leftCol}>
         <StorageDoughnut storage={data} />
         <div className={styles.free}>
           {dict.storage.space.free}: <br />
@@ -27,7 +27,7 @@ const StorageInfo: FC = async () => {
           {dict.storage.space.used} - {Utils.formatBytes(data.space.used, dict)}
         </div>
       </Col>
-      <Col xs={7}>
+      <Col md={7} xs={12}>
         <StorageLines storage={data} dict={dict} />
       </Col>
     </Row>

@@ -1,7 +1,13 @@
+@import "@/styles/utils/mixins";
+
 .wrapper {
   display: grid;
   place-items: center;
   width: 60%;
   height: 280px;
   margin-bottom: 12px;
+
+  @include max-xl-screen {
+    width: 80%;
+  }
 }

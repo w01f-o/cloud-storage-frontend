@@ -11,7 +11,7 @@ const LastUpdatedFolders: FC = async () => {
     <>
       {!!folders.length ? (
         folders.map((folder) => (
-          <Col key={folder.id} xs={4}>
+          <Col key={folder.id} lg={4} md={6} xs={12}>
             <Folder folder={folder} isExtended={false} />
           </Col>
         ))
