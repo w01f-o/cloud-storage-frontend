@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Col, Container, Row } from "@w01f-o/react-grid-layout";
 import styles from "./folderListLoader.module.scss";
@@ -9,33 +9,23 @@ import { useTheme } from "@/hooks/useTheme";
 interface FoldersListLoaderProps {
   view: "row" | "cells";
   length: number;
-  width?: number;
 }
 
-const FolderListLoader: FC<FoldersListLoaderProps> = ({
-  view,
-  length,
-  width,
-}) => {
+const FolderListLoader: FC<FoldersListLoaderProps> = ({ view, length }) => {
   const theme = useTheme();
-  const xs = useMemo(() => {
-    if (width) return width;
-
-    switch (view) {
-      case "row":
-        return 12;
-      case "cells":
-        return 2;
-      default:
-        return 2;
-    }
-  }, [view, width]);
 
   return (
     <Container fluid>
       <Row className={styles.row}>
         {Array.from({ length }).map((_, index) => (
-          <Col xs={xs} key={index}>
+          <Col
+            xxl={view === "row" ? 12 : 2}
+            xl={view === "row" ? 12 : 3}
+            lg={view === "row" ? 12 : 4}
+            md={4}
+            xs={12}
+            key={index}
+          >
             <Skeleton
               height={130}
               borderRadius={20}

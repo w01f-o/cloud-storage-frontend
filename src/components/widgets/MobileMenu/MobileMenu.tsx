@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./mobileMenu.module.scss";
 import MobileMenuIcon from "@/components/shared/Icons/MobileMenuIcon";
 import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
@@ -17,14 +17,33 @@ const MobileMenu: FC<MobileMenuProps> = ({ children }) => {
     setMenuIsOpen(!menuIsOpen);
   };
 
-  const pathname = usePathname();
-
   const transition = useTransition(menuIsOpen, {
     from: { clipPath: "circle(30% at 100% 3%)" },
     enter: { clipPath: "circle(90% at 65% 38%)" },
     leave: { clipPath: "circle(30% at 100% 3%)" },
     config: { duration: 200 },
   });
+
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  // useEffect(() => {
+  //   const rootPortalEl = document.querySelector("#root-portal");
+  //   if (menuIsOpen && rootPortalEl) {
+  //     const clickHandler = (e: Event) => {
+  //       if (e.target instanceof HTMLAnchorElement) {
+  //         setMenuIsOpen(false);
+  //       }
+  //     };
+  //
+  //     rootPortalEl.addEventListener("click", clickHandler);
+  //
+  //     return () => {
+  //       rootPortalEl.removeEventListener("click", clickHandler);
+  //     };
+  //   }
+  // }, [menuIsOpen]);
+
+  const pathname = usePathname();
 
   useEffect(() => {
     setMenuIsOpen(false);
@@ -45,7 +64,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ children }) => {
         (style, item) =>
           item && (
             <ReactPortal>
-              <animated.div className={styles.menu} style={style}>
+              <animated.div className={styles.menu} ref={menuRef} style={style}>
                 {children}
               </animated.div>
             </ReactPortal>

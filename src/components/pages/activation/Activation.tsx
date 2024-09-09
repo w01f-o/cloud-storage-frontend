@@ -16,7 +16,7 @@ const Activation: FC = async () => {
 
   return (
     <Row className={styles.row}>
-      <Col xs={4}>
+      <Col lg={4} md={6} xs={12}>
         <ActivationForm dict={dict} />
       </Col>
     </Row>

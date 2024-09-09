@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from "react";
 
 interface useClickOutsideOptions {
-  ref: RefObject<HTMLButtonElement>;
+  ref: RefObject<HTMLElement>;
   callback: () => void;
 }
 

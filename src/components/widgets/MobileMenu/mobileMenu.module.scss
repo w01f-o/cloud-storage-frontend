@@ -4,14 +4,20 @@
   $size: 50px;
 
   position: fixed;
-  right: 35px;
-  top: 70px;
+  right: 40px;
+  top: 65px;
   width: $size;
   height: $size;
   z-index: 3;
   border-radius: 12px;
   background: var(--color-body-backgroud);
   border: none;
+
+  svg {
+    path {
+      fill: var(--color-black);
+    }
+  }
 }
 
 .menu {
@@ -23,6 +29,7 @@
   z-index: 1;
   background: var(--color-body-backgroud);
   padding: 65px 100px 65px 65px;
+  overflow-y: auto;
 }
 
 .wrapper {

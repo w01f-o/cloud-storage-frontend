@@ -12,8 +12,9 @@ import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
 import { useRouter } from "next/navigation";
 import { File } from "@/types/file.type";
-import Modal from "@/components/shared/UI/Modal/Modal";
 import Button from "@/components/shared/UI/Button/Button";
+import clsx from "clsx";
+import BottomSheet from "@/components/shared/UI/BottomSheet/BottomSheet";
 
 interface FileControllerProps {
   dict: RootDictionary;
@@ -73,17 +74,23 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
 
   return (
     <>
-      <button
-        className={styles.contextButton}
-        ref={contextButtonRef}
-        onClick={contextButtonClickHandler}
-        onContextMenu={contextButtonClickHandler}
-        title={dict.contextMenu.title}
-        type="button"
-        aria-label={dict.contextMenu.ariaLabel}
+      <div
+        className={clsx(styles.buttonWrapper, {
+          [styles.grow]: isMobile,
+        })}
       >
-        <TripleDotsIcon fill={"#567df4"} />
-      </button>
+        <button
+          className={styles.contextButton}
+          ref={contextButtonRef}
+          onClick={contextButtonClickHandler}
+          onContextMenu={contextButtonClickHandler}
+          title={dict.contextMenu.title}
+          type="button"
+          aria-label={dict.contextMenu.ariaLabel}
+        >
+          <TripleDotsIcon fill={"#567df4"} />
+        </button>
+      </div>
       {!isMobile && (
         <ContextMenu
           items={contextMenuItems}
@@ -93,11 +100,7 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
         />
       )}
       {isMobile && (
-        <Modal
-          isOpen={contextIsOpen}
-          setIsOpen={setContextIsOpen}
-          contentClassName={styles.modal}
-        >
+        <BottomSheet isOpen={contextIsOpen} setIsOpen={setContextIsOpen}>
           <div className={styles.mobileContext}>
             {contextMenuItems.map((item) => (
               <Button
@@ -115,7 +118,7 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
               </Button>
             ))}
           </div>
-        </Modal>
+        </BottomSheet>
       )}
       <FileDeleter
         modalIsOpen={deleterIsOpen}

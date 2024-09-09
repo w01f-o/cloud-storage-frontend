@@ -229,7 +229,8 @@
       "full": "Télécharger le fichier",
       "partial": "Télécharger",
       "success": "Fichier téléchargé avec succès",
-      "error": "Une erreur s'est produite lors du téléchargement du fichier"
+      "error": "Une erreur s'est produite lors du téléchargement du fichier",
+      "start": "Le téléchargement du fichier a commencé"
     },
     "share": {
       "full": "Accéder aux paramètres",

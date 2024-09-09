@@ -38,12 +38,12 @@ body {
   padding: var(--offset-body-padding);
   background: var(--color-body-backgroud);
   color: var(--color-black);
+}
 
-  &.body-mobile {
-    padding: 0;
-    background: var(--color-white);
-    overflow-y: auto;
-  }
+.body-mobile {
+  padding: 0;
+  background: var(--color-white);
+  overflow-y: auto;
 }
 
 body {
@@ -82,6 +82,6 @@ body {
   }
 }
 
-//* {
-//  outline: 1px solid red;
-//}
+.scroll-lock {
+  overflow: hidden;
+}

@@ -7,6 +7,7 @@ import clsx from "clsx";
 import FileController from "@/components/features/Files/FileController/FileController";
 import { getDictionary } from "@/actions/lang.action";
 import { isMobileDevice } from "@/actions/actions.utils";
+import DesktopOnly from "@/components/features/Responsive/DesktopOnly";
 
 interface FileProps {
   file: FileType;
@@ -27,14 +28,16 @@ const File: FC<FileProps> = async ({ file, isExtended }) => {
       {isExtended ? (
         <>
           <div className={styles.name}>{file.name}</div>
-          <div className={styles.info}>
-            <div className={styles.date}>
-              {Utils.getDate(file.addedAt, dict)}
+          <DesktopOnly>
+            <div className={styles.info}>
+              <div className={styles.date}>
+                {Utils.getDate(file.addedAt, dict)}
+              </div>
+              <div className={styles.size}>
+                {Utils.formatBytes(file.size, dict)}
+              </div>
             </div>
-            <div className={styles.size}>
-              {Utils.formatBytes(file.size, dict)}
-            </div>
-          </div>
+          </DesktopOnly>
         </>
       ) : (
         <>

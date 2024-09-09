@@ -229,7 +229,8 @@
       "full": "Datei hochladen",
       "partial": "Herunterladen",
       "success": "Datei erfolgreich hochgeladen",
-      "error": "Beim Herunterladen der Datei ist ein Fehler aufgetreten"
+      "error": "Beim Herunterladen der Datei ist ein Fehler aufgetreten",
+      "start": "Der Datei-Upload wurde gestartet"
     },
     "share": {
       "full": "Greifen Sie auf Einstellungen zu",

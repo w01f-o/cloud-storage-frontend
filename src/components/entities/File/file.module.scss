@@ -54,6 +54,16 @@
   max-width: 80%;
 }
 
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+
+  &.grow {
+    flex-grow: 1;
+  }
+}
+
 .contextButton {
   display: grid;
   place-items: center;
@@ -81,14 +91,10 @@
   }
 }
 
-.modal {
-  max-height: 400px !important;
-
-  .mobileContext {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 30px;
-    height: 100%;
-  }
+.mobileContext {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  height: 100%;
 }

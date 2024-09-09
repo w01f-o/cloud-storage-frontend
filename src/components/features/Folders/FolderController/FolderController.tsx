@@ -12,8 +12,8 @@ import FolderUpdater from "@/components/features/Folders/FolderUpdater/FolderUpd
 import { useRouter } from "next/navigation";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { Folder as FolderType } from "@/types/folder.type";
-import Modal from "@/components/shared/UI/Modal/Modal";
 import Button from "@/components/shared/UI/Button/Button";
+import BottomSheet from "@/components/shared/UI/BottomSheet/BottomSheet";
 
 interface FolderControllerProps {
   dict: RootDictionary;
@@ -101,11 +101,7 @@ const FolderController: FC<FolderControllerProps> = ({
         />
       )}
       {isMobile && (
-        <Modal
-          isOpen={contextIsOpen}
-          setIsOpen={setContextIsOpen}
-          contentClassName={styles.modal}
-        >
+        <BottomSheet isOpen={contextIsOpen} setIsOpen={setContextIsOpen}>
           <div className={styles.mobileContext}>
             {contextMenuItems.map((item) => (
               <Button
@@ -123,7 +119,7 @@ const FolderController: FC<FolderControllerProps> = ({
               </Button>
             ))}
           </div>
-        </Modal>
+        </BottomSheet>
       )}
       <FolderDeleter
         folder={folder}

@@ -11,7 +11,7 @@ import clsx from "clsx";
 
 interface NavBarProps {
   dict: RootDictionary;
-  isMobile: boolean;
+  isMobile?: boolean;
 }
 
 const NavBar: FC<NavBarProps> = ({ dict, isMobile }) => {

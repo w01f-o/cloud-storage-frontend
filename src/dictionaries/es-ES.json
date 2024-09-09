@@ -229,7 +229,8 @@
       "full": "Subir archivo",
       "partial": "Descargar",
       "success": "Archivo cargado exitosamente",
-      "error": "Se produjo un error al descargar el archivo."
+      "error": "Se produjo un error al descargar el archivo.",
+      "start": "La carga del archivo ha comenzado"
     },
     "share": {
       "full": "Configuración de acceso",

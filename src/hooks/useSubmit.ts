@@ -10,6 +10,7 @@ type useSubmitCallback<T> = (data: T) => Promise<ServerActionResult<unknown>>;
 interface useSubmitEvents {
   onSuccess?: () => void;
   onError?: (error: string) => void;
+  onStart?: () => void;
   onEnd?: () => void;
 }
 
@@ -39,6 +40,7 @@ export function useSubmit<T extends FieldValues>(
   const pathname = usePathname();
 
   const submitHandler: SubmitHandler<T> = async (data: T) => {
+    events?.onStart && events.onStart();
     type &&
       router.replace(
         `${pathname}/?${new URLSearchParams({

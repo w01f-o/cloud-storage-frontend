@@ -1,3 +1,5 @@
+@import "@/styles/utils/mixins";
+
 .modal {
   display: grid;
   place-items: center;
@@ -20,6 +22,10 @@
   padding: 20px;
   overflow-y: auto;
   scrollbar-width: none;
+
+  @include max-md-screen {
+    width: 90%;
+  }
 }
 
 .closeButton {

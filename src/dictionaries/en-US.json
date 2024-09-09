@@ -229,7 +229,8 @@
       "full": "Upload file",
       "partial": "Upload",
       "success": "File uploaded successfully",
-      "error": "An error occurred while uploading the file"
+      "error": "An error occurred while uploading the file",
+      "start": "File upload has started"
     },
     "share": {
       "full": "Access Settings",

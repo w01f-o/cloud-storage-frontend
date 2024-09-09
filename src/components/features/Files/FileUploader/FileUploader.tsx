@@ -14,6 +14,7 @@ import { useDropzone } from "react-dropzone";
 import clsx from "clsx";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Form from "@/components/shared/UI/Form/Form";
+import { useToast } from "@/hooks/useToast";
 
 interface FileUploaderProps {
   folderId: string;
@@ -27,6 +28,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
     setModalIsOpen(true);
   };
   const { register, handleSubmit, reset, setValue } = useForm<UploadFileDto>();
+  const toast = useToast();
 
   const { isPending, submitHandler } = useSubmit(
     (data: UploadFileDto) => {
@@ -44,7 +46,10 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
       errorMessage: () => dict.files.upload.error,
       type: "upload",
       events: {
-        onEnd: () => setModalIsOpen(false),
+        onStart: () => {
+          setModalIsOpen(false);
+          toast.add({ type: "info", message: dict.files.upload.start });
+        },
       },
     },
   );

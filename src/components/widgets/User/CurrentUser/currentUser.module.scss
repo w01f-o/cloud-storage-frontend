@@ -8,12 +8,14 @@
   flex-direction: column;
   justify-content: center;
   width: calc(100% - 62px);
+  pointer-events: none;
 }
 
 .avatar {
   display: flex;
   overflow: hidden;
   border-radius: 50%;
+  pointer-events: none;
 
   img {
     max-width: 100%;

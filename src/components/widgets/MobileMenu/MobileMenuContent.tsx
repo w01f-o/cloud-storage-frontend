@@ -4,15 +4,21 @@ import { getDictionary } from "@/actions/lang.action";
 import CurrentUser from "@/components/widgets/User/CurrentUser/CurrentUser";
 import styles from "@/components/widgets/MobileMenu/mobileMenu.module.scss";
 import SignOutButton from "@/components/features/Auth/SignOutButton/SignOutButton";
+import { auth } from "@/services/auth/auth";
 
 const MobileMenuContent: FC = async () => {
   const dict = await getDictionary();
+  const session = await auth();
 
   return (
     <div className={styles.wrapper}>
       <CurrentUser dict={dict} />
       <NavBar dict={dict} isMobile />
-      <SignOutButton dict={dict} />
+      {session ? (
+        <SignOutButton dict={dict} />
+      ) : (
+        <div style={{ height: 30 }}></div>
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+@import "@/styles/utils/mixins";
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -27,14 +29,22 @@
   font: {
     size: 20px;
   }
+
   text-align: center;
   margin-bottom: 18px;
   padding: 0 20%;
+
+  @include max-md-screen {
+    padding: 0 10%;
+  }
 }
 
 .links {
   display: flex;
+  justify-content: center;
   gap: 20px;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .animatedBox {

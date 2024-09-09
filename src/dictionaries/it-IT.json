@@ -229,7 +229,8 @@
       "full": "Carica file",
       "partial": "Scaricamento",
       "success": "File caricato con successo",
-      "error": "Si è verificato un errore durante il download del file"
+      "error": "Si è verificato un errore durante il download del file",
+      "start": "Il caricamento del file è iniziato"
     },
     "share": {
       "full": "Accedi alle Impostazioni",

@@ -263,6 +263,7 @@ interface Upload {
   partial: string;
   success: string;
   error: string;
+  start: string;
 }
 
 interface Share {

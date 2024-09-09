@@ -1,7 +1,13 @@
+@import "@/styles/utils/mixins";
+
 .wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @include max-xl-screen {
+    padding-top: 30px;
+  }
 }
 
 .item {

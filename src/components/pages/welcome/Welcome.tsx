@@ -12,9 +12,10 @@ import { RootDictionary } from "@/types/dictionaries.type";
 
 interface WelcomeProps {
   dict: RootDictionary;
+  isMobile: boolean;
 }
 
-const Welcome: FC<WelcomeProps> = ({ dict }) => {
+const Welcome: FC<WelcomeProps> = ({ dict, isMobile }) => {
   const leftButtonStyle = useSpring({
     from: { opacity: 0, x: "-50%" },
     to: { opacity: 1, x: "0" },
@@ -35,7 +36,7 @@ const Welcome: FC<WelcomeProps> = ({ dict }) => {
 
   return (
     <div className={styles.wrapper}>
-      <WelcomeBackground />
+      {!isMobile && <WelcomeBackground />}
       <animated.div className={styles.welcome} style={animatedBoxStyle}>
         <div className={styles.welcome}>
           <WelcomeIcon className={styles.svg} />
