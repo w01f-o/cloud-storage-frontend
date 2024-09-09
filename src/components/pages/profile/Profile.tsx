@@ -3,11 +3,11 @@ import PageTitle from "@/components/widgets/PageTitle/PageTitle";
 import { getDictionary } from "@/actions/lang.action";
 import { Col, Row } from "@w01f-o/react-grid-layout";
 import UserProfile from "@/components/widgets/User/UserProfile/UserProfile";
-import LastUpdatedFolders from "@/components/widgets/Folders/LastUpdatedFolders/LastUpdatedFolders";
 import LastUploadedFiles from "@/components/widgets/Files/LastUploadedFiles/LastUploadedFiles";
 import styles from "./profile.module.scss";
-import FolderListLoader from "@/components/widgets/Loaders/FolderListLoader/FolderListLoader";
 import FilesListLoader from "@/components/widgets/Loaders/FileListLoader/FileListLoader";
+import LastUpdatedFolderListLoader from "@/components/widgets/Loaders/LastUpdatedFolderListLoader/LastUpdatedFolderListLoader";
+import LastUpdatedFolders from "@/components/widgets/Folders/LastUpdatedFolders/LastUpdatedFolders";
 
 const Profile: FC = async () => {
   const dict = await getDictionary();
@@ -21,9 +21,7 @@ const Profile: FC = async () => {
         </Col>
         <Col xl={6} xs={12} className={styles.foldersCol}>
           <h3 className={styles.title}>{dict.profile.folders}</h3>
-          <Suspense
-            fallback={<FolderListLoader view={"cells"} length={7} width={4} />}
-          >
+          <Suspense fallback={<LastUpdatedFolderListLoader length={7} />}>
             <Row>
               <LastUpdatedFolders />
             </Row>
