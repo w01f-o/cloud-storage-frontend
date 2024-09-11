@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, memo } from "react";
 import Link from "next/link";
 import CellsModeIcon from "@/components/shared/Icons/CellsModeIcon";
 import RowModeIcon from "@/components/shared/Icons/RowModeIcon";
@@ -39,4 +39,4 @@ const ViewModeSwitcher: FC<ViewModeSwitcherProps> = ({ dict }) => {
   );
 };
 
-export default ViewModeSwitcher;
+export default memo(ViewModeSwitcher);

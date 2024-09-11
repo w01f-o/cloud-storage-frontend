@@ -16,8 +16,6 @@ const nunitoSans: NextFont = Nunito_Sans({
   preload: true,
 });
 
-// TODO: Refactor forms and other shit, make saving theme in cookie or local storage, make zaebis dark theme
-
 const RootLayout = ({
   children,
   params: { lang },

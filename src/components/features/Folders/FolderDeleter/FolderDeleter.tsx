@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { useForm } from "react-hook-form";
-import { Folder } from "@/types/folder.type";
+import { Folder } from "@/types/entities/folder.type";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
 import { deleteFolderAction } from "@/actions/folders.actions";

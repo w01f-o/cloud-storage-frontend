@@ -14,11 +14,7 @@ const SideBar: FC = async () => {
     <aside className={styles.sidebar}>
       <CurrentUser dict={dict} />
       <NavBar dict={dict} />
-      {session ? (
-        <SignOutButton dict={dict} />
-      ) : (
-        <div style={{ height: 30 }}></div>
-      )}
+      {session ? <SignOutButton /> : <div style={{ height: 30 }}></div>}
     </aside>
   );
 };

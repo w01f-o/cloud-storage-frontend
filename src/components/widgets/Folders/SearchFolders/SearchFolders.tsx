@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, memo } from "react";
 import { SearchIcon } from "lucide-react";
 import Field from "@/components/shared/UI/Field/Field";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -43,4 +43,4 @@ const SearchFolders: FC<SearchFoldersProps> = ({ dict }) => {
   );
 };
 
-export default SearchFolders;
+export default memo(SearchFolders);

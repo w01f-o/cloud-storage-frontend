@@ -1,9 +1,7 @@
-import { UserData } from "@/types/userData.type";
+import { AuthUser } from "@/types/entities/authUser.type";
+import { Tokens } from "@/types/entities/tokens.type";
 
 export interface AuthResponse {
-  user: UserData;
-  accessToken: string;
-  refreshToken: string;
-  accessExpiresIn: number;
-  refreshExpiresIn: number;
+  user: AuthUser;
+  tokens: Tokens;
 }

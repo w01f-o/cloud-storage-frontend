@@ -2,7 +2,7 @@
 
 import { createServerAction, ServerActionError } from "@/actions/actions.utils";
 import { FilesApi, SharedFilesApi } from "@/services/api/index.api";
-import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
+import { UpdateFileDto } from "@/types/dtos/users/updateFile.dto";
 
 export const uploadFileAction = createServerAction(
   async (uploadFileData: FormData) => {

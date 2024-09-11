@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./folder.module.scss";
-import type { Folder } from "@/types/folder.type";
+import type { Folder } from "@/types/entities/folder.type";
 import Link from "next/link";
 import FolderIcon from "@/components/shared/Icons/FolderIcon";
 import { Utils } from "@/services/utils";

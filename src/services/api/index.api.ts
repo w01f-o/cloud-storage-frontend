@@ -1,22 +1,21 @@
 import { auth } from "@/services/auth/auth";
-import { Folder } from "@/types/folder.type";
-import { File } from "@/types/file.type";
-import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
-import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
+import { Folder } from "@/types/entities/folder.type";
+import { File } from "@/types/entities/file.type";
+import { CreateFolderDto } from "@/types/dtos/folders/createFolder.dto";
 import { AuthResponse } from "@/types/authResponse.type";
-import { AuthRegistrationDto } from "@/types/dtos/authRegistration.dto";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
 import { QueryParams } from "@/types/queryParams.type";
-import { UpdateFolderDto } from "@/types/dtos/updateFolder.dto";
-import { User } from "@/types/user.type";
+import { UpdateFolderDto } from "@/types/dtos/users/updateFolder.dto";
+import { User } from "@/types/entities/user.type";
 import { Utils } from "@/services/utils";
-import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
-import { Storage } from "@/types/storage.type";
-import { ActivateDto } from "@/types/activateDto.type";
-import { ChangePasswordDto } from "@/types/dtos/changePassword.dto";
-import { UpdateEmailDto } from "@/types/dtos/updateEmail.dto";
-import { UpdateNameDto } from "@/types/dtos/updateName.dto";
-import { SharedFile } from "@/types/sharedFile.type";
+import { UpdateFileDto } from "@/types/dtos/users/updateFile.dto";
+import { Storage } from "@/types/entities/storage.type";
+import { ActivateDto } from "@/types/dtos/auth/activate.dto";
+import { ChangePasswordDto } from "@/types/dtos/users/changePassword.dto";
+import { UpdateEmailDto } from "@/types/dtos/users/updateEmail.dto";
+import { UpdateNameDto } from "@/types/dtos/users/updateName.dto";
+import { SharedFile } from "@/types/entities/sharedFile.type";
+import { AuthLoginDto, AuthRegistrationDto } from "@/types/dtos/auth/auth.dto";
 
 export type FetchResponse<T> = { data: T; response: Response };
 
@@ -208,7 +207,7 @@ export class AuthApi extends CloudStoreApi {
 
   public static async activate(activateDto: ActivateDto) {
     return await this.fetch<AuthResponse>({
-      withAuth: false,
+      withAuth: true,
       endpoint: `${this.API_ENDPOINT}/activate`,
       fetchOptions: {
         method: "POST",

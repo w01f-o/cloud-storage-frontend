@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import { File } from "@/types/file.type";
+import { File } from "@/types/entities/file.type";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Button from "@/components/shared/UI/Button/Button";

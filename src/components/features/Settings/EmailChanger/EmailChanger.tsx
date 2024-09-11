@@ -8,9 +8,10 @@ import { useSubmit } from "@/hooks/useSubmit";
 import { useForm } from "react-hook-form";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { updateEmailAction } from "@/actions/users.action";
-import { UpdateEmailDto } from "@/types/dtos/updateEmail.dto";
+import { UpdateEmailDto } from "@/types/dtos/users/updateEmail.dto";
 import styles from "./emailChanger.module.scss";
 import Form from "@/components/shared/UI/Form/Form";
+import { useRouter } from "next/navigation";
 
 interface EmailChangerProps {
   dict: RootDictionary;
@@ -18,7 +19,7 @@ interface EmailChangerProps {
 
 const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-
+  const router = useRouter();
   const clickHandler = () => {
     setModalIsOpen(!modalIsOpen);
   };
@@ -35,7 +36,10 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
       successMessage: dict.settings.email.success,
       errorMessage: () => dict.settings.email.error,
       events: {
-        onEnd: () => setModalIsOpen(false),
+        onEnd: () => {
+          setModalIsOpen(false);
+          router.refresh();
+        },
       },
     },
   );

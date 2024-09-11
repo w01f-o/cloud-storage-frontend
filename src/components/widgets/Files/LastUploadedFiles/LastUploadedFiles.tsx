@@ -4,11 +4,13 @@ import File from "@/components/entities/File/File";
 import Link from "next/link";
 import { Col } from "@w01f-o/react-grid-layout";
 import styles from "./lastUploadedFiles.module.scss";
+import { getDictionary } from "@/actions/lang.action";
 
 interface LastUploadedFilesProps {}
 
 const LastUploadedFiles: FC<LastUploadedFilesProps> = async ({}) => {
   const { data: files } = await FilesApi.getLastUploaded();
+  const dict = await getDictionary();
 
   return (
     <>
@@ -21,7 +23,7 @@ const LastUploadedFiles: FC<LastUploadedFilesProps> = async ({}) => {
           </Col>
         ))
       ) : (
-        <div className={styles.empty}>Здесь пока ничего нет</div>
+        <div className={styles.empty}>{dict.files.empty.title}</div>
       )}
     </>
   );

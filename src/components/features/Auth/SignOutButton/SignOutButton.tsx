@@ -1,28 +1,22 @@
-"use client";
-
-import { FC } from "react";
+import { FC, memo } from "react";
 import LogoutIcon from "@/components/shared/Icons/LogoutIcon";
 import styles from "./signOutButton.module.scss";
 import { logoutAction, redirectAction } from "@/actions/auth.actions";
-import { useParams } from "next/navigation";
-import { RootDictionary } from "@/types/dictionaries.type";
+import { getDictionary } from "@/actions/lang.action";
 
-interface SignOutButtonProps {
-  dict: RootDictionary;
-}
+const SignOutButton: FC = async () => {
+  const dict = await getDictionary();
 
-const SignOutButton: FC<SignOutButtonProps> = ({ dict }) => {
-  const { lang } = useParams();
+  const logout = async () => {
+    "use server";
 
-  const submitHandler = async (e: any) => {
-    e.preventDefault();
     await logoutAction();
-    await redirectAction(`/${lang}/welcome`);
+    await redirectAction("/");
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <button className={styles.button} title="Выйти" type="submit">
+    <form action={logout}>
+      <button className={styles.button}>
         <LogoutIcon />
         {dict.auth.logout}
       </button>
@@ -30,4 +24,4 @@ const SignOutButton: FC<SignOutButtonProps> = ({ dict }) => {
   );
 };
 
-export default SignOutButton;
+export default memo(SignOutButton);

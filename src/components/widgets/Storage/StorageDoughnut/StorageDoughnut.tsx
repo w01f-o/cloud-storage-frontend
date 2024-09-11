@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect } from "react";
-import { Storage } from "@/types/storage.type";
+import { Storage } from "@/types/entities/storage.type";
 import styles from "./storageDoughnut.module.scss";
 import { Chart, registerables } from "chart.js";
 import { Utils } from "@/services/utils";
@@ -48,6 +48,8 @@ const StorageDoughnut: FC<StorageDoughnutProps> = ({ storage }) => {
             enabled: false,
           },
         },
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
 

@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useRef, useState } from "react";
 import styles from "./navbar.module.scss";
-import { routes } from "@/components/widgets/NavBar/routes";
+import { routes } from "@/constants/routes";
 import NavBarItem from "@/components/widgets/NavBar/NavBarItem";
 import { useParams, usePathname } from "next/navigation";
 import { Utils } from "@/services/utils";

@@ -7,7 +7,7 @@ import styles from "./folderCreator.module.scss";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { useForm } from "react-hook-form";
 import Field from "@/components/shared/UI/Field/Field";
-import { CreateFolderDto } from "@/types/dtos/createFolder.dto";
+import { CreateFolderDto } from "@/types/dtos/folders/createFolder.dto";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
 import { createFolderAction } from "@/actions/folders.actions";

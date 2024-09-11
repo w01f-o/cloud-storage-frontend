@@ -7,7 +7,7 @@ import Modal from "@/components/shared/UI/Modal/Modal";
 import Field from "@/components/shared/UI/Field/Field";
 import { useForm } from "react-hook-form";
 import { uploadFileAction } from "@/actions/files.actions";
-import { UploadFileDto } from "@/types/dtos/uploadFile.dto";
+import { UploadFileDto } from "@/types/dtos/files/uploadFile.dto";
 import { useSubmit } from "@/hooks/useSubmit";
 import styles from "./fileUploader.module.scss";
 import { useDropzone } from "react-dropzone";

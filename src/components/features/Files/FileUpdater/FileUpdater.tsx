@@ -1,11 +1,11 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import { File } from "@/types/file.type";
+import { File } from "@/types/entities/file.type";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
 import { useForm } from "react-hook-form";
 import { updateFileAction } from "@/actions/files.actions";
-import { UpdateFileDto } from "@/types/dtos/updateFile.dto";
+import { UpdateFileDto } from "@/types/dtos/users/updateFile.dto";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
 import Form from "@/components/shared/UI/Form/Form";

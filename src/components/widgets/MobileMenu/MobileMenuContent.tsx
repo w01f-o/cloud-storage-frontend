@@ -14,11 +14,7 @@ const MobileMenuContent: FC = async () => {
     <div className={styles.wrapper}>
       <CurrentUser dict={dict} />
       <NavBar dict={dict} isMobile />
-      {session ? (
-        <SignOutButton dict={dict} />
-      ) : (
-        <div style={{ height: 30 }}></div>
-      )}
+      {session ? <SignOutButton /> : <div style={{ height: 30 }}></div>}
     </div>
   );
 };

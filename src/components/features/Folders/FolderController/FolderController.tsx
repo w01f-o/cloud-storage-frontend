@@ -11,7 +11,7 @@ import FolderDeleter from "@/components/features/Folders/FolderDeleter/FolderDel
 import FolderUpdater from "@/components/features/Folders/FolderUpdater/FolderUpdater";
 import { useRouter } from "next/navigation";
 import { RootDictionary } from "@/types/dictionaries.type";
-import { Folder as FolderType } from "@/types/folder.type";
+import { Folder as FolderType } from "@/types/entities/folder.type";
 import Button from "@/components/shared/UI/Button/Button";
 import BottomSheet from "@/components/shared/UI/BottomSheet/BottomSheet";
 

@@ -10,10 +10,11 @@ import StorageLines from "@/components/widgets/Storage/StorageLines/StorageLines
 const StorageInfo: FC = async () => {
   const dict = await getDictionary();
   const { data } = await UserApi.getUserStorage();
+  const storageIsEmpty = data.space.total === data.space.free;
 
   return (
     <Row className={styles.row}>
-      <Col md={5} xs={12} className={styles.leftCol}>
+      <Col md={storageIsEmpty ? 12 : 5} xs={12} className={styles.leftCol}>
         <StorageDoughnut storage={data} />
         <div className={styles.free}>
           {dict.storage.space.free}: <br />
@@ -27,9 +28,11 @@ const StorageInfo: FC = async () => {
           {dict.storage.space.used} - {Utils.formatBytes(data.space.used, dict)}
         </div>
       </Col>
-      <Col md={7} xs={12}>
-        <StorageLines storage={data} dict={dict} />
-      </Col>
+      {!storageIsEmpty && (
+        <Col md={7} xs={12}>
+          <StorageLines storage={data} dict={dict} />
+        </Col>
+      )}
     </Row>
   );
 };

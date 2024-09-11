@@ -1,9 +1,10 @@
-import { type DefaultSession, NextAuthConfig } from "next-auth";
+import { type DefaultSession, NextAuthConfig, User } from "next-auth";
 import Credentials from "@auth/core/providers/credentials";
-import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
-import { UserData } from "@/types/userData.type";
+import { AuthUser } from "@/types/entities/authUser.type";
 import { CustomAuthError } from "@/services/auth/auth.error";
 import { AuthApi } from "@/services/api/index.api";
+import { AuthLoginDto } from "@/types/dtos/auth/auth.dto";
+import { Tokens } from "@/types/entities/tokens.type";
 
 declare module "next-auth" {
   interface Session {
@@ -13,16 +14,16 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 
-  interface User extends UserData {}
-}
-
-declare module "@auth/core/jwt" {
-  interface JWT {
+  interface User extends AuthUser {
     accessToken: string;
     refreshToken: string;
     accessExpiresIn: number;
     refreshExpiresIn: number;
   }
+}
+
+declare module "@auth/core/jwt" {
+  interface JWT extends Tokens {}
 }
 
 export const authOptions: NextAuthConfig = {
@@ -40,19 +41,19 @@ export const authOptions: NextAuthConfig = {
         },
       },
       authorize: async (credentials) => {
-        const signInDto: AuthLoginDto = {
+        const loginDto: AuthLoginDto = {
           email: credentials?.email as string,
           password: credentials?.password as string,
         };
-        const { response, data } = await AuthApi.login(signInDto);
+        const { response, data } = await AuthApi.login(loginDto);
 
         if (response.ok && data) {
-          const userData: UserData = {
+          const userData: User = {
             ...data.user,
-            accessToken: data.accessToken,
-            refreshToken: data.refreshToken,
-            accessExpiresIn: data.accessExpiresIn,
-            refreshExpiresIn: data.refreshExpiresIn,
+            accessToken: data.tokens.access,
+            refreshToken: data.tokens.refresh,
+            accessExpiresIn: data.tokens.accessExpiresIn,
+            refreshExpiresIn: data.tokens.refreshExpiresIn,
           };
 
           return userData;

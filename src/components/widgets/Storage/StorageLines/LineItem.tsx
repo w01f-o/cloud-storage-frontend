@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { Category, Space } from "@/types/storage.type";
+import { Category, Space } from "@/types/entities/storage.type";
 import { Utils } from "@/services/utils";
 import styles from "./storageLines.module.scss";
 import { RootDictionary } from "@/types/dictionaries.type";

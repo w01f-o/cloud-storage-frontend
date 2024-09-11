@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { File as FileType } from "@/types/file.type";
+import { File as FileType } from "@/types/entities/file.type";
 import styles from "./file.module.scss";
 import { Utils } from "@/services/utils";
 import FileIcon from "@/components/shared/Icons/FileIcon/FileIcon";

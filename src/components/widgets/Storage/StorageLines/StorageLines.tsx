@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Storage } from "@/types/storage.type";
+import { Storage } from "@/types/entities/storage.type";
 import styles from "./storageLines.module.scss";
 import { RootDictionary } from "@/types/dictionaries.type";
 import LineItem from "@/components/widgets/Storage/StorageLines/LineItem";

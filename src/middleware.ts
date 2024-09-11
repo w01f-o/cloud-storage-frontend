@@ -56,12 +56,14 @@ export async function middleware(req: NextRequest) {
       req.cookies.get(sessionCookie)?.value as string,
     );
     const {
-      data: { accessToken, refreshToken, accessExpiresIn, refreshExpiresIn },
+      data: {
+        tokens: { access, refresh, accessExpiresIn, refreshExpiresIn },
+      },
     } = await AuthApi.refresh(oldTokenData.refreshToken);
     const newSession = {
       ...oldTokenData,
-      accessToken,
-      refreshToken,
+      accessToken: access,
+      refreshToken: refresh,
       accessExpiresIn,
       refreshExpiresIn,
     };

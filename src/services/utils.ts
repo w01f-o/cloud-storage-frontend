@@ -1,7 +1,7 @@
-import { Route } from "@/components/widgets/NavBar/routes";
 import Color from "colorjs.io";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { FileTypes } from "@/enums/FileTypes.enum";
+import { Route } from "@/types/route.type";
 
 export class Utils {
   public static checkLinkForActive(

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { File } from "@/types/file.type";
+import { File } from "@/types/entities/file.type";
 import styles from "./sharedFile.module.scss";
 import FileIcon from "@/components/shared/Icons/FileIcon/FileIcon";
 import { Utils } from "@/services/utils";

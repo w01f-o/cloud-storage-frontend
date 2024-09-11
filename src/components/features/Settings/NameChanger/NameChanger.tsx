@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Button from "@/components/shared/UI/Button/Button";
 import { useForm } from "react-hook-form";
-import { UpdateNameDto } from "@/types/dtos/updateName.dto";
+import { UpdateNameDto } from "@/types/dtos/users/updateName.dto";
 import { useSubmit } from "@/hooks/useSubmit";
 import { updateNameAction } from "@/actions/users.action";
 import Modal from "@/components/shared/UI/Modal/Modal";

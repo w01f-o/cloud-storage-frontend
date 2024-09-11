@@ -11,7 +11,7 @@ import FileDeleter from "@/components/features/Files/FileDeleter/fileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
 import { useRouter } from "next/navigation";
-import { File } from "@/types/file.type";
+import { File } from "@/types/entities/file.type";
 import Button from "@/components/shared/UI/Button/Button";
 import clsx from "clsx";
 import BottomSheet from "@/components/shared/UI/BottomSheet/BottomSheet";

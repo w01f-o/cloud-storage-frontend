@@ -2,9 +2,9 @@
 
 import { UserApi } from "@/services/api/index.api";
 import { createServerAction, ServerActionError } from "./actions.utils";
-import { ChangePasswordDto } from "@/types/dtos/changePassword.dto";
-import { UpdateEmailDto } from "@/types/dtos/updateEmail.dto";
-import { UpdateNameDto } from "@/types/dtos/updateName.dto";
+import { ChangePasswordDto } from "@/types/dtos/users/changePassword.dto";
+import { UpdateEmailDto } from "@/types/dtos/users/updateEmail.dto";
+import { UpdateNameDto } from "@/types/dtos/users/updateName.dto";
 
 export const updateAvatarAction = createServerAction(
   async (formData: FormData) => {

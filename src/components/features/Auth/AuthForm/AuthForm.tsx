@@ -3,14 +3,19 @@
 import { Lock, Mail, User } from "lucide-react";
 import styles from "./authForm.module.scss";
 import Link from "next/link";
-import { loginAction, registerAction } from "@/actions/auth.actions";
+import {
+  loginAction,
+  redirectAction,
+  registerAction,
+} from "@/actions/auth.actions";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { AuthFormDto } from "@/types/dtos/authForm.dto";
+import { AuthDto } from "@/types/dtos/auth/auth.dto";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
+import { useParams } from "next/navigation";
 
 interface AuthFormProps {
   formType: "registration" | "login";
@@ -21,17 +26,23 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
   const formAction = formType === "login" ? loginAction : registerAction;
   const formTitle =
     formType === "login" ? dict.auth.login : dict.auth.registration;
+  const { lang } = useParams();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthFormDto>();
+  } = useForm<AuthDto>();
 
   const { submitHandler, isPending } = useSubmit(formAction, {
     successMessage: dict.auth.success,
     errorMessage: (error) =>
       dict.errors[JSON.parse(error).type as keyof RootDictionary["errors"]],
+    events: {
+      onSuccess: async () => {
+        await redirectAction(`/${lang}/`);
+      },
+    },
   });
 
   return (

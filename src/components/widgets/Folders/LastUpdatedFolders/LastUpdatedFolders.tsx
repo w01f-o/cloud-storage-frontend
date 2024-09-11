@@ -3,9 +3,11 @@ import { FoldersApi } from "@/services/api/index.api";
 import { Col } from "@w01f-o/react-grid-layout";
 import { FC } from "react";
 import styles from "./lastUpdatedFolders.module.scss";
+import { getDictionary } from "@/actions/lang.action";
 
 const LastUpdatedFolders: FC = async () => {
   const { data: folders } = await FoldersApi.getLastUpdated();
+  const dict = await getDictionary();
 
   return (
     <>
@@ -16,7 +18,7 @@ const LastUpdatedFolders: FC = async () => {
           </Col>
         ))
       ) : (
-        <div className={styles.empty}>Пусто</div>
+        <div className={styles.empty}>{dict.folders.empty.title}</div>
       )}
     </>
   );

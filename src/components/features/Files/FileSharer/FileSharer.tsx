@@ -17,7 +17,7 @@ import {
   unShareFileAction,
 } from "@/actions/files.actions";
 import styles from "./fileSharer.module.scss";
-import { File } from "@/types/file.type";
+import { File } from "@/types/entities/file.type";
 import Link from "next/link";
 import { useToast } from "@/hooks/useToast";
 import ToggleSwitcher from "@/components/shared/UI/ToggleSwitcher/ToggleSwitcher";

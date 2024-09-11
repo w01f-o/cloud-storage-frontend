@@ -7,9 +7,10 @@ import Modal from "@/components/shared/UI/Modal/Modal";
 import styles from "./accountDeleter.module.scss";
 import { useSubmit } from "@/hooks/useSubmit";
 import { useForm } from "react-hook-form";
-import { UpdateNameDto } from "@/types/dtos/updateName.dto";
+import { UpdateNameDto } from "@/types/dtos/users/updateName.dto";
 import { deleteUserAction } from "@/actions/users.action";
 import Form from "@/components/shared/UI/Form/Form";
+import { logoutAction } from "@/actions/auth.actions";
 
 interface AccountDeleterProps {
   dict: RootDictionary;
@@ -25,10 +26,11 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
   const { isPending, submitHandler } = useSubmit<UpdateNameDto>(
     deleteUserAction,
     {
-      successMessage: "success",
-      errorMessage: (error) => error,
+      successMessage: dict.settings.delete.success,
+      errorMessage: () => dict.settings.delete.error,
       events: {
         onError: () => setModalIsOpen(false),
+        onSuccess: logoutAction,
       },
     },
   );

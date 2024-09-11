@@ -1,7 +1,4 @@
-export interface Route {
-  path: string;
-  name: string;
-}
+import { Route } from "@/types/route.type";
 
 export const routes: Route[] = [
   { path: "/", name: "home" },

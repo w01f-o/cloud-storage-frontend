@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import Button from "@/components/shared/UI/Button/Button";
 import { useSubmit } from "@/hooks/useSubmit";
 import { activateAction } from "@/actions/auth.actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SendCodeAgain from "@/components/features/Auth/ActivationForm/SendCodeAgain/SendCodeAgain";
 
 interface ActivateFormProps {
@@ -45,8 +45,8 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
   const { isPending, submitHandler } = useSubmit<FormState>(
     (data) => {
       const code: number = +Object.values(data).join("");
-      console.log(code);
-      return activateAction(code);
+
+      return activateAction({ code });
     },
     {
       successMessage: dict.activation.success,

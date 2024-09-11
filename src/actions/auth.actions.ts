@@ -2,13 +2,16 @@
 
 import { auth, signIn, signOut } from "@/services/auth/auth";
 import { createServerAction, ServerActionError } from "@/actions/actions.utils";
-import { AuthFormDto } from "@/types/dtos/authForm.dto";
-import { AuthLoginDto } from "@/types/dtos/authLogin.dto";
-import { AuthRegistrationDto } from "@/types/dtos/authRegistration.dto";
-import { redirect } from "next/navigation";
+import {
+  AuthDto,
+  AuthLoginDto,
+  AuthRegistrationDto,
+} from "@/types/dtos/auth/auth.dto";
 import { AuthApi, UserApi } from "@/services/api/index.api";
+import { ActivateDto } from "@/types/dtos/auth/activate.dto";
+import { redirect } from "next/navigation";
 
-export const loginAction = createServerAction(async (formData: AuthFormDto) => {
+export const loginAction = createServerAction(async (formData: AuthDto) => {
   const body: AuthLoginDto = {
     email: formData.email,
     password: formData.password,
@@ -17,22 +20,20 @@ export const loginAction = createServerAction(async (formData: AuthFormDto) => {
   await signIn("credentials", { redirect: false, ...body });
 });
 
-export const registerAction = createServerAction(
-  async (formData: AuthFormDto) => {
-    const body: AuthRegistrationDto = {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-    };
-    const { response, data } = await AuthApi.register(body);
+export const registerAction = createServerAction(async (formData: AuthDto) => {
+  const body: AuthRegistrationDto = {
+    name: formData.name,
+    email: formData.email,
+    password: formData.password,
+  };
+  const { response, data } = await AuthApi.register(body);
 
-    if (!response.ok) {
-      throw new ServerActionError(JSON.stringify(data));
-    }
+  if (!response.ok) {
+    throw new ServerActionError(JSON.stringify(data));
+  }
 
-    await signIn("credentials", { redirect: false, ...body });
-  },
-);
+  await signIn("credentials", { redirect: false, ...body });
+});
 
 export const logoutAction = createServerAction(async () => {
   const session = await auth();
@@ -45,19 +46,17 @@ export const logoutAction = createServerAction(async () => {
   await signOut({ redirect: false });
 });
 
-export const activateAction = createServerAction(async (code: number) => {
-  const session = await auth();
-  const { data, response } = await AuthApi.activate({
-    code,
-    email: session?.user.email ?? "",
-  });
+export const activateAction = createServerAction(
+  async (activateDto: ActivateDto) => {
+    const { data, response } = await AuthApi.activate(activateDto);
 
-  if (!response.ok) {
-    throw new ServerActionError(JSON.stringify(data));
-  }
+    if (!response.ok) {
+      throw new ServerActionError(JSON.stringify(data));
+    }
 
-  return data;
-});
+    return data;
+  },
+);
 
 export const sendActivationCodeAgainAction = createServerAction(async () => {
   const { data, response } = await UserApi.sendActivationCodeAgain();
@@ -69,6 +68,6 @@ export const sendActivationCodeAgainAction = createServerAction(async () => {
   return data;
 });
 
-export const redirectAction = createServerAction(async (path: string) => {
-  redirect(path);
+export const redirectAction = createServerAction(async (pathname: string) => {
+  redirect(pathname);
 });
