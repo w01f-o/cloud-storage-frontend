@@ -4,17 +4,16 @@ import { FC, MouseEvent, useRef, useState } from "react";
 import { RootDictionary } from "@/types/dictionaries.type";
 import styles from "@/components/entities/File/file.module.scss";
 import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
-import ContextMenu, {
-  ContextMenuItemType,
-} from "@/components/shared/UI/ContextMenu/ContextMenu";
 import FileDeleter from "@/components/features/Files/FileDeleter/FileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
-import { useRouter } from "next/navigation";
 import { File } from "@/types/entities/file.type";
 import Button from "@/components/shared/UI/Button/Button";
 import clsx from "clsx";
 import BottomSheet from "@/components/shared/UI/BottomSheet/BottomSheet";
+import Link from "next/link";
+import { ContextMenuItemType } from "@/types/contextMenuItem.type";
+import ContextMenu from "@/components/shared/UI/ContextMenu/ContextMenu";
 
 interface FileControllerProps {
   dict: RootDictionary;
@@ -47,21 +46,15 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
     setSharerIsOpen(!sharerIsOpen);
   };
 
-  const router = useRouter();
-
-  const downloadFile = async () => {
-    try {
-      const res = await fetch(`/api/file/${file.id}`);
-      if (res.ok) {
-        router.replace(`/api/file/${file.id}`);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const contextMenuItems: ContextMenuItemType[] = [
-    { id: 1, name: dict.files.actions.download, action: downloadFile },
+    {
+      id: 1,
+      name: dict.files.actions.download,
+      link: {
+        href: `/download/file/${file.id}`,
+        target: "_blank",
+      },
+    },
     { id: 2, name: dict.files.actions.rename, action: updateFile },
     { id: 3, name: dict.files.actions.share, action: shareFile },
     {
@@ -102,19 +95,27 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
       {isMobile && (
         <BottomSheet isOpen={contextIsOpen} setIsOpen={setContextIsOpen}>
           <div className={styles.mobileContext}>
-            {contextMenuItems.map((item) => (
-              <Button
-                key={item.id}
-                role={"secondary"}
-                onClick={() => {
-                  setContextIsOpen(false);
-                  item.action();
-                }}
-                isDanger={item.isDanger}
-              >
-                {item.name}
-              </Button>
-            ))}
+            {contextMenuItems.map((item) =>
+              item.link ? (
+                <Link key={item.id} href={item.link}>
+                  <Button role={"secondary"} isDanger={item.isDanger}>
+                    {item.name}
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  key={item.id}
+                  role={"secondary"}
+                  onClick={() => {
+                    setContextIsOpen(false);
+                    item.action!();
+                  }}
+                  isDanger={item.isDanger}
+                >
+                  {item.name}
+                </Button>
+              ),
+            )}
           </div>
         </BottomSheet>
       )}

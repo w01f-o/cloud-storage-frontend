@@ -26,7 +26,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
           <Col xs={10}>
             <div className={styles.box}>
               <div className={styles.scrollContainer}>
-                <div className={styles.content}>{children}</div>
+                <main className={styles.content}>{children}</main>
               </div>
             </div>
           </Col>
@@ -39,9 +39,9 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
         <Container fluid className={styles.container}>
           <Row className={styles.row}>
             <Col xs={12}>
-              <div className={clsx(styles.content, styles.mobileContent)}>
+              <main className={clsx(styles.content, styles.mobileContent)}>
                 {children}
-              </div>
+              </main>
             </Col>
           </Row>
         </Container>

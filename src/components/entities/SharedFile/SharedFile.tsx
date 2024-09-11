@@ -1,29 +1,22 @@
-"use client";
-
 import { FC } from "react";
 import { File } from "@/types/entities/file.type";
 import styles from "./sharedFile.module.scss";
 import FileIcon from "@/components/shared/Icons/FileIcon/FileIcon";
 import { Utils } from "@/services/utils";
 import Button from "@/components/shared/UI/Button/Button";
-import { RootDictionary } from "@/types/dictionaries.type";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { getDictionary } from "@/actions/lang.action";
 
 interface SharedFileProps {
   file: File;
   link: string;
-  dict: RootDictionary;
 }
 
-const SharedFile: FC<SharedFileProps> = ({ file, dict, link }) => {
-  const router = useRouter();
-
-  const clickHandler = (): void => {
-    router.replace(`/api/shared_file/${link}`);
-  };
+const SharedFile: FC<SharedFileProps> = async ({ file, link }) => {
+  const dict = await getDictionary();
 
   return (
-    <div className={styles.wrapper}>
+    <article className={styles.wrapper}>
       <div className={styles.icon}>
         <FileIcon fileType={file.type} />
       </div>
@@ -31,10 +24,10 @@ const SharedFile: FC<SharedFileProps> = ({ file, dict, link }) => {
       <div className={styles.info}>
         <div className={styles.size}>{Utils.formatBytes(file.size, dict)}</div>
       </div>
-      <Button role={"primary"} onClick={clickHandler}>
-        {dict.files.actions.download}
-      </Button>
-    </div>
+      <Link href={`/download/shared_file/${link}`} target={"_blank"}>
+        <Button role={"primary"}>{dict.files.actions.download}</Button>
+      </Link>
+    </article>
   );
 };
 

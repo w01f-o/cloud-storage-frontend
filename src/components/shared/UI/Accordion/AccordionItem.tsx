@@ -32,7 +32,7 @@ const AccordionItem: FC<AccordionItemProps> = ({
       >
         {title}
       </button>
-      <div className={styles.body}>
+      <div className={styles.body} aria-expanded={id === active}>
         <div className={styles.content}>{body}</div>
       </div>
     </div>

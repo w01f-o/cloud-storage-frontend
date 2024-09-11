@@ -4,9 +4,6 @@ import { FC, MouseEvent, useRef, useState } from "react";
 import styles from "@/components/entities/Folder/folder.module.scss";
 import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
 import { Utils } from "@/services/utils";
-import ContextMenu, {
-  ContextMenuItemType,
-} from "@/components/shared/UI/ContextMenu/ContextMenu";
 import FolderDeleter from "@/components/features/Folders/FolderDeleter/FolderDeleter";
 import FolderUpdater from "@/components/features/Folders/FolderUpdater/FolderUpdater";
 import { useRouter } from "next/navigation";
@@ -14,6 +11,9 @@ import { RootDictionary } from "@/types/dictionaries.type";
 import { Folder as FolderType } from "@/types/entities/folder.type";
 import Button from "@/components/shared/UI/Button/Button";
 import BottomSheet from "@/components/shared/UI/BottomSheet/BottomSheet";
+import { ContextMenuItemType } from "@/types/contextMenuItem.type";
+import ContextMenu from "@/components/shared/UI/ContextMenu/ContextMenu";
+import Link from "next/link";
 
 interface FolderControllerProps {
   dict: RootDictionary;
@@ -64,7 +64,9 @@ const FolderController: FC<FolderControllerProps> = ({
     {
       id: 1,
       name: dict.folders.actions.open,
-      action: contextMenuHandler("open"),
+      link: {
+        href: `/folder/${folder.id}`,
+      },
     },
     {
       id: 2,
@@ -103,19 +105,27 @@ const FolderController: FC<FolderControllerProps> = ({
       {isMobile && (
         <BottomSheet isOpen={contextIsOpen} setIsOpen={setContextIsOpen}>
           <div className={styles.mobileContext}>
-            {contextMenuItems.map((item) => (
-              <Button
-                key={item.id}
-                role={"secondary"}
-                onClick={() => {
-                  setContextIsOpen(false);
-                  item.action();
-                }}
-                isDanger={item.isDanger}
-              >
-                {item.name}
-              </Button>
-            ))}
+            {contextMenuItems.map((item) =>
+              item.link ? (
+                <Link key={item.id} href={item.link}>
+                  <Button role={"secondary"} isDanger={item.isDanger}>
+                    {item.name}
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  key={item.id}
+                  role={"secondary"}
+                  onClick={() => {
+                    setContextIsOpen(false);
+                    item.action!();
+                  }}
+                  isDanger={item.isDanger}
+                >
+                  {item.name}
+                </Button>
+              ),
+            )}
           </div>
         </BottomSheet>
       )}

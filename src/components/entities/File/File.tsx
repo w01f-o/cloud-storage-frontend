@@ -19,7 +19,7 @@ const File: FC<FileProps> = async ({ file, isExtended }) => {
   const isMobile = isMobileDevice();
 
   return (
-    <div
+    <article
       className={clsx(styles.wrapper, {
         [styles.minify]: !isExtended,
       })}
@@ -30,9 +30,9 @@ const File: FC<FileProps> = async ({ file, isExtended }) => {
           <div className={styles.name}>{file.name}</div>
           <DesktopOnly>
             <div className={styles.info}>
-              <div className={styles.date}>
+              <time className={styles.date}>
                 {Utils.getDate(file.addedAt, dict)}
-              </div>
+              </time>
               <div className={styles.size}>
                 {Utils.formatBytes(file.size, dict)}
               </div>
@@ -43,9 +43,9 @@ const File: FC<FileProps> = async ({ file, isExtended }) => {
         <>
           <div className={styles.info}>
             <div className={styles.name}>{file.name}</div>
-            <div className={styles.date}>
+            <time className={styles.date}>
               {Utils.getDate(file.addedAt, dict)}
-            </div>
+            </time>
           </div>
           <div className={styles.size}>
             {Utils.formatBytes(file.size, dict)}
@@ -55,7 +55,7 @@ const File: FC<FileProps> = async ({ file, isExtended }) => {
       {isExtended && (
         <FileController file={file} dict={dict} isMobile={isMobile} />
       )}
-    </div>
+    </article>
   );
 };
 

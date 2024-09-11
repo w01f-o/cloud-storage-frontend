@@ -4,13 +4,7 @@ import ContextMenuItem from "./ContextMenuItem";
 import { animated, useTransition } from "@react-spring/web";
 import layoutStyles from "@/components/pages/Layout/layout.module.scss";
 import { useClickOutside } from "@/hooks/useClickOutside";
-
-export interface ContextMenuItemType {
-  id: number;
-  name: string;
-  action: () => void;
-  isDanger?: boolean;
-}
+import { ContextMenuItemType } from "@/types/contextMenuItem.type";
 
 interface ContextMenuProps {
   items: ContextMenuItemType[];

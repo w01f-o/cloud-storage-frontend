@@ -19,7 +19,7 @@ const Folder: FC<FolderProps> = async ({ folder, isExtended }) => {
   const isMobile = isMobileDevice();
 
   return (
-    <div className={styles.wrapper}>
+    <article className={styles.wrapper}>
       <Link
         className={clsx(styles.folder, {
           [styles.minify]: !isExtended,
@@ -30,15 +30,15 @@ const Folder: FC<FolderProps> = async ({ folder, isExtended }) => {
         <FolderIcon color={folder.color} className={styles.icon} />
         <div className={styles.info}>
           <div className={styles.name}>{folder.name}</div>
-          <div className={styles.date}>
+          <time className={styles.date}>
             {Utils.getDate(folder.editedAt, dict)}
-          </div>
+          </time>
         </div>
       </Link>
       {isExtended && (
         <FolderController folder={folder} dict={dict} isMobile={isMobile} />
       )}
-    </div>
+    </article>
   );
 };
 

@@ -113,6 +113,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
             })}
             hidden
             tabIndex={-1}
+            aria-hidden={"true"}
           />
           <Button role={"primary"} isPending={isPending}>
             {dict.files.upload.partial}

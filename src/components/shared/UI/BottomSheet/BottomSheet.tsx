@@ -10,7 +10,7 @@ import {
 } from "react";
 import styles from "./bottomSheet.module.scss";
 import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
-import { useTransition, animated } from "@react-spring/web";
+import { animated, useTransition } from "@react-spring/web";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
 interface BottomSheetProps {

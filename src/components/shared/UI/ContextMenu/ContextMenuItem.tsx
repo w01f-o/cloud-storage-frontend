@@ -1,27 +1,38 @@
 import { FC } from "react";
 import styles from "./contextMenu.module.scss";
 import clsx from "clsx";
-import type { ContextMenuItemType } from "./ContextMenu";
+import Link from "next/link";
+import { ContextMenuItemType } from "@/types/contextMenuItem.type";
 
 interface ContextMenuItemProps {
   item: ContextMenuItemType;
 }
 
-const ContextMenuItem: FC<ContextMenuItemProps> = ({ item }) => {
+const ContextMenuItem: FC<ContextMenuItemProps> = ({
+  item: { isDanger, link, name, action },
+}) => {
   const clickHandler = () => {
-    item.action();
+    action?.();
   };
 
-  return (
+  return link ? (
+    <Link
+      className={clsx(styles.item, {
+        [styles.danger]: isDanger,
+      })}
+      href={link.href}
+      target={link.target}
+    >
+      {name}
+    </Link>
+  ) : (
     <button
       className={clsx(styles.item, {
-        [styles.danger]: item.isDanger,
+        [styles.danger]: isDanger,
       })}
       onClick={clickHandler}
-      title={item.name}
-      type="button"
     >
-      {item.name}
+      {name}
     </button>
   );
 };

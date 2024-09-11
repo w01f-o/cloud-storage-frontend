@@ -70,6 +70,7 @@ const Modal: FC<ModalProps> = ({
             className={clsx(styles.modal, wrapperClassName)}
             style={props}
             onMouseDown={mouseHandler}
+            role={"dialog"}
           >
             <div
               className={clsx(styles.content, contentClassName)}
