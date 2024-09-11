@@ -68,12 +68,7 @@ const FolderDeleter: FC<DeleteFolderProps> = ({
           autoFocus
           aria-invalid={errors.name ? "true" : "false"}
         />
-        <Button
-          role="primary"
-          title={dict.folders.delete.full}
-          type="submit"
-          isPending={isPending}
-        >
+        <Button role={"primary"} isPending={isPending}>
           {dict.folders.delete.partial}
         </Button>
       </Form>

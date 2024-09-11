@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
 import { ServerActionResult } from "@/actions/actions.utils";
@@ -41,38 +41,51 @@ export function useSubmit<T extends FieldValues>(
   const toast = useToast();
   const pathname = usePathname();
 
-  const submitHandler: SubmitHandler<T> = async (data: T) => {
-    events?.onStart && events.onStart();
-    type &&
-      router.replace(
-        `${pathname}/?${new URLSearchParams({
-          [type]: nanoid(4),
-        }).toString()}`,
-      );
+  const submitHandler: SubmitHandler<T> = useCallback(
+    async (data: T) => {
+      events?.onStart && events.onStart();
+      type &&
+        router.replace(
+          `${pathname}/?${new URLSearchParams({
+            [type]: nanoid(4),
+          }).toString()}`,
+        );
 
-    setIsPending(true);
+      setIsPending(true);
 
-    const result = await callback(data);
-    setIsPending(false);
+      const result = await callback(data);
+      setIsPending(false);
 
-    if (!result.success) {
-      toast.add({
-        type: "error",
-        message: errorMessage(result.error),
-      });
+      if (!result.success) {
+        toast.add({
+          type: "error",
+          message: errorMessage(result.error),
+        });
 
-      setIsError(true);
-      events?.onError && events.onError(result.error);
-    } else {
-      toast.add({ type: "success", message: successMessage });
+        setIsError(true);
+        events?.onError && events.onError(result.error);
+      } else {
+        toast.add({ type: "success", message: successMessage });
 
-      reset && reset();
-      events?.onSuccess && events.onSuccess();
-    }
+        reset && reset();
+        events?.onSuccess && events.onSuccess();
+      }
 
-    type && router.refresh();
-    events?.onEnd && events.onEnd();
-  };
+      type && router.refresh();
+      events?.onEnd && events.onEnd();
+    },
+    [
+      callback,
+      errorMessage,
+      events,
+      pathname,
+      reset,
+      router,
+      successMessage,
+      toast,
+      type,
+    ],
+  );
 
   return {
     isPending,

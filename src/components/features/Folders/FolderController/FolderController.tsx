@@ -106,9 +106,7 @@ const FolderController: FC<FolderControllerProps> = ({
             {contextMenuItems.map((item) => (
               <Button
                 key={item.id}
-                type={"button"}
                 role={"secondary"}
-                title={item.name}
                 onClick={() => {
                   setContextIsOpen(false);
                   item.action();

@@ -31,12 +31,7 @@ const SharedFile: FC<SharedFileProps> = ({ file, dict, link }) => {
       <div className={styles.info}>
         <div className={styles.size}>{Utils.formatBytes(file.size, dict)}</div>
       </div>
-      <Button
-        type={"button"}
-        role={"primary"}
-        title={dict.files.actions.download}
-        onClick={clickHandler}
-      >
+      <Button role={"primary"} onClick={clickHandler}>
         {dict.files.actions.download}
       </Button>
     </div>

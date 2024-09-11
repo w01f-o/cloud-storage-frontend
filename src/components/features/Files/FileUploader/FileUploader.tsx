@@ -71,14 +71,14 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
     reset();
     setUploadedFile(null);
     setIsPending(false);
-  }, [reset]);
+  }, [reset, setIsPending]);
 
   return (
     <div className={styles.wrapper}>
       <Button
         role={"primary"}
-        title={"Upload"}
-        type={"button"}
+        title={dict.files.upload.full}
+        aria-label={dict.files.upload.full}
         rounded
         onClick={clickHandler}
       >
@@ -114,12 +114,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
             hidden
             tabIndex={-1}
           />
-          <Button
-            type={"submit"}
-            role={"primary"}
-            title={dict.files.upload.full}
-            isPending={isPending}
-          >
+          <Button role={"primary"} isPending={isPending}>
             {dict.files.upload.partial}
           </Button>
         </Form>

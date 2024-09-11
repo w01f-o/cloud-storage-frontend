@@ -41,12 +41,7 @@ const FileDeleter: FC<FileDeleterProps> = ({
         onSubmit={handleSubmit(submitHandler)}
         title={dict.files.delete.warning}
       >
-        <Button
-          type={"submit"}
-          role={"primary"}
-          title={dict.files.delete.full}
-          isPending={isPending}
-        >
+        <Button role={"primary"} isPending={isPending}>
           {dict.files.delete.partial}
         </Button>
       </Form>

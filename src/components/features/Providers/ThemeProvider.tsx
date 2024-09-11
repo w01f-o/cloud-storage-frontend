@@ -30,6 +30,7 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     return () => {
       mql.removeEventListener("change", mqlChangeHandler);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

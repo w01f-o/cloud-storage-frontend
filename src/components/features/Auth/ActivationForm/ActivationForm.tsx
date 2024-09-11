@@ -215,12 +215,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
             />
           </Col>
         </Row>
-        <Button
-          type={"submit"}
-          role={"primary"}
-          title={dict.activation.full}
-          isPending={isPending}
-        >
+        <Button role={"primary"} isPending={isPending}>
           {dict.activation.partial}
         </Button>
       </form>

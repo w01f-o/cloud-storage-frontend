@@ -78,12 +78,7 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
 
   return (
     <>
-      <Button
-        role="secondary"
-        title={dict.settings.avatar.change}
-        type="button"
-        onClick={clickHandler}
-      >
+      <Button role={"secondary"} onClick={clickHandler}>
         {dict.settings.avatar.change}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
@@ -116,12 +111,7 @@ const AvatarChanger: FC<AvatarChangerProps> = ({ dict, oldAvatarUrl }) => {
               tabIndex={-1}
             />
           </div>
-          <Button
-            type={"submit"}
-            role={"primary"}
-            title={dict.settings.avatar.full}
-            isPending={isPending}
-          >
+          <Button role={"primary"} isPending={isPending}>
             {dict.settings.avatar.partial}
           </Button>
         </Form>

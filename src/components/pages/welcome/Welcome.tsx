@@ -48,7 +48,7 @@ const Welcome: FC<WelcomeProps> = ({ dict, isMobile }) => {
       <div className={styles.links}>
         <animated.div style={leftButtonStyle}>
           <Link href="/auth/login">
-            <Button type="button" title={dict.auth.login} role="primary">
+            <Button role={"primary"}>
               {dict.auth.login}
               <ArrowIcon />
             </Button>
@@ -56,13 +56,7 @@ const Welcome: FC<WelcomeProps> = ({ dict, isMobile }) => {
         </animated.div>
         <animated.div style={rightButtonStyle}>
           <Link href="/auth/registration">
-            <Button
-              type="button"
-              title={dict.auth.registration}
-              role="secondary"
-            >
-              {dict.auth.registration}
-            </Button>
+            <Button role={"secondary"}>{dict.auth.registration}</Button>
           </Link>
         </animated.div>
       </div>

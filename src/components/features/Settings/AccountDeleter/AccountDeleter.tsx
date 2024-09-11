@@ -41,13 +41,7 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
 
   return (
     <>
-      <Button
-        role="secondary"
-        title={dict.settings.delete.full}
-        type="button"
-        onClick={clickHandler}
-        isDanger
-      >
+      <Button role={"secondary"} onClick={clickHandler} isDanger>
         {dict.settings.delete.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>
@@ -56,12 +50,7 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
           title={dict.settings.delete.title}
         >
           <div className={styles.warning}>{dict.settings.delete.warning}</div>
-          <Button
-            type={"submit"}
-            role={"primary"}
-            title={dict.settings.delete.full}
-            isPending={isPending}
-          >
+          <Button role={"primary"} isPending={isPending}>
             {dict.settings.delete.partial}
           </Button>
         </Form>

@@ -43,6 +43,7 @@ const SendCodeAgain: FC<SendCodeAgainProps> = ({ dict }) => {
     return sendCodeTimer > 0
       ? `${dict.activation.sendAgain.full} ${sendCodeTimer} ${sendCodeTimer <= 1 ? dict.activation.sendAgain.seconds.one : dict.activation.sendAgain.seconds.other}`
       : dict.activation.sendAgain.partial;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendCodeTimer]);
 
   return (

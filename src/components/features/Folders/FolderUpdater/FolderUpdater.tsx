@@ -76,12 +76,7 @@ const FolderUpdater: FC<ChangeColorProps> = ({
           aria-invalid={errors.color ? "true" : "false"}
         />
         <FormFieldError errors={errors} field={"color"} />
-        <Button
-          role="primary"
-          title={dict.folders.update.full}
-          type="submit"
-          isPending={isPending}
-        >
+        <Button role={"primary"} isPending={isPending}>
           {dict.folders.update.partial}
         </Button>
       </Form>

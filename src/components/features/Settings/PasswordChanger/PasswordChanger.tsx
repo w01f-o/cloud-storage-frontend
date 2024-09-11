@@ -58,12 +58,7 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
 
   return (
     <>
-      <Button
-        role="secondary"
-        title={dict.settings.password.full}
-        type="button"
-        onClick={clickHandler}
-      >
+      <Button role={"secondary"} onClick={clickHandler}>
         {dict.settings.password.full}
       </Button>
       <Modal
@@ -158,12 +153,7 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
             />
             <FormFieldError errors={errors} field={"repeatNewPassword"} />
           </span>
-          <Button
-            type={"submit"}
-            role={"primary"}
-            title={dict.settings.password.full}
-            isPending={isPending}
-          >
+          <Button role={"primary"} isPending={isPending}>
             {dict.settings.password.partial}
           </Button>
         </Form>

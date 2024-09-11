@@ -105,9 +105,7 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
             {contextMenuItems.map((item) => (
               <Button
                 key={item.id}
-                type={"button"}
                 role={"secondary"}
-                title={item.name}
                 onClick={() => {
                   setContextIsOpen(false);
                   item.action();

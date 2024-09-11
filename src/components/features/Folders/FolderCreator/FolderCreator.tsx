@@ -47,13 +47,7 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Button
-        type={"button"}
-        role={"primary"}
-        title={dict.folders.create.full}
-        rounded={true}
-        onClick={toggleModal}
-      >
+      <Button role={"primary"} rounded onClick={toggleModal}>
         <Plus />
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
@@ -84,12 +78,7 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
             aria-invalid={errors.color ? "true" : "false"}
           />
           <FormFieldError errors={errors} field={"color"} />
-          <Button
-            type={"submit"}
-            role={"primary"}
-            title={dict.folders.create.full}
-            isPending={isPending}
-          >
+          <Button role={"primary"} isPending={isPending}>
             {dict.folders.create.partial}
           </Button>
         </Form>

@@ -142,10 +142,8 @@ const FileSharer: FC<FileSharerProps> = ({
           />
         </div>
         <Button
-          type="submit"
           onClick={handleSubmit(submitHandler)}
           role={"primary"}
-          title={dict.files.share.save}
           isPending={isPending}
         >
           {dict.files.share.save}

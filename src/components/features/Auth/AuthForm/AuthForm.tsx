@@ -106,12 +106,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
           {formType === "login" ? dict.auth.register : dict.auth.login}
         </Link>
       </p>
-      <Button
-        type="submit"
-        title={formTitle}
-        role="primary"
-        isPending={isPending}
-      >
+      <Button role="primary" isPending={isPending}>
         {formTitle}
       </Button>
     </form>

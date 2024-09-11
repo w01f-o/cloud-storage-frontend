@@ -46,12 +46,7 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
 
   return (
     <>
-      <Button
-        type={"button"}
-        role={"secondary"}
-        title={"email"}
-        onClick={clickHandler}
-      >
+      <Button role={"secondary"} onClick={clickHandler}>
         {dict.settings.email.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
@@ -71,12 +66,7 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
             aria-invalid={errors?.email ? "true" : "false"}
           />
           <FormFieldError errors={errors} field={"email"} />
-          <Button
-            type={"submit"}
-            role={"primary"}
-            title={dict.settings.email.full}
-            isPending={isPending}
-          >
+          <Button role={"primary"} isPending={isPending}>
             {dict.settings.email.partial}
           </Button>
         </Form>

@@ -19,12 +19,7 @@ const PlanImprover: FC<ImprovePlanProps> = ({ dict }) => {
 
   return (
     <>
-      <Button
-        role="secondary"
-        title={dict.settings.plan.improve}
-        type="button"
-        onClick={clickHandler}
-      >
+      <Button role={"secondary"} onClick={clickHandler}>
         {dict.settings.plan.improve}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>

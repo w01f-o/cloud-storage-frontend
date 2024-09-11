@@ -60,12 +60,7 @@ const FileUpdater: FC<FileUpdaterProps> = ({
           autoFocus
         />
         <FormFieldError errors={errors} field={"name"} />
-        <Button
-          type={"submit"}
-          role={"primary"}
-          title={dict.files.update.full}
-          isPending={isPending}
-        >
+        <Button role={"primary"} isPending={isPending}>
           {dict.files.update.partial}
         </Button>
       </Form>

@@ -22,12 +22,7 @@ const LanguageChanger: FC<ChangeLanguageProps> = ({ dict }) => {
 
   return (
     <>
-      <Button
-        role="secondary"
-        title={dict.settings.language.change}
-        type="button"
-        onClick={clickHandler}
-      >
+      <Button role={"secondary"} onClick={clickHandler}>
         {dict.settings.language.change}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen}>

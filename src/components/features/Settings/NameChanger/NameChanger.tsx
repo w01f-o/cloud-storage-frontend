@@ -41,12 +41,7 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
 
   return (
     <>
-      <Button
-        type={"button"}
-        role={"secondary"}
-        title={dict.settings.name.full}
-        onClick={clickHandler}
-      >
+      <Button role={"secondary"} onClick={clickHandler}>
         {dict.settings.name.full}
       </Button>
       <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} onClose={reset}>
@@ -67,12 +62,7 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
             aria-invalid={errors.name ? "true" : "false"}
           />
           <FormFieldError errors={errors} field={"name"} />
-          <Button
-            type={"submit"}
-            role={"primary"}
-            title={dict.settings.name.full}
-            isPending={isPending}
-          >
+          <Button role={"primary"} isPending={isPending}>
             {dict.settings.name.partial}
           </Button>
         </Form>
