@@ -7,7 +7,7 @@ import { getDictionary } from "@/actions/lang.action";
 const SignOutButton: FC = async () => {
   const dict = await getDictionary();
 
-  const logout = async () => {
+  const logout = async (): Promise<void> => {
     "use server";
 
     await logoutAction();

@@ -12,6 +12,7 @@ import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
 import { createFolderAction } from "@/actions/folders.actions";
 import Form from "@/components/shared/UI/Form/Form";
+import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 
 interface CreateFolderProps {
   dict: RootDictionary;
@@ -61,20 +62,28 @@ const FolderCreator: FC<CreateFolderProps> = ({ dict }) => {
             placeholder={dict.folders.name}
             type="text"
             {...register("name", {
-              required: true,
+              required: {
+                value: true,
+                message: dict.auth.required,
+              },
             })}
             title={dict.folders.name}
             aria-invalid={errors.name ? "true" : "false"}
             autoFocus
           />
+          <FormFieldError errors={errors} field={"name"} />
           <Field
             type="color"
             {...register("color", {
-              required: true,
+              required: {
+                value: true,
+                message: dict.auth.required,
+              },
             })}
             title={dict.folders.color}
             aria-invalid={errors.color ? "true" : "false"}
           />
+          <FormFieldError errors={errors} field={"color"} />
           <Button
             type={"submit"}
             role={"primary"}

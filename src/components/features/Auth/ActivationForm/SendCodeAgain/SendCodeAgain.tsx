@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import styles from "@/components/features/Auth/ActivationForm/activationForm.module.scss";
 import { useForm } from "react-hook-form";
 import { useSubmit } from "@/hooks/useSubmit";
@@ -39,6 +39,12 @@ const SendCodeAgain: FC<SendCodeAgainProps> = ({ dict }) => {
     },
   );
 
+  const buttonText = useMemo(() => {
+    return sendCodeTimer > 0
+      ? `${dict.activation.sendAgain.full} ${sendCodeTimer} ${sendCodeTimer <= 1 ? dict.activation.sendAgain.seconds.one : dict.activation.sendAgain.seconds.other}`
+      : dict.activation.sendAgain.partial;
+  }, [sendCodeTimer]);
+
   return (
     <form
       className={styles.sendAgainForm}
@@ -49,9 +55,7 @@ const SendCodeAgain: FC<SendCodeAgainProps> = ({ dict }) => {
         type="submit"
         disabled={sendCodeTimer !== 0 || isPending}
       >
-        {sendCodeTimer > 0
-          ? `${dict.activation.sendAgain.full} ${sendCodeTimer} ${sendCodeTimer <= 1 ? dict.activation.sendAgain.seconds.one : dict.activation.sendAgain.seconds.other}`
-          : dict.activation.sendAgain.partial}
+        {buttonText}
       </button>
     </form>
   );

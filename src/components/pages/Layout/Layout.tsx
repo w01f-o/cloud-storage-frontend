@@ -17,7 +17,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = async ({ children }) => {
   return (
     <>
-      <NextTopLoader showSpinner={false} />
+      <NextTopLoader showSpinner={false} color={"#567df4"} />
       <DesktopOnly>
         <Row>
           <Col xs={2}>

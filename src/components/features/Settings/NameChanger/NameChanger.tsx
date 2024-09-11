@@ -11,6 +11,7 @@ import Modal from "@/components/shared/UI/Modal/Modal";
 import Field from "@/components/shared/UI/Field/Field";
 import styles from "./nameChanger.module.scss";
 import Form from "@/components/shared/UI/Form/Form";
+import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 
 interface NameChangerProps {
   dict: RootDictionary;
@@ -66,7 +67,7 @@ const NameChanger: FC<NameChangerProps> = ({ dict, oldName }) => {
             defaultValue={oldName}
             aria-invalid={errors.name ? "true" : "false"}
           />
-          <div className={styles.error}>{errors?.name?.message}</div>
+          <FormFieldError errors={errors} field={"name"} />
           <Button
             type={"submit"}
             role={"primary"}

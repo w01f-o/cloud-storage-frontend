@@ -39,7 +39,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
     formState: { errors },
     clearErrors,
     setError,
-  } = useForm<FormState>({});
+  } = useForm<FormState>();
   const router = useRouter();
 
   const { isPending, submitHandler } = useSubmit<FormState>(
@@ -65,7 +65,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
     e: ChangeEvent<HTMLInputElement>,
     currentInput: keyof FormState,
     nextInput: keyof FormState | null,
-  ) => {
+  ): void => {
     const value = e.target.value;
 
     if (value.length === 0) {
@@ -85,7 +85,7 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
   const keyDownHandler = (
     e: KeyboardEvent<HTMLInputElement>,
     prevInput: keyof FormState | null,
-  ) => {
+  ): void => {
     const key = e.key || e.code;
 
     if (key === "e" || key === "-") {
@@ -104,18 +104,28 @@ const ActivationForm: FC<ActivateFormProps> = ({ dict }) => {
   const pasteHandler = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     const code = e.clipboardData?.getData("Text").split("");
+    const setResult = (action: "error" | "value"): void => {
+      const inputsList: (keyof FormState)[] = [
+        "input1",
+        "input2",
+        "input3",
+        "input4",
+      ];
+
+      action === "value"
+        ? inputsList.forEach((input) => {
+            setValue(input, code?.shift() || "");
+          })
+        : inputsList.forEach((input) => {
+            setError(input, { type: "custom", message: "Invalid code" });
+          });
+    };
 
     if (code?.length === 4 && code.every((char) => !isNaN(+char))) {
       setFocus("input4");
-      setValue("input1", code[0] || "");
-      setValue("input2", code[1] || "");
-      setValue("input3", code[2] || "");
-      setValue("input4", code[3] || "");
+      setResult("value");
     } else {
-      setError("input1", { type: "custom", message: "Invalid code" });
-      setError("input2", { type: "custom", message: "Invalid code" });
-      setError("input3", { type: "custom", message: "Invalid code" });
-      setError("input4", { type: "custom", message: "Invalid code" });
+      setResult("error");
     }
   };
 

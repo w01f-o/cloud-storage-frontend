@@ -7,7 +7,7 @@ import TripleDotsIcon from "@/components/shared/Icons/TripleDotsIcon";
 import ContextMenu, {
   ContextMenuItemType,
 } from "@/components/shared/UI/ContextMenu/ContextMenu";
-import FileDeleter from "@/components/features/Files/FileDeleter/fileDeleter";
+import FileDeleter from "@/components/features/Files/FileDeleter/FileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
 import { useRouter } from "next/navigation";

@@ -9,6 +9,7 @@ import { UpdateFolderDto } from "@/types/dtos/users/updateFolder.dto";
 import { useSubmit } from "@/hooks/useSubmit";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Form from "@/components/shared/UI/Form/Form";
+import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 
 interface ChangeColorProps {
   folder: Folder;
@@ -51,22 +52,30 @@ const FolderUpdater: FC<ChangeColorProps> = ({
       >
         <Field
           {...register("name", {
-            required: true,
+            required: {
+              value: true,
+              message: dict.auth.required,
+            },
           })}
           title={dict.folders.name}
           defaultValue={folder.name}
           aria-invalid={errors.name ? "true" : "false"}
           autoFocus
         />
+        <FormFieldError errors={errors} field={"name"} />
         <Field
           {...register("color", {
-            required: true,
+            required: {
+              value: true,
+              message: dict.auth.required,
+            },
           })}
           type="color"
           title={dict.folders.color}
           defaultValue={folder.color}
           aria-invalid={errors.color ? "true" : "false"}
         />
+        <FormFieldError errors={errors} field={"color"} />
         <Button
           role="primary"
           title={dict.folders.update.full}

@@ -18,7 +18,7 @@ interface SharedFileProps {
 const SharedFile: FC<SharedFileProps> = ({ file, dict, link }) => {
   const router = useRouter();
 
-  const clickHandler = () => {
+  const clickHandler = (): void => {
     router.replace(`/api/shared_file/${link}`);
   };
 

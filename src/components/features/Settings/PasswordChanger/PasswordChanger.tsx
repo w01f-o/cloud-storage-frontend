@@ -10,6 +10,7 @@ import { useSubmit } from "@/hooks/useSubmit";
 import { updatePasswordAction } from "@/actions/users.action";
 import styles from "./passwordChanger.module.scss";
 import Form from "@/components/shared/UI/Form/Form";
+import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 
 interface ChangePasswordProps {
   dict: RootDictionary;
@@ -101,7 +102,7 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
               autoFocus
               aria-invalid={errors?.oldPassword ? "true" : "false"}
             />
-            <div className={styles.error}>{errors?.oldPassword?.message}</div>
+            <FormFieldError errors={errors} field={"oldPassword"} />
           </span>
           <span>
             {dict.settings.password.new}:
@@ -127,7 +128,7 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
               type="password"
               aria-invalid={errors?.newPassword ? "true" : "false"}
             />
-            <div className={styles.error}>{errors?.newPassword?.message}</div>
+            <FormFieldError errors={errors} field={"newPassword"} />
           </span>
           <span>
             {dict.settings.password.repeat}:
@@ -155,9 +156,7 @@ const PasswordChanger: FC<ChangePasswordProps> = ({ dict }) => {
               type="password"
               aria-invalid={errors?.repeatNewPassword ? "true" : "false"}
             />
-            <div className={styles.error}>
-              {errors?.repeatNewPassword?.message}
-            </div>
+            <FormFieldError errors={errors} field={"repeatNewPassword"} />
           </span>
           <Button
             type={"submit"}

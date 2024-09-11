@@ -9,6 +9,7 @@ import { UpdateFileDto } from "@/types/dtos/users/updateFile.dto";
 import Field from "@/components/shared/UI/Field/Field";
 import Button from "@/components/shared/UI/Button/Button";
 import Form from "@/components/shared/UI/Form/Form";
+import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 
 interface FileUpdaterProps {
   modalIsOpen: boolean;
@@ -23,7 +24,12 @@ const FileUpdater: FC<FileUpdaterProps> = ({
   modalIsOpen,
   dict,
 }) => {
-  const { handleSubmit, reset, register } = useForm<UpdateFileDto>();
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors },
+  } = useForm<UpdateFileDto>();
   const { submitHandler, isPending } = useSubmit<UpdateFileDto>(
     (data: UpdateFileDto) => updateFileAction(file.id, data),
     {
@@ -45,11 +51,15 @@ const FileUpdater: FC<FileUpdaterProps> = ({
       >
         <Field
           {...register("name", {
-            required: true,
+            required: {
+              value: true,
+              message: dict.auth.required,
+            },
           })}
           defaultValue={file.name}
           autoFocus
         />
+        <FormFieldError errors={errors} field={"name"} />
         <Button
           type={"submit"}
           role={"primary"}

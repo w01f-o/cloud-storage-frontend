@@ -13,7 +13,7 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   useEffect(() => {
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const toggleTheme = (mql: MediaQueryList | MediaQueryListEvent) => {
+    const mqlChangeHandler = (mql: MediaQueryList | MediaQueryListEvent) => {
       const cookieTheme = document.cookie.match(/theme=([^;]+)/)?.[1];
 
       if (cookieTheme) {
@@ -24,14 +24,12 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
       mql.matches ? theme.set("dark") : theme.set("light");
     };
-    toggleTheme(mql);
 
-    mql.addEventListener("change", toggleTheme);
+    mql.addEventListener("change", mqlChangeHandler);
 
     return () => {
-      mql.removeEventListener("change", toggleTheme);
+      mql.removeEventListener("change", mqlChangeHandler);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

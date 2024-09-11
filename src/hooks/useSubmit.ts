@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
 import { ServerActionResult } from "@/actions/actions.utils";
@@ -24,7 +24,9 @@ interface useSubmitOptions {
 
 interface useSubmitReturn<T extends FieldValues> {
   isPending: boolean;
+  setIsPending: Dispatch<SetStateAction<boolean>>;
   isError: boolean;
+  setIsError: Dispatch<SetStateAction<boolean>>;
   submitHandler: SubmitHandler<T>;
 }
 
@@ -65,16 +67,18 @@ export function useSubmit<T extends FieldValues>(
       toast.add({ type: "success", message: successMessage });
 
       reset && reset();
-      events?.onSuccess && events?.onSuccess();
+      events?.onSuccess && events.onSuccess();
     }
 
     type && router.refresh();
-    events?.onEnd && events?.onEnd();
+    events?.onEnd && events.onEnd();
   };
 
   return {
     isPending,
+    setIsPending,
     isError,
+    setIsError,
     submitHandler,
   };
 }

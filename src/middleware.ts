@@ -3,6 +3,7 @@ import { auth } from "@/services/auth/auth";
 import Negotiator from "negotiator";
 import { AuthApi, UserApi } from "@/services/api/index.api";
 import { match } from "@formatjs/intl-localematcher";
+import { headers } from "next/headers";
 
 const locales = [
   "en-US",
@@ -23,15 +24,15 @@ function getLocale(req: NextRequest): string {
 
   if (cookieLocale) return cookieLocale;
 
-  const headers = { "accept-language": "en-US,en;q=0.5" };
-  const languages = new Negotiator({ headers }).languages();
+  const languageHeaders = {
+    "accept-language": `${headers().get("accept-language")}`,
+  };
+  const languages = new Negotiator({ headers: languageHeaders }).languages();
   const defaultLocale = process.env.DEFAULT_LOCALE;
 
   if (!defaultLocale) {
     throw new Error("process.env.DEFAULT_LOCALE is not defined");
   }
-
-  // return defaultLocale;
 
   return match(languages, locales, defaultLocale);
 }
@@ -113,5 +114,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next).*)", "/api/:path*"],
+  matcher: ["/((?!_next|favicon.ico).*)", "/api/:path*"],
 };

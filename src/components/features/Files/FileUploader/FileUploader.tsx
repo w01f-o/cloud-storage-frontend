@@ -30,7 +30,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
   const { register, handleSubmit, reset, setValue } = useForm<UploadFileDto>();
   const toast = useToast();
 
-  const { isPending, submitHandler } = useSubmit(
+  const { isPending, submitHandler, setIsPending } = useSubmit(
     (data: UploadFileDto) => {
       const formData = new FormData();
 
@@ -46,7 +46,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
       errorMessage: () => dict.files.upload.error,
       type: "upload",
       events: {
-        onStart: () => {
+        onStart: async () => {
           setModalIsOpen(false);
           toast.add({ type: "info", message: dict.files.upload.start });
         },
@@ -70,6 +70,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
   const closeModalHandler = useCallback(() => {
     reset();
     setUploadedFile(null);
+    setIsPending(false);
   }, [reset]);
 
   return (

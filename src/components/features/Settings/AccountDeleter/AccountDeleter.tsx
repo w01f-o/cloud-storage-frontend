@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { UpdateNameDto } from "@/types/dtos/users/updateName.dto";
 import { deleteUserAction } from "@/actions/users.action";
 import Form from "@/components/shared/UI/Form/Form";
-import { logoutAction } from "@/actions/auth.actions";
+import { logoutAction, redirectAction } from "@/actions/auth.actions";
 
 interface AccountDeleterProps {
   dict: RootDictionary;
@@ -30,7 +30,10 @@ const AccountDeleter: FC<AccountDeleterProps> = ({ dict }) => {
       errorMessage: () => dict.settings.delete.error,
       events: {
         onError: () => setModalIsOpen(false),
-        onSuccess: logoutAction,
+        onSuccess: async () => {
+          await logoutAction();
+          await redirectAction("/");
+        },
       },
     },
   );

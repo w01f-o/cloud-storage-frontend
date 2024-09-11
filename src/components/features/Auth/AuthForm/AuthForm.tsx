@@ -16,6 +16,7 @@ import { AuthDto } from "@/types/dtos/auth/auth.dto";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
 import { useParams } from "next/navigation";
+import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 
 interface AuthFormProps {
   formType: "registration" | "login";
@@ -59,9 +60,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
             })}
             aria-invalid={errors.name ? "true" : "false"}
           />
-          {errors.name && (
-            <div className={styles.error}>{errors.name.message}</div>
-          )}
+          <FormFieldError errors={errors} field={"name"} />
         </>
       )}
       <>
@@ -74,9 +73,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
           })}
           aria-invalid={errors.email ? "true" : "false"}
         />
-        {errors.email && (
-          <div className={styles.error}>{errors.email.message}</div>
-        )}
+        <FormFieldError errors={errors} field={"email"} />
         <Field
           icon={{ element: <Lock />, position: "left" }}
           placeholder={dict.auth.password}
@@ -98,9 +95,7 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
           })}
           aria-invalid={errors.password ? "true" : "false"}
         />
-        {errors.password && (
-          <div className={styles.error}>{errors.password.message}</div>
-        )}
+        <FormFieldError errors={errors} field={"password"} />
       </>
       <p>
         {formType === "login"

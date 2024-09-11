@@ -12,6 +12,7 @@ import { UpdateEmailDto } from "@/types/dtos/users/updateEmail.dto";
 import styles from "./emailChanger.module.scss";
 import Form from "@/components/shared/UI/Form/Form";
 import { useRouter } from "next/navigation";
+import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 
 interface EmailChangerProps {
   dict: RootDictionary;
@@ -70,7 +71,7 @@ const EmailChanger: FC<EmailChangerProps> = ({ dict }) => {
             })}
             aria-invalid={errors?.email ? "true" : "false"}
           />
-          <div className={styles.error}>{errors?.email?.message}</div>
+          <FormFieldError errors={errors} field={"email"} />
           <Button
             type={"submit"}
             role={"primary"}
