@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { updateEmailAction } from "@/actions/users.action";
 import { UpdateEmailDto } from "@/types/dtos/users/updateEmail.dto";
-import styles from "./emailChanger.module.scss";
 import Form from "@/components/shared/UI/Form/Form";
 import { useRouter } from "next/navigation";
 import FormFieldError from "@/components/shared/UI/Form/FormFieldError";

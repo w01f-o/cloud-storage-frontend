@@ -9,7 +9,6 @@ import { useSubmit } from "@/hooks/useSubmit";
 import { updateNameAction } from "@/actions/users.action";
 import Modal from "@/components/shared/UI/Modal/Modal";
 import Field from "@/components/shared/UI/Field/Field";
-import styles from "./nameChanger.module.scss";
 import Form from "@/components/shared/UI/Form/Form";
 import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 

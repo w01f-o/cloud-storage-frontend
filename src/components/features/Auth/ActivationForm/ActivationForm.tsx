@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import Button from "@/components/shared/UI/Button/Button";
 import { useSubmit } from "@/hooks/useSubmit";
 import { activateAction } from "@/actions/auth.actions";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import SendCodeAgain from "@/components/features/Auth/ActivationForm/SendCodeAgain/SendCodeAgain";
 
 interface ActivateFormProps {
