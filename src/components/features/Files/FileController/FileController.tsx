@@ -8,10 +8,8 @@ import FileDeleter from "@/components/features/Files/FileDeleter/FileDeleter";
 import FileUpdater from "@/components/features/Files/FileUpdater/FileUpdater";
 import FileSharer from "@/components/features/Files/FileSharer/FileSharer";
 import { File } from "@/types/entities/file.type";
-import Button from "@/components/shared/UI/Button/Button";
 import clsx from "clsx";
 import BottomSheet from "@/components/shared/UI/BottomSheet/BottomSheet";
-import Link from "next/link";
 import { ContextMenuItemType } from "@/types/contextMenuItem.type";
 import ContextMenu from "@/components/shared/UI/ContextMenu/ContextMenu";
 
@@ -93,31 +91,11 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
         />
       )}
       {isMobile && (
-        <BottomSheet isOpen={contextIsOpen} setIsOpen={setContextIsOpen}>
-          <div className={styles.mobileContext}>
-            {contextMenuItems.map((item) =>
-              item.link ? (
-                <Link key={item.id} href={item.link}>
-                  <Button role={"secondary"} isDanger={item.isDanger}>
-                    {item.name}
-                  </Button>
-                </Link>
-              ) : (
-                <Button
-                  key={item.id}
-                  role={"secondary"}
-                  onClick={() => {
-                    setContextIsOpen(false);
-                    item.action!();
-                  }}
-                  isDanger={item.isDanger}
-                >
-                  {item.name}
-                </Button>
-              ),
-            )}
-          </div>
-        </BottomSheet>
+        <BottomSheet
+          isOpen={contextIsOpen}
+          setIsOpen={setContextIsOpen}
+          actions={contextMenuItems}
+        />
       )}
       <FileDeleter
         modalIsOpen={deleterIsOpen}

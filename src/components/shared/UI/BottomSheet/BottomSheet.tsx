@@ -1,25 +1,21 @@
 "use client";
 
-import {
-  Dispatch,
-  FC,
-  ReactNode,
-  SetStateAction,
-  useEffect,
-  useRef,
-} from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useRef } from "react";
 import styles from "./bottomSheet.module.scss";
 import ReactPortal from "@/components/features/ReactPortal/ReactPortal";
 import { animated, useTransition } from "@react-spring/web";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { ContextMenuItemType } from "@/types/contextMenuItem.type";
+import Link from "next/link";
+import Button from "@/components/shared/UI/Button/Button";
 
 interface BottomSheetProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  children: ReactNode;
+  actions?: ContextMenuItemType[];
 }
 
-const BottomSheet: FC<BottomSheetProps> = ({ children, isOpen, setIsOpen }) => {
+const BottomSheet: FC<BottomSheetProps> = ({ isOpen, setIsOpen, actions }) => {
   const bottomSheetRef = useRef<HTMLDivElement | null>(null);
 
   useClickOutside({ ref: bottomSheetRef, callback: () => setIsOpen(false) });
@@ -48,7 +44,29 @@ const BottomSheet: FC<BottomSheetProps> = ({ children, isOpen, setIsOpen }) => {
             style={props}
             ref={bottomSheetRef}
           >
-            {children}
+            <div className={styles.content}>
+              {actions?.map((item) =>
+                item.link ? (
+                  <Link key={item.id} href={item.link.href}>
+                    <Button role={"secondary"} isDanger={item.isDanger}>
+                      {item.name}
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button
+                    key={item.id}
+                    role={"secondary"}
+                    onClick={() => {
+                      setIsOpen(false);
+                      item.action!();
+                    }}
+                    isDanger={item.isDanger}
+                  >
+                    {item.name}
+                  </Button>
+                ),
+              )}
+            </div>
           </animated.div>
         </ReactPortal>
       ),

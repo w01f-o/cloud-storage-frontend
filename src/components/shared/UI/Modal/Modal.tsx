@@ -29,12 +29,14 @@ const Modal: FC<ModalProps> = ({
   wrapperClassName,
   onClose,
 }) => {
-  const contentMouseDownHandler = (e: MouseEvent<HTMLDivElement>) => {
+  const contentMouseDownHandler = (
+    e: MouseEvent<HTMLDivElement | HTMLButtonElement>,
+  ) => {
     e.stopPropagation();
   };
 
-  const mouseHandler = () => {
-    setIsOpen(false);
+  const closeMouseDownHandler = () => {
+    setIsOpen(!isOpen);
   };
 
   const transition = useTransition(isOpen, {
@@ -58,7 +60,7 @@ const Modal: FC<ModalProps> = ({
       document.body.classList.remove("body-backdrop");
       document.body.removeEventListener("keydown", keyDownHandler);
 
-      onClose && onClose();
+      onClose?.();
     };
   }, [isOpen, onClose, setIsOpen]);
 
@@ -69,14 +71,19 @@ const Modal: FC<ModalProps> = ({
           <animated.div
             className={clsx(styles.modal, wrapperClassName)}
             style={props}
-            onMouseDown={mouseHandler}
-            role={"dialog"}
+            onMouseDown={closeMouseDownHandler}
           >
             <div
               className={clsx(styles.content, contentClassName)}
               onMouseDown={contentMouseDownHandler}
+              role={"dialog"}
             >
-              <X className={styles.closeButton} onClick={mouseHandler} />
+              <button
+                className={styles.closeButton}
+                onClick={closeMouseDownHandler}
+              >
+                <X />
+              </button>
               {children}
             </div>
           </animated.div>

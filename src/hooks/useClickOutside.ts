@@ -10,7 +10,7 @@ export const useClickOutside = ({
   callback,
 }: useClickOutsideOptions): void => {
   useEffect(() => {
-    const clickHandler = (e: any) => {
+    const clickHandler = (e: any): void => {
       if (!ref.current?.contains(e.target)) {
         callback();
       }

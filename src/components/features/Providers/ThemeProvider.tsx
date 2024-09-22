@@ -25,6 +25,8 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
       mql.matches ? theme.set("dark") : theme.set("light");
     };
 
+    mqlChangeHandler(mql);
+
     mql.addEventListener("change", mqlChangeHandler);
 
     return () => {

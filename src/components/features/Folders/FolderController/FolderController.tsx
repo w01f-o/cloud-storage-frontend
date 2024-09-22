@@ -103,31 +103,11 @@ const FolderController: FC<FolderControllerProps> = ({
         />
       )}
       {isMobile && (
-        <BottomSheet isOpen={contextIsOpen} setIsOpen={setContextIsOpen}>
-          <div className={styles.mobileContext}>
-            {contextMenuItems.map((item) =>
-              item.link ? (
-                <Link key={item.id} href={item.link}>
-                  <Button role={"secondary"} isDanger={item.isDanger}>
-                    {item.name}
-                  </Button>
-                </Link>
-              ) : (
-                <Button
-                  key={item.id}
-                  role={"secondary"}
-                  onClick={() => {
-                    setContextIsOpen(false);
-                    item.action!();
-                  }}
-                  isDanger={item.isDanger}
-                >
-                  {item.name}
-                </Button>
-              ),
-            )}
-          </div>
-        </BottomSheet>
+        <BottomSheet
+          isOpen={contextIsOpen}
+          setIsOpen={setContextIsOpen}
+          actions={contextMenuItems}
+        />
       )}
       <FolderDeleter
         folder={folder}

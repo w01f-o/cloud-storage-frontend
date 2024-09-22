@@ -8,3 +8,15 @@
   width: 100vw;
   padding: 40px 30px;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  height: 100%;
+
+  button {
+    width: 100%;
+  }
+}
