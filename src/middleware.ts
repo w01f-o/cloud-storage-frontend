@@ -46,6 +46,14 @@ export async function middleware(req: NextRequest) {
 
   const locale = getLocale(req);
 
+  if (session && session.user.refreshExpiresIn < Date.now()) {
+    const response = NextResponse.redirect(req.nextUrl);
+
+    response.cookies.delete(sessionCookie);
+
+    return response;
+  }
+
   if (session && session.user.accessExpiresIn < Date.now()) {
     const response = NextResponse.redirect(req.nextUrl);
 
@@ -56,22 +64,26 @@ export async function middleware(req: NextRequest) {
     const oldTokenData = JSON.parse(
       req.cookies.get(sessionCookie)?.value as string,
     );
-    const {
-      data: {
-        tokens: { access, refresh, accessExpiresIn, refreshExpiresIn },
-      },
-    } = await AuthApi.refresh(oldTokenData.refreshToken);
-    const newSession = {
-      ...oldTokenData,
-      accessToken: access,
-      refreshToken: refresh,
-      accessExpiresIn,
-      refreshExpiresIn,
-    };
+    try {
+      const {
+        data: {
+          tokens: { access, refresh, accessExpiresIn, refreshExpiresIn },
+        },
+      } = await AuthApi.refresh(oldTokenData.refreshToken);
+      const newSession = {
+        ...oldTokenData,
+        accessToken: access,
+        refreshToken: refresh,
+        accessExpiresIn,
+        refreshExpiresIn,
+      };
 
-    response.cookies.set(sessionCookie, JSON.stringify(newSession), {
-      httpOnly: true,
-    });
+      response.cookies.set(sessionCookie, JSON.stringify(newSession), {
+        httpOnly: true,
+      });
+    } catch (err) {
+      response.cookies.delete(sessionCookie);
+    }
 
     return response;
   }
