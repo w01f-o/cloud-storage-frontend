@@ -9,6 +9,7 @@ import MobileOnly from "@/components/features/Responsive/MobileOnly";
 import DesktopOnly from "@/components/features/Responsive/DesktopOnly";
 import MobileMenu from "@/components/widgets/MobileMenu/MobileMenu";
 import MobileMenuContent from "@/components/widgets/MobileMenu/MobileMenuContent";
+import UploadProgress from "@/components/widgets/Files/UploadProgress/UploadProgress";
 
 interface LayoutProps {
   children: ReactNode;
@@ -48,6 +49,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
       </MobileOnly>
       <div id="root-portal"></div>
       <Toast />
+      <UploadProgress />
     </>
   );
 };

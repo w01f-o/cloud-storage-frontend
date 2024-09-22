@@ -24,7 +24,10 @@ const SharedFile: FC<SharedFileProps> = async ({ file, link }) => {
       <div className={styles.info}>
         <div className={styles.size}>{Utils.formatBytes(file.size, dict)}</div>
       </div>
-      <Link href={`/download/shared_file/${link}`} target={"_blank"}>
+      <Link
+        href={`/api/file/download/${link}?${new URLSearchParams({ file_type: "shared_file" })}`}
+        target={"_blank"}
+      >
         <Button role={"primary"}>{dict.files.actions.download}</Button>
       </Link>
     </article>

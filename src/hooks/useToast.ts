@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { Toast } from "@/types/toast.type";
 import {
-  addToast,
-  disableToast,
-  enableToast,
-  removeToast,
+  add as addAction,
+  disable as disableAction,
+  enable as enableAction,
+  remove as removeAction,
 } from "@/redux/reducers/toastSlice";
 
 type useToastReturn = {
@@ -20,19 +20,19 @@ export const useToast = (): useToastReturn => {
   const { items } = useAppSelector((state) => state.toast);
 
   const add = (toast: Omit<Toast, "id">): void => {
-    dispatch(addToast(toast));
+    dispatch(addAction(toast));
   };
 
   const remove = (id: string): void => {
-    dispatch(removeToast(id));
+    dispatch(removeAction(id));
   };
 
   const disable = (): void => {
-    dispatch(disableToast());
+    dispatch(disableAction());
   };
 
   const enable = (): void => {
-    dispatch(enableToast());
+    dispatch(enableAction());
   };
 
   return {

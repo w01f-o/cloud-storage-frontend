@@ -1,0 +1,44 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: fixed;
+  right: 20px;
+  z-index: 200;
+  top: 20px;
+  font: {
+    size: 24px;
+  }
+  padding: 24px;
+  width: 100%;
+  max-width: 460px;
+  background: var(--color-blue_light_800);
+  border-radius: 16px;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.line {
+  height: 5px;
+  width: 60%;
+  background: var(--color-yellow);
+  border-radius: 8px;
+
+  .progress {
+    height: inherit;
+    background: var(--color-green);
+    border-radius: 8px;
+    transition: 0.2s;
+  }
+}
+
+.name {
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

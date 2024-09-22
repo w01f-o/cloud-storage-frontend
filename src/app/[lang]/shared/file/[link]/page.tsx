@@ -1,7 +1,7 @@
 import { Metadata, NextPage } from "next";
 import { SharedFilesApi } from "@/services/api/index.api";
 import SharedFile from "@/components/entities/SharedFile/SharedFile";
-import { getDictionary } from "@/actions/lang.action";
+import { redirect } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -20,10 +20,13 @@ export async function generateMetadata({
 }
 
 const Page: NextPage<PageProps> = async ({ params: { link } }) => {
-  const { data: file } = await SharedFilesApi.getByLink(link);
-  const dict = await getDictionary();
+  const { data: file, response } = await SharedFilesApi.getByLink(link);
 
-  return <SharedFile file={file} dict={dict} link={link} />;
+  if (!response.ok) {
+    redirect("/");
+  }
+
+  return <SharedFile file={file} link={link} />;
 };
 
 export default Page;

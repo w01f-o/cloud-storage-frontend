@@ -16,7 +16,7 @@ export const toastSlice = createSlice({
   name: "toast",
   initialState,
   reducers: {
-    addToast: (state, action: PayloadAction<Omit<Toast, "id">>) => {
+    add: (state, action: PayloadAction<Omit<Toast, "id">>) => {
       if (state.isEnabled) {
         const { type, message } = action.payload;
         state.items.push({
@@ -26,19 +26,18 @@ export const toastSlice = createSlice({
         });
       }
     },
-    removeToast: (state, action: PayloadAction<string>) => {
+    remove: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
-    enableToast: (state) => {
+    enable: (state) => {
       state.isEnabled = true;
     },
-    disableToast: (state) => {
+    disable: (state) => {
       state.isEnabled = false;
     },
   },
 });
 
-export const { addToast, removeToast, enableToast, disableToast } =
-  toastSlice.actions;
+export const { add, remove, enable, disable } = toastSlice.actions;
 
 export default toastSlice.reducer;

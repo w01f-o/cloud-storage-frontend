@@ -15,6 +15,11 @@ import clsx from "clsx";
 import { RootDictionary } from "@/types/dictionaries.type";
 import Form from "@/components/shared/UI/Form/Form";
 import { useToast } from "@/hooks/useToast";
+import axios from "axios";
+import { ServerActionResult } from "@/actions/actions.utils";
+import UploadProgress from "@/components/widgets/Files/UploadProgress/UploadProgress";
+import { useUploadedFiles } from "@/hooks/useUploadedFiles";
+import { nanoid } from "nanoid";
 
 interface FileUploaderProps {
   folderId: string;
@@ -29,16 +34,38 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
   };
   const { register, handleSubmit, reset, setValue } = useForm<UploadFileDto>();
   const toast = useToast();
+  const uploadedFiles = useUploadedFiles();
 
   const { isPending, submitHandler, setIsPending } = useSubmit(
-    (data: UploadFileDto) => {
+    async (data: UploadFileDto) => {
       const formData = new FormData();
 
       formData.append("file", data.file[0]);
       formData.append("name", data.name);
       formData.append("folderId", folderId);
+      const fileId = nanoid();
 
-      return uploadFileAction(formData);
+      uploadedFiles.add({ name: data.file[0].name, id: fileId });
+
+      try {
+        const { data: uploadedFileData } = await axios.post<
+          ServerActionResult<File>
+        >("/api/file/upload", formData, {
+          onUploadProgress: (progressEvent) => {
+            if (progressEvent.progress === 1) {
+              uploadedFiles.remove(fileId);
+            }
+            uploadedFiles.setProgress({
+              id: fileId,
+              progress: progressEvent.progress || 0,
+            });
+          },
+        });
+
+        return uploadedFileData;
+      } catch (e) {
+        return { success: false, error: dict.files.upload.error };
+      }
     },
     {
       reset,
@@ -46,7 +73,7 @@ const FileUploader: FC<FileUploaderProps> = ({ folderId, dict }) => {
       errorMessage: () => dict.files.upload.error,
       type: "upload",
       events: {
-        onStart: async () => {
+        onStart: () => {
           setModalIsOpen(false);
           toast.add({ type: "info", message: dict.files.upload.start });
         },

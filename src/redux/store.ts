@@ -1,22 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
 import toastReducer from "./reducers/toastSlice";
 import themeReducer from "./reducers/themeSlice";
-import storage from "redux-persist/lib/storage";
+import uploadedFilesReducer from "@/redux/reducers/uploadedFilesSlice";
 
 const rootReducer = combineReducers({
   toast: toastReducer,
   theme: themeReducer,
+  uploadedFiles: uploadedFilesReducer,
 });
-
-// export const persistedReducer = persistReducer(
-//   {
-//     key: "root",
-//     storage,
-//     whitelist: ["theme"],
-//   },
-//   rootReducer,
-// );
 
 export const makeStore = () => {
   return configureStore({

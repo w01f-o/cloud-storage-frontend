@@ -44,12 +44,6 @@ export function useSubmit<T extends FieldValues>(
   const submitHandler: SubmitHandler<T> = useCallback(
     async (data: T) => {
       events?.onStart && events.onStart();
-      type &&
-        router.replace(
-          `${pathname}/?${new URLSearchParams({
-            [type]: nanoid(4),
-          }).toString()}`,
-        );
 
       setIsPending(true);
 
@@ -63,16 +57,23 @@ export function useSubmit<T extends FieldValues>(
         });
 
         setIsError(true);
-        events?.onError && events.onError(result.error);
+        events?.onError?.(result.error);
       } else {
         toast.add({ type: "success", message: successMessage });
 
         reset && reset();
-        events?.onSuccess && events.onSuccess();
+        events?.onSuccess?.();
       }
 
-      type && router.refresh();
-      events?.onEnd && events.onEnd();
+      if (type) {
+        router.replace(
+          `${pathname}/?${new URLSearchParams({
+            [type]: nanoid(4),
+          }).toString()}`,
+        );
+        router.refresh();
+      }
+      events?.onEnd?.();
     },
     [
       callback,

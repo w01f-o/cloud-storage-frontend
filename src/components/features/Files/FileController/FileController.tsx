@@ -49,7 +49,7 @@ const FileController: FC<FileControllerProps> = ({ dict, file, isMobile }) => {
       id: 1,
       name: dict.files.actions.download,
       link: {
-        href: `/download/file/${file.id}`,
+        href: `/api/file/download/${file.id}?${new URLSearchParams({ file_type: "file" })}`,
         target: "_blank",
       },
     },

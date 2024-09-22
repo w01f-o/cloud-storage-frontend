@@ -16,6 +16,7 @@
     "@react-spring/web": "^9.7.4",
     "@reduxjs/toolkit": "^2.2.7",
     "@w01f-o/react-grid-layout": "^1.1.4",
+    "axios": "^1.7.7",
     "chart.js": "^4.4.4",
     "clsx": "^2.1.1",
     "colorjs.io": "^0.5.2",
@@ -40,16 +41,16 @@
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
+    "@types/mime-types": "^2.1.4",
+    "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/mime-types": "^2.1.4",
-    "@types/negotiator": "^0.6.3",
     "@types/ua-parser-js": "^0.7.39",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
-    "typescript": "^5",
-    "autoprefixer": "^10.4.20"
+    "typescript": "^5"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

@@ -14,7 +14,7 @@ const UserProfile: FC = async () => {
           alt={"avatar"}
           width={200}
           height={200}
-          priority={true}
+          loading={"lazy"}
         />
       </div>
       <div className={styles.name}>{user.name}</div>
