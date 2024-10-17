@@ -12,7 +12,8 @@ import {
 import { useToast } from "@/hooks/useToast";
 import type { Toast as ToastType } from "@/types/toast.type";
 import clsx from "clsx";
-import { CloseIcon } from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+import { X } from "lucide-react";
+import ToastIcon from "@/components/shared/Icons/ToastIcon";
 
 const Toast: FC = () => {
   const { list, remove } = useToast();
@@ -67,7 +68,8 @@ const Toast: FC = () => {
               ref={(ref: HTMLDivElement) => ref && refMap.set(item, ref)}
               className={clsx(styles.item, styles[item.type])}
             >
-              <div>
+              <div className={styles.content}>
+                <ToastIcon type={item.type} />
                 <div>{item.message}</div>
               </div>
               <animated.div style={{ right: life }} className={styles.life} />
@@ -75,7 +77,7 @@ const Toast: FC = () => {
                 onClick={closeButtonClickHandler(item, life)}
                 className={styles.icon}
               >
-                <CloseIcon />
+                <X />
               </button>
             </div>
           </animated.div>

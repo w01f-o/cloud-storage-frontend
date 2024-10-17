@@ -48,6 +48,12 @@
     background: inherit;
     filter: brightness(70%);
   }
+
+  .content {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 }
 
 .wrapper {
