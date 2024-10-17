@@ -13,7 +13,6 @@ import { cookies } from "next/headers";
 
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ["latin", "cyrillic"],
-  preload: true,
 });
 
 const RootLayout = ({

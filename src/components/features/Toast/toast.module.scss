@@ -2,16 +2,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
-
-  width: 300px;
   height: 80px;
+  width: 300px;
   border-radius: 16px;
   padding: 20px;
-  position: fixed;
-  transition: 0.2s;
-  right: 10px;
-  bottom: -10px;
-  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 
   font: {
     size: 16px;
@@ -38,10 +34,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+
+  .life {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background: inherit;
+    filter: brightness(70%);
   }
 }
 
 .wrapper {
+  display: flex;
+  flex-direction: column;
   z-index: 300;
   position: fixed;
   right: 20px;
