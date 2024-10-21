@@ -9,6 +9,7 @@ import ArrowIcon from "@/components/shared/Icons/ArrowIcon";
 import WelcomeBackground from "@/components/widgets/WelcomeBackground/WelcomeBackground";
 import { animated, useSpring } from "@react-spring/web";
 import { RootDictionary } from "@/types/dictionaries.type";
+import { RoutePaths } from "@/constants/routes";
 
 interface WelcomeProps {
   dict: RootDictionary;
@@ -47,7 +48,7 @@ const Welcome: FC<WelcomeProps> = ({ dict, isMobile }) => {
       </animated.div>
       <div className={styles.links}>
         <animated.div style={leftButtonStyle}>
-          <Link href="/auth/login">
+          <Link href={RoutePaths.LOGIN}>
             <Button role={"primary"}>
               {dict.auth.login}
               <ArrowIcon />
@@ -55,7 +56,7 @@ const Welcome: FC<WelcomeProps> = ({ dict, isMobile }) => {
           </Link>
         </animated.div>
         <animated.div style={rightButtonStyle}>
-          <Link href="/auth/registration">
+          <Link href={RoutePaths.REGISTRATION}>
             <Button role={"secondary"}>{dict.auth.registration}</Button>
           </Link>
         </animated.div>

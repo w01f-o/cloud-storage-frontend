@@ -1,4 +1,6 @@
+import { RoutePaths } from "@/constants/routes";
+
 export interface Route {
-  path: string;
+  path: RoutePaths;
   name: string;
 }

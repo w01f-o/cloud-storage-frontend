@@ -17,6 +17,7 @@ import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
 import { useParams } from "next/navigation";
 import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
+import { RoutePaths } from "@/constants/routes";
 
 interface AuthFormProps {
   formType: "registration" | "login";
@@ -101,7 +102,11 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
         {formType === "login"
           ? dict.auth.dontHaveAccount
           : dict.auth.alreadyHaveAccount}
-        <Link href={`/auth/${formType === "login" ? "registration" : "login"}`}>
+        <Link
+          href={
+            formType === "login" ? RoutePaths.REGISTRATION : RoutePaths.LOGIN
+          }
+        >
           &nbsp;
           {formType === "login" ? dict.auth.register : dict.auth.login}
         </Link>

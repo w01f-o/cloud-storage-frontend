@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Col } from "@w01f-o/react-grid-layout";
 import styles from "./lastUploadedFiles.module.scss";
 import { getDictionary } from "@/actions/lang.action";
+import { RoutePaths } from "@/constants/routes";
 
 interface LastUploadedFilesProps {}
 
@@ -17,7 +18,7 @@ const LastUploadedFiles: FC<LastUploadedFilesProps> = async ({}) => {
       {!!files.length ? (
         files.map((file) => (
           <Col xs={12} key={file.id}>
-            <Link href={`/folder/${file.folderId}`}>
+            <Link href={`${RoutePaths.FOLDER}/${file.folderId}`}>
               <File file={file} isExtended={false} />
             </Link>
           </Col>

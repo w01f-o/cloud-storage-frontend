@@ -16,7 +16,7 @@ const ViewModeSwitcher: FC<ViewModeSwitcherProps> = ({ dict }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const href = (mode: "row" | "cells") => {
+  const getHref = (mode: "row" | "cells") => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("view", mode);
 
@@ -25,14 +25,14 @@ const ViewModeSwitcher: FC<ViewModeSwitcherProps> = ({ dict }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Link href={href("cells")} title={dict.folders.view.cells}>
+      <Link href={getHref("cells")} title={dict.folders.view.cells}>
         <CellsModeIcon
           isActive={
             searchParams.get("view") === "cells" || !searchParams.get("view")
           }
         />
       </Link>
-      <Link href={href("row")} title={dict.folders.view.row}>
+      <Link href={getHref("row")} title={dict.folders.view.row}>
         <RowModeIcon isActive={searchParams.get("view") === "row"} />
       </Link>
     </div>
