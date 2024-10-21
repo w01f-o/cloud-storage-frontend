@@ -39,6 +39,7 @@ const SearchFolders: FC<SearchFoldersProps> = ({ dict }) => {
       icon={{ element: <SearchIcon />, position: "left" }}
       onChange={debouncedChangeHandler}
       defaultValue={searchParams.get("search") || ""}
+      autoFocus={!!searchParams.get("search")}
     />
   );
 };
