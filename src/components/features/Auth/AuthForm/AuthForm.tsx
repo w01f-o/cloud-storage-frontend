@@ -17,7 +17,7 @@ import { RootDictionary } from "@/types/dictionaries.type";
 import { useSubmit } from "@/hooks/useSubmit";
 import { useParams } from "next/navigation";
 import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
-import { RoutePaths } from "@/constants/routes";
+import { RoutePaths } from "@/enums/RoutePaths.enum";
 
 interface AuthFormProps {
   formType: "registration" | "login";

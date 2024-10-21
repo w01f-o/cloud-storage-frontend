@@ -9,7 +9,7 @@ import ArrowIcon from "@/components/shared/Icons/ArrowIcon";
 import WelcomeBackground from "@/components/widgets/WelcomeBackground/WelcomeBackground";
 import { animated, useSpring } from "@react-spring/web";
 import { RootDictionary } from "@/types/dictionaries.type";
-import { RoutePaths } from "@/constants/routes";
+import { RoutePaths } from "@/enums/RoutePaths.enum";
 
 interface WelcomeProps {
   dict: RootDictionary;

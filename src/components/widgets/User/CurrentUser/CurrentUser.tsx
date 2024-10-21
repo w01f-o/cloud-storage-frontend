@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RootDictionary } from "@/types/dictionaries.type";
 import { UserApi } from "@/services/api/index.api";
+import { RoutePaths } from "@/enums/RoutePaths.enum";
 
 interface CurrentUserProps {
   dict: RootDictionary;
@@ -23,7 +24,7 @@ const CurrentUser: FC<CurrentUserProps> = async ({ dict }) => {
   return (
     <Link
       className={styles.wrapper}
-      href={`${user ? "/profile" : "/auth/login"}`}
+      href={user ? RoutePaths.PROFILE : RoutePaths.LOGIN}
     >
       <div className={styles.avatar}>
         <Image

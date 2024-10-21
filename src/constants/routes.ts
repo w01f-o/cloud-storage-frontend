@@ -1,16 +1,5 @@
 import { Route } from "@/types/route.type";
-
-export enum RoutePaths {
-  HOME = "/",
-  PROFILE = "/profile",
-  STORAGE = "/storage",
-  SHARED = "/shared",
-  SETTINGS = "/settings",
-  HELP = "/help",
-  LOGIN = "/auth/login",
-  REGISTRATION = "/auth/registration",
-  FOLDER = "/folder",
-}
+import { RoutePaths } from "@/enums/RoutePaths.enum";
 
 export const routes: Route[] = [
   { path: RoutePaths.HOME, name: "home" },

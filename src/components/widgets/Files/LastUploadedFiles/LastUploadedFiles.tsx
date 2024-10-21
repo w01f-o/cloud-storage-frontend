@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Col } from "@w01f-o/react-grid-layout";
 import styles from "./lastUploadedFiles.module.scss";
 import { getDictionary } from "@/actions/lang.action";
-import { RoutePaths } from "@/constants/routes";
+import { RoutePaths } from "@/enums/RoutePaths.enum";
 
 interface LastUploadedFilesProps {}
 
