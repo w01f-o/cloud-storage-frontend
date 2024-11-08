@@ -4,6 +4,7 @@ import Negotiator from "negotiator";
 import { AuthApi, UserApi } from "@/services/api/index.api";
 import { match } from "@formatjs/intl-localematcher";
 import { headers } from "next/headers";
+import { ApiErrors } from "@/enums/ApiErrors.enum";
 
 const locales = [
   "en-US",
@@ -42,24 +43,20 @@ export async function middleware(req: NextRequest) {
   const sessionCookie = process.env.NEXTAUTH_URL?.startsWith("https://")
     ? "__Secure-next-auth.session-token"
     : "authjs.session-token";
-  const session = await auth();
-
   const locale = getLocale(req);
 
-  if (session && session.user.refreshExpiresIn < Date.now()) {
+  const { data: userData, response: userResponse } = await UserApi.getUser();
+  const session = await auth();
+
+  if (
+    session &&
+    userResponse.status === 401 &&
+    // @ts-expect-error
+    (userData.type === ApiErrors.EXPIRED_ACCESS_TOKEN ||
+      // @ts-expect-error
+      userData.type === ApiErrors.WRONG_ACCESS_TOKEN)
+  ) {
     const response = NextResponse.redirect(req.nextUrl);
-
-    response.cookies.delete(sessionCookie);
-
-    return response;
-  }
-
-  if (session && session.user.accessExpiresIn < Date.now()) {
-    const response = NextResponse.redirect(req.nextUrl);
-
-    if (process.env.NODE_ENV === "development") {
-      console.log("Token expired");
-    }
 
     const oldTokenData = JSON.parse(
       req.cookies.get(sessionCookie)?.value as string,
@@ -88,9 +85,7 @@ export async function middleware(req: NextRequest) {
     return response;
   }
 
-  const { data: user } = await UserApi.getUser();
-
-  if (session && !user?.isActivated && !pathname.endsWith("activation")) {
+  if (session && !userData?.isActivated && !pathname.endsWith("activation")) {
     req.nextUrl.pathname = `/${locale}/activation`;
 
     return NextResponse.redirect(req.nextUrl);

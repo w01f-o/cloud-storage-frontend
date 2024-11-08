@@ -3,11 +3,9 @@ import { Folder } from "@/types/entities/folder.type";
 import { File } from "@/types/entities/file.type";
 import { CreateFolderDto } from "@/types/dtos/folders/createFolder.dto";
 import { AuthResponse } from "@/types/authResponse.type";
-import { ApiErrors } from "@/enums/ApiErrors.enum";
 import { QueryParams } from "@/types/queryParams.type";
 import { UpdateFolderDto } from "@/types/dtos/users/updateFolder.dto";
 import { User } from "@/types/entities/user.type";
-import { Utils } from "@/services/utils";
 import { UpdateFileDto } from "@/types/dtos/users/updateFile.dto";
 import { Storage } from "@/types/entities/storage.type";
 import { ActivateDto } from "@/types/dtos/auth/activate.dto";
@@ -38,11 +36,6 @@ class CloudStoreApi {
     });
 
     const data = await response.json();
-
-    if (data.type === ApiErrors.EXPIRED_ACCESS_TOKEN) {
-      await Utils.sleep(1000);
-      return await this.fetchWithAuth<T>(endpoint, token, options);
-    }
 
     return { response, data };
   }
