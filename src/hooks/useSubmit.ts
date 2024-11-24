@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { useToast } from "@/hooks/useToast";
 import { ServerActionResult } from "@/actions/actions.utils";
 import { FieldValues, SubmitHandler } from "react-hook-form";

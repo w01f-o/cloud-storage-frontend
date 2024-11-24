@@ -40,11 +40,11 @@ function getLocale(req: NextRequest): string {
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const locale = getLocale(req);
+
   const sessionCookie = process.env.NEXTAUTH_URL?.startsWith("https://")
     ? "__Secure-next-auth.session-token"
     : "authjs.session-token";
-  const locale = getLocale(req);
-
   const { data: userData, response: userResponse } = await UserApi.getUser();
   const session = await auth();
 
@@ -59,7 +59,7 @@ export async function middleware(req: NextRequest) {
     const response = NextResponse.redirect(req.nextUrl);
 
     const oldTokenData = JSON.parse(
-      req.cookies.get(sessionCookie)?.value as string,
+      req.cookies.get(sessionCookie)!.value as string,
     );
     try {
       const {
