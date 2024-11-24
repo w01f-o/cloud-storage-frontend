@@ -11,7 +11,7 @@ import { isMobileDevice } from "@/actions/actions.utils";
 
 interface FolderProps {
   folder: Folder;
-  isExtended: boolean;
+  isExtended?: boolean;
 }
 
 const Folder: FC<FolderProps> = async ({ folder, isExtended }) => {

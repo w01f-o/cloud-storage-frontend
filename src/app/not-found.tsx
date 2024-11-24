@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: "Страница не найдена - Cloud Storage",
 };
 
-const page: NextPage = () => {
+const Page: NextPage = () => {
   return <NotFound />;
 };
 
-export default NotFound;
+export default Page;

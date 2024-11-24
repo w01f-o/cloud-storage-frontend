@@ -11,7 +11,7 @@ import DesktopOnly from "@/components/features/Responsive/DesktopOnly";
 
 interface FileProps {
   file: FileType;
-  isExtended: boolean;
+  isExtended?: boolean;
 }
 
 const File: FC<FileProps> = async ({ file, isExtended }) => {

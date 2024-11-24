@@ -2,6 +2,7 @@ import FolderPage from "@/components/pages/folder/FolderPage";
 import { Metadata, NextPage } from "next";
 import { FoldersApi } from "@/services/api/index.api";
 import { QueryParams } from "@/types/queryParams.type";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -13,11 +14,15 @@ interface PageProps {
 export async function generateMetadata({
   params: { id },
 }: PageProps): Promise<Metadata> {
-  const { data: folder } = await FoldersApi.getById(id);
+  try {
+    const { data: folder } = await FoldersApi.getById(id);
 
-  return {
-    title: `${folder.name} - Cloud Storage`,
-  };
+    return {
+      title: `${folder.name} - Cloud Storage`,
+    };
+  } catch (e) {
+    notFound();
+  }
 }
 
 const page: NextPage<PageProps> = ({ params: { id }, searchParams }) => {

@@ -3,7 +3,8 @@
 import { ChangeEvent, FC, memo } from "react";
 import { SearchIcon } from "lucide-react";
 import Field from "@/components/shared/UI/Field/Field";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { useDebounceCallback } from "usehooks-ts";
 import { RootDictionary } from "@/types/dictionaries.type";
 

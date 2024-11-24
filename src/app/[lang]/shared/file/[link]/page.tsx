@@ -1,7 +1,7 @@
 import { Metadata, NextPage } from "next";
 import { SharedFilesApi } from "@/services/api/index.api";
 import SharedFile from "@/components/entities/SharedFile/SharedFile";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -12,19 +12,23 @@ interface PageProps {
 export async function generateMetadata({
   params: { link },
 }: PageProps): Promise<Metadata> {
-  const { data: file } = await SharedFilesApi.getByLink(link);
+  try {
+    const { data: file, response } = await SharedFilesApi.getByLink(link);
 
-  return {
-    title: `${file.name} - Cloud Storage`,
-  };
+    if (!response.ok) {
+      notFound();
+    }
+
+    return {
+      title: `${file.name} - Cloud Storage`,
+    };
+  } catch (e) {
+    notFound();
+  }
 }
 
 const Page: NextPage<PageProps> = async ({ params: { link } }) => {
-  const { data: file, response } = await SharedFilesApi.getByLink(link);
-
-  if (!response.ok) {
-    redirect("/");
-  }
+  const { data: file } = await SharedFilesApi.getByLink(link);
 
   return <SharedFile file={file} link={link} />;
 };
