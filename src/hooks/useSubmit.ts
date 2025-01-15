@@ -69,7 +69,7 @@ export function useSubmit<T extends FieldValues>(
       if (type) {
         router.replace(
           `${pathname}/?${new URLSearchParams({
-            [type]: nanoid(4),
+            [type]: nanoid(3),
           }).toString()}`,
         );
         router.refresh();
