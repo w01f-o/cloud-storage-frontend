@@ -3,7 +3,8 @@ import styles from "./languageChanger.module.scss";
 import { Language } from "@/components/features/Settings/LanguageChanger/languages";
 import FlagIcon from "@/components/shared/Icons/FlagIcon";
 import { RootDictionary } from "@/types/dictionaries.type";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import clsx from "clsx";
 
 interface LanguageItemProps {
