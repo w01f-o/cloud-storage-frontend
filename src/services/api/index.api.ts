@@ -34,9 +34,11 @@ class CloudStoreApi {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    console.log(`${this.API_BASE_URL}${endpoint}`);
+    console.log(`Bearer ${token}`);
+    console.log(response);
     const data = await response.json();
-    console.log(data);
+
     return { response, data };
   }
 
