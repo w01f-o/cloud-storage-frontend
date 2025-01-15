@@ -47,52 +47,49 @@ export async function middleware(req: NextRequest) {
     ? "__Secure-next-auth.session-token"
     : "authjs.session-token";
 
-  const session = await auth();
-
-  let userData: null | User = null;
+  let userData: User | null = null;
+  let userResponse: Response | null = null;
 
   try {
-    const { data, response: userResponse } = await UserApi.getUser();
-
+    const { data, response } = await UserApi.getUser();
     userData = data;
-
-    if (
-      session &&
-      userResponse.status === 401 &&
-      // @ts-expect-error
-      (userData.type === ApiErrors.EXPIRED_ACCESS_TOKEN ||
-        // @ts-expect-error
-        userData.type === ApiErrors.WRONG_ACCESS_TOKEN)
-    ) {
-      const response = NextResponse.redirect(req.nextUrl);
-
-      const oldTokenData = JSON.parse(
-        req.cookies.get(sessionCookie)!.value as string,
-      );
-
-      const {
-        data: {
-          tokens: { access, refresh, accessExpiresIn, refreshExpiresIn },
-        },
-      } = await AuthApi.refresh(oldTokenData.refreshToken);
-      const newSession = {
-        ...oldTokenData,
-        accessToken: access,
-        refreshToken: refresh,
-        accessExpiresIn,
-        refreshExpiresIn,
-      };
-
-      response.cookies.set(sessionCookie, JSON.stringify(newSession), {
-        httpOnly: true,
-      });
-
-      return response;
-    }
+    userResponse = response;
   } catch (e) {
+    console.log(e);
+  }
+
+  const session = await auth();
+
+  if (
+    session &&
+    userResponse?.status === 401 &&
+    // @ts-expect-error
+    (userData?.type === ApiErrors.EXPIRED_ACCESS_TOKEN ||
+      // @ts-expect-error
+      userData?.type === ApiErrors.WRONG_ACCESS_TOKEN)
+  ) {
     const response = NextResponse.redirect(req.nextUrl);
 
-    response.cookies.delete(sessionCookie);
+    const oldTokenData = JSON.parse(
+      req.cookies.get(sessionCookie)!.value as string,
+    );
+
+    const {
+      data: {
+        tokens: { access, refresh, accessExpiresIn, refreshExpiresIn },
+      },
+    } = await AuthApi.refresh(oldTokenData.refreshToken);
+    const newSession = {
+      ...oldTokenData,
+      accessToken: access,
+      refreshToken: refresh,
+      accessExpiresIn,
+      refreshExpiresIn,
+    };
+
+    response.cookies.set(sessionCookie, JSON.stringify(newSession), {
+      httpOnly: true,
+    });
 
     return response;
   }

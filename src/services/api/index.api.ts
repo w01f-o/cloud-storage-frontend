@@ -36,7 +36,7 @@ class CloudStoreApi {
     });
 
     const data = await response.json();
-
+    console.log(data);
     return { response, data };
   }
 
