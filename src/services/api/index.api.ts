@@ -46,7 +46,7 @@ class CloudStoreApi {
   ): Promise<FetchResponse<T>> {
     const response = await fetch(`${this.API_BASE_URL}${endpoint}`, options);
     const data = await response.json();
-
+    console.log(`DATA FROM API: ${JSON.stringify(data)}`);
     return { response, data };
   }
 
