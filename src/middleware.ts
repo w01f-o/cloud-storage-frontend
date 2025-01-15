@@ -5,7 +5,6 @@ import { AuthApi, UserApi } from "@/services/api/index.api";
 import { match } from "@formatjs/intl-localematcher";
 import { headers } from "next/headers";
 import { ApiErrors } from "@/enums/ApiErrors.enum";
-import { User } from "@/types/entities/user.type";
 
 const locales = [
   "en-US",
@@ -46,50 +45,42 @@ export async function middleware(req: NextRequest) {
   const sessionCookie = process.env.AUTH_URL?.startsWith("https://")
     ? "__Secure-next-auth.session-token"
     : "authjs.session-token";
-
-  let userData: User | null = null;
-  let userResponse: Response | null = null;
-
-  try {
-    const { data, response } = await UserApi.getUser();
-    userData = data;
-    userResponse = response;
-  } catch (e) {
-    console.log(e);
-  }
-
+  const { data: userData, response: userResponse } = await UserApi.getUser();
   const session = await auth();
 
   if (
     session &&
-    userResponse?.status === 401 &&
+    userResponse.status === 401 &&
     // @ts-expect-error
-    (userData?.type === ApiErrors.EXPIRED_ACCESS_TOKEN ||
+    (userData.type === ApiErrors.EXPIRED_ACCESS_TOKEN ||
       // @ts-expect-error
-      userData?.type === ApiErrors.WRONG_ACCESS_TOKEN)
+      userData.type === ApiErrors.WRONG_ACCESS_TOKEN)
   ) {
     const response = NextResponse.redirect(req.nextUrl);
 
     const oldTokenData = JSON.parse(
       req.cookies.get(sessionCookie)!.value as string,
     );
+    try {
+      const {
+        data: {
+          tokens: { access, refresh, accessExpiresIn, refreshExpiresIn },
+        },
+      } = await AuthApi.refresh(oldTokenData.refreshToken);
+      const newSession = {
+        ...oldTokenData,
+        accessToken: access,
+        refreshToken: refresh,
+        accessExpiresIn,
+        refreshExpiresIn,
+      };
 
-    const {
-      data: {
-        tokens: { access, refresh, accessExpiresIn, refreshExpiresIn },
-      },
-    } = await AuthApi.refresh(oldTokenData.refreshToken);
-    const newSession = {
-      ...oldTokenData,
-      accessToken: access,
-      refreshToken: refresh,
-      accessExpiresIn,
-      refreshExpiresIn,
-    };
-
-    response.cookies.set(sessionCookie, JSON.stringify(newSession), {
-      httpOnly: true,
-    });
+      response.cookies.set(sessionCookie, JSON.stringify(newSession), {
+        httpOnly: true,
+      });
+    } catch (err) {
+      response.cookies.delete(sessionCookie);
+    }
 
     return response;
   }
