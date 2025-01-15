@@ -87,7 +87,8 @@ export async function middleware(req: NextRequest) {
 
       response.cookies.set(sessionCookie, JSON.stringify(newSession), {
         httpOnly: true,
-        domain: "w01f-server.ru",
+        secure: true,
+        domain: "cloud-storage-frontend-production.up.railway.app",
       });
     } catch (err) {
       console.log(`ERROR REFRESHING TOKENS - ${err}`);
