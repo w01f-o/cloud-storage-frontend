@@ -92,7 +92,11 @@ export async function middleware(req: NextRequest) {
       });
     } catch (err) {
       console.log(`ERROR REFRESHING TOKENS - ${err}`);
-      response.cookies.delete(sessionCookie);
+      response.cookies.set(sessionCookie, "", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+      });
     }
 
     return response;
