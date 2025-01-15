@@ -46,7 +46,12 @@ export async function middleware(req: NextRequest) {
     ? "__Secure-next-auth.session-token"
     : "authjs.session-token";
   const { data: userData, response: userResponse } = await UserApi.getUser();
+
+  console.log(`userData - ${userData}`);
+
   const session = await auth();
+
+  console.log(`session - ${session}`);
 
   if (
     session &&
@@ -74,6 +79,8 @@ export async function middleware(req: NextRequest) {
         accessExpiresIn,
         refreshExpiresIn,
       };
+
+      console.log(`newSession - ${newSession}`);
 
       response.cookies.set(sessionCookie, JSON.stringify(newSession), {
         httpOnly: true,
