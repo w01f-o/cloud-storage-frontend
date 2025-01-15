@@ -43,7 +43,7 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const locale = getLocale(req);
 
-  const sessionCookie = process.env.NEXTAUTH_URL?.startsWith("https://")
+  const sessionCookie = process.env.AUTH_URL?.startsWith("https://")
     ? "__Secure-next-auth.session-token"
     : "authjs.session-token";
 
