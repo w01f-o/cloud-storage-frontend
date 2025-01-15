@@ -5,7 +5,6 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: process.env.NEXT_PUBLIC_API_BASE_HOSTNAME,
-        port: "5000",
       },
     ],
   },
