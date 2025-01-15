@@ -43,15 +43,11 @@ export async function middleware(req: NextRequest) {
   const locale = getLocale(req);
 
   const sessionCookie = process.env.AUTH_URL?.startsWith("https://")
-    ? "__Secure-next-auth.session-token"
+    ? "__Secure-authjs.session-token"
     : "authjs.session-token";
   const { data: userData, response: userResponse } = await UserApi.getUser();
 
-  console.log(`userData - ${userData}`);
-
   const session = await auth();
-
-  console.log(`session - ${session}`);
 
   if (
     session &&
@@ -79,8 +75,6 @@ export async function middleware(req: NextRequest) {
         accessExpiresIn,
         refreshExpiresIn,
       };
-
-      console.log(`newSession - ${newSession}`);
 
       response.cookies.set(sessionCookie, JSON.stringify(newSession), {
         httpOnly: true,

@@ -35,13 +35,7 @@ class CloudStoreApi {
       },
     });
 
-    console.log(`Bearer ${token}`);
-
-    console.log(`RESPONSE - ${response}`);
-
     const data = await response.json();
-
-    console.log(`DATA - ${data}`);
 
     return { response, data };
   }
