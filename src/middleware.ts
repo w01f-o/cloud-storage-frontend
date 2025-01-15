@@ -47,7 +47,11 @@ export async function middleware(req: NextRequest) {
     : "authjs.session-token";
   const { data: userData, response: userResponse } = await UserApi.getUser();
 
+  console.log(`userData: ${JSON.stringify(userData)}`);
+
   const session = await auth();
+
+  console.log(`session: ${JSON.stringify(session)}`);
 
   if (
     session &&
@@ -62,6 +66,9 @@ export async function middleware(req: NextRequest) {
     const oldTokenData = JSON.parse(
       req.cookies.get(sessionCookie)!.value as string,
     );
+
+    console.log(`oldTokenData: ${JSON.stringify(oldTokenData)}`);
+
     try {
       const {
         data: {
@@ -75,6 +82,8 @@ export async function middleware(req: NextRequest) {
         accessExpiresIn,
         refreshExpiresIn,
       };
+
+      console.log(`newSession: ${JSON.stringify(newSession)}`);
 
       response.cookies.set(sessionCookie, JSON.stringify(newSession), {
         httpOnly: true,
