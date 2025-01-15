@@ -185,6 +185,8 @@ export class AuthApi extends CloudStoreApi {
   }
 
   public static async refresh(token: string) {
+    console.log(`TOKEN - ${token}`);
+
     return await this.fetch<AuthResponse>({
       withAuth: false,
       endpoint: `${this.API_ENDPOINT}/refresh`,
