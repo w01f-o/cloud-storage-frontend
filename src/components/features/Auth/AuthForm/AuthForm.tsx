@@ -18,6 +18,7 @@ import { useSubmit } from "@/hooks/useSubmit";
 import { useParams } from "next/navigation";
 import FormFieldError from "@/components/shared/UI/Form/FormFieldError";
 import { RoutePaths } from "@/enums/RoutePaths.enum";
+import { useRouter } from "nextjs-toploader/app";
 
 interface AuthFormProps {
   formType: "registration" | "login";
@@ -30,6 +31,8 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
     formType === "login" ? dict.auth.login : dict.auth.registration;
   const { lang } = useParams();
 
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -41,8 +44,8 @@ const AuthForm: FC<AuthFormProps> = ({ formType, dict }) => {
     errorMessage: (error) =>
       dict.errors[JSON.parse(error).type as keyof RootDictionary["errors"]],
     events: {
-      onSuccess: async () => {
-        await redirectAction(`/${lang}/`);
+      onSuccess: () => {
+        router.push(`/${lang}/`);
       },
     },
   });
