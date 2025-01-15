@@ -87,6 +87,7 @@ export async function middleware(req: NextRequest) {
 
       response.cookies.set(sessionCookie, JSON.stringify(newSession), {
         httpOnly: true,
+        domain: "w01f-server.ru",
       });
     } catch (err) {
       console.log(`ERROR REFRESHING TOKENS - ${err}`);
