@@ -89,6 +89,7 @@ export async function middleware(req: NextRequest) {
         httpOnly: true,
       });
     } catch (err) {
+      console.log(`ERROR REFRESHING TOKENS - ${err}`);
       response.cookies.delete(sessionCookie);
     }
 
