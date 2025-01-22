@@ -45,8 +45,8 @@ export async function middleware(req: NextRequest) {
   const sessionCookie = process.env.AUTH_URL?.startsWith("https://")
     ? "__Secure-authjs.session-token"
     : "authjs.session-token";
-  const { data: userData, response: userResponse } = await UserApi.getUser();
 
+  const { data: userData, response: userResponse } = await UserApi.getUser();
   const session = await auth();
 
   if (
