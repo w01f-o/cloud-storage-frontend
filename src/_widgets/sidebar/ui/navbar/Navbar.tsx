@@ -1,0 +1,44 @@
+import { usePathname } from '@/_shared/i18n';
+import { RouterConfig } from '@/_shared/router';
+import { useTranslations } from 'next-intl';
+import { FC } from 'react';
+import { NavItem } from './NavItem';
+import { useActiveIndicator } from './useActiveIndicator';
+
+export const Navbar: FC = () => {
+  const t = useTranslations('Navbar');
+
+  const pathname = usePathname();
+  const { activeElementRef, activeIndicatorStyles } = useActiveIndicator({
+    pathname,
+  });
+
+  return (
+    <nav>
+      {activeIndicatorStyles && (
+        <div
+          className='bg-primary absolute w-1 transition-[top]'
+          style={{
+            top: activeIndicatorStyles.top ?? 0,
+            height: activeIndicatorStyles.height,
+          }}
+        ></div>
+      )}
+      <ul className='flex flex-col gap-2 pr-4 pl-2.5'>
+        {RouterConfig.getNavBarRoutes().map(route => {
+          const isActive = pathname === route.path;
+
+          return (
+            <NavItem
+              path={route.path}
+              title={t(route.name)}
+              key={route.path}
+              ref={isActive ? activeElementRef : undefined}
+              isActive={isActive}
+            />
+          );
+        })}
+      </ul>
+    </nav>
+  );
+};

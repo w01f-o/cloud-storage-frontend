@@ -1,19 +1,80 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 :root {
-  --color-background: white;
-  --color-foreground: black;
+  --color-background: #f1f3f6;
+  --color-foreground: #1b1d28;
+  --color-default: #1b1d28;
+  --color-content: #ffffff;
+  --color-primary: #567df4;
+  --color-danger: #f87070;
+  --color-warning: #ffbf00;
+  --color-success: #afe1af;
+  --color-secondary: #d1defc;
 }
 
 :root[data-theme='dark'] {
-  --color-background: black;
-  --color-foreground: white;
+  --color-background: #1b1d28;
+  --color-foreground: #f1f3f6;
+  --color-content: #1a1a1c;
+  --color-default: #1a1a1c;
 }
 
-.bg-background {
-  background-color: var(--color-background);
+@theme {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-content: var(--color-content);
+  --color-default: var(--color-default);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-success: var(--color-success);
+  --color-danger: var(--color-danger);
+  --color-warning: var(--color-warning);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 1.75rem;
+  --radius-4xl: 2.8125rem;
+
+  --border-1: 0.0625rem;
+  --border-2: 0.125rem;
+  --border-3: 0.1875rem;
+
+  --opacity-base: 0.9;
+
+  --animate-ripple: ripple 0.6s linear;
+
+  @keyframes ripple {
+    to {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
 }
 
-.text-foreground {
-  color: var(--color-foreground);
+@layer {
+  button {
+    @apply cursor-pointer;
+  }
+
+  body {
+    @apply bg-background text-foreground flex h-screen py-8 pr-8 antialiased transition-colors;
+  }
+}
+
+@utility transition-colors-background-opacity {
+  transition-property:
+    transform, color, background, background-color, border-color, font-weight,
+    text-decoration-color, fill, stroke, opacity, outline;
+  transition-timing-function: ease;
+  transition-duration: 0.25s;
+}
+
+@utility outline-focus-base {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }

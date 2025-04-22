@@ -1,6 +1,66 @@
 {
+  "shared": {
+    "errors": {
+      "unknown": "Произошла неизвестная ошибка",
+      "requiredField": "Поле обязательно для заполнения"
+    }
+  },
+  "Navbar": {
+    "home": "Главная",
+    "profile": "Профиль",
+    "storage": "Хранилище",
+    "shared": "Общие файлы",
+    "settings": "Настройки",
+    "help": "Помощь"
+  },
+  "WelcomePage": {
+    "title": "Добро пожаловать в Safe Cloud!",
+    "description": "Надежное и удобное облачное хранилище для ваших файлов с неограниченным доступом из любой точки мира"
+  },
+  "AuthPage": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "labels": {
+      "email": "Электронная почта",
+      "password": "Пароль",
+      "name": "Имя",
+      "dontHaveAccount": "Нет аккаунта? <register>Зарегистрироваться</register>",
+      "alreadyHaveAccount": "Уже есть аккаунт? <login>Войти</login>"
+    },
+    "success": {
+      "login": "Вы успешно вошли в аккаунт",
+      "register": "Вы успешно зарегистрировались"
+    },
+    "actions": {
+      "login": "Войти",
+      "register": "Зарегистрироваться",
+      "logout": "Выйти"
+    },
+    "errors": {
+      "userNotFound": "Пользователь не найден",
+      "invalidCredentials": "Введён неверный логин или пароль",
+      "userAlreadyExists": "Пользователь с таким логином уже существует",
+      "passwordMinLength": "Пароль должен быть не менее {minLength} символов",
+      "passwordMaxLength": "Пароль должен быть не более {maxLength} символов",
+      "passwordsNotMatch": "Пароли не совпадают"
+    }
+  },
   "HomePage": {
-    "title": "Привет из Safe Cloud",
-    "subtitle": "Добро пожаловать в Safe Cloud"
+    "title": "Главная | Safe Cloud"
+  },
+  "ProfilePage": {
+    "title": "Профиль | Safe Cloud"
+  },
+  "StoragePage": {
+    "title": "Моё хранилище | Safe Cloud"
+  },
+  "SharedPage": {
+    "title": "Общие файлы | Safe Cloud"
+  },
+  "SettingsPage": {
+    "title": "Настройки | Safe Cloud"
+  },
+  "HelpPage": {
+    "title": "Помощь | Safe Cloud"
   }
 }

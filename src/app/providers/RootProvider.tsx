@@ -1,13 +1,15 @@
 'use client';
 
-import { NextIntlClientProvider } from 'next-intl';
+import { Locale, Messages, NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from 'next-themes';
 import { FC, ReactNode } from 'react';
+import { TanstackQueryProvider } from './TanstackQueryProvider';
+import { ThemeInCookieProvider } from './ThemeInCookieProvider';
 
 interface RootProviderProps {
   children: ReactNode;
-  locale: string;
-  messages: Record<string, unknown>;
+  locale: Locale;
+  messages: Messages;
 }
 
 export const RootProvider: FC<RootProviderProps> = ({
@@ -21,7 +23,11 @@ export const RootProvider: FC<RootProviderProps> = ({
       messages={messages}
       timeZone='Europe/Moscow'
     >
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider enableSystem defaultTheme='light' enableColorScheme>
+        <ThemeInCookieProvider>
+          <TanstackQueryProvider>{children}</TanstackQueryProvider>
+        </ThemeInCookieProvider>
+      </ThemeProvider>
     </NextIntlClientProvider>
   );
 };

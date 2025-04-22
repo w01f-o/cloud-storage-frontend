@@ -3,6 +3,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getCurrentUser } from '../../api/service';
 import { AuthQueryKeys } from '../../model';
 import { useTokenStore } from '../stores/token-store';
+import { AxiosError } from 'axios';
 
 type UseSessionReturn =
   | {
@@ -19,7 +20,7 @@ type UseSession = () => UseSessionReturn;
 export const useSession: UseSession = () => {
   const { accessToken } = useTokenStore();
 
-  const { data: user } = useQuery({
+  const { data: user } = useQuery<User, AxiosError>({
     queryKey: [AuthQueryKeys.CURRENT_SESSION, accessToken],
     queryFn: ({ signal }) => getCurrentUser({ signal }),
     retry: false,

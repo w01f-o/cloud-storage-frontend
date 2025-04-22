@@ -6,3 +6,4 @@ public
 node_modules
 next-env.d.ts
 yarn.lock
+messages

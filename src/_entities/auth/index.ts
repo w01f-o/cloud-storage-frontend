@@ -7,7 +7,7 @@ export {
 } from './lib';
 export type { TokenStore } from './lib';
 
-export { AuthErrors, AuthMutationKeys, AuthQueryKeys } from './model';
+export { AuthErrors, AuthMutationKeys, AuthQueryKeys, AuthType } from './model';
 export type { LoginDto, RegisterDto } from './model';
 
 export {

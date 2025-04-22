@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { authorize } from '../../api';
-import { AuthDto } from '../../model';
+import { AxiosError } from 'axios';
+import { authorize } from '../../api/service';
+import { LoginDto, RegisterDto } from '../../model';
+import { AuthResponse } from '../../model/types';
 
 interface UseAuthorizeBaseReturn {
   isPending: boolean;
@@ -9,11 +11,11 @@ interface UseAuthorizeBaseReturn {
 }
 
 interface UseAuthorizeLoginReturn extends UseAuthorizeBaseReturn {
-  login: (dto: AuthDto) => void;
+  login: (dto: LoginDto) => void;
 }
 
 interface UseAuthorizeRegisterReturn extends UseAuthorizeBaseReturn {
-  register: (dto: AuthDto) => void;
+  register: (dto: RegisterDto) => void;
 }
 
 function useAuthorize<T extends 'login' | 'register'>(
@@ -25,15 +27,15 @@ function useAuthorize(type: 'login' | 'register') {
     mutate: login,
     isPending: loginIsPending,
     isSuccess: loginIsSuccess,
-  } = useMutation({
-    mutationFn: (dto: AuthDto) => authorize('login', dto),
+  } = useMutation<AuthResponse, AxiosError, LoginDto>({
+    mutationFn: dto => authorize('login', dto),
   });
   const {
     mutate: register,
     isPending: registerIsPending,
     isSuccess: registerIsSuccess,
-  } = useMutation({
-    mutationFn: (dto: AuthDto) => authorize('register', dto),
+  } = useMutation<AuthResponse, AxiosError, RegisterDto>({
+    mutationFn: dto => authorize('register', dto),
   });
 
   if (type === 'login')

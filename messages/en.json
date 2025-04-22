@@ -1,6 +1,66 @@
 {
+  "shared": {
+    "errors": {
+      "unknown": "An unknown error occurred",
+      "requiredField": "This field is required"
+    }
+  },
+  "Navbar": {
+    "home": "Home",
+    "profile": "Profile",
+    "storage": "Storage",
+    "shared": "Shared files",
+    "settings": "Settings",
+    "help": "Help"
+  },
+  "WelcomePage": {
+    "title": "Welcome to Safe Cloud!",
+    "description": "A reliable and convenient cloud storage solution for your files with unlimited access from anywhere in the world"
+  },
+  "AuthPage": {
+    "login": "Login",
+    "register": "Register",
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "name": "Name",
+      "dontHaveAccount": "Don't have an account? <register>Register</register>",
+      "alreadyHaveAccount": "Already have an account? <login>Login</login>"
+    },
+    "success": {
+      "login": "You have successfully logged in",
+      "register": "You have successfully registered"
+    },
+    "actions": {
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout"
+    },
+    "errors": {
+      "userNotFound": "User not found",
+      "invalidCredentials": "Invalid email or password",
+      "userAlreadyExists": "A user with this email already exists",
+      "passwordMinLength": "Password must be at least {minLength} characters long",
+      "passwordMaxLength": "Password must be no more than {maxLength} characters long",
+      "passwordsNotMatch": "Passwords do not match"
+    }
+  },
   "HomePage": {
-    "title": "Hello from Safe Cloud",
-    "subtitle": "Welcome to the Safe Cloud"
+    "title": "Home | Safe Cloud"
+  },
+  "ProfilePage": {
+    "title": "Profile | Safe Cloud"
+  },
+  "StoragePage": {
+    "title": "My storage | Safe Cloud"
+  },
+  "SharedPage": {
+    "title": "Shared files | Safe Cloud"
+  },
+  "SettingsPage": {
+    "title": "Settings | Safe Cloud"
+  },
+  "HelpPage": {
+    "title": "Help | Safe Cloud"
   }
 }

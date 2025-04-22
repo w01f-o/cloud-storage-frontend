@@ -1,5 +1,10 @@
+import { AuthType } from '@/_entities/auth';
 import { FC } from 'react';
 
-export const AuthPage: FC = () => {
-  return <></>;
+interface AuthPageProps {
+  type: AuthType;
+}
+
+export const AuthPage: FC<AuthPageProps> = ({ type }) => {
+  return <>{type}</>;
 };
