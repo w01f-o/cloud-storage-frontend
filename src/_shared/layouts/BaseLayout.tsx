@@ -14,7 +14,7 @@ export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
       <MobileOnly>
         <MobileNavbar />
       </MobileOnly>
-      <main className='bg-background lg:bg-content lg:rounded-content h-full flex-grow px-12 pt-16 pb-7 transition-colors'>
+      <main className='bg-background lg:bg-content lg:rounded-content relative h-full flex-grow overflow-hidden px-12 pt-16 pb-7 transition-colors'>
         {children}
       </main>
     </>

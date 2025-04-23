@@ -10,7 +10,7 @@ export const CurrentUser: FC = () => {
   return (
     <Link
       href={RoutePaths.PROFILE}
-      className='flex w-full items-center gap-2.5 pr-7 pl-3.5'
+      className='flex w-full items-center gap-2.5 pr-7 pl-5'
     >
       <Avatar src='/150.jpg' />
       <div className='flex w-0 flex-1 flex-col'>

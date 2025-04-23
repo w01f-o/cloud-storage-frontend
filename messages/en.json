@@ -14,12 +14,19 @@
     "help": "Help"
   },
   "WelcomePage": {
-    "title": "Welcome to Safe Cloud!",
-    "description": "A reliable and convenient cloud storage solution for your files with unlimited access from anywhere in the world"
+    "title": "Welcome",
+    "greeting": "Welcome to\nSafe Cloud!",
+    "description": "A reliable and convenient cloud storage solution for your files\nwith unlimited access from anywhere in the world",
+    "links": {
+      "login": "Login",
+      "register": "Register"
+    }
   },
   "AuthPage": {
-    "login": "Login",
-    "register": "Register",
+    "title": {
+      "login": "Login",
+      "register": "Register"
+    },
     "labels": {
       "email": "Email",
       "password": "Password",

@@ -18,9 +18,9 @@
 }
 
 :root[data-theme='dark'] {
-  --color-background: #20232a;
+  --color-background: #2a2a2c;
   --color-foreground: #f1f3f6;
-  --color-content: #1e2024;
+  --color-content: #1a1a1c;
   --color-default: #f1f3f6;
   --color-skeleton: #2e313a;
   --color-skeleton-highlight: #3d414c;
@@ -57,7 +57,7 @@
   --border-2: 0.125rem;
   --border-3: 0.1875rem;
 
-  --opacity-base: 0.9;
+  --opacity-base: 0.8;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
