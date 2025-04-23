@@ -1,3 +1,5 @@
+'use client';
+
 import { usePathname } from '@/_shared/i18n';
 import { RouterConfig } from '@/_shared/router';
 import clsx from 'clsx';

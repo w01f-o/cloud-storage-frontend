@@ -13,7 +13,7 @@ import {
 import { Spinner } from '../spinner';
 import { Text } from '../text';
 import { buttonVariants } from './button-variants';
-import { Ripples } from './Ripples';
+import { Ripples } from './ripples';
 
 interface ButtonProps<T extends ElementType = 'button'>
   extends HTMLAttributes<T> {

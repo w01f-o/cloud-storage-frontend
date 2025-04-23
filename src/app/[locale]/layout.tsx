@@ -1,6 +1,6 @@
 import { routing } from '@/_shared/i18n';
 import { BaseLayout } from '@/_shared/layouts';
-import { RootProvider } from '@/app/providers/RootProvider';
+import { RootProvider } from '@/app/providers';
 import type { NextPage } from 'next';
 import { hasLocale, Locale } from 'next-intl';
 import { getMessages } from 'next-intl/server';

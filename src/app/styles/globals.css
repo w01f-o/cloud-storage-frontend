@@ -12,6 +12,9 @@
   --color-warning: #ffbf00;
   --color-success: #afe1af;
   --color-secondary: #d1defc;
+  --color-skeleton: #e8eaed;
+  --color-skeleton-highlight: #f5f6f8;
+  --color-selection: #cdd9ff;
 }
 
 :root[data-theme='dark'] {
@@ -19,6 +22,13 @@
   --color-foreground: #f1f3f6;
   --color-content: #1e2024;
   --color-default: #f1f3f6;
+  --color-skeleton: #2e313a;
+  --color-skeleton-highlight: #3d414c;
+  --color-selection: #567df4;
+}
+
+::selection {
+  @apply bg-selection;
 }
 
 @theme {
@@ -31,6 +41,9 @@
   --color-success: var(--color-success);
   --color-danger: var(--color-danger);
   --color-warning: var(--color-warning);
+  --color-skeleton: var(--color-skeleton);
+  --color-skeleton-highlight: var(--color-skeleton-highlight);
+  --color-selection: var(--color-selection);
 
   --radius-sm: 0.25rem;
   --radius-md: 0.75rem;
@@ -38,7 +51,7 @@
   --radius-xl: 1.25rem;
   --radius-2xl: 1.5rem;
   --radius-3xl: 1.75rem;
-  --radius-4xl: 2.8125rem;
+  --radius-content: 3.4375rem;
 
   --border-1: 0.0625rem;
   --border-2: 0.125rem;
@@ -46,12 +59,55 @@
 
   --opacity-base: 0.9;
 
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-ripple: ripple 0.6s linear;
+  --animate-shimmer: shimmer 2s infinite;
+  --animate-caret-blink: caret-blink 1s infinite;
 
   @keyframes ripple {
     to {
       transform: scale(2);
       opacity: 0;
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: 'var(--radix-accordion-content-height)';
+      opacity: 1;
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: 'var(--radix-accordion-content-height)';
+      opacity: 1;
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(200%);
     }
   }
 }
@@ -62,7 +118,7 @@
   }
 
   body {
-    @apply bg-background text-foreground flex h-screen py-8 pr-8 antialiased transition-colors;
+    @apply bg-background text-foreground flex h-screen antialiased transition-colors lg:py-8 lg:pr-8;
   }
 }
 

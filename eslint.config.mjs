@@ -25,6 +25,13 @@ const eslintConfig = [
       ],
       'newline-before-return': 'error',
       'import/newline-after-import': ['error', { count: 1 }],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ];

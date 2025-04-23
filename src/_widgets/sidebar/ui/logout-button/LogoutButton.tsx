@@ -1,5 +1,24 @@
+// import { useSession } from '@/_entities/auth';
+import { Button } from '@/_shared/ui';
+import { IconLogout } from '@tabler/icons-react';
 import { FC } from 'react';
 
 export const LogoutButton: FC = () => {
-  return <div></div>;
+  // const { isAuth } = useSession();
+
+  return (
+    <div className='px-4'>
+      <Button
+        variant='ghost'
+        color='default'
+        size='lg'
+        disableAnimation
+        disableRipple
+        className='font-semibold'
+        startContent={<IconLogout />}
+      >
+        Выйти
+      </Button>
+    </div>
+  );
 };

@@ -57,10 +57,6 @@ export class RouterConfig {
     },
   } as const;
 
-  static getPath(route: RoutePaths): string {
-    return this.routes[route].path;
-  }
-
   static getAllRoutes(): Route[] {
     return Object.values(this.routes);
   }
