@@ -15,7 +15,7 @@ import { HttpStatus } from './enums/http-status.enum';
 let refreshPromise: Promise<void> | null = null;
 
 const baseConfig: CreateAxiosDefaults = {
-  baseURL: process.env?.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },

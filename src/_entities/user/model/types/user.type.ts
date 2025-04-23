@@ -4,12 +4,11 @@ interface User {
   name: string;
   isConfirmed: boolean;
   avatar: string | null;
-  banner: string | null;
 }
 
 type UpdateUserDto = Partial<
   Pick<User, 'name' | 'email'> & {
-    password: string;
+    password?: string;
     avatar?: File;
   }
 >;

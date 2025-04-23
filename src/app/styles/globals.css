@@ -5,8 +5,8 @@
 :root {
   --color-background: #f1f3f6;
   --color-foreground: #1b1d28;
-  --color-default: #1b1d28;
   --color-content: #ffffff;
+  --color-default: #1b1d28;
   --color-primary: #567df4;
   --color-danger: #f87070;
   --color-warning: #ffbf00;
@@ -15,10 +15,10 @@
 }
 
 :root[data-theme='dark'] {
-  --color-background: #1b1d28;
+  --color-background: #20232a;
   --color-foreground: #f1f3f6;
-  --color-content: #1a1a1c;
-  --color-default: #1a1a1c;
+  --color-content: #1e2024;
+  --color-default: #f1f3f6;
 }
 
 @theme {

@@ -10,7 +10,7 @@ declare module 'next-intl' {
   }
 }
 
-export { withNextIntlMiddleware } from './middleware';
+export { nextIntlMiddleware } from './middleware';
 export {
   getPathname,
   Link,

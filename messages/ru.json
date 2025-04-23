@@ -46,21 +46,21 @@
     }
   },
   "HomePage": {
-    "title": "Главная | Safe Cloud"
+    "title": "Главная"
   },
   "ProfilePage": {
-    "title": "Профиль | Safe Cloud"
+    "title": "Профиль"
   },
   "StoragePage": {
-    "title": "Моё хранилище | Safe Cloud"
+    "title": "Моё хранилище"
   },
-  "SharedPage": {
-    "title": "Общие файлы | Safe Cloud"
+  "SharedFilePage": {
+    "title": "Общие файлы"
   },
   "SettingsPage": {
-    "title": "Настройки | Safe Cloud"
+    "title": "Настройки"
   },
   "HelpPage": {
-    "title": "Помощь | Safe Cloud"
+    "title": "Помощь"
   }
 }

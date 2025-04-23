@@ -49,22 +49,22 @@ declare const messages: {
     }
   },
   "HomePage": {
-    "title": "Home | Safe Cloud"
+    "title": "Home"
   },
   "ProfilePage": {
-    "title": "Profile | Safe Cloud"
+    "title": "Profile"
   },
   "StoragePage": {
-    "title": "My storage | Safe Cloud"
+    "title": "My storage"
   },
-  "SharedPage": {
-    "title": "Shared files | Safe Cloud"
+  "SharedFilePage": {
+    "title": "Shared files"
   },
   "SettingsPage": {
-    "title": "Settings | Safe Cloud"
+    "title": "Settings"
   },
   "HelpPage": {
-    "title": "Help | Safe Cloud"
+    "title": "Help"
   }
 };
 export default messages;

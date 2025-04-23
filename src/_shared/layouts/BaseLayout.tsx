@@ -15,10 +15,14 @@ const DynamicToaster = dynamic(
 export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <DynamicNextTopLoader />
+      <DynamicNextTopLoader
+        showSpinner={false}
+        color='var(--color-primary)'
+        height={4}
+      />
       <DynamicToaster position='bottom-right' />
       <Sidebar />
-      <main className='bg-content h-full flex-grow rounded-4xl'>
+      <main className='bg-content h-full flex-grow rounded-4xl px-12 pt-16 pb-7 transition-colors'>
         {children}
       </main>
     </>

@@ -3,3 +3,7 @@ export type { MiddlewareFactory } from './middlewares';
 
 export { apiClient, authApiClient, HttpStatus } from './api';
 export type { ApiError, RequestOptions } from './api';
+
+export { useBodyRef } from './hooks';
+
+export { generatePrefixedPageTitle } from './utils';

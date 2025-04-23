@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useBodyRef } from '@/_shared/lib';
+import { Ref, RefObject, useRef, useState } from 'react';
+import {
+  useDebounceCallback,
+  useIsomorphicLayoutEffect,
+  useResizeObserver,
+} from 'usehooks-ts';
 
 interface UseActiveIndicatorParams {
   pathname: string;
@@ -9,33 +15,65 @@ interface ActiveIndicatorStyles {
   height: number;
 }
 
-const ACTIVE_INDICATOR_HEIGHT: number = 32;
+const ACTIVE_INDICATOR_HEIGHT = 32;
 
-export const useActiveIndicator = (params: UseActiveIndicatorParams) => {
-  const { pathname } = params;
+interface UseActiveIndicatorReturn {
+  activeElementRef: Ref<HTMLLIElement>;
+  activeIndicatorStyles: ActiveIndicatorStyles | null;
+  isDisableAnimation: boolean;
+}
 
+export const useActiveIndicator = ({
+  pathname,
+}: UseActiveIndicatorParams): UseActiveIndicatorReturn => {
   const [activeIndicatorStyles, setActiveIndicatorStyles] =
     useState<ActiveIndicatorStyles | null>(null);
+  const [isDisableAnimation, setIsDisableAnimation] = useState(false);
 
+  const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const bodyRef = useBodyRef();
   const activeElementRef = useRef<HTMLLIElement>(null);
 
-  useEffect(() => {
-    const activeElement = activeElementRef.current;
+  const updateIndicatorPosition = useDebounceCallback(() => {
+    const element = activeElementRef.current;
+    if (!element) return;
 
-    if (!activeElement) {
-      return;
-    }
-
-    const clientRect = activeElement.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
 
     setActiveIndicatorStyles({
-      top: clientRect.top + (clientRect.height - ACTIVE_INDICATOR_HEIGHT) / 2,
+      top: rect.top + (rect.height - ACTIVE_INDICATOR_HEIGHT) / 2,
       height: ACTIVE_INDICATOR_HEIGHT,
     });
-  }, [pathname]);
+  }, 100);
+
+  const disableAnimationTemporarily = () => {
+    setIsDisableAnimation(true);
+
+    if (animationTimeoutRef.current) {
+      clearTimeout(animationTimeoutRef.current);
+    }
+
+    animationTimeoutRef.current = setTimeout(() => {
+      setIsDisableAnimation(false);
+    }, 200);
+  };
+
+  useResizeObserver({
+    ref: bodyRef as RefObject<HTMLElement>,
+    onResize: () => {
+      updateIndicatorPosition();
+      disableAnimationTemporarily();
+    },
+  });
+
+  useIsomorphicLayoutEffect(() => {
+    updateIndicatorPosition();
+  }, [updateIndicatorPosition, pathname]);
 
   return {
     activeIndicatorStyles,
     activeElementRef,
+    isDisableAnimation,
   };
 };

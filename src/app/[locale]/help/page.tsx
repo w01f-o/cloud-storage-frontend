@@ -1,3 +1,5 @@
+import { HelpPage } from '@/_pages/help';
+import { generatePrefixedPageTitle } from '@/_shared/lib';
 import { Metadata, NextPage } from 'next';
 import { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
@@ -15,12 +17,12 @@ export const generateMetadata = async ({
   const t = await getTranslations({ locale });
 
   return {
-    title: t(`HelpPage.title`),
+    title: generatePrefixedPageTitle(t(`HelpPage.title`)),
   };
 };
 
 const Page: NextPage = () => {
-  return <></>;
+  return <HelpPage />;
 };
 
 export default Page;

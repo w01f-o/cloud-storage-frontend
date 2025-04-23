@@ -73,7 +73,7 @@ export class RouterConfig {
     ): route is Route & {
       showInNavbar: true;
       name: keyof Messages['Navbar'];
-    } => route.showInNavbar === true && !!route.name;
+    } => !!route.showInNavbar && !!route.name;
 
     return Object.values(this.routes).filter(isNavbarRoute);
   }
@@ -81,7 +81,7 @@ export class RouterConfig {
   static getProtectedRoutes(): Array<Route & { requiresAuth: true }> {
     const isProtectedRoute = (
       route: Route
-    ): route is Route & { requiresAuth: true } => route.requiresAuth === true;
+    ): route is Route & { requiresAuth: true } => !!route.requiresAuth;
 
     return Object.values(this.routes).filter(isProtectedRoute);
   }

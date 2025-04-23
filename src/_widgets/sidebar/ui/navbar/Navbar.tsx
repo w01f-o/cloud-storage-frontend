@@ -1,5 +1,6 @@
 import { usePathname } from '@/_shared/i18n';
 import { RouterConfig } from '@/_shared/router';
+import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import { NavItem } from './NavItem';
@@ -9,15 +10,18 @@ export const Navbar: FC = () => {
   const t = useTranslations('Navbar');
 
   const pathname = usePathname();
-  const { activeElementRef, activeIndicatorStyles } = useActiveIndicator({
-    pathname,
-  });
+  const { activeElementRef, activeIndicatorStyles, isDisableAnimation } =
+    useActiveIndicator({
+      pathname,
+    });
 
   return (
     <nav>
       {activeIndicatorStyles && (
         <div
-          className='bg-primary absolute w-1 transition-[top]'
+          className={clsx('bg-primary absolute w-1', {
+            'transition-[top]': !isDisableAnimation,
+          })}
           style={{
             top: activeIndicatorStyles.top ?? 0,
             height: activeIndicatorStyles.height,

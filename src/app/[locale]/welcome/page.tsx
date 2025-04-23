@@ -1,4 +1,5 @@
 import { WelcomePage } from '@/_pages/welcome';
+import { generatePrefixedPageTitle } from '@/_shared/lib';
 import { Metadata, NextPage } from 'next';
 import { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
@@ -16,7 +17,7 @@ export const generateMetadata = async ({
   const t = await getTranslations({ locale });
 
   return {
-    title: t(`WelcomePage.title`),
+    title: generatePrefixedPageTitle(t(`WelcomePage.title`)),
   };
 };
 

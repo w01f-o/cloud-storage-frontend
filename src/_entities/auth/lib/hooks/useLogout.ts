@@ -1,28 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { logout } from '../../api/service';
 import { AxiosError } from 'axios';
+import { logout } from '../../api/service';
 
-interface UseLogoutReturn {
-  logout: () => void;
-  isPending: boolean;
-  isSuccess: boolean;
-}
-
-type UseLogout = () => UseLogoutReturn;
-
-const useLogout: UseLogout = () => {
+const useLogout = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending, isSuccess } = useMutation<void, AxiosError>({
+  return useMutation<void, AxiosError>({
     mutationFn: logout,
-    onSuccess: () => queryClient.resetQueries(),
+    onSuccess: () => queryClient.removeQueries(),
   });
-
-  return {
-    logout: mutate,
-    isPending,
-    isSuccess,
-  };
 };
 
 export { useLogout };

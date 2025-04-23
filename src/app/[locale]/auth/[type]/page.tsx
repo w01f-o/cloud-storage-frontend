@@ -1,5 +1,6 @@
 import { AuthType } from '@/_entities/auth';
 import { AuthPage } from '@/_pages/auth';
+import { generatePrefixedPageTitle } from '@/_shared/lib';
 import { Metadata, NextPage } from 'next';
 import { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
@@ -18,7 +19,7 @@ export const generateMetadata = async ({
   const t = await getTranslations({ locale });
 
   return {
-    title: t(`AuthPage.actions.${type}`),
+    title: generatePrefixedPageTitle(t(`AuthPage.actions.${type}`)),
   };
 };
 

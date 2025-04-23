@@ -23,7 +23,7 @@ export const useTokenStore = create<TokenStore>()(
         setAccessToken: accessToken =>
           set({ accessToken }, false, 'setAccessToken'),
       }),
-      { name: 'session' }
+      { name: 'session', version: 1 }
     ),
     { name: 'SessionStore' }
   )
