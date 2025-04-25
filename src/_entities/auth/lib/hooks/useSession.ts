@@ -1,5 +1,5 @@
 import { User } from '@/_entities/user';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { getCurrentUser } from '../../api/service';
 import { AuthQueryKeys } from '../../model';
@@ -25,7 +25,7 @@ export const useSession: UseSession = () => {
     queryFn: ({ signal }) => getCurrentUser({ signal }),
     retry: false,
     enabled: accessToken !== null,
-    placeholderData: keepPreviousData,
+    // placeholderData: keepPreviousData,
     staleTime: 30 * 60 * 1000,
     gcTime: Infinity,
   });

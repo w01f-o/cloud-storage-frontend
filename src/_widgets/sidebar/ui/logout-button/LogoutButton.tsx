@@ -1,10 +1,26 @@
-// import { useSession } from '@/_entities/auth';
+'use client';
+
+import { useLogout, useSession } from '@/_entities/auth';
+import { useRouter } from '@/_shared/i18n';
+import { RoutePaths } from '@/_shared/router';
 import { Button } from '@/_shared/ui';
 import { IconLogout } from '@tabler/icons-react';
 import { FC } from 'react';
 
 export const LogoutButton: FC = () => {
-  // const { isAuth } = useSession();
+  const { isAuth } = useSession();
+  const router = useRouter();
+  const { mutate: logout } = useLogout({
+    onSuccess: () => {
+      router.push(RoutePaths.WELCOME);
+    },
+  });
+
+  if (!isAuth) return <div></div>;
+
+  const clickHandler = () => {
+    logout();
+  };
 
   return (
     <div className='px-4'>
@@ -16,6 +32,7 @@ export const LogoutButton: FC = () => {
         disableRipple
         className='font-semibold'
         startContent={<IconLogout />}
+        onClick={clickHandler}
       >
         Выйти
       </Button>

@@ -1,7 +1,7 @@
 'use client';
 
 import { AuthErrors, useLogin } from '@/_entities/auth';
-import { Link } from '@/_shared/i18n';
+import { Link, useRouter } from '@/_shared/i18n';
 import { catchApiError } from '@/_shared/lib';
 import { RoutePaths } from '@/_shared/router';
 import { Button, Input, Text } from '@/_shared/ui';
@@ -15,9 +15,11 @@ import { LoginFormSchema, loginSchema } from '../model/login-schema';
 export const LoginForm: FC = () => {
   const t = useTranslations('AuthPage');
 
+  const router = useRouter();
   const { mutate: login, isPending } = useLogin({
     onSuccess: () => {
       toast.success(t('success.login'));
+      router.push(RoutePaths.HOME);
     },
     onError: error => {
       const errorMessage = catchApiError<AuthErrors>(error).message;

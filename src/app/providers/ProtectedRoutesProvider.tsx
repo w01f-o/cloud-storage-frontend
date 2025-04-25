@@ -4,7 +4,7 @@ import { useSession } from '@/_entities/auth';
 import { redirect, usePathname } from '@/_shared/i18n';
 import { RoutePaths, RouterConfig } from '@/_shared/router';
 import { useLocale } from 'next-intl';
-import { FC, PropsWithChildren, useLayoutEffect } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 
 export const ProtectedRoutesProvider: FC<PropsWithChildren> = ({
   children,
@@ -13,7 +13,7 @@ export const ProtectedRoutesProvider: FC<PropsWithChildren> = ({
   const pathname = usePathname();
   const locale = useLocale();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (
       isAuth &&
       RouterConfig.getAuthPaths().includes(pathname as RoutePaths)

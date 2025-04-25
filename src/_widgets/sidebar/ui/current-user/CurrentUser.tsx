@@ -11,6 +11,9 @@ export const CurrentUser: FC = () => {
   const { isAuth, user } = useSession();
   const t = useTranslations();
 
+  console.log(isAuth);
+  console.log(user);
+
   return (
     <Link
       href={isAuth ? RoutePaths.PROFILE : RoutePaths.LOGIN}

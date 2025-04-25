@@ -11,6 +11,7 @@ export class RouterConfig {
     [RoutePaths.HOME]: {
       path: RoutePaths.HOME,
       name: 'home',
+      requiresAuth: true,
       showInNavbar: true,
     },
     [RoutePaths.PROFILE]: {
@@ -34,7 +35,6 @@ export class RouterConfig {
     [RoutePaths.SETTINGS]: {
       path: RoutePaths.SETTINGS,
       name: 'settings',
-      requiresAuth: true,
       showInNavbar: true,
     },
     [RoutePaths.HELP]: {

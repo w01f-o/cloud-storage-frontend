@@ -1,4 +1,5 @@
 import { useBodyRef } from '@/_shared/lib';
+import { RouterConfig } from '@/_shared/router';
 import { Ref, RefObject, useRef, useState } from 'react';
 import {
   useDebounceCallback,
@@ -36,6 +37,12 @@ export const useActiveIndicator = ({
   const activeElementRef = useRef<HTMLLIElement>(null);
 
   const updateIndicatorPosition = useDebounceCallback(() => {
+    if (
+      RouterConfig.getNavBarRoutes().every(route => route.path !== pathname)
+    ) {
+      return setActiveIndicatorStyles(null);
+    }
+
     const element = activeElementRef.current;
     if (!element) return;
 
