@@ -8,7 +8,7 @@ import { IconLogout } from '@tabler/icons-react';
 import { FC } from 'react';
 
 export const LogoutButton: FC = () => {
-  const { isAuth } = useSession();
+  const user = useSession();
   const router = useRouter();
   const { mutate: logout } = useLogout({
     onSuccess: () => {
@@ -16,7 +16,7 @@ export const LogoutButton: FC = () => {
     },
   });
 
-  if (!isAuth) return <div></div>;
+  if (!user) return <div></div>;
 
   const clickHandler = () => {
     logout();

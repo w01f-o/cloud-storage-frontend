@@ -1,9 +1,7 @@
-import {
-  AuthErrors,
-  logout,
-  refreshTokens,
-  useTokenStore,
-} from '@/_entities/auth';
+import { AuthErrors, logout, refreshTokens } from '@/_entities/auth';
+import { getAccessToken } from '@/_entities/auth/lib/get-access-token';
+import { AuthResponse } from '@/_entities/auth/model/types';
+import { isServer } from '@tanstack/react-query';
 import axios, {
   CreateAxiosDefaults,
   InternalAxiosRequestConfig,
@@ -12,7 +10,11 @@ import axios, {
 import { catchApiError } from './catch-api-error';
 import { HttpStatus } from './enums/http-status.enum';
 
-let refreshPromise: Promise<void> | null = null;
+interface RetryableRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean;
+}
+
+let refreshPromise: Promise<AuthResponse> | null = null;
 
 const baseConfig: CreateAxiosDefaults = {
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -25,15 +27,16 @@ const baseConfig: CreateAxiosDefaults = {
 const apiClient = axios.create(baseConfig);
 const authApiClient = axios.create(baseConfig);
 
-authApiClient.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${useTokenStore.getState().accessToken}`;
+authApiClient.interceptors.request.use(
+  async (config: RetryableRequestConfig) => {
+    if (isServer && !config._retry) {
+      const accessToken = await getAccessToken();
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
 
-  return config;
-});
-
-interface RetryableRequestConfig extends InternalAxiosRequestConfig {
-  _retry?: boolean;
-}
+    return config;
+  }
+);
 
 authApiClient.interceptors.response.use(
   response => response,
@@ -62,17 +65,26 @@ authApiClient.interceptors.response.use(
       } else {
         refreshPromise = refreshTokens();
         await refreshPromise;
+
+        if (isServer) {
+          originalRequest.headers.Authorization = `Bearer ${(await refreshPromise).accessToken}`;
+        }
+
         refreshPromise = null;
       }
     } catch {
       refreshPromise = null;
 
-      return await logout();
+      if (!isServer) {
+        await logout();
+      }
+
+      return;
     }
 
-    if (originalRequest.url !== 'user') {
-      return authApiClient(originalRequest);
-    }
+    const response = await authApiClient(originalRequest);
+
+    return response;
   }
 );
 

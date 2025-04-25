@@ -1,7 +1,8 @@
 import { MutationHookOptions } from '@/_shared/model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { logout } from '../../api/service';
+import { logout } from '../../api/requests';
+import { AuthQueryKeys } from '../../model';
 
 const useLogout = (options?: MutationHookOptions<void, AxiosError>) => {
   const { onSuccess, ...rest } = options ?? {};
@@ -10,7 +11,12 @@ const useLogout = (options?: MutationHookOptions<void, AxiosError>) => {
   return useMutation<void, AxiosError>({
     mutationFn: logout,
     onSuccess: async (data, variables, context) => {
-      await queryClient.resetQueries();
+      queryClient.setQueryData([AuthQueryKeys.CURRENT_SESSION], null);
+      await queryClient.resetQueries({
+        predicate: query =>
+          Array.isArray(query.queryKey) &&
+          query.queryKey[0] !== AuthQueryKeys.CURRENT_SESSION,
+      });
 
       onSuccess?.(data, variables, context);
     },

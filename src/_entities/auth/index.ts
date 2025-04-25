@@ -16,4 +16,4 @@ export {
   getCurrentUser,
   logout,
   refreshTokens,
-} from './api/service';
+} from './api/requests';

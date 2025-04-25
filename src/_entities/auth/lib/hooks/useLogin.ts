@@ -1,17 +1,27 @@
 import { MutationHookOptions } from '@/_shared/model';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { authorize } from '../../api/service';
-import { AuthMutationKeys, AuthType } from '../../model';
+import { login } from '../../api/requests';
+import { AuthMutationKeys, AuthQueryKeys } from '../../model';
 import { AuthResponse, LoginDto } from '../../model/types';
 
 const useLogin = (
   options?: MutationHookOptions<AuthResponse, AxiosError, LoginDto>
 ) => {
+  const { onSuccess, ...rest } = options ?? {};
+  const queryClient = useQueryClient();
+
   return useMutation<AuthResponse, AxiosError, LoginDto>({
-    mutationFn: dto => authorize(AuthType.LOGIN, dto),
+    mutationFn: login,
     mutationKey: [AuthMutationKeys.LOGIN],
-    ...options,
+    onSuccess: async (data, variables, context) => {
+      await queryClient.invalidateQueries({
+        queryKey: [AuthQueryKeys.CURRENT_SESSION],
+      });
+
+      onSuccess?.(data, variables, context);
+    },
+    ...rest,
   });
 };
 
