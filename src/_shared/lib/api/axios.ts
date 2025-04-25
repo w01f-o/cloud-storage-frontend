@@ -70,7 +70,7 @@ authApiClient.interceptors.response.use(
       return await logout();
     }
 
-    if (originalRequest.url !== 'users') {
+    if (originalRequest.url !== 'user') {
       return authApiClient(originalRequest);
     }
   }

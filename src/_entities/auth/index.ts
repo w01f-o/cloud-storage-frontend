@@ -1,7 +1,8 @@
 export {
   authMiddleware,
-  useAuthorize,
+  useLogin,
   useLogout,
+  useRegister,
   useSession,
   useTokenStore,
 } from './lib';

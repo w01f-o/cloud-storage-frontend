@@ -1,9 +1,9 @@
 import { User } from '@/_entities/user';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { getCurrentUser } from '../../api/service';
 import { AuthQueryKeys } from '../../model';
 import { useTokenStore } from '../stores/token-store';
-import { AxiosError } from 'axios';
 
 type UseSessionReturn =
   | {
@@ -34,5 +34,5 @@ export const useSession: UseSession = () => {
     return { isAuth: true, user };
   }
 
-  return { isAuth: false, user: null, sessionId: null };
+  return { isAuth: false, user: null };
 };

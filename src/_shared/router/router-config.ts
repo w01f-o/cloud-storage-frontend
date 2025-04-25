@@ -86,6 +86,10 @@ export class RouterConfig {
     return this.getProtectedRoutes().map(route => route.path);
   }
 
+  static getAuthPaths(): RoutePaths[] {
+    return [RoutePaths.LOGIN, RoutePaths.REGISTER];
+  }
+
   static getFolderPath(id: string | number): string {
     return `/${this.routes[RoutePaths.FOLDER].path}/${id}`;
   }

@@ -1,4 +1,4 @@
-import messages from '../../../messages/ru.json';
+import messages from '../../../messages/en.json';
 import { formats } from './request';
 import { routing } from './routing';
 

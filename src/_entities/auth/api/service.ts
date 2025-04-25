@@ -38,7 +38,7 @@ const refreshTokens = async (): Promise<void> => {
 };
 
 const getCurrentUser = async ({ signal }: RequestOptions): Promise<User> => {
-  const { data } = await authApiClient.get<User>('users', { signal });
+  const { data } = await authApiClient.get<User>('user', { signal });
 
   return data;
 };

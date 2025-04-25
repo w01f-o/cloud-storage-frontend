@@ -3,6 +3,7 @@
 import { Link } from '@/_shared/i18n';
 import { RoutePaths } from '@/_shared/router';
 import { Button, Heading, IconFullLogo, Text } from '@/_shared/ui';
+import { IconArrowRight } from '@tabler/icons-react';
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
@@ -36,7 +37,12 @@ export const WelcomePage: FC = () => {
           }}
           className='flex-1'
         >
-          <Button as={Link} href={RoutePaths.LOGIN} isFullWidth>
+          <Button
+            as={Link}
+            href={RoutePaths.LOGIN}
+            isFullWidth
+            endContent={<IconArrowRight />}
+          >
             {t('links.login')}
           </Button>
         </motion.div>

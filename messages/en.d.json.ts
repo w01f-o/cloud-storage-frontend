@@ -2,12 +2,6 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  "shared": {
-    "errors": {
-      "unknown": "An unknown error occurred",
-      "requiredField": "This field is required"
-    }
-  },
   "Navbar": {
     "home": "Home",
     "profile": "Profile",
@@ -33,6 +27,7 @@ declare const messages: {
     "labels": {
       "email": "Email",
       "password": "Password",
+      "confirmPassword": "Confirm password",
       "name": "Name",
       "dontHaveAccount": "Don't have an account? <register>Register</register>",
       "alreadyHaveAccount": "Already have an account? <login>Login</login>"
@@ -47,9 +42,14 @@ declare const messages: {
       "logout": "Logout"
     },
     "errors": {
-      "userNotFound": "User not found",
-      "invalidCredentials": "Invalid email or password",
-      "userAlreadyExists": "A user with this email already exists",
+      "server": {
+        "invalidCredentials": "Invalid email or password",
+        "userAlreadyExists": "A user with this email already exists",
+        "unknown": "An unknown error occurred"
+      },
+      "invalidEmail": "Invalid email",
+      "nameMinLength": "Name must be at least {minLength} characters long",
+      "nameMaxLength": "Name must be no more than {maxLength} characters long",
       "passwordMinLength": "Password must be at least {minLength} characters long",
       "passwordMaxLength": "Password must be no more than {maxLength} characters long",
       "passwordsNotMatch": "Passwords do not match"

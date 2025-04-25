@@ -1,1 +1,1 @@
-export { ActivatePage, AuthPage } from './ui';
+export { ActivatePage, LoginPage, RegisterPage } from './ui';

@@ -1,10 +1,4 @@
 {
-  "shared": {
-    "errors": {
-      "unknown": "Произошла неизвестная ошибка",
-      "requiredField": "Поле обязательно для заполнения"
-    }
-  },
   "Navbar": {
     "home": "Главная",
     "profile": "Профиль",
@@ -28,8 +22,9 @@
       "register": "Регистрация"
     },
     "labels": {
-      "email": "Электронная почта",
+      "email": "Email",
       "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
       "name": "Имя",
       "dontHaveAccount": "Нет аккаунта? <register>Зарегистрироваться</register>",
       "alreadyHaveAccount": "Уже есть аккаунт? <login>Войти</login>"
@@ -44,11 +39,16 @@
       "logout": "Выйти"
     },
     "errors": {
-      "userNotFound": "Пользователь не найден",
-      "invalidCredentials": "Введён неверный логин или пароль",
-      "userAlreadyExists": "Пользователь с таким логином уже существует",
-      "passwordMinLength": "Пароль должен быть не менее {minLength} символов",
-      "passwordMaxLength": "Пароль должен быть не более {maxLength} символов",
+      "server": {
+        "invalidCredentials": "Введён неверный логин или пароль",
+        "userAlreadyExists": "Пользователь с таким логином уже существует",
+        "unknown": "Произошла неизвестная ошибка"
+      },
+      "invalidEmail": "Некорректная электронная почта",
+      "nameMinLength": "Имя должно быть длиною не менее {minLength} символов",
+      "nameMaxLength": "Имя должно быть длиною не более {maxLength} символов",
+      "passwordMinLength": "Пароль должен быть длиною не менее {minLength} символов",
+      "passwordMaxLength": "Пароль должен быть длиною не более {maxLength} символов",
       "passwordsNotMatch": "Пароли не совпадают"
     }
   },

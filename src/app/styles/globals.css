@@ -8,7 +8,8 @@
   --color-content: #ffffff;
   --color-default: #1b1d28;
   --color-primary: #567df4;
-  --color-danger: #f87070;
+  --color-danger: #e65858;
+  --color-danger-50: #6a1c1c;
   --color-warning: #ffbf00;
   --color-success: #afe1af;
   --color-secondary: #d1defc;
@@ -40,6 +41,7 @@
   --color-secondary: var(--color-secondary);
   --color-success: var(--color-success);
   --color-danger: var(--color-danger);
+  --color-danger-50: var(--color-danger-50);
   --color-warning: var(--color-warning);
   --color-skeleton: var(--color-skeleton);
   --color-skeleton-highlight: var(--color-skeleton-highlight);

@@ -61,9 +61,9 @@ export const buttonVariants = tv({
       ghost: 'bg-transparent',
     },
     size: {
-      sm: 'h-8 min-w-16 px-3',
-      md: 'h-10 min-w-20 px-4',
-      lg: 'h-12 min-w-24 px-6',
+      sm: 'h-8 min-w-24 px-3',
+      md: 'h-10 min-w-28 px-4',
+      lg: 'h-12 min-w-32 px-6',
     },
     isIconOnly: {
       true: 'px-0 min-w-0',
@@ -118,7 +118,7 @@ export const buttonVariants = tv({
   defaultVariants: {
     variant: 'solid',
     color: 'primary',
-    size: 'md',
+    size: 'lg',
     radius: 'md',
   },
 });

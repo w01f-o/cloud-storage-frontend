@@ -3,6 +3,7 @@
 import { Locale, Messages, NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from 'next-themes';
 import { FC, ReactNode } from 'react';
+import { ProtectedRoutesProvider } from './ProtectedRoutesProvider';
 import { TanstackQueryProvider } from './TanstackQueryProvider';
 import { ThemeInCookieProvider } from './ThemeInCookieProvider';
 
@@ -25,7 +26,9 @@ export const RootProvider: FC<RootProviderProps> = ({
     >
       <ThemeProvider enableSystem defaultTheme='light' enableColorScheme>
         <ThemeInCookieProvider>
-          <TanstackQueryProvider>{children}</TanstackQueryProvider>
+          <TanstackQueryProvider>
+            <ProtectedRoutesProvider>{children}</ProtectedRoutesProvider>
+          </TanstackQueryProvider>
         </ThemeInCookieProvider>
       </ThemeProvider>
     </NextIntlClientProvider>
