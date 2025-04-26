@@ -3,7 +3,7 @@ import { apiClient, authApiClient } from '@/_shared/lib';
 import { browserQueryClient } from '@/app/providers/TanstackQueryProvider';
 import { isServer } from '@tanstack/react-query';
 import { RequestOptions } from 'https';
-import { getRefreshToken } from '../lib/get-refresh-token';
+import { getRefreshToken } from '../lib/server/get-refresh-token';
 import { AuthQueryKeys, LoginDto, RegisterDto } from '../model';
 import { AuthResponse } from '../model/types';
 
@@ -40,8 +40,6 @@ export const refreshTokens = async (): Promise<AuthResponse> => {
     `${ENDPOINT}/refresh`,
     isServer ? { refreshToken: await getRefreshToken() } : null
   );
-
-  console.log('client');
 
   return data;
 };

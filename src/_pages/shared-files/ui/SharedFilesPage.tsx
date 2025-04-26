@@ -1,5 +1,5 @@
 import { FC } from 'react';
 
-export const HelpPage: FC = () => {
+export const SharedFilesPage: FC = () => {
   return <></>;
 };

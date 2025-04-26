@@ -5,7 +5,7 @@ import {
   MAX_USER_NAME_LENGTH,
   MIN_PASSWORD_LENGTH,
   MIN_USER_NAME_LENGTH,
-} from './constants';
+} from '../constants';
 
 export const registerSchema = (
   t: ReturnType<typeof createTranslator<Messages, 'AuthPage'>>

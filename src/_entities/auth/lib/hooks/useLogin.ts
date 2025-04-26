@@ -5,7 +5,7 @@ import { login } from '../../api/requests';
 import { AuthMutationKeys, AuthQueryKeys } from '../../model';
 import { AuthResponse, LoginDto } from '../../model/types';
 
-const useLogin = (
+export const useLogin = (
   options?: MutationHookOptions<AuthResponse, AxiosError, LoginDto>
 ) => {
   const { onSuccess, ...rest } = options ?? {};
@@ -24,5 +24,3 @@ const useLogin = (
     ...rest,
   });
 };
-
-export { useLogin };

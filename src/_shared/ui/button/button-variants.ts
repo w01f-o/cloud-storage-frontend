@@ -40,6 +40,7 @@ export const buttonVariants = tv({
     'relative',
     'overflow-hidden',
     'gap-2',
+    'font-semibold',
     'select-none',
     'outline-focus-base',
     'focus-visible:outline-primary',
@@ -61,9 +62,9 @@ export const buttonVariants = tv({
       ghost: 'bg-transparent',
     },
     size: {
-      sm: 'h-8 min-w-24 px-3',
-      md: 'h-10 min-w-28 px-4',
-      lg: 'h-12 min-w-32 px-6',
+      sm: 'h-8 min-w-24 px-3 text-sm',
+      md: 'h-10 min-w-28 px-4 text-md',
+      lg: 'h-12 min-w-32 px-6 text-lg',
     },
     isIconOnly: {
       true: 'px-0 min-w-0',
@@ -118,7 +119,7 @@ export const buttonVariants = tv({
   defaultVariants: {
     variant: 'solid',
     color: 'primary',
-    size: 'lg',
+    size: 'md',
     radius: 'md',
   },
 });

@@ -1,4 +1,4 @@
-import { SharedFilePage } from '@/_pages/shared-file';
+import { SharedFilesPage } from '@/_pages/shared-files';
 import { generatePrefixedPageTitle } from '@/_shared/lib';
 import { Metadata, NextPage } from 'next';
 import { Locale } from 'next-intl';
@@ -22,7 +22,7 @@ export const generateMetadata = async ({
 };
 
 const Page: NextPage = () => {
-  return <SharedFilePage />;
+  return <SharedFilesPage />;
 };
 
 export default Page;

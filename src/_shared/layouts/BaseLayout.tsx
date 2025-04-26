@@ -8,6 +8,8 @@ import {
 } from '@tanstack/react-query';
 import { FC, PropsWithChildren } from 'react';
 import { DesktopOnly, MobileOnly } from '../ui';
+import { PageTitle } from '../ui/page-title/PageTitle';
+import { ScrollContainer } from '../ui/scroll-container/ScrollContainer';
 import { ClientEffects } from './ClientEffects';
 
 export const BaseLayout: FC<PropsWithChildren> = async ({ children }) => {
@@ -27,8 +29,11 @@ export const BaseLayout: FC<PropsWithChildren> = async ({ children }) => {
       <MobileOnly>
         <MobileNavbar />
       </MobileOnly>
-      <main className='bg-background lg:bg-content lg:rounded-content relative h-full flex-grow overflow-hidden px-12 pt-16 pb-7 transition-colors'>
-        {children}
+      <main className='bg-background lg:bg-content lg:rounded-content relative h-full flex-grow overflow-hidden pt-16 pb-7 pl-12 transition-colors'>
+        <PageTitle />
+        <ScrollContainer>
+          <div className='size-full pr-8'>{children}</div>
+        </ScrollContainer>
       </main>
     </HydrationBoundary>
   );

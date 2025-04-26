@@ -5,7 +5,7 @@ import { register } from '../../api/requests';
 import { AuthMutationKeys, AuthQueryKeys } from '../../model';
 import { AuthResponse, RegisterDto } from '../../model/types';
 
-const useRegister = (
+export const useRegister = (
   options?: MutationHookOptions<AuthResponse, AxiosError, RegisterDto>
 ) => {
   const { onSuccess, ...rest } = options ?? {};
@@ -24,5 +24,3 @@ const useRegister = (
     ...rest,
   });
 };
-
-export { useRegister };

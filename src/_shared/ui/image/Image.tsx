@@ -22,7 +22,7 @@ interface ImageProps<T extends ElementType = 'div'> extends HTMLAttributes<T> {
   as?: T;
 }
 
-const Image = <T extends ElementType = 'div'>({
+export const Image = <T extends ElementType = 'div'>({
   src,
   fallbackSrc,
   className,
@@ -66,5 +66,3 @@ const Image = <T extends ElementType = 'div'>({
     </Tag>
   );
 };
-
-export { Image };

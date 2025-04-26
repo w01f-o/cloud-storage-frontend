@@ -1,6 +1,6 @@
 import { createTranslator, Messages } from 'next-intl';
 import { z } from 'zod';
-import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from './constants';
+import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from '../constants';
 
 export const loginSchema = (
   t: ReturnType<typeof createTranslator<Messages, 'AuthPage'>>

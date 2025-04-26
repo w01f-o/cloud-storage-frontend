@@ -1,5 +1,5 @@
 import { AuthErrors, logout, refreshTokens } from '@/_entities/auth';
-import { getAccessToken } from '@/_entities/auth/lib/get-access-token';
+import { getAccessToken } from '@/_entities/auth/lib/server/get-access-token';
 import { AuthResponse } from '@/_entities/auth/model/types';
 import { isServer } from '@tanstack/react-query';
 import axios, {

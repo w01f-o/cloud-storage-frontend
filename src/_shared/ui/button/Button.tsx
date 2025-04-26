@@ -11,7 +11,6 @@ import {
   useMemo,
 } from 'react';
 import { Spinner } from '../spinner';
-import { Text } from '../text';
 import { buttonVariants } from './button-variants';
 import { Ripples } from './ripples';
 
@@ -93,17 +92,11 @@ const Button = <T extends ElementType = 'button'>({
       disabled={isDisabled || isLoading}
       aria-disabled={isDisabled || isLoading}
     >
-      {spinnerPosition === 'start' && isLoading && <Spinner size={size} />}
+      {spinnerPosition === 'start' && isLoading && <Spinner />}
       {startContent}
-      {isIconOnly ? (
-        children
-      ) : (
-        <Text as='span' size={size === 'lg' ? 'lg' : undefined}>
-          {children}
-        </Text>
-      )}
+      {isIconOnly ? children : <span>{children}</span>}
       {endContent}
-      {spinnerPosition === 'end' && isLoading && <Spinner size={size} />}
+      {spinnerPosition === 'end' && isLoading && <Spinner />}
       {!isRipplesDisabled && <Ripples />}
     </Tag>
   );
