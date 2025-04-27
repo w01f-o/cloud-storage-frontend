@@ -22,9 +22,9 @@ import {
   modalContentVariants,
   modalOverlayVariants,
 } from './modal.variants';
-import { ModalContextType, OverflowScroll } from './types/modal.type';
+import type { ModalContext, OverflowScroll } from './types/modal.type';
 
-const ModalContext = createContext<ModalContextType>({} as ModalContextType);
+const ModalContext = createContext<ModalContext>({} as ModalContext);
 
 export const Modal: FC<ModalPrimitive.DialogProps> = ({
   children,

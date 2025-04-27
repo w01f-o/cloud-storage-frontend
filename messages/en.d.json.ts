@@ -59,7 +59,9 @@ declare const messages: {
     "title": "Home"
   },
   "ProfilePage": {
-    "title": "Profile"
+    "title": "Profile",
+    "lastUpdatedFolders": "Last updated folders",
+    "lastUploadedFiles": "Last uploaded files"
   },
   "StoragePage": {
     "title": "My storage"
@@ -68,7 +70,22 @@ declare const messages: {
     "title": "Shared files"
   },
   "SettingsPage": {
-    "title": "Settings"
+    "title": "Settings",
+    "tabs": {
+      "general": "General",
+      "account": "Account",
+      "appearance": "Appearance"
+    },
+    "account": {
+      "changeUserName": "Change name",
+      "changeUserEmail": "Change email",
+      "changeUserPassword": "Change password",
+      "save": "Save",
+      "errors": {
+        "nameMinLength": "Name must be at least {minLength} characters long",
+        "nameMaxLength": "Name must be no more than {maxLength} characters long"
+      }
+    }
   },
   "HelpPage": {
     "title": "Help"

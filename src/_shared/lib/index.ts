@@ -6,4 +6,12 @@ export type { ApiError, RequestOptions } from './api';
 
 export { useBodyRef } from './hooks';
 
+export {
+  fetchInfiniteQueryOptionsFactory,
+  fetchQueryOptionsFactory,
+  infiniteQueryHookFactory,
+  queryHookFactory,
+  suspenseInfiniteQueryHookFactory,
+  suspenseQueryHookFactory,
+} from './query';
 export { generatePrefixedPageTitle } from './utils';

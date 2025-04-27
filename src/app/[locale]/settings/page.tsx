@@ -21,7 +21,7 @@ export const generateMetadata = async ({
   };
 };
 
-const Page: NextPage = () => {
+const Page: NextPage<PageProps> = async () => {
   return <SettingsPage />;
 };
 

@@ -18,13 +18,13 @@ import {
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id' | 'size'> {
-  label: string;
+  label?: string;
   isRequired?: boolean;
   isFullWidth?: boolean;
   isInvalid?: boolean;
   errorMessage?: string;
   size?: 'sm' | 'md' | 'lg';
-  ref: Ref<HTMLInputElement>;
+  ref?: Ref<HTMLInputElement>;
 }
 
 export const Input: FC<InputProps> = ({

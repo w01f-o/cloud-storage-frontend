@@ -1,4 +1,3 @@
 export {} from './lib';
 
-export { UserQueryKeys } from './model';
-export type { User } from './model';
+export type { User } from './model/types/user.type';

@@ -19,5 +19,5 @@ export const skeletonVariants = tv({
 });
 
 export const skeletonWrapperVariants = tv({
-  base: 'relative inline-block size-full',
+  base: 'relative inline-flex size-full',
 });

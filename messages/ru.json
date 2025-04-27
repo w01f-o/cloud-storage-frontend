@@ -56,7 +56,9 @@
     "title": "Главная"
   },
   "ProfilePage": {
-    "title": "Профиль"
+    "title": "Профиль",
+    "lastUpdatedFolders": "Последние обновленные папки",
+    "lastUploadedFiles": "Последние загруженные файлы"
   },
   "StoragePage": {
     "title": "Моё хранилище"
@@ -65,7 +67,22 @@
     "title": "Общие файлы"
   },
   "SettingsPage": {
-    "title": "Настройки"
+    "title": "Настройки",
+    "tabs": {
+      "general": "Общие",
+      "account": "Аккаунт",
+      "appearance": "Внешний вид"
+    },
+    "account": {
+      "changeUserName": "Изменить имя",
+      "changeUserEmail": "Изменить электронную почту",
+      "changeUserPassword": "Изменить пароль",
+      "save": "Сохранить",
+      "errors": {
+        "nameMinLength": "Имя должно быть длиною не менее {minLength} символов",
+        "nameMaxLength": "Имя должно быть длиною не более {maxLength} символов"
+      }
+    }
   },
   "HelpPage": {
     "title": "Помощь"

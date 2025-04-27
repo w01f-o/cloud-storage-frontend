@@ -1,44 +1,38 @@
-import { ThemeSwitcher } from '@/_features/theme';
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalClose,
-  ModalContent,
-  ModalDescription,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  ModalTrigger,
-} from '@/_shared/ui';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/_shared/ui';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import { TabsValue } from '../model/enums/tabs-value.enum';
+import { AccountSettings } from './general-settings/AccountSettings';
+import { AppearanceSettings } from './general-settings/AppearanceSettings';
+import { GeneralSettings } from './general-settings/GeneralSettings';
 
 export const SettingsPage: FC = () => {
+  const t = useTranslations('SettingsPage');
+
   return (
-    <>
-      <ThemeSwitcher />
-      <Modal>
-        <ModalTrigger asChild>
-          <Button>Open Modal</Button>
-        </ModalTrigger>
-        <ModalContent>
-          <ModalHeader>
-            <ModalTitle>Modal title</ModalTitle>
-            <ModalDescription>Description</ModalDescription>
-          </ModalHeader>
-          <ModalBody>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            laborum aliquid rerum est sapiente eius, molestias beatae, iure
-            maiores quos quidem dolore quae impedit nihil vero provident
-            reiciendis culpa quibusdam!
-          </ModalBody>
-          <ModalFooter>
-            <ModalClose asChild>
-              <Button>Close</Button>
-            </ModalClose>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+    <div className='pt-6'>
+      <Tabs defaultValue={TabsValue.ACCOUNT}>
+        <TabsList className='mb-4'>
+          <TabsTrigger value={TabsValue.GENERAL}>
+            {t('tabs.general')}
+          </TabsTrigger>
+          <TabsTrigger value={TabsValue.ACCOUNT}>
+            {t('tabs.account')}
+          </TabsTrigger>
+          <TabsTrigger value={TabsValue.APPEARANCE}>
+            {t('tabs.appearance')}
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value={TabsValue.GENERAL}>
+          <GeneralSettings />
+        </TabsContent>
+        <TabsContent value={TabsValue.ACCOUNT}>
+          <AccountSettings />
+        </TabsContent>
+        <TabsContent value={TabsValue.APPEARANCE}>
+          <AppearanceSettings />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 };

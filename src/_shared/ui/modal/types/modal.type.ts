@@ -1,6 +1,6 @@
 export type OverflowScroll = 'inside' | 'outside';
 
-export interface ModalContextType {
+export interface ModalContext {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 

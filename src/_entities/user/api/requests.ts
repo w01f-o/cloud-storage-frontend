@@ -1,13 +1,24 @@
-import { apiClient } from '@/_shared/lib';
-import { User } from '../model';
-import { UpdateUserDto } from '../model/types/user.type';
+import { authApiClient } from '@/_shared/lib';
+import { UpdateUserDto, User } from '../model/types/user.type';
 
-const ENDPOINT = '/users';
+const ENDPOINT: string = '/user';
 
-const updateUser = async (dto: UpdateUserDto) => {
-  const { data } = await apiClient.patch<User>(ENDPOINT, dto);
+export const updateUser = async (dto: UpdateUserDto) => {
+  const formData = new FormData();
+
+  Object.entries(dto).forEach(([key, value]) => {
+    console.log(key, value);
+
+    formData.append(key, value);
+  });
+
+  const { data } = await authApiClient.patch<User>(ENDPOINT, formData);
 
   return data;
 };
 
-export { updateUser };
+export const deleteUser = async () => {
+  const { data } = await authApiClient.delete<User>(ENDPOINT);
+
+  return data;
+};
