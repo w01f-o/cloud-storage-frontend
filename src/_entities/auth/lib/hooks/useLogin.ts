@@ -6,7 +6,7 @@ import { AuthMutationKeys, AuthQueryKeys } from '../../model';
 import { AuthResponse, LoginDto } from '../../model/types';
 
 export const useLogin = (
-  options?: MutationHookOptions<AuthResponse, AxiosError, LoginDto>
+  options?: MutationHookOptions<AuthResponse, LoginDto, AxiosError>
 ) => {
   const { onSuccess, ...rest } = options ?? {};
   const queryClient = useQueryClient();

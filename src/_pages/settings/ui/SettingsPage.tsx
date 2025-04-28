@@ -1,35 +1,43 @@
+import { Link } from '@/_shared/i18n';
+import { RoutePaths } from '@/_shared/router';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { TabsValue } from '../model/enums/tabs-value.enum';
-import { AccountSettings } from './general-settings/AccountSettings';
-import { AppearanceSettings } from './general-settings/AppearanceSettings';
+import { SettingsTabValue } from '../model/enums/tabs-value.enum';
+import { AccountSettings } from './account-settings/AccountSettings';
+import { AppearanceSettings } from './appearance-settings/AppearanceSettings';
 import { GeneralSettings } from './general-settings/GeneralSettings';
 
-export const SettingsPage: FC = () => {
+interface SettingsPageProps {
+  tabValue: SettingsTabValue;
+}
+
+export const SettingsPage: FC<SettingsPageProps> = ({ tabValue }) => {
   const t = useTranslations('SettingsPage');
 
   return (
     <div className='pt-6'>
-      <Tabs defaultValue={TabsValue.ACCOUNT}>
+      <Tabs value={tabValue}>
         <TabsList className='mb-4'>
-          <TabsTrigger value={TabsValue.GENERAL}>
-            {t('tabs.general')}
+          <TabsTrigger value={SettingsTabValue.GENERAL}>
+            <Link href={RoutePaths.SETTINGS_GENERAL}>{t('tabs.general')}</Link>
           </TabsTrigger>
-          <TabsTrigger value={TabsValue.ACCOUNT}>
-            {t('tabs.account')}
+          <TabsTrigger value={SettingsTabValue.ACCOUNT}>
+            <Link href={RoutePaths.SETTINGS_ACCOUNT}>{t('tabs.account')}</Link>
           </TabsTrigger>
-          <TabsTrigger value={TabsValue.APPEARANCE}>
-            {t('tabs.appearance')}
+          <TabsTrigger value={SettingsTabValue.APPEARANCE}>
+            <Link href={RoutePaths.SETTINGS_APPEARANCE}>
+              {t('tabs.appearance')}
+            </Link>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value={TabsValue.GENERAL}>
+        <TabsContent value={SettingsTabValue.GENERAL}>
           <GeneralSettings />
         </TabsContent>
-        <TabsContent value={TabsValue.ACCOUNT}>
+        <TabsContent value={SettingsTabValue.ACCOUNT}>
           <AccountSettings />
         </TabsContent>
-        <TabsContent value={TabsValue.APPEARANCE}>
+        <TabsContent value={SettingsTabValue.APPEARANCE}>
           <AppearanceSettings />
         </TabsContent>
       </Tabs>

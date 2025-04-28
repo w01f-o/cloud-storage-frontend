@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useShallow } from 'zustand/react/shallow';
 import { uploadFile } from '../../api/requests';
-import { MutationFileKeys } from '../../model/enums/mutation-keys.enum';
+import { FileMutationKeys } from '../../model/enums/mutation-keys.enum';
 import { File as FileEntity } from '../../model/types/file.type';
 import { useUploadFileProgresses } from '../stores/upload-progresses-store';
 import { cancelFileListQueries } from '../utils/cancelFileListQueries';
@@ -40,7 +40,7 @@ export const useUploadFile = (
         },
       });
     },
-    mutationKey: [MutationFileKeys.UPLOAD],
+    mutationKey: [FileMutationKeys.UPLOAD],
     onMutate: async ({ file, id }) => {
       addFile({ name: file.name, id, abortController: new AbortController() });
       await cancelFileListQueries(queryClient);

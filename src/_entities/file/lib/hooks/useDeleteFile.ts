@@ -2,12 +2,12 @@ import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { deleteFile } from '../../api/requests';
-import { MutationFileKeys } from '../../model/enums/mutation-keys.enum';
 import { FileQueryKeys } from '../../model/enums/query-keys.enum';
 import { File } from '../../model/types/file.type';
 import { cancelFileListQueries } from '../utils/cancelFileListQueries';
 import { cancelFileQueries } from '../utils/cancelFileQueries';
 import { invalidateFileListQueries } from '../utils/invalidateFileListQueries';
+import { FileMutationKeys } from '../../model/enums/mutation-keys.enum';
 
 export const useDeleteFile = (
   options: MutationHookOptions<File, string, AxiosError>
@@ -17,7 +17,7 @@ export const useDeleteFile = (
 
   return useMutation<File, AxiosError, string>({
     mutationFn: deleteFile,
-    mutationKey: [MutationFileKeys.DELETE],
+    mutationKey: [FileMutationKeys.DELETE],
     onMutate: async id => {
       await Promise.all([
         cancelFileListQueries(queryClient),

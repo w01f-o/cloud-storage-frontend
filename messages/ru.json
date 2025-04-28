@@ -5,6 +5,9 @@
     "storage": "Хранилище",
     "shared": "Общие файлы",
     "settings": "Настройки",
+    "settingsGeneral": "Основные настройки",
+    "settingsAccount": "Настройки аккаунта",
+    "settingsAppearance": "Настройки внешнего вида",
     "help": "Помощь"
   },
   "WelcomePage": {

@@ -4,10 +4,10 @@ export {
   AccordionItem,
   AccordionTrigger,
 } from './accordion';
+export { FadeIn, FadeInOut } from './animations';
 export { Avatar } from './avatar';
 export { Button } from './button';
 export { Caption } from './caption';
-export { FadeInOut } from './fade-in-out';
 export { Heading } from './heading';
 export { IconCloud, IconFullLogo } from './icons';
 export { Image } from './image';

@@ -1,4 +1,4 @@
-export const enum TabsValue {
+export enum SettingsTabValue {
   ACCOUNT = 'account',
   APPEARANCE = 'appearance',
   GENERAL = 'general',

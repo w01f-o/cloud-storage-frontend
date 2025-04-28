@@ -7,8 +7,8 @@ import axios, {
   InternalAxiosRequestConfig,
   isAxiosError,
 } from 'axios';
-import { catchApiError } from './catch-api-error';
 import { HttpStatus } from './enums/http-status.enum';
+import { catchApiError } from './helpers';
 
 interface RetryableRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;

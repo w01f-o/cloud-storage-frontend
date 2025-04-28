@@ -2,6 +2,7 @@
 
 import { useSession } from '@/_entities/auth';
 import { Link } from '@/_shared/i18n';
+import { getApiStaticUrl } from '@/_shared/lib';
 import { RoutePaths } from '@/_shared/router';
 import { Avatar, Caption, Heading } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
@@ -32,7 +33,10 @@ export const CurrentUser: FC = () => {
       href={RoutePaths.PROFILE}
       className='flex w-full items-center gap-2.5 pr-7 pl-5'
     >
-      <Avatar src={user?.avatar ?? null} size='default' />
+      <Avatar
+        src={user?.avatar ? getApiStaticUrl(user.avatar) : null}
+        size='default'
+      />
       <div className='flex w-0 flex-1 flex-col'>
         <Heading size='default' className='truncate'>
           {user.name}

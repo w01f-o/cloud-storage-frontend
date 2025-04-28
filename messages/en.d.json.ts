@@ -8,6 +8,9 @@ declare const messages: {
     "storage": "Storage",
     "shared": "Shared files",
     "settings": "Settings",
+    "settingsGeneral": "General settings",
+    "settingsAccount": "Account settings",
+    "settingsAppearance": "Appearance settings",
     "help": "Help"
   },
   "WelcomePage": {

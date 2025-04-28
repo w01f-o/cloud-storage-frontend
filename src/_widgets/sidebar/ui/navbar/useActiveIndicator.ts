@@ -76,7 +76,7 @@ export const useActiveIndicator = ({
 
   useIsomorphicLayoutEffect(() => {
     updateIndicatorPosition();
-  }, [updateIndicatorPosition, pathname]);
+  }, [pathname]);
 
   return {
     activeIndicatorStyles,

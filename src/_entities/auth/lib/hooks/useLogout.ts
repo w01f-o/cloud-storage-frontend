@@ -4,7 +4,9 @@ import { AxiosError } from 'axios';
 import { logout } from '../../api/requests';
 import { AuthQueryKeys } from '../../model';
 
-export const useLogout = (options?: MutationHookOptions<void, AxiosError>) => {
+export const useLogout = (
+  options?: MutationHookOptions<void, void, AxiosError>
+) => {
   const { onSuccess, ...rest } = options ?? {};
   const queryClient = useQueryClient();
 

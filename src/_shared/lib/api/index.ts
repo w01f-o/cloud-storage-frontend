@@ -1,4 +1,4 @@
 export { apiClient, authApiClient } from './axios';
-export { catchApiError } from './catch-api-error';
 export { HttpStatus } from './enums/http-status.enum';
+export { catchApiError, getApiStaticUrl } from './helpers';
 export type { ApiError, RequestOptions } from './types';

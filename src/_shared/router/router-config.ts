@@ -33,9 +33,24 @@ export class RouterConfig {
       showInNavbar: true,
     },
     [RoutePaths.SETTINGS]: {
-      path: RoutePaths.SETTINGS,
+      path: RoutePaths.SETTINGS_GENERAL,
       name: 'settings',
       showInNavbar: true,
+    },
+    [RoutePaths.SETTINGS_GENERAL]: {
+      path: RoutePaths.SETTINGS_GENERAL,
+      name: 'settingsGeneral',
+      showInNavbar: false,
+    },
+    [RoutePaths.SETTINGS_ACCOUNT]: {
+      path: RoutePaths.SETTINGS_ACCOUNT,
+      name: 'settingsAccount',
+      showInNavbar: false,
+    },
+    [RoutePaths.SETTINGS_APPEARANCE]: {
+      path: RoutePaths.SETTINGS_APPEARANCE,
+      name: 'settingsAppearance',
+      showInNavbar: false,
     },
     [RoutePaths.HELP]: {
       path: RoutePaths.HELP,
@@ -87,7 +102,7 @@ export class RouterConfig {
   }
 
   static getAuthPaths(): RoutePaths[] {
-    return [RoutePaths.LOGIN, RoutePaths.REGISTER];
+    return [RoutePaths.LOGIN, RoutePaths.REGISTER, RoutePaths.WELCOME];
   }
 
   static getFolderPath(id: string | number): string {

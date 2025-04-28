@@ -8,10 +8,7 @@ export const useFileList = queryHookFactory<
   PaginatedResult<File>,
   Partial<PaginationOptions<File>>
 >({
-  queryKey: ({ ...paginationOptions }) => [
-    FileQueryKeys.LIST,
-    paginationOptions,
-  ],
-  queryFn: ({ ...paginationOptions }, { signal }) =>
+  queryKey: paginationOptions => [FileQueryKeys.LIST, paginationOptions],
+  queryFn: (paginationOptions, { signal }) =>
     getFiles(paginationOptions, { signal }),
 });

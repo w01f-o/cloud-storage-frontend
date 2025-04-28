@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from '@/_entities/auth';
+import { getApiStaticUrl } from '@/_shared/lib';
 import { Avatar, Heading, Text } from '@/_shared/ui';
 import { FC } from 'react';
 import { LastUpdatedFolders } from './LastUpdatedFolders';
@@ -12,7 +13,10 @@ export const ProfilePage: FC = () => {
   return (
     <>
       <div className='flex flex-col items-center gap-2.5 pt-10 pb-4'>
-        <Avatar src={user!.avatar} size='large' />
+        <Avatar
+          src={user?.avatar ? getApiStaticUrl(user.avatar) : null}
+          size='large'
+        />
         <Heading size='xl' as='h2'>
           {user!.name}
         </Heading>

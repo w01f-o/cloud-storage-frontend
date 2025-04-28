@@ -12,3 +12,5 @@ export interface File {
   folderId: string;
   createdAt: Date;
 }
+
+export type UpdateFileDto = Partial<Pick<File, 'displayName'>>;

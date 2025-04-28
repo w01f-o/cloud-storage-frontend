@@ -1,7 +1,6 @@
 import { authApiClient, RequestOptions } from '@/_shared/lib';
 import { PaginatedResult, PaginationOptions } from '@/_shared/model';
-import { File as FileEntity } from '../model/types/file.type';
-import { UpdateFileDto } from '../model/types/update-file.dto';
+import { File as FileEntity, UpdateFileDto } from '../model/types/file.type';
 
 const ENDPOINT: string = '/files';
 

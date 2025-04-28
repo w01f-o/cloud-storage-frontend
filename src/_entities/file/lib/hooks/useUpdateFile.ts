@@ -2,10 +2,9 @@ import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { updateFile } from '../../api/requests';
-import { MutationFileKeys } from '../../model/enums/mutation-keys.enum';
+import { FileMutationKeys } from '../../model/enums/mutation-keys.enum';
 import { FileQueryKeys } from '../../model/enums/query-keys.enum';
-import { File } from '../../model/types/file.type';
-import { UpdateFileDto } from '../../model/types/update-file.dto';
+import { File, UpdateFileDto } from '../../model/types/file.type';
 import { cancelFileListQueries } from '../utils/cancelFileListQueries';
 import { cancelFileQueries } from '../utils/cancelFileQueries';
 import { invalidateFileListQueries } from '../utils/invalidateFileListQueries';
@@ -23,7 +22,7 @@ export const useUpdateFile = (
 
   return useMutation<File, AxiosError, { id: string; data: UpdateFileDto }>({
     mutationFn: ({ id, data }) => updateFile(id, data),
-    mutationKey: [MutationFileKeys.UPDATE],
+    mutationKey: [FileMutationKeys.UPDATE],
     onMutate: async ({ id, data }) => {
       await Promise.all([
         cancelFileListQueries(queryClient),

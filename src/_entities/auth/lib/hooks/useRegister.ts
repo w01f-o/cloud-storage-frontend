@@ -6,7 +6,7 @@ import { AuthMutationKeys, AuthQueryKeys } from '../../model';
 import { AuthResponse, RegisterDto } from '../../model/types';
 
 export const useRegister = (
-  options?: MutationHookOptions<AuthResponse, AxiosError, RegisterDto>
+  options?: MutationHookOptions<AuthResponse, RegisterDto, AxiosError>
 ) => {
   const { onSuccess, ...rest } = options ?? {};
   const queryClient = useQueryClient();
