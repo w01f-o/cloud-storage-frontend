@@ -1,4 +1,4 @@
-import { AuthQueryKeys, getCurrentUser } from '@/_entities/auth';
+import { getSessionQueryOptions } from '@/_entities/auth';
 import { MobileNavbar } from '@/_widgets/mobile-navbar/ui/MobileNavbar';
 import { Sidebar } from '@/_widgets/sidebar';
 import {
@@ -15,10 +15,7 @@ import { ClientEffects } from './ClientEffects';
 export const BaseLayout: FC<PropsWithChildren> = async ({ children }) => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: [AuthQueryKeys.CURRENT_SESSION],
-    queryFn: ({ signal }) => getCurrentUser({ signal }),
-  });
+  await queryClient.prefetchQuery(getSessionQueryOptions());
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

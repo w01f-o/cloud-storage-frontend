@@ -70,6 +70,11 @@ export class RouterConfig {
       requiresAuth: true,
       showInNavbar: false,
     },
+    [RoutePaths.ACTIVATE]: {
+      path: RoutePaths.ACTIVATE,
+      requiresAuth: true,
+      showInNavbar: false,
+    },
   } as const;
 
   static getAllRoutes(): Route[] {

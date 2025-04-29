@@ -16,7 +16,7 @@ export const LogoutButton: FC = () => {
     },
   });
 
-  if (!user) return <div></div>;
+  if (!user) return <div className='h-12'></div>;
 
   const clickHandler = () => {
     logout();

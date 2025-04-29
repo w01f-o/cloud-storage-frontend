@@ -12,6 +12,8 @@ export type { ApiError, RequestOptions } from './api';
 
 export { useBodyRef } from './hooks';
 
+export { navigate } from './actions';
+
 export {
   fetchInfiniteQueryOptionsFactory,
   fetchQueryOptionsFactory,

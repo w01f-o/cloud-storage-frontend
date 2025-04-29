@@ -1,6 +1,13 @@
-import { AuthErrors, logout, refreshTokens } from '@/_entities/auth';
-import { getAccessToken } from '@/_entities/auth/lib/server/get-access-token';
-import { AuthResponse } from '@/_entities/auth/model/types';
+import {
+  AuthErrors,
+  AuthResponse,
+  getAccessToken,
+  logout,
+  refreshTokens,
+} from '@/_entities/auth';
+import { navigate } from '@/_shared/lib';
+import { RoutePaths } from '@/_shared/router';
+import { browserQueryClient } from '@/app/providers/TanstackQueryProvider';
 import { isServer } from '@tanstack/react-query';
 import axios, {
   CreateAxiosDefaults,
@@ -77,6 +84,10 @@ authApiClient.interceptors.response.use(
 
       if (!isServer) {
         await logout();
+
+        browserQueryClient?.resetQueries();
+
+        await navigate(RoutePaths.WELCOME);
       }
 
       return;

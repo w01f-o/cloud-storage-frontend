@@ -9,5 +9,6 @@ export {
 } from './lib';
 
 export { getCurrentUser, logout, refreshTokens } from './api/requests';
+export { getSessionQueryOptions } from './config/query-options/getSessionQueryOptions';
 export { AuthErrors, AuthMutationKeys, AuthQueryKeys, AuthType } from './model';
-export type { LoginDto, RegisterDto } from './model';
+export type { AuthResponse, LoginDto, RegisterDto } from './model';

@@ -7,8 +7,6 @@ export const updateUser = async (dto: UpdateUserDto) => {
   const formData = new FormData();
 
   Object.entries(dto).forEach(([key, value]) => {
-    console.log(key, value);
-
     formData.append(key, value);
   });
 

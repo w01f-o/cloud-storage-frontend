@@ -33,7 +33,7 @@ const initialState: UploadFileProgressesState = {
 
 export const useUploadFileProgresses = create<UploadFileProgressesStore>()(
   devtools(
-    immer(set => ({
+    immer((set, get) => ({
       ...initialState,
       addFile: file => {
         set(state => {
@@ -62,12 +62,8 @@ export const useUploadFileProgresses = create<UploadFileProgressesStore>()(
         });
       },
       abortUpload: id => {
-        set(state => {
-          const file = state.files.find(file => file.id === id);
-          if (file?.abortController) {
-            file.abortController.abort();
-          }
-        });
+        const file = get().files.find(file => file.id === id);
+        file?.abortController?.abort();
       },
     })),
     { name: 'upload-file-progresses' }

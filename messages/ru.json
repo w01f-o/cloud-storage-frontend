@@ -22,7 +22,8 @@
   "AuthPage": {
     "title": {
       "login": "Вход",
-      "register": "Регистрация"
+      "register": "Регистрация",
+      "activate": "Активация аккаунта"
     },
     "labels": {
       "email": "Email",

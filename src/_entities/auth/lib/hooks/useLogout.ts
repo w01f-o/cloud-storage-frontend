@@ -9,6 +9,7 @@ export const useLogout = (
 ) => {
   const { onSuccess, ...rest } = options ?? {};
   const queryClient = useQueryClient();
+  // const router = useRouter();
 
   return useMutation<void, AxiosError>({
     mutationFn: logout,
@@ -19,6 +20,7 @@ export const useLogout = (
           Array.isArray(query.queryKey) &&
           query.queryKey[0] !== AuthQueryKeys.CURRENT_SESSION,
       });
+      // router.replace(RoutePaths.WELCOME);
 
       onSuccess?.(data, variables, context);
     },

@@ -9,6 +9,7 @@ export const enum RoutePaths {
   SETTINGS_ACCOUNT = '/settings/account',
   SETTINGS_APPEARANCE = '/settings/appearance',
   HELP = '/help',
+  ACTIVATE = '/auth/activate',
   LOGIN = '/auth/login',
   REGISTER = '/auth/register',
   FOLDER = '/folder',

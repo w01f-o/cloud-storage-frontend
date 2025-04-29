@@ -25,7 +25,8 @@ declare const messages: {
   "AuthPage": {
     "title": {
       "login": "Login",
-      "register": "Register"
+      "register": "Register",
+      "activate": "Activation"
     },
     "labels": {
       "email": "Email",

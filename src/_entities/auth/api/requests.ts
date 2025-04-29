@@ -1,10 +1,8 @@
 import { User } from '@/_entities/user';
-import { apiClient, authApiClient } from '@/_shared/lib';
-import { browserQueryClient } from '@/app/providers/TanstackQueryProvider';
+import { apiClient, authApiClient, RequestOptions } from '@/_shared/lib';
 import { isServer } from '@tanstack/react-query';
-import { RequestOptions } from 'https';
-import { getRefreshToken } from '../lib/server/get-refresh-token';
-import { AuthQueryKeys, LoginDto, RegisterDto } from '../model';
+import { getRefreshToken } from '../lib';
+import { LoginDto, RegisterDto } from '../model';
 import { AuthResponse } from '../model/types';
 
 const ENDPOINT: string = '/auth';
@@ -26,13 +24,6 @@ export const register = async (dto: RegisterDto): Promise<AuthResponse> => {
 
 export const logout = async (): Promise<void> => {
   await apiClient.post<AuthResponse>(`${ENDPOINT}/logout`);
-
-  browserQueryClient?.setQueryData([AuthQueryKeys.CURRENT_SESSION], null);
-  browserQueryClient?.resetQueries({
-    predicate: query =>
-      Array.isArray(query.queryKey) &&
-      query.queryKey[0] !== AuthQueryKeys.CURRENT_SESSION,
-  });
 };
 
 export const refreshTokens = async (): Promise<AuthResponse> => {

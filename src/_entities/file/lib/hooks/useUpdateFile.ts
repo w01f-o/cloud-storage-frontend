@@ -27,9 +27,6 @@ export const useUpdateFile = (
       await Promise.all([
         cancelFileListQueries(queryClient),
         cancelFileQueries(queryClient, id),
-        queryClient.removeQueries({
-          queryKey: [FileQueryKeys.FIND_ONE, id],
-        }),
       ]);
 
       const previousFileList = queryClient.getQueriesData<

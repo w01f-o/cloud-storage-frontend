@@ -7,14 +7,8 @@ import { useChangeUserNameForm } from '../model/hooks/useChangeUserNameForm';
 
 export const ChangeUserNameForm: FC = () => {
   const t = useTranslations('SettingsPage.account');
-  const {
-    buttonIsVisible,
-    errors,
-    register,
-    submitHandler,
-    isPending,
-    currentName,
-  } = useChangeUserNameForm();
+  const { buttonIsVisible, errors, register, submitHandler, currentName } =
+    useChangeUserNameForm();
 
   return (
     <form className='flex gap-2' onSubmit={submitHandler}>
@@ -25,9 +19,7 @@ export const ChangeUserNameForm: FC = () => {
         defaultValue={currentName}
       />
       <FadeInOut isVisible={buttonIsVisible}>
-        <Button className='mt-1' isLoading={isPending}>
-          {t('save')}
-        </Button>
+        <Button className='mt-1'>{t('save')}</Button>
       </FadeInOut>
     </form>
   );

@@ -1,6 +1,6 @@
+import { LogoutButton } from '@/_features/logout-button';
 import { FC } from 'react';
 import { CurrentUser } from './current-user/CurrentUser';
-import { LogoutButton } from './logout-button/LogoutButton';
 import { Navbar } from './navbar/Navbar';
 
 export const Sidebar: FC = () => {
