@@ -1,9 +1,9 @@
 'use client';
 
-import { FolderList, FolderListLoader } from '@/_entities/folder';
 import { useInfiniteFolderList } from '@/_entities/folder/lib/hooks/useInfiniteFolderList';
 import { FoldersSearchField } from '@/_features/folders-search';
 import { useInfiniteScroll } from '@/_shared/lib/hooks/useInfiniteScroll';
+import { FolderList, FolderListLoader } from '@/_widgets/folder';
 import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
@@ -25,7 +25,6 @@ export const HomePage: FC = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-    rootMargin: '200px',
   });
 
   return (
@@ -33,9 +32,8 @@ export const HomePage: FC = () => {
       <div className='pt-6 pb-4'>
         <FoldersSearchField />
       </div>
-      {isSuccess && <FolderList folders={folders} />}
+      {isSuccess && <FolderList folders={folders} cursorRef={cursorRef} />}
       {(isFetchingNextPage || isLoading) && <FolderListLoader />}
-      <div ref={cursorRef} className='h-2 w-full'></div>
     </>
   );
 };

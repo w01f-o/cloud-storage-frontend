@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { InfiniteQueryObserverResult } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
 import { useIntersectionObserver } from 'usehooks-ts';
 
 interface UseInfiniteScrollProps {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
-  fetchNextPage: () => void;
+  fetchNextPage: () => Promise<InfiniteQueryObserverResult<unknown[], unknown>>;
   threshold?: number;
-  rootMargin?: string;
 }
 
 export const useInfiniteScroll = ({
@@ -14,16 +14,26 @@ export const useInfiniteScroll = ({
   isFetchingNextPage,
   fetchNextPage,
   threshold = 0.5,
-  rootMargin,
 }: UseInfiniteScrollProps) => {
+  const lockRef = useRef(false);
+
   const { isIntersecting, ref } = useIntersectionObserver({
     threshold,
-    rootMargin,
   });
 
   useEffect(() => {
-    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
+    if (
+      isIntersecting &&
+      hasNextPage &&
+      !isFetchingNextPage &&
+      !lockRef.current
+    ) {
+      lockRef.current = true;
+      fetchNextPage().finally(() => {
+        setTimeout(() => {
+          lockRef.current = false;
+        }, 500);
+      });
     }
   }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
 

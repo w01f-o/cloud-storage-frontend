@@ -1,3 +1,4 @@
+import { Folder } from '@/_entities/folder';
 import { Link } from '@/_shared/i18n';
 import { adjustSaturation } from '@/_shared/lib';
 import { RouterConfig } from '@/_shared/router';
@@ -17,15 +18,15 @@ import {
   IconFolder,
 } from '@/_shared/ui';
 import { useFormatter } from 'next-intl';
-import { FC, memo } from 'react';
-import { Folder } from '../model/types/folder.type';
+import { FC, memo, Ref } from 'react';
 
 interface FolderItemProps {
   folder: Folder;
+  ref?: Ref<HTMLDivElement>;
 }
 
 export const FolderItem: FC<FolderItemProps> = memo(
-  ({ folder: { color, name, size, updatedAt, id } }) => {
+  ({ folder: { color, name, size, updatedAt, id }, ref }) => {
     const format = useFormatter();
 
     const formattedUpdatedAt = format.dateTime(updatedAt, {
@@ -40,6 +41,7 @@ export const FolderItem: FC<FolderItemProps> = memo(
           <div
             className='flex h-32 w-full flex-col rounded-2xl px-5 pt-6 pb-5 shadow-xs'
             style={{ background: color, color: adjustSaturation(color, 0.8) }}
+            ref={ref}
           >
             <div className='flex flex-grow'>
               <IconFolder color={color} />

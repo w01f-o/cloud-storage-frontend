@@ -6,4 +6,5 @@ export {
   useFolderList,
   useInfiniteFolderList,
 } from './lib';
-export { FolderList, FolderListLoader } from './ui';
+export { FolderMutationKeys, FolderQueryKeys } from './model';
+export type { CreateFolderDto, Folder, UpdateFolderDto } from './model';
