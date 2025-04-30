@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
 const withNextIntl = createNextIntlPlugin({
   requestConfig: './src/_shared/i18n/request.ts',
   experimental: {
-    createMessagesDeclaration: './messages/en.json',
+    createMessagesDeclaration: './src/_shared/i18n/messages/en.json',
   },
 });
 
