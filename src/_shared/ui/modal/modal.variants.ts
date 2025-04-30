@@ -1,11 +1,11 @@
 import { tv } from 'tailwind-variants';
 
 export const modalOverlayVariants = tv({
-  base: 'fixed inset-0 bg-content/50 z-50',
+  base: 'fixed inset-0 z-50',
   variants: {
     backdrop: {
       blurred: 'backdrop-blur-xs',
-      opaque: 'bg-content/50',
+      opaque: 'bg-overlay/40 dark:bg-overlay/60',
       transparent: 'bg-transparent',
     },
   },
@@ -42,10 +42,10 @@ export const modalContentVariants = tv({
     },
     rounded: {
       none: 'rounded-none',
-      sm: 'rounded-sm',
-      md: 'rounded-md',
-      lg: 'rounded-lg',
-      xl: 'rounded-xl',
+      sm: 'rounded-md',
+      md: 'rounded-lg',
+      lg: 'rounded-xl',
+      xl: 'rounded-2xl',
     },
     overflowScroll: {
       inside: 'max-h-[calc(100vh-8rem)] my-16',
@@ -53,7 +53,7 @@ export const modalContentVariants = tv({
     },
   },
   defaultVariants: {
-    rounded: 'md',
+    rounded: 'xl',
     size: 'md',
     overflowScroll: 'inside',
   },

@@ -15,8 +15,6 @@ import {
   useState,
 } from 'react';
 import { tv } from 'tailwind-variants';
-import { Heading } from '../heading';
-import { Text } from '../text';
 import {
   modalBodyVariants,
   modalContentVariants,
@@ -32,25 +30,23 @@ export const Modal: FC<ModalPrimitive.DialogProps> = ({
   defaultOpen = false,
   onOpenChange,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
+  const [innerIsOpen, innerSetIsOpen] = useState<boolean>(defaultOpen);
   const [overflowScroll, setOverflowScroll] =
     useState<OverflowScroll>('inside');
 
-  const handleOpenChange = onOpenChange ?? setIsOpen;
+  const handleOpenChange = onOpenChange ?? innerSetIsOpen;
+  const isOpen = open ?? innerIsOpen;
 
   return (
     <ModalContext.Provider
       value={{
-        isOpen: open ?? isOpen,
+        isOpen,
         overflowScroll,
         setOverflowScroll,
         setIsOpen: handleOpenChange,
       }}
     >
-      <ModalPrimitive.Root
-        open={open ?? isOpen}
-        onOpenChange={handleOpenChange}
-      >
+      <ModalPrimitive.Root open={isOpen} onOpenChange={handleOpenChange}>
         {children}
       </ModalPrimitive.Root>
     </ModalContext.Provider>
@@ -139,7 +135,7 @@ export const ModalContent = forwardRef<
                 {...contentMotionProps}
               >
                 {children}
-                <ModalPrimitive.Close className='absolute top-4 right-4'>
+                <ModalPrimitive.Close className='absolute top-4 right-4 outline-none'>
                   <IconX />
                 </ModalPrimitive.Close>
               </motion.div>
@@ -170,9 +166,7 @@ export const ModalTitle = forwardRef<
 >(({ children, ...props }, ref) => {
   return (
     <ModalPrimitive.Title ref={ref} {...props} asChild>
-      <Heading size='sm' as='div'>
-        {children}
-      </Heading>
+      <div className='text-2xl'>{children}</div>
     </ModalPrimitive.Title>
   );
 });
@@ -189,7 +183,7 @@ export const ModalDescription = forwardRef<
       asChild
       {...props}
     >
-      <Text size='sm'>{children}</Text>
+      <p>{children}</p>
     </ModalPrimitive.Description>
   );
 });
@@ -207,7 +201,7 @@ export const ModalBody: FC<HTMLAttributes<HTMLDivElement>> = ({
       {...props}
       className={modalBodyVariants({ className, overflowScroll })}
     >
-      <Text>{children}</Text>
+      {children}
     </div>
   );
 };

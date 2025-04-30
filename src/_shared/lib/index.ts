@@ -10,7 +10,7 @@ export {
 } from './api';
 export type { ApiError, RequestOptions } from './api';
 
-export { useBodyRef } from './hooks';
+export { useBodyRef, useDisclosure, useInfiniteScroll } from './hooks';
 
 export { navigate } from './actions';
 

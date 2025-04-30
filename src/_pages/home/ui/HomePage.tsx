@@ -1,8 +1,8 @@
 'use client';
 
-import { useInfiniteFolderList } from '@/_entities/folder/lib/hooks/useInfiniteFolderList';
+import { useInfiniteFolderList } from '@/_entities/folder';
 import { FoldersSearchField } from '@/_features/folders-search';
-import { useInfiniteScroll } from '@/_shared/lib/hooks/useInfiniteScroll';
+import { useInfiniteScroll } from '@/_shared/lib';
 import { FolderList, FolderListLoader } from '@/_widgets/folder';
 import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';

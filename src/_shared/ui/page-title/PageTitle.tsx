@@ -53,7 +53,10 @@ export const PageTitle: FC<HTMLAttributes<HTMLHeadingElement>> = ({
 
   return (
     !!title && (
-      <h1 className={tv({ base: 'text-4xl font-bold' })({ className })}>
+      <h1
+        className={tv({ base: 'text-4xl font-bold' })({ className })}
+        {...props}
+      >
         {title}
       </h1>
     )

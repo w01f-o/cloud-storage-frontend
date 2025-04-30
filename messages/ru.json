@@ -90,5 +90,15 @@
   },
   "HelpPage": {
     "title": "Помощь"
+  },
+  "FolderItem": {
+  "contextMenu": {
+    "open": "Открыть",
+    "delete": "Удалить",
+    "properties": "Свойства"
+  },
+  "modal": {
+    "title": "Свойства"
   }
+}
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import { InfiniteQueryObserverResult } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import { useIntersectionObserver } from 'usehooks-ts';

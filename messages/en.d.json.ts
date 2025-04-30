@@ -93,6 +93,16 @@ declare const messages: {
   },
   "HelpPage": {
     "title": "Help"
+  },
+  "FolderItem": {
+    "contextMenu": {
+      "open": "Open",
+      "delete": "Delete",
+      "properties": "Properties"
+    },
+    "modal": {
+      "title": "Properties"
+    }
   }
 };
 export default messages;
