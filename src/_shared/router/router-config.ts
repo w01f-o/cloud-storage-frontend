@@ -107,6 +107,16 @@ export class RouterConfig {
     return this.getProtectedRoutes().map(route => route.path);
   }
 
+  static getNonProtectedPaths(): RoutePaths[] {
+    const isNonProtectedRoute = (
+      route: Route
+    ): route is Route & { requiresAuth: false } => !route.requiresAuth;
+
+    return Object.values(this.routes)
+      .filter(isNonProtectedRoute)
+      .map(route => route.path);
+  }
+
   static getAuthPaths(): RoutePaths[] {
     return [RoutePaths.LOGIN, RoutePaths.REGISTER, RoutePaths.WELCOME];
   }

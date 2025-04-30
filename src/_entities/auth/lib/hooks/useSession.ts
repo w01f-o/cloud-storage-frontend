@@ -15,7 +15,7 @@ export const useSession = () => {
     retry: false,
     staleTime: 0,
     gcTime: Infinity,
-    enabled: !!RouterConfig.getProtectedPaths().includes(
+    enabled: !RouterConfig.getNonProtectedPaths().includes(
       pathname as RoutePaths
     ),
   });

@@ -8,6 +8,22 @@ export { FadeIn, FadeInOut } from './animations';
 export { Avatar } from './avatar';
 export { Button } from './button';
 export { Caption } from './caption';
+export {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuGroup,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuPortal,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from './context-menu';
 export { Heading } from './heading';
 export { IconCloud, IconFolder, IconFullLogo } from './icons';
 export { Image } from './image';
