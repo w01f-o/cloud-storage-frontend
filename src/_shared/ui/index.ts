@@ -9,7 +9,7 @@ export { Avatar } from './avatar';
 export { Button } from './button';
 export { Caption } from './caption';
 export { Heading } from './heading';
-export { IconCloud, IconFullLogo } from './icons';
+export { IconCloud, IconFolder, IconFullLogo } from './icons';
 export { Image } from './image';
 export { Input } from './input';
 export { DesktopOnly, MobileOnly } from './mobile';

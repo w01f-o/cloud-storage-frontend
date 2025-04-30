@@ -10,19 +10,31 @@ export const wrapperVariants = tv({
 });
 
 export const inputWrapperVariants = tv({
-  base: 'flex items-end relative cursor-text size-full border-2 bg-background border-primary transition-colors-background-opacity outline-focus-base focus-visible:outline-primary rounded-lg py-2.5 px-4',
+  base: 'flex gap-2 relative cursor-text size-full border-2 bg-background transition-colors-background-opacity outline-focus-base focus-visible:outline-primary rounded-lg px-4',
   variants: {
     isInvalid: {
       true: 'border-danger text-danger',
     },
     size: {
-      sm: 'h-12',
-      md: 'h-14',
-      lg: 'h-16',
+      sm: 'h-12 pt-1.5 pb-1.5',
+      md: 'h-14 py-2.5',
+      lg: 'h-16 py-2.5',
+    },
+    withLabel: {
+      true: 'items-end',
+      false: 'items-center',
+    },
+    color: {
+      primary: 'border-primary',
+      secondary: 'border-secondary',
+      danger: 'border-danger',
+      success: 'border-success',
+      default: 'border-default',
     },
   },
   defaultVariants: {
     size: 'md',
+    color: 'primary',
   },
 });
 

@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [apiUrl],
   },
-  turbopack: {},
 };
 
 const withNextIntl = createNextIntlPlugin({

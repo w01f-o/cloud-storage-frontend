@@ -1,5 +1,5 @@
 import { User } from '@/_entities/user';
-import { fetchQueryOptionsFactory } from '@/_shared/lib';
+import { fetchQueryOptionsFactory } from '@/_shared/lib/query';
 import { getCurrentUser } from '../../api/requests';
 import { AuthQueryKeys } from '../../model';
 

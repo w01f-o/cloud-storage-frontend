@@ -46,6 +46,7 @@ export class RouterConfig {
       path: RoutePaths.SETTINGS_ACCOUNT,
       name: 'settingsAccount',
       showInNavbar: false,
+      requiresAuth: true,
     },
     [RoutePaths.SETTINGS_APPEARANCE]: {
       path: RoutePaths.SETTINGS_APPEARANCE,
@@ -111,10 +112,10 @@ export class RouterConfig {
   }
 
   static getFolderPath(id: string | number): string {
-    return `/${this.routes[RoutePaths.FOLDER].path}/${id}`;
+    return `${this.routes[RoutePaths.FOLDER].path}/${id}`;
   }
 
   static getShareFilePath(id: string | number): string {
-    return `/${this.routes[RoutePaths.SHARED].path}/${id}`;
+    return `${this.routes[RoutePaths.SHARED].path}/${id}`;
   }
 }

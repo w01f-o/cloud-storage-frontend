@@ -4,6 +4,7 @@ import {
   FC,
   InputHTMLAttributes,
   MouseEvent,
+  ReactNode,
   Ref,
   useCallback,
   useId,
@@ -24,6 +25,9 @@ interface InputProps
   isInvalid?: boolean;
   errorMessage?: string;
   size?: 'sm' | 'md' | 'lg';
+  color?: 'primary' | 'secondary' | 'danger' | 'success' | 'default';
+  startContent?: ReactNode;
+  endContent?: ReactNode;
   ref?: Ref<HTMLInputElement>;
 }
 
@@ -35,6 +39,9 @@ export const Input: FC<InputProps> = ({
   isRequired,
   errorMessage,
   size,
+  startContent,
+  endContent,
+  color,
   ref: propsRef,
   ...props
 }) => {
@@ -65,7 +72,15 @@ export const Input: FC<InputProps> = ({
       className={wrapperVariants({ isFullWidth })}
       onClick={wrapperClickHandler}
     >
-      <div className={inputWrapperVariants({ isInvalid, size })}>
+      <div
+        className={inputWrapperVariants({
+          isInvalid,
+          size,
+          withLabel: !!label,
+          color,
+        })}
+      >
+        {startContent && <span>{startContent}</span>}
         <input
           id={id}
           type={type}
@@ -79,10 +94,13 @@ export const Input: FC<InputProps> = ({
           {...props}
           placeholder=' '
         />
-        <label htmlFor={id} className={labelVariants({})}>
-          {label}
-          {isRequired && <span className='text-danger ms-0.5'>*</span>}
-        </label>
+        {endContent && <span>{endContent}</span>}
+        {label && (
+          <label htmlFor={id} className={labelVariants({})}>
+            {label}
+            {isRequired && <span className='text-danger ms-0.5'>*</span>}
+          </label>
+        )}
       </div>
       {errorMessage && (
         <p id={errorId} className='text-danger text-sm' role='alert'>

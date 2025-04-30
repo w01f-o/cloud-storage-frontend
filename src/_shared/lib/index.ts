@@ -15,11 +15,10 @@ export { useBodyRef } from './hooks';
 export { navigate } from './actions';
 
 export {
-  fetchInfiniteQueryOptionsFactory,
-  fetchQueryOptionsFactory,
   infiniteQueryHookFactory,
   queryHookFactory,
   suspenseInfiniteQueryHookFactory,
   suspenseQueryHookFactory,
 } from './query';
-export { generatePrefixedPageTitle } from './utils';
+
+export { adjustSaturation, generatePrefixedPageTitle } from './utils';
