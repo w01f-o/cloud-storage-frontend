@@ -1,8 +1,16 @@
+import { getInfiniteFolderListQueryOptions } from '@/_entities/folder/config/query-options/getInfiniteFolderListQueryOptions';
 import { HomePage } from '@/_pages/home';
 import { generatePrefixedPageTitle } from '@/_shared/lib';
+import { FolderListLoader } from '@/_widgets/folder';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import { Metadata, NextPage } from 'next';
 import { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import { Suspense } from 'react';
 
 interface PageProps {
   params: Promise<{
@@ -21,8 +29,18 @@ export const generateMetadata = async ({
   };
 };
 
-const Page: NextPage = () => {
-  return <HomePage />;
+const Page: NextPage = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery(getInfiniteFolderListQueryOptions());
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Suspense fallback={<FolderListLoader />}>
+        <HomePage />
+      </Suspense>
+    </HydrationBoundary>
+  );
 };
 
 export default Page;

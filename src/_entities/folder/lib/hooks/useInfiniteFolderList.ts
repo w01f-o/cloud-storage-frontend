@@ -1,10 +1,10 @@
-import { infiniteQueryHookFactory } from '@/_shared/lib';
+import { suspenseInfiniteQueryHookFactory } from '@/_shared/lib';
 import { InfinitePaginationOptions, PaginatedResult } from '@/_shared/model';
 import { getFolders } from '../../api/requests';
 import { FolderQueryKeys } from '../../model/enums/query-keys.enum';
 import { Folder } from '../../model/types/folder.type';
 
-export const useInfiniteFolderList = infiniteQueryHookFactory<
+export const useInfiniteFolderList = suspenseInfiniteQueryHookFactory<
   PaginatedResult<Folder>,
   Partial<InfinitePaginationOptions<Folder>>
 >({

@@ -32,7 +32,7 @@ export const useInfiniteScroll = ({
       fetchNextPage().finally(() => {
         setTimeout(() => {
           lockRef.current = false;
-        }, 500);
+        });
       });
     }
   }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);

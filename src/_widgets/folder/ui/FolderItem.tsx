@@ -4,16 +4,8 @@ import { adjustSaturation } from '@/_shared/lib';
 import { RouterConfig } from '@/_shared/router';
 import {
   ContextMenu,
-  ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuItem,
-  ContextMenuLabel,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
-  ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
   ContextMenuTrigger,
   IconFolder,
 } from '@/_shared/ui';
@@ -56,33 +48,9 @@ export const FolderItem: FC<FolderItemProps> = memo(
           </div>
         </ContextMenuTrigger>
         <ContextMenuContent>
-          <ContextMenuItem>Back</ContextMenuItem>
-          <ContextMenuItem disabled>Forward</ContextMenuItem>
-          <ContextMenuItem>Reload</ContextMenuItem>
-          <ContextMenuSub>
-            <ContextMenuSubTrigger>More Tools</ContextMenuSubTrigger>
-            <ContextMenuSubContent className='w-48'>
-              <ContextMenuItem>Save Page As...</ContextMenuItem>
-              <ContextMenuItem>Create Shortcut...</ContextMenuItem>
-              <ContextMenuItem>Name Window...</ContextMenuItem>
-              <ContextMenuSeparator />
-              <ContextMenuItem>Developer Tools</ContextMenuItem>
-            </ContextMenuSubContent>
-          </ContextMenuSub>
-          <ContextMenuSeparator />
-          <ContextMenuCheckboxItem checked>
-            Show Bookmarks Bar
-          </ContextMenuCheckboxItem>
-          <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
-          <ContextMenuSeparator />
-          <ContextMenuRadioGroup value='pedro'>
-            <ContextMenuLabel>People</ContextMenuLabel>
-            <ContextMenuSeparator />
-            <ContextMenuRadioItem value='pedro'>
-              Pedro Duarte
-            </ContextMenuRadioItem>
-            <ContextMenuRadioItem value='colm'>Colm Tuite</ContextMenuRadioItem>
-          </ContextMenuRadioGroup>
+          <ContextMenuItem asChild>
+            <Link href={RouterConfig.getFolderPath(id)}>Открыть</Link>
+          </ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
     );

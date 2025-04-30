@@ -11,10 +11,8 @@ export const HomePage: FC = () => {
   const searchParams = useSearchParams();
   const {
     data: folders,
-    isSuccess,
     fetchNextPage,
     hasNextPage,
-    isLoading,
     isFetchingNextPage,
   } = useInfiniteFolderList(
     { perPage: 36 },
@@ -32,8 +30,8 @@ export const HomePage: FC = () => {
       <div className='pt-6 pb-4'>
         <FoldersSearchField />
       </div>
-      {isSuccess && <FolderList folders={folders} cursorRef={cursorRef} />}
-      {(isFetchingNextPage || isLoading) && <FolderListLoader />}
+      <FolderList folders={folders} cursorRef={cursorRef} />
+      {isFetchingNextPage && <FolderListLoader />}
     </>
   );
 };

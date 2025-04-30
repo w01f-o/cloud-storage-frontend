@@ -18,8 +18,8 @@ export const suspenseInfiniteQueryHookFactory = <
 >({
   queryKey,
   queryFn,
-  getNextPageParam,
   getPreviousPageParam,
+  getNextPageParam,
   initialPageParam,
 }: {
   queryKey: ((requestParams: TRequestParams) => TQueryKey) | TQueryKey;
@@ -27,9 +27,9 @@ export const suspenseInfiniteQueryHookFactory = <
     requestParams: TRequestParams,
     context: QueryFunctionContext<TQueryKey, TPageParam>
   ) => Promise<TQueryFnData> | TQueryFnData;
+  getPreviousPageParam: GetPreviousPageParamFunction<TPageParam, TQueryFnData>;
   getNextPageParam: GetNextPageParamFunction<TPageParam, TQueryFnData>;
   initialPageParam: TPageParam;
-  getPreviousPageParam: GetPreviousPageParamFunction<TPageParam, TQueryFnData>;
 }) =>
   function <SelectType = TData>(
     requestParams?: TRequestParams,

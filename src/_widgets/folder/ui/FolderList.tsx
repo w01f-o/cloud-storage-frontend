@@ -4,7 +4,7 @@ import { FolderItem } from './FolderItem';
 
 interface FolderListProps {
   folders: Folder[];
-  cursorRef: Ref<HTMLDivElement>;
+  cursorRef?: Ref<HTMLDivElement>;
 }
 
 export const FolderList: FC<FolderListProps> = ({ folders, cursorRef }) => {
