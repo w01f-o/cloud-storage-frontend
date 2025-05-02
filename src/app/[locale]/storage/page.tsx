@@ -1,5 +1,11 @@
+import { getUserStorageQueryOptions } from '@/_entities/storage/config/query-options/get-user-storage-query-options';
 import { StoragePage } from '@/_pages/storage';
 import { generatePrefixedPageTitle } from '@/_shared/lib';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import { Metadata, NextPage } from 'next';
 import { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
@@ -22,7 +28,15 @@ export const generateMetadata = async ({
 };
 
 const Page: NextPage = () => {
-  return <StoragePage />;
+  const queryClient = new QueryClient();
+
+  queryClient.prefetchQuery(getUserStorageQueryOptions());
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <StoragePage />
+    </HydrationBoundary>
+  );
 };
 
 export default Page;
