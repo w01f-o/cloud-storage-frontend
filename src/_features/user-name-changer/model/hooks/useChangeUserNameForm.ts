@@ -22,6 +22,9 @@ export const useChangeUserNameForm = () => {
   } = useForm<ChangeUserNameFormSchema>({
     resolver: zodResolver(changeUserNameSchema(t)),
     mode: 'onSubmit',
+    defaultValues: {
+      name: user?.name,
+    },
   });
 
   const submitHandler = (data: ChangeUserNameFormSchema) => {

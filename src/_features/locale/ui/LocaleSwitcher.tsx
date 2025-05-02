@@ -9,18 +9,15 @@ import {
   SelectValue,
 } from '@/_shared/ui';
 import { Spinner } from '@/_shared/ui/spinner';
-import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import { useLocaleSwitcher } from '../model/useLocaleSwitcher';
 
 export const LocaleSwitcher: FC = () => {
-  const t = useTranslations('SettingsPage.general.locale');
   const { changeHandler, dropdownIsOpen, isPending, locale, toggleDropdown } =
     useLocaleSwitcher();
 
   return (
-    <div className='flex items-center gap-4'>
-      <div>{t('title')}</div>
+    <>
       <Select
         value={locale}
         onValueChange={changeHandler}
@@ -39,6 +36,6 @@ export const LocaleSwitcher: FC = () => {
         </SelectContent>
       </Select>
       {isPending && <Spinner />}
-    </div>
+    </>
   );
 };

@@ -16,25 +16,22 @@ export const UserAccountDeleter: FC = () => {
   const t = useTranslations('SettingsPage.account.delete');
 
   return (
-    <div className='flex items-center gap-4'>
-      <div className='w-36'>{t('title')}</div>
-      <Modal>
-        <ModalTrigger asChild>
+    <Modal>
+      <ModalTrigger asChild>
+        <Button color='danger'>{t('confirm')}</Button>
+      </ModalTrigger>
+      <ModalContent>
+        <ModalHeader>
+          <ModalTitle>{t('title')}</ModalTitle>
+        </ModalHeader>
+        <ModalBody className='py-2'>{t('warning')}</ModalBody>
+        <ModalFooter className='justify-between'>
+          <ModalClose asChild>
+            <Button>{t('cancel')}</Button>
+          </ModalClose>
           <Button color='danger'>{t('confirm')}</Button>
-        </ModalTrigger>
-        <ModalContent>
-          <ModalHeader>
-            <ModalTitle>{t('title')}</ModalTitle>
-          </ModalHeader>
-          <ModalBody className='py-2'>{t('warning')}</ModalBody>
-          <ModalFooter className='justify-between'>
-            <ModalClose asChild>
-              <Button>{t('cancel')}</Button>
-            </ModalClose>
-            <Button color='danger'>{t('confirm')}</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </div>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };

@@ -1,10 +1,11 @@
 import { tv } from 'tailwind-variants';
 
 export const wrapperVariants = tv({
-  base: 'flex flex-col w-full',
+  base: 'flex flex-col',
   variants: {
     isFullWidth: {
-      false: 'max-w-sm',
+      false: 'w-60',
+      true: 'w-full',
     },
   },
 });
