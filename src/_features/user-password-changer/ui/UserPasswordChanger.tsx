@@ -1,5 +1,50 @@
-import { FC } from 'react';
+'use client';
+
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalClose,
+  ModalContent,
+  ModalDescription,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  ModalTrigger,
+} from '@/_shared/ui';
+import { useTranslations } from 'next-intl';
+import { FC, useId } from 'react';
+import { ChangeUserPasswordForm } from './ChangeUserPasswordForm';
 
 export const UserPasswordChanger: FC = () => {
-  return <></>;
+  const t = useTranslations('SettingsPage.account');
+  const formId = useId();
+
+  return (
+    <div className='flex items-center gap-4'>
+      <div className='w-36'>{t('password.title')}</div>
+      <Modal>
+        <ModalTrigger asChild>
+          <Button>{t('change')}</Button>
+        </ModalTrigger>
+        <ModalContent>
+          <ModalHeader>
+            <ModalTitle>{t('password.title')}</ModalTitle>
+            <ModalDescription>{t('password.description')}</ModalDescription>
+          </ModalHeader>
+          <ModalBody>
+            <ChangeUserPasswordForm id={formId} />
+          </ModalBody>
+          <ModalFooter className='justify-between'>
+            <ModalClose asChild>
+              <Button color='secondary'>{t('password.cancel')}</Button>
+            </ModalClose>
+            <Button type='submit' form={formId}>
+              {t('submit')}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </div>
+  );
 };

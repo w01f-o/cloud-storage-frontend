@@ -5,11 +5,11 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import {
   ChangeUserNameFormSchema,
-  loginSchema,
+  changeUserNameSchema,
 } from '../schemas/change-user-name-schema';
 
 export const useChangeUserNameForm = () => {
-  const t = useTranslations('SettingsPage.account');
+  const t = useTranslations('SettingsPage.account.name.errors');
   const user = useSession();
 
   const { mutate, isPending } = useUpdateUser();
@@ -20,7 +20,7 @@ export const useChangeUserNameForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ChangeUserNameFormSchema>({
-    resolver: zodResolver(loginSchema(t)),
+    resolver: zodResolver(changeUserNameSchema(t)),
     mode: 'onSubmit',
   });
 

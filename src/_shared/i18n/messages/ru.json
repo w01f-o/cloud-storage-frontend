@@ -78,13 +78,54 @@
       "appearance": "Внешний вид"
     },
     "account": {
-      "changeUserName": "Изменить имя",
-      "changeUserEmail": "Изменить электронную почту",
-      "changeUserPassword": "Изменить пароль",
-      "save": "Сохранить",
-      "errors": {
-        "nameMinLength": "Имя должно быть длиною не менее {minLength} символов",
-        "nameMaxLength": "Имя должно быть длиною не более {maxLength} символов"
+      "name": {
+        "title": "Изменить имя",
+        "errors": {
+          "minLength": "Имя должно быть длиною не менее {minLength} символов",
+          "maxLength": "Имя должно быть длиною не более {maxLength} символов"
+        }
+      },
+      "password": {
+        "title": "Изменить пароль",
+        "description": "Введите новый пароль",
+        "currentPassword": "Текущий пароль",
+        "newPassword": "Новый пароль",
+        "repeatNewPassword": "Повторите новый пароль",
+        "errors": {
+          "minLength": "Пароль должен быть длиною не менее {minLength} символов",
+          "maxLength": "Пароль должен быть длиною не более {maxLength} символов",
+          "notMatch": "Пароли не совпадают"
+        },
+        "cancel": "Отменить"
+      },
+      "email": {
+        "title": "Изменить электронную почту",
+        "errors": {
+          "invalid": "Некорректная электронная почта"
+        } 
+      },
+      "delete": {
+        "title": "Удаление аккаунта",
+        "warning": "Вы уверены, что хотите удалить свой аккаунт? Все ваши данные, включая файлы и папки будут безвозвратно удалены ",
+        "cancel": "Отмена",
+        "confirm": "Удалить"
+      },
+      "submit": "Сохранить",
+      "change": "Изменить"
+    },
+    "appearance": {
+      "theme": {
+        "title": "Сменить тему",
+        "variants": {
+          "dark": "Тёмная",
+          "light": "Светлая",
+          "system": "Как в системе"
+        }
+      }
+    },
+    "general": {
+      "locale": {
+        "title": "Язык интерфейса"
       }
     }
   },

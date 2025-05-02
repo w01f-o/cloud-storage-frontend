@@ -9,14 +9,15 @@ import { useUploadFileProgresses } from '../stores/upload-progresses-store';
 import { cancelFileListQueries } from '../utils/cancelFileListQueries';
 import { invalidateFileListQueries } from '../utils/invalidateFileListQueries';
 
-export const useUploadFile = (
-  options?: MutationHookOptions<
-    FileEntity,
-    { id: string; file: File },
-    AxiosError
-  >
-) => {
-  const { onMutate, onSettled, ...rest } = options ?? {};
+export const useUploadFile = ({
+  onMutate,
+  onSettled,
+  ...options
+}: MutationHookOptions<
+  FileEntity,
+  { id: string; file: File },
+  AxiosError
+> = {}) => {
   const queryClient = useQueryClient();
   const { addFile, removeFile, updateFileProgress, setAbortController } =
     useUploadFileProgresses(
@@ -48,11 +49,11 @@ export const useUploadFile = (
       onMutate?.({ file, id });
     },
     onSettled: async (data, error, { file, id }, context) => {
-      invalidateFileListQueries(queryClient);
+      await invalidateFileListQueries(queryClient);
       removeFile(id);
 
       onSettled?.(data, error, { file, id }, context);
     },
-    ...rest,
+    ...options,
   });
 };

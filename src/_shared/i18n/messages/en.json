@@ -78,13 +78,54 @@
       "appearance": "Appearance"
     },
     "account": {
-      "changeUserName": "Change name",
-      "changeUserEmail": "Change email",
-      "changeUserPassword": "Change password",
-      "save": "Save",
-      "errors": {
-        "nameMinLength": "Name must be at least {minLength} characters long",
-        "nameMaxLength": "Name must be no more than {maxLength} characters long"
+      "name": {
+        "title": "Change Name",
+        "errors": {
+          "minLength": "Name must be at least {minLength} characters long",
+          "maxLength": "Name must be no more than {maxLength} characters long"
+        }
+      },
+      "password": {
+        "title": "Change Password",
+        "description": "Enter a new password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "repeatNewPassword": "Repeat new password",
+        "errors": {
+          "minLength": "Password must be at least {minLength} characters long",
+          "maxLength": "Password must be no more than {maxLength} characters long",
+          "notMatch": "Passwords do not match"
+        },
+        "cancel": "Cancel"
+      },
+      "email": {
+        "title": "Change Email",
+        "errors": {
+          "invalid": "Invalid email address"
+        } 
+      },
+      "delete": {
+        "title": "Deleting an account",
+        "warning": "Are you sure you want to delete your account? All your data, including files and folders, will be permanently deleted.",
+        "cancel": "Cancel",
+        "confirm": "Delete"
+      },
+      "submit": "Save",
+      "change": "Change"
+    },
+    "appearance": {
+    "theme": {
+        "title": "Change Theme",
+        "variants": {
+          "dark": "Dark",
+          "light": "Light",
+          "system": "System"
+        }
+      }
+    },
+    "general": {
+      "locale": {
+        "title": "App language"
       }
     }
   },

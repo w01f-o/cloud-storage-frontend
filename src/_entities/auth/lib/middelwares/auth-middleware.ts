@@ -1,15 +1,14 @@
 import { routing } from '@/_shared/i18n';
 import { RoutePaths, RouterConfig } from '@/_shared/router';
 import { ComposableMiddleware } from 'next-compose-middleware';
+import { Locale } from 'next-intl';
 import { NextResponse } from 'next/server';
 
 export const clearPathname = (pathname: string): RoutePaths => {
   const segments = pathname.split('/');
   const maybeLocale = segments[1];
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  if (routing.locales.includes(maybeLocale)) {
+  if (routing.locales.includes(maybeLocale as Locale)) {
     const cleanedPath = '/' + segments.slice(2).join('/');
 
     return (cleanedPath || RoutePaths.HOME) as RoutePaths;

@@ -18,26 +18,28 @@ export const useUpdateUser = (
     onMutate: async data => {
       onMutate?.(data);
 
-      await queryClient.cancelQueries({
-        queryKey: [AuthQueryKeys.CURRENT_SESSION],
-      });
-
-      const previousUser = queryClient.getQueryData<User>([
-        AuthQueryKeys.CURRENT_SESSION,
-      ]);
-
-      queryClient.setQueriesData(
-        {
+      if (data.email || data.name) {
+        await queryClient.cancelQueries({
           queryKey: [AuthQueryKeys.CURRENT_SESSION],
-        },
-        (old: User): User => ({
-          ...old,
-          email: data.email ?? old.email,
-          name: data.name ?? old.name,
-        })
-      );
+        });
 
-      return { previousUser };
+        const previousUser = queryClient.getQueryData<User>([
+          AuthQueryKeys.CURRENT_SESSION,
+        ]);
+
+        queryClient.setQueriesData(
+          {
+            queryKey: [AuthQueryKeys.CURRENT_SESSION],
+          },
+          (old: User): User => ({
+            ...old,
+            email: data.email ?? old.email,
+            name: data.name ?? old.name,
+          })
+        );
+
+        return { previousUser };
+      }
     },
     onSettled: async (data, error, variables, context) => {
       await queryClient.invalidateQueries({

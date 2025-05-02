@@ -10,20 +10,24 @@ import { cancelFileQueries } from '../utils/cancelFileQueries';
 import { invalidateFileListQueries } from '../utils/invalidateFileListQueries';
 import { invalidateFileQueries } from '../utils/invalidateFileQueries';
 
-export const useUpdateFile = (
-  options: MutationHookOptions<
-    File,
-    { id: string; data: UpdateFileDto },
-    AxiosError
-  >
-) => {
-  const { onSettled, onError, ...rest } = options ?? {};
+export const useUpdateFile = ({
+  onSettled,
+  onError,
+  onMutate,
+  ...options
+}: MutationHookOptions<
+  File,
+  { id: string; data: UpdateFileDto },
+  AxiosError
+> = {}) => {
   const queryClient = useQueryClient();
 
   return useMutation<File, AxiosError, { id: string; data: UpdateFileDto }>({
     mutationFn: ({ id, data }) => updateFile(id, data),
     mutationKey: [FileMutationKeys.UPDATE],
     onMutate: async ({ id, data }) => {
+      onMutate?.({ data, id });
+
       await Promise.all([
         cancelFileListQueries(queryClient),
         cancelFileQueries(queryClient, id),
@@ -102,6 +106,6 @@ export const useUpdateFile = (
 
       onError?.(error, variables, context);
     },
-    ...rest,
+    ...options,
   });
 };

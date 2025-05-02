@@ -41,6 +41,18 @@ export {
   ModalTitle,
   ModalTrigger,
 } from './modal';
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from './select';
 export { Skeleton } from './skeleton';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 export { Text } from './text';

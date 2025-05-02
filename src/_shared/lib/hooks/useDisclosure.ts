@@ -8,9 +8,11 @@ interface UseDisclosureProps {
   onClose: () => void;
 }
 
-export const useDisclosure = (props?: Partial<UseDisclosureProps>) => {
-  const { initialState = false, onClose, onOpen } = props ?? {};
-
+export const useDisclosure = ({
+  initialState = false,
+  onClose,
+  onOpen,
+}: Partial<UseDisclosureProps> = {}) => {
   const [isOpen, setIsOpen] = useState<boolean>(initialState);
 
   const open = () => {

@@ -19,7 +19,7 @@ export const ChangeUserNameForm: FC = () => {
         defaultValue={currentName}
       />
       <FadeInOut isVisible={buttonIsVisible}>
-        <Button className='mt-1'>{t('save')}</Button>
+        <Button className='mt-1'>{t('submit')}</Button>
       </FadeInOut>
     </form>
   );

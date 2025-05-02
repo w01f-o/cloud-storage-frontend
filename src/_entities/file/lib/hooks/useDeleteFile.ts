@@ -2,23 +2,27 @@ import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { deleteFile } from '../../api/requests';
+import { FileMutationKeys } from '../../model/enums/mutation-keys.enum';
 import { FileQueryKeys } from '../../model/enums/query-keys.enum';
 import { File } from '../../model/types/file.type';
 import { cancelFileListQueries } from '../utils/cancelFileListQueries';
 import { cancelFileQueries } from '../utils/cancelFileQueries';
 import { invalidateFileListQueries } from '../utils/invalidateFileListQueries';
-import { FileMutationKeys } from '../../model/enums/mutation-keys.enum';
 
-export const useDeleteFile = (
-  options: MutationHookOptions<File, string, AxiosError>
-) => {
-  const { onError, onSettled, ...rest } = options ?? {};
+export const useDeleteFile = ({
+  onError,
+  onSettled,
+  onMutate,
+  ...options
+}: MutationHookOptions<File, { id: string }, AxiosError> = {}) => {
   const queryClient = useQueryClient();
 
-  return useMutation<File, AxiosError, string>({
-    mutationFn: deleteFile,
+  return useMutation<File, AxiosError, { id: string }>({
+    mutationFn: ({ id }) => deleteFile(id),
     mutationKey: [FileMutationKeys.DELETE],
-    onMutate: async id => {
+    onMutate: async ({ id }) => {
+      onMutate?.({ id });
+
       await Promise.all([
         cancelFileListQueries(queryClient),
         cancelFileQueries(queryClient, id),
@@ -44,10 +48,16 @@ export const useDeleteFile = (
             Array.isArray(query.queryKey) &&
             query.queryKey[0] === FileQueryKeys.LIST,
         },
-        (old: PaginatedResult<File>) => ({
-          ...old,
-          data: old.list.filter(file => file.id !== id),
-        })
+        (
+          old: PaginatedResult<File> | undefined
+        ): PaginatedResult<File> | undefined => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            list: old.list.filter(file => file.id !== id),
+          };
+        }
       );
 
       return { previousFileList, previousFile };
@@ -79,6 +89,6 @@ export const useDeleteFile = (
 
       onError?.(error, id, context);
     },
-    ...rest,
+    ...options,
   });
 };

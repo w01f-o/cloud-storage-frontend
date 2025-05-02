@@ -8,5 +8,5 @@ export const invalidateFileListQueries = async (
     predicate: query =>
       Array.isArray(query.queryKey) &&
       (query.queryKey[0] === FileQueryKeys.LIST ||
-        query.queryKey[0] === FileQueryKeys.INFINITE_LIST),
+        query.queryKey[0] === FileQueryKeys.INFINITE),
   });
