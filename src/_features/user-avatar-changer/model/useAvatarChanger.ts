@@ -108,10 +108,10 @@ export const useAvatarChanger = (): UseAvatarChangerReturn => {
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
 
-    const cropX = crop.x! * scaleX;
-    const cropY = crop.y! * scaleY;
-    const cropWidth = crop.width! * scaleX;
-    const cropHeight = crop.height! * scaleY;
+    const cropX = crop.x * scaleX;
+    const cropY = crop.y * scaleY;
+    const cropWidth = crop.width * scaleX;
+    const cropHeight = crop.height * scaleY;
 
     const size = Math.min(cropWidth, cropHeight);
 
