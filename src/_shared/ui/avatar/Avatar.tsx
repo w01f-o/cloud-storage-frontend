@@ -4,7 +4,7 @@ import { avatarVariants } from './avatar.variants';
 
 interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   src: string | null;
-  size?: 'default' | 'large';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const AVATAR_FALLBACK: string = '/no-avatar.webp';
@@ -12,10 +12,18 @@ const AVATAR_FALLBACK: string = '/no-avatar.webp';
 export const Avatar: FC<AvatarProps> = ({
   src,
   className,
-  size = 'default',
+  size = 'xs',
   ...props
 }) => {
-  const getSize = () => (size === 'default' ? 50 : 256);
+  const getSize = () => {
+    return {
+      xs: 48,
+      sm: 96,
+      md: 128,
+      lg: 208,
+      xl: 256,
+    }[size];
+  };
 
   return (
     <div className={avatarVariants({ className, size })} {...props}>

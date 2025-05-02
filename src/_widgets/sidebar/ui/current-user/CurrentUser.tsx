@@ -18,7 +18,7 @@ export const CurrentUser: FC = () => {
         href={RoutePaths.LOGIN}
         className='flex w-full items-center gap-2.5 pr-7 pl-5'
       >
-        <Avatar src={null} size='default' />
+        <Avatar src={null} />
         <div className='flex w-0 flex-1 flex-col'>
           <Heading size='default' className='truncate'>
             {t('AuthPage.actions.login')}
@@ -33,10 +33,7 @@ export const CurrentUser: FC = () => {
       href={RoutePaths.PROFILE}
       className='flex w-full items-center gap-2.5 pr-7 pl-5'
     >
-      <Avatar
-        src={user?.avatar ? getApiStaticUrl(user.avatar) : null}
-        size='default'
-      />
+      <Avatar src={user?.avatar ? getApiStaticUrl(user.avatar) : null} />
       <div className='flex w-0 flex-1 flex-col'>
         <Heading size='default' className='truncate'>
           {user.name}

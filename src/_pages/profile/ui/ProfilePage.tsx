@@ -15,7 +15,7 @@ export const ProfilePage: FC = () => {
       <div className='flex flex-col items-center gap-2.5 pt-10 pb-4'>
         <Avatar
           src={user?.avatar ? getApiStaticUrl(user.avatar) : null}
-          size='large'
+          size='xl'
         />
         <Heading size='xl' as='h2'>
           {user!.name}

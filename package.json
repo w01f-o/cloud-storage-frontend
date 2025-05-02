@@ -42,6 +42,7 @@
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.56.1",
+    "react-image-crop": "^11.0.10",
     "sonner": "^2.0.3",
     "spinners-react": "^1.0.10",
     "tailwind-variants": "^1.0.0",

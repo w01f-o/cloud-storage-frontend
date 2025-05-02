@@ -13,7 +13,7 @@ export const AccountSettings: FC = () => {
 
   return (
     <SettingsGroup>
-      <SettingsRow label='Avatar'>
+      <SettingsRow label={t('avatar.title')}>
         <UserAvatarChanger />
       </SettingsRow>
       <SettingsRow label={t('name.title')}>

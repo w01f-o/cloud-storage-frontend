@@ -78,6 +78,14 @@
       "appearance": "Appearance"
     },
     "account": {
+      "avatar": {
+        "title": "Change avatar",
+        "success": "You have successfully changed your avatar",
+        "errors": {
+          "invalidFile": "The file must be an image ({format}) and no larger than {size}",
+          "unknown": "An unknown error occurred while changing the avatar"
+        }
+      },
       "name": {
         "title": "Change Name",
         "errors": {

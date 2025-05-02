@@ -20,5 +20,5 @@ export const useSession = () => {
     ),
   });
 
-  return user;
+  return user as User | null;
 };

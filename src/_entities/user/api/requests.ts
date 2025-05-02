@@ -10,7 +10,9 @@ export const updateUser = async (dto: UpdateUserDto) => {
     formData.append(key, value);
   });
 
-  const { data } = await authApiClient.patch<User>(ENDPOINT, formData);
+  const { data } = await authApiClient.patch<User>(ENDPOINT, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
   return data;
 };
