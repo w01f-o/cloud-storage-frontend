@@ -8,13 +8,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/_shared/ui';
-import { useTranslations } from 'next-intl';
+import { Messages, useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { FC } from 'react';
 
 export const ThemeSwitcher: FC = () => {
-  const { setTheme, theme } = useTheme();
-  const t = useTranslations('SettingsPage.appearance.theme');
+  const { setTheme, theme, themes } = useTheme();
+  const t = useTranslations('SettingsPage.appearance.theme.variants');
 
   return (
     <Select defaultValue={theme} value={theme} onValueChange={setTheme}>
@@ -23,9 +23,13 @@ export const ThemeSwitcher: FC = () => {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value='dark'>{t('variants.dark')}</SelectItem>
-          <SelectItem value='light'>{t('variants.light')}</SelectItem>
-          <SelectItem value='system'>{t('variants.system')}</SelectItem>
+          {themes.map(theme => (
+            <SelectItem value={theme} key={theme}>
+              {t(
+                theme as keyof Messages['SettingsPage']['appearance']['theme']['variants']
+              )}
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>

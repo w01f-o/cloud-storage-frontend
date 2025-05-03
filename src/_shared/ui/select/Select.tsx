@@ -4,7 +4,7 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 
 import { IconCheck, IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import {
   contentVariants,
   itemVariants,
@@ -107,9 +107,14 @@ export const SelectLabel: FC<SelectPrimitive.SelectLabelProps> = ({
   );
 };
 
-export const SelectItem: FC<SelectPrimitive.SelectItemProps> = ({
+interface SelectItemProps extends SelectPrimitive.SelectItemProps {
+  icon?: ReactNode;
+}
+
+export const SelectItem: FC<SelectItemProps> = ({
   className,
   children,
+  icon,
   ...props
 }) => {
   return (
@@ -119,6 +124,7 @@ export const SelectItem: FC<SelectPrimitive.SelectItemProps> = ({
           <IconCheck className='h-4 w-4' />
         </SelectPrimitive.ItemIndicator>
       </span>
+      {icon}
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );

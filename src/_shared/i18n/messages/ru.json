@@ -1,183 +1,187 @@
 {
-  "Navbar": {
-    "home": "Главная",
-    "profile": "Профиль",
-    "storage": "Хранилище",
-    "shared": "Общие файлы",
-    "settings": "Настройки",
-    "settingsGeneral": "Основные настройки",
-    "settingsAccount": "Настройки аккаунта",
-    "settingsAppearance": "Настройки внешнего вида",
-    "help": "Помощь"
-  },
-  "WelcomePage": {
-    "title": "Добро пожаловать",
-    "greeting": "Добро пожаловать в\nSafe Cloud!",
-    "description": "Надежное и удобное облачное хранилище для ваших файлов\n с неограниченным доступом из любой точки мира",
-    "links": {
-      "login": "Войти",
-      "register": "Зарегистрироваться"
-    }
-  },
-  "AuthPage": {
-    "title": {
-      "login": "Вход",
-      "register": "Регистрация",
-      "activate": "Активация аккаунта"
+    "Navbar": {
+      "home": "Главная",
+      "profile": "Профиль",
+      "storage": "Хранилище",
+      "shared": "Общие файлы",
+      "settings": "Настройки",
+      "settingsGeneral": "Основные настройки",
+      "settingsAccount": "Настройки аккаунта",
+      "settingsAppearance": "Настройки внешнего вида",
+      "help": "Помощь"
     },
-    "labels": {
-      "email": "Email",
-      "password": "Пароль",
-      "confirmPassword": "Подтвердите пароль",
-      "name": "Имя",
-      "dontHaveAccount": "Нет аккаунта? <register>Зарегистрироваться</register>",
-      "alreadyHaveAccount": "Уже есть аккаунт? <login>Войти</login>"
+    "WelcomePage": {
+      "title": "Добро пожаловать",
+      "greeting": "Добро пожаловать в\nSafe Cloud!",
+      "description": "Надежное и удобное облачное хранилище для ваших файлов\n с неограниченным доступом из любой точки мира",
+      "links": {
+        "login": "Войти",
+        "register": "Зарегистрироваться"
+      }
     },
-    "success": {
-      "login": "Вы успешно вошли в аккаунт",
-      "register": "Вы успешно зарегистрировались"
-    },
-    "actions": {
-      "login": "Войти",
-      "register": "Зарегистрироваться",
-      "logout": "Выйти"
-    },
-    "errors": {
-      "server": {
-        "invalidCredentials": "Введён неверный логин или пароль",
-        "userAlreadyExists": "Пользователь с таким логином уже существует",
-        "unknown": "Произошла неизвестная ошибка"
+    "AuthPage": {
+      "title": {
+        "login": "Вход",
+        "register": "Регистрация",
+        "activate": "Активация аккаунта"
       },
-      "invalidEmail": "Некорректная электронная почта",
-      "nameMinLength": "Имя должно быть длиною не менее {minLength} символов",
-      "nameMaxLength": "Имя должно быть длиною не более {maxLength} символов",
-      "passwordMinLength": "Пароль должен быть длиною не менее {minLength} символов",
-      "passwordMaxLength": "Пароль должен быть длиною не более {maxLength} символов",
-      "passwordsNotMatch": "Пароли не совпадают"
-    }
-  },
-  "HomePage": {
-    "title": "Главная"
-  },
-  "ProfilePage": {
-    "title": "Профиль",
-    "lastUpdatedFolders": "Последние обновленные папки",
-    "lastUploadedFiles": "Последние загруженные файлы"
-  },
-  "StoragePage": {
-    "title": "Моё хранилище",
-    "available": "Доступно",
-    "capacity": "Всего",
-    "used": "Использовано",
-    "resolvedFileType": {
-      "image": "Изображение",
-      "video": "Видео",
-      "audio": "Аудио",
-      "document": "Документ",
-      "text": "Текст",
-      "source_code": "Исходный код",
-      "archive": "Архив",
-      "exe": "Исполняемый файл",
-      "other": "Другое",
-      "model": "3D-модель",
-      "font": "Шрифт",
-      "plural": {
-        "image": "Изображения",
+      "labels": {
+        "email": "Email",
+        "password": "Пароль",
+        "confirmPassword": "Подтвердите пароль",
+        "name": "Имя",
+        "dontHaveAccount": "Нет аккаунта? <register>Зарегистрироваться</register>",
+        "alreadyHaveAccount": "Уже есть аккаунт? <login>Войти</login>"
+      },
+      "success": {
+        "login": "Вы успешно вошли в аккаунт",
+        "register": "Вы успешно зарегистрировались"
+      },
+      "actions": {
+        "login": "Войти",
+        "register": "Зарегистрироваться",
+        "logout": "Выйти"
+      },
+      "errors": {
+        "server": {
+          "invalidCredentials": "Введён неверный логин или пароль",
+          "userAlreadyExists": "Пользователь с таким логином уже существует",
+          "unknown": "Произошла неизвестная ошибка"
+        },
+        "invalidEmail": "Некорректная электронная почта",
+        "nameMinLength": "Имя должно быть длиною не менее {minLength} символов",
+        "nameMaxLength": "Имя должно быть длиною не более {maxLength} символов",
+        "passwordMinLength": "Пароль должен быть длиною не менее {minLength} символов",
+        "passwordMaxLength": "Пароль должен быть длиною не более {maxLength} символов",
+        "passwordsNotMatch": "Пароли не совпадают"
+      }
+    },
+    "HomePage": {
+      "title": "Главная"
+    },
+    "ProfilePage": {
+      "title": "Профиль",
+      "lastUpdatedFolders": "Последние обновленные папки",
+      "lastUploadedFiles": "Последние загруженные файлы"
+    },
+    "StoragePage": {
+      "title": "Моё хранилище",
+      "available": "Доступно",
+      "capacity": "Всего",
+      "used": "Использовано",
+      "resolvedFileType": {
+        "image": "Изображение",
         "video": "Видео",
         "audio": "Аудио",
-        "document": "Документы",
-        "text": "Тексты",
+        "document": "Документ",
+        "text": "Текст",
         "source_code": "Исходный код",
-        "archive": "Архивы",
-        "exe": "Исполняемые файлы",
-        "model": "3D-модели",
-        "font": "Шрифты",
-        "other": "Другое"
+        "archive": "Архив",
+        "exe": "Исполняемый файл",
+        "other": "Другое",
+        "model": "3D-модель",
+        "font": "Шрифт",
+        "plural": {
+          "image": "Изображения",
+          "video": "Видео",
+          "audio": "Аудио",
+          "document": "Документы",
+          "text": "Тексты",
+          "source_code": "Исходный код",
+          "archive": "Архивы",
+          "exe": "Исполняемые файлы",
+          "model": "3D-модели",
+          "font": "Шрифты",
+          "other": "Другое"
+        }
       }
-    }
-  },
-  "SharedFilePage": {
-    "title": "Общие файлы"
-  },
-  "SettingsPage": {
-    "title": "Настройки",
-    "tabs": {
-      "general": "Общие",
-      "account": "Аккаунт",
-      "appearance": "Внешний вид"
     },
-    "account": {
-      "avatar": {
-        "title": "Сменить аватара",
-        "success": "Вы успешно сменили аватар",
-        "errors": {
-          "invalidFile": "Файл должен быть изображением ({format}) и не более {size}",
-          "unknown": "Произошла неизвестная ошибка при смене автара"
-        }
+    "SharedFilePage": {
+      "title": "Общие файлы"
+    },
+    "SettingsPage": {
+      "title": "Настройки",
+      "tabs": {
+        "general": "Общие",
+        "account": "Аккаунт",
+        "appearance": "Внешний вид"
       },
-      "name": {
-        "title": "Изменить имя",
-        "success": "Вы успешно сменили имя",
-        "errors": {
-          "minLength": "Имя должно быть длиною не менее {minLength} символов",
-          "maxLength": "Имя должно быть длиною не более {maxLength} символов"
-        }
-      },
-      "password": {
-        "title": "Изменить пароль",
-        "description": "Введите новый пароль",
-        "currentPassword": "Текущий пароль",
-        "newPassword": "Новый пароль",
-        "repeatNewPassword": "Повторите новый пароль",
-        "errors": {
-          "minLength": "Пароль должен быть длиною не менее {minLength} символов",
-          "maxLength": "Пароль должен быть длиною не более {maxLength} символов",
-          "notMatch": "Пароли не совпадают"
+      "account": {
+        "avatar": {
+          "title": "Сменить аватара",
+          "success": "Вы успешно сменили аватар",
+          "errors": {
+            "invalidFile": "Файл должен быть изображением ({format}) и не более {size}",
+            "unknown": "Произошла неизвестная ошибка при смене автара"
+          }
         },
-        "cancel": "Отменить"
+        "name": {
+          "title": "Изменить имя",
+          "success": "Вы успешно сменили имя",
+          "errors": {
+            "minLength": "Имя должно быть длиною не менее {minLength} символов",
+            "maxLength": "Имя должно быть длиною не более {maxLength} символов"
+          }
+        },
+        "password": {
+          "title": "Изменить пароль",
+          "description": "Введите новый пароль",
+          "currentPassword": "Текущий пароль",
+          "newPassword": "Новый пароль",
+          "repeatNewPassword": "Повторите новый пароль",
+          "errors": {
+            "minLength": "Пароль должен быть длиною не менее {minLength} символов",
+            "maxLength": "Пароль должен быть длиною не более {maxLength} символов",
+            "notMatch": "Пароли не совпадают"
+          },
+          "cancel": "Отменить"
+        },
+        "email": {
+          "title": "Изменить электронную почту",
+          "errors": {
+            "invalid": "Некорректная электронная почта"
+          } 
+        },
+        "delete": {
+          "title": "Удаление аккаунта",
+          "warning": "Вы уверены, что хотите удалить свой аккаунт? Все ваши данные, включая файлы и папки будут безвозвратно удалены ",
+          "cancel": "Отмена",
+          "confirm": "Удалить"
+        },
+        "submit": "Сохранить",
+        "change": "Изменить"
       },
-      "email": {
-        "title": "Изменить электронную почту",
-        "errors": {
-          "invalid": "Некорректная электронная почта"
-        } 
+      "appearance": {
+        "theme": {
+          "title": "Сменить тему",
+          "variants": {
+            "dark": "Тёмная",
+            "light": "Светлая",
+            "system": "Как в системе"
+          }
+        }
       },
-      "delete": {
-        "title": "Удаление аккаунта",
-        "warning": "Вы уверены, что хотите удалить свой аккаунт? Все ваши данные, включая файлы и папки будут безвозвратно удалены ",
-        "cancel": "Отмена",
-        "confirm": "Удалить"
-      },
-      "submit": "Сохранить",
-      "change": "Изменить"
-    },
-    "appearance": {
-      "theme": {
-        "title": "Сменить тему",
-        "variants": {
-          "dark": "Тёмная",
-          "light": "Светлая",
-          "system": "Как в системе"
+      "general": {
+        "locale": {
+          "title": "Язык интерфейса",
+          "item": {
+            "ru": "Русский (Русский)",
+            "en": "Английский (English)"
+          }
         }
       }
     },
-    "general": {
-      "locale": {
-        "title": "Язык интерфейса"
-      }
+    "HelpPage": {
+      "title": "Помощь"
+    },
+    "FolderItem": {
+    "contextMenu": {
+      "open": "Открыть",
+      "delete": "Удалить",
+      "properties": "Свойства"
+    },
+    "modal": {
+      "title": "Свойства"
     }
-  },
-  "HelpPage": {
-    "title": "Помощь"
-  },
-  "FolderItem": {
-  "contextMenu": {
-    "open": "Открыть",
-    "delete": "Удалить",
-    "properties": "Свойства"
-  },
-  "modal": {
-    "title": "Свойства"
   }
-}
 }

@@ -166,7 +166,11 @@ declare const messages: {
     },
     "general": {
       "locale": {
-        "title": "App language"
+        "title": "App language",
+        "item": {
+          "ru": "Russian (Русский)",
+          "en": "English (English)"
+        }
       }
     }
   },
