@@ -68,7 +68,36 @@ declare const messages: {
     "lastUploadedFiles": "Last uploaded files"
   },
   "StoragePage": {
-    "title": "My storage"
+    "title": "My storage",
+    "available": "Available",
+    "capacity": "Total",
+    "used": "Used",
+    "resolvedFileType": {
+      "image": "Image",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Document",
+      "text": "Text",
+      "source_code": "Source Code",
+      "archive": "Archive",
+      "exe": "Executable File",
+      "other": "Other",
+      "model": "3D Model",
+      "font": "Font",
+      "plural": {
+        "image": "Images",
+        "video": "Videos",
+        "audio": "Audio",
+        "document": "Documents",
+        "text": "Texts",
+        "source_code": "Source Code",
+        "archive": "Archives",
+        "exe": "Executable Files",
+        "model": "3D Models",
+        "font": "Fonts",
+        "other": "Other"
+      }
+    }
   },
   "SharedFilePage": {
     "title": "Shared files"
@@ -91,6 +120,7 @@ declare const messages: {
       },
       "name": {
         "title": "Change Name",
+        "success": "You have successfully changed your name",
         "errors": {
           "minLength": "Name must be at least {minLength} characters long",
           "maxLength": "Name must be no more than {maxLength} characters long"

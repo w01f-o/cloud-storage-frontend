@@ -1,7 +1,7 @@
 import { File } from '@/_entities/file';
 
-type StorageFile = Pick<File, 'mimeType' | 'resolvedType' | 'size'>;
-type UserSpace = {
+export type StorageFile = Pick<File, 'mimeType' | 'resolvedType' | 'size'>;
+export type UserSpace = {
   used: bigint;
   free: bigint;
   total: bigint;

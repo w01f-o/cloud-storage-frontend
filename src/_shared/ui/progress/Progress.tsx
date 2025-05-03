@@ -13,6 +13,7 @@ interface ProgressProps extends Omit<ProgressPrimitive.ProgressProps, 'value'> {
 export const Progress: FC<ProgressProps> = ({
   className,
   value,
+  color,
   dir,
   ...props
 }) => {
@@ -25,6 +26,7 @@ export const Progress: FC<ProgressProps> = ({
             dir === 'rtl'
               ? `translateX(${100 - Math.max(value, 1.5)}%)`
               : `translateX(-${100 - Math.max(value, 1.5)}%)`,
+          background: color,
         }}
       />
     </ProgressPrimitive.Root>

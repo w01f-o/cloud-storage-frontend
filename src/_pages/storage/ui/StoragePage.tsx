@@ -1,8 +1,8 @@
 'use client';
 
 import { FC } from 'react';
+import { StorageFileTypeDistribution } from './file-type-distribution/StorageFileTypeDistribution';
 import { StorageDoughnut } from './StorageDoughnut';
-import { StorageFileTypeDistribution } from './StorageFileTypeDistribution';
 import { StorageSummary } from './StorageSummary';
 
 export const StoragePage: FC = () => {
@@ -12,7 +12,7 @@ export const StoragePage: FC = () => {
         <StorageDoughnut />
         <StorageSummary />
       </div>
-      <div className='w-1/3'>
+      <div className='w-1/2'>
         <StorageFileTypeDistribution />
       </div>
     </div>

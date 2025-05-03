@@ -15,7 +15,7 @@ export const ChangeUserNameForm: FC = () => {
       <Input
         size='sm'
         {...register('name')}
-        errorMessage={errors.name?.message}
+        isInvalid={!!errors.name?.message}
         defaultValue={currentName}
       />
       <FadeInOut isVisible={buttonIsVisible}>

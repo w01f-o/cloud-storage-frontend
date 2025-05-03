@@ -65,7 +65,36 @@
     "lastUploadedFiles": "Последние загруженные файлы"
   },
   "StoragePage": {
-    "title": "Моё хранилище"
+    "title": "Моё хранилище",
+    "available": "Доступно",
+    "capacity": "Всего",
+    "used": "Использовано",
+    "resolvedFileType": {
+      "image": "Изображение",
+      "video": "Видео",
+      "audio": "Аудио",
+      "document": "Документ",
+      "text": "Текст",
+      "source_code": "Исходный код",
+      "archive": "Архив",
+      "exe": "Исполняемый файл",
+      "other": "Другое",
+      "model": "3D-модель",
+      "font": "Шрифт",
+      "plural": {
+        "image": "Изображения",
+        "video": "Видео",
+        "audio": "Аудио",
+        "document": "Документы",
+        "text": "Тексты",
+        "source_code": "Исходный код",
+        "archive": "Архивы",
+        "exe": "Исполняемые файлы",
+        "model": "3D-модели",
+        "font": "Шрифты",
+        "other": "Другое"
+      }
+    }
   },
   "SharedFilePage": {
     "title": "Общие файлы"
@@ -88,6 +117,7 @@
       },
       "name": {
         "title": "Изменить имя",
+        "success": "Вы успешно сменили имя",
         "errors": {
           "minLength": "Имя должно быть длиною не менее {minLength} символов",
           "maxLength": "Имя должно быть длиною не более {maxLength} символов"

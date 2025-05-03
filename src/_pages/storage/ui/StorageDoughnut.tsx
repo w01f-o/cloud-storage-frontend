@@ -1,8 +1,10 @@
 'use client';
 
+import { getFileColor } from '@/_entities/file';
 import { useUserStorage } from '@/_entities/storage';
-import { ArcElement, Chart, Legend, Tooltip } from 'chart.js';
-import { useLocale } from 'next-intl';
+import { ArcElement, Chart, ChartData, Legend, Tooltip } from 'chart.js';
+import { useLocale, useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 import prettyBytes from 'pretty-bytes';
 import { FC } from 'react';
 import { Doughnut } from 'react-chartjs-2';
@@ -12,19 +14,24 @@ Chart.register(ArcElement, Tooltip, Legend);
 export const StorageDoughnut: FC = () => {
   const { data: storage } = useUserStorage();
   const locale = useLocale();
+  const t = useTranslations('StoragePage.resolvedFileType.plural');
 
-  const data = storage.files.map(item => item.size);
-  const labels = storage.files.map(item => item.resolvedType);
+  const data = storage.files.map(({ size }) => size);
+  const labels = storage.files.map(({ resolvedType }) => t(resolvedType));
+  const colors = storage.files.map(({ resolvedType }) =>
+    getFileColor(resolvedType)
+  );
+  const { resolvedTheme } = useTheme();
 
-  const doughnutData = {
+  const doughnutData: ChartData<'doughnut', string[] | number[], string> = {
     labels: labels,
     datasets: [
       {
         data: data.length > 0 ? data.map(String) : [1],
-        backgroundColor: 'rgba(161,64,255,0.5)',
-        hoverOffset: 5,
+        backgroundColor: colors,
+        hoverOffset: 0,
         borderRadius: 5,
-        borderColor: '#f1f3f6',
+        borderColor: resolvedTheme === 'light' ? '#ffffff' : '#1a1a1c',
         borderWidth: 1,
       },
     ],
