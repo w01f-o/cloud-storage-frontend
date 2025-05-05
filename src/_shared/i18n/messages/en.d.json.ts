@@ -175,7 +175,69 @@ declare const messages: {
     }
   },
   "HelpPage": {
-    "title": "Help"
+    "title": "Help",
+    "questions": [
+      {
+        "q": "What is cloud storage?",
+        "a": "Cloud storage is a service that allows you to store data online and access it from any device connected to the internet."
+      },
+      {
+        "q": "How secure is my data?",
+        "a": "We use industry-standard encryption and security protocols to protect your data both in transit and at rest."
+      },
+      {
+        "q": "Can I access my files offline?",
+        "a": "Yes, you can mark files for offline access and they will be synced to your device."
+      },
+      {
+        "q": "How much storage do I get for free?",
+        "a": "We offer 10 GB of free storage to all new users. You can upgrade at any time for more space."
+      },
+      {
+        "q": "How do I share files with others?",
+        "a": "You can generate a shareable link or invite users via email with customizable access permissions."
+      },
+      {
+        "q": "Can I recover deleted files?",
+        "a": "Yes, deleted files are moved to the Trash and can be restored within 30 days."
+      },
+      {
+        "q": "What file types are supported?",
+        "a": "Our cloud storage supports all common file types including documents, images, videos, and archives."
+      },
+      {
+        "q": "Is there a mobile app available?",
+        "a": "Yes, our mobile app is available for both iOS and Android, offering full access to your files on the go."
+      },
+      {
+        "q": "How can I upgrade my storage plan?",
+        "a": "You can upgrade your plan at any time from the account settings page under the 'Billing' section."
+      },
+      {
+        "q": "Can I collaborate with others on files?",
+        "a": "Yes, you can grant editing permissions to other users and collaborate in real time on documents."
+      },
+      {
+        "q": "How do I contact support?",
+        "a": "You can contact our support team via the Help Center or by submitting a ticket through your account dashboard."
+      },
+      {
+        "q": "What happens if I exceed my storage limit?",
+        "a": "If you exceed your storage quota, uploads will be paused until you delete files or upgrade your plan."
+      },
+      {
+        "q": "Are there any bandwidth limits?",
+        "a": "There are no limits on bandwidth for standard use, but excessive usage may be subject to fair use policies."
+      },
+      {
+        "q": "Can I use cloud storage for backups?",
+        "a": "Yes, our service is ideal for backing up important files and syncing them across devices."
+      },
+      {
+        "q": "Is version history available?",
+        "a": "Yes, we store previous versions of your files for up to 30 days, allowing you to revert if needed."
+      }
+    ]
   },
   "FolderItem": {
     "contextMenu": {

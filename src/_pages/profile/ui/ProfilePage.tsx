@@ -24,7 +24,7 @@ export const ProfilePage: FC = () => {
           {user!.email}
         </Text>
       </div>
-      <div className='flex justify-between'>
+      <div className='flex justify-between gap-20'>
         <LastUpdatedFolders />
         <LastUploadedFiles />
       </div>

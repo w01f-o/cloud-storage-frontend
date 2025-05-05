@@ -1,6 +1,7 @@
 import { routing } from '@/_shared/i18n';
 import { BaseLayout } from '@/_shared/layouts';
 import { RootProvider } from '@/app/providers';
+import { Chart } from 'chart.js';
 import type { NextPage } from 'next';
 import { hasLocale, Locale } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -24,6 +25,8 @@ export const generateStaticParams = (): Awaited<RootLayoutProps['params']>[] =>
 const nunitoSans: NextFont = Nunito_Sans({
   subsets: ['latin', 'cyrillic'],
 });
+
+Chart.defaults.font.family = nunitoSans.style.fontFamily;
 
 const RootLayout: NextPage<RootLayoutProps> = async ({ children, params }) => {
   const { locale } = await params;

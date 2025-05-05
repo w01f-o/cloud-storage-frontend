@@ -45,11 +45,18 @@ export const StorageDoughnut: FC = () => {
           plugins: {
             tooltip: {
               callbacks: {
-                label: ({ label, parsed }) =>
-                  `${label}: ${prettyBytes(parsed, { locale })}`,
+                label: ({ label, raw }) => {
+                  if (typeof raw === 'string') {
+                    return `${label}: ${prettyBytes(BigInt(raw), { locale })}`;
+                  }
+                },
               },
+              titleFont: { family: 'Nunito Sans' },
+              bodyFont: { family: 'Nunito Sans' },
             },
-            legend: { display: false },
+            legend: {
+              display: false,
+            },
           },
           responsive: true,
           maintainAspectRatio: false,
