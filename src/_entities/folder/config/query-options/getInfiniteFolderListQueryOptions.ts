@@ -1,12 +1,13 @@
 import { fetchInfiniteQueryOptionsFactory } from '@/_shared/lib/query';
-import { InfinitePaginationOptions, PaginatedResult } from '@/_shared/model';
+import { PaginatedResult } from '@/_shared/model';
+import { InfiniteSearchPaginationOptions } from '@/_shared/model/types/pagination.type';
 import { getFolders } from '../../api/requests';
 import { Folder, FolderQueryKeys } from '../../model';
 
 export const getInfiniteFolderListQueryOptions =
   fetchInfiniteQueryOptionsFactory<
     PaginatedResult<Folder>,
-    InfinitePaginationOptions<Folder>
+    Partial<InfiniteSearchPaginationOptions<Folder>>
   >({
     queryKey: [FolderQueryKeys.INFINITE],
     queryFn: (pagination, { signal, pageParam }) =>

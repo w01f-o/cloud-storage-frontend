@@ -4,7 +4,7 @@ export const wrapperVariants = tv({
   base: 'flex flex-col',
   variants: {
     isFullWidth: {
-      false: 'w-60',
+      false: 'min-w-60 max-w-sm',
       true: 'w-full',
     },
   },

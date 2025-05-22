@@ -1,7 +1,7 @@
 import { Folder } from '@/_entities/folder';
 import clsx from 'clsx';
 import { FC, Ref } from 'react';
-import { FolderItem } from './FolderItem';
+import { FolderItem } from './item/FolderItem';
 
 interface FolderListProps {
   folders: Folder[];

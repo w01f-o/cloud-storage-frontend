@@ -1,14 +1,15 @@
 import { suspenseInfiniteQueryHookFactory } from '@/_shared/lib';
-import { InfinitePaginationOptions, PaginatedResult } from '@/_shared/model';
+import { PaginatedResult } from '@/_shared/model';
+import { InfiniteSearchPaginationOptions } from '@/_shared/model/types/pagination.type';
 import { getFolders } from '../../api/requests';
 import { FolderQueryKeys } from '../../model/enums/query-keys.enum';
 import { Folder } from '../../model/types/folder.type';
 
 export const useInfiniteFolderList = suspenseInfiniteQueryHookFactory<
   PaginatedResult<Folder>,
-  Partial<InfinitePaginationOptions<Folder>>
+  Partial<InfiniteSearchPaginationOptions<Folder>>
 >({
-  queryKey: [FolderQueryKeys.INFINITE],
+  queryKey: pagination => [FolderQueryKeys.INFINITE, pagination],
   queryFn: (pagination, { signal, pageParam }) =>
     getFolders({ ...pagination, page: pageParam }, { signal }),
   getNextPageParam: lastPage => lastPage.meta.next,

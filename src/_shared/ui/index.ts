@@ -8,6 +8,7 @@ export { FadeIn, FadeInOut } from './animations';
 export { Avatar } from './avatar';
 export { Button } from './button';
 export { Caption } from './caption';
+export { ColorPicker } from './color-picker';
 export {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -25,7 +26,7 @@ export {
   ContextMenuTrigger,
 } from './context-menu';
 export { Heading } from './heading';
-export { IconCloud, IconFolder, IconFullLogo } from './icons';
+export { IconCloud, IconFile, IconFolder, IconFullLogo } from './icons';
 export { Image } from './image';
 export { Input } from './input';
 export { DesktopOnly, MobileOnly } from './mobile';
@@ -41,6 +42,12 @@ export {
   ModalTitle,
   ModalTrigger,
 } from './modal';
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+} from './popover';
 export {
   Select,
   SelectContent,

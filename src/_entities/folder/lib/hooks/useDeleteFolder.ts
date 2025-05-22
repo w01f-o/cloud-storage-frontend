@@ -1,5 +1,9 @@
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { deleteFolder } from '../../api/requests';
 import { FolderQueryKeys } from '../../model';
@@ -35,6 +39,13 @@ export const useDeleteFolder = ({
           Array.isArray(query.queryKey) &&
           query.queryKey[0] === FolderQueryKeys.LIST,
       });
+      const previousFolderInfiniteList = queryClient.getQueriesData<
+        InfiniteData<PaginatedResult<Folder>>
+      >({
+        predicate: query =>
+          Array.isArray(query.queryKey) &&
+          query.queryKey[0] === FolderQueryKeys.INFINITE,
+      });
       const previousFolder = queryClient.getQueriesData<Folder | undefined>({
         queryKey: [FolderQueryKeys.FIND_ONE, id],
       });
@@ -59,8 +70,26 @@ export const useDeleteFolder = ({
           };
         }
       );
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FolderQueryKeys.INFINITE,
+        },
+        (old: InfiniteData<PaginatedResult<Folder>> | undefined) => {
+          if (!old) return old;
 
-      return { previousFolderList, previousFolder };
+          return {
+            ...old,
+            pages: old.pages.map(page => ({
+              ...page,
+              list: page.list.filter(folder => folder.id !== id),
+            })),
+          };
+        }
+      );
+
+      return { previousFolderList, previousFolderInfiniteList, previousFolder };
     },
     onSettled: async (data, error, variables, context) => {
       await invalidateFolderListQueries(queryClient);
@@ -71,7 +100,8 @@ export const useDeleteFolder = ({
       if (
         context instanceof Object &&
         'previousFolder' in context &&
-        'previousFolderList' in context
+        'previousFolderList' in context &&
+        'previousFolderInfiniteList' in context
       ) {
         queryClient.setQueriesData(
           {
@@ -80,6 +110,14 @@ export const useDeleteFolder = ({
               query.queryKey[0] === FolderQueryKeys.LIST,
           },
           context.previousFolderList
+        );
+        queryClient.setQueriesData(
+          {
+            predicate: query =>
+              Array.isArray(query.queryKey) &&
+              query.queryKey[0] === FolderQueryKeys.INFINITE,
+          },
+          context.previousFolderInfiniteList
         );
         queryClient.setQueriesData(
           { queryKey: [FolderQueryKeys.FIND_ONE, id] },

@@ -1,5 +1,9 @@
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { updateFolder } from '../../api/requests';
 import { FolderQueryKeys } from '../../model';
@@ -41,6 +45,13 @@ export const useUpdateFolder = ({
             Array.isArray(query.queryKey) &&
             query.queryKey[0] === FolderQueryKeys.LIST,
         });
+        const previousFolderInfiniteList = queryClient.getQueriesData<
+          InfiniteData<PaginatedResult<Folder>>
+        >({
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FolderQueryKeys.INFINITE,
+        });
         const previousFolder = queryClient.getQueriesData<Folder | undefined>({
           queryKey: [FolderQueryKeys.FIND_ONE, id],
         });
@@ -52,15 +63,13 @@ export const useUpdateFolder = ({
           (old: Folder) => ({ ...old, ...data })
         );
 
-        queryClient.setQueriesData(
+        queryClient.setQueriesData<PaginatedResult<Folder>>(
           {
             predicate: query =>
               Array.isArray(query.queryKey) &&
               query.queryKey[0] === FolderQueryKeys.LIST,
           },
-          (
-            old: PaginatedResult<Folder> | undefined
-          ): PaginatedResult<Folder> | undefined => {
+          old => {
             if (!old) return old;
 
             return {
@@ -72,8 +81,30 @@ export const useUpdateFolder = ({
           }
         );
 
+        queryClient.setQueriesData<InfiniteData<PaginatedResult<Folder>>>(
+          {
+            predicate: query =>
+              Array.isArray(query.queryKey) &&
+              query.queryKey[0] === FolderQueryKeys.INFINITE,
+          },
+          old => {
+            if (!old) return old;
+
+            return {
+              ...old,
+              pages: old.pages.map(page => ({
+                ...page,
+                list: page.list.map(folder =>
+                  folder.id === id ? { ...folder, ...data } : folder
+                ),
+              })),
+            };
+          }
+        );
+
         return {
           previousFolderList,
+          previousFolderInfiniteList,
           previousFolder,
         };
       },
@@ -89,7 +120,8 @@ export const useUpdateFolder = ({
         if (
           context instanceof Object &&
           'previousFolder' in context &&
-          'previousFolderList' in context
+          'previousFolderList' in context &&
+          'previousFolderInfiniteList' in context
         ) {
           queryClient.setQueriesData(
             {
@@ -98,6 +130,14 @@ export const useUpdateFolder = ({
                 query.queryKey[0] === FolderQueryKeys.LIST,
             },
             context.previousFolderList
+          );
+          queryClient.setQueriesData(
+            {
+              predicate: query =>
+                Array.isArray(query.queryKey) &&
+                query.queryKey[0] === FolderQueryKeys.INFINITE,
+            },
+            context.previousFolderInfiniteList
           );
           queryClient.setQueriesData(
             { queryKey: [FolderQueryKeys.FIND_ONE, variables.id] },

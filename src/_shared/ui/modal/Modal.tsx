@@ -104,7 +104,6 @@ export const ModalContent = forwardRef<
               />
             </ModalPrimitive.Overlay>
             <ModalPrimitive.Content
-              ref={ref}
               className={clsx(
                 'fixed inset-0 z-50 flex h-dvh w-screen justify-center overflow-y-auto',
                 {
@@ -132,6 +131,7 @@ export const ModalContent = forwardRef<
                   duration: 0.2,
                   ease: 'easeOut',
                 }}
+                ref={ref}
                 {...contentMotionProps}
               >
                 {children}

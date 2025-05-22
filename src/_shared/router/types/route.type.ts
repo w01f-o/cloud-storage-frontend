@@ -5,5 +5,6 @@ export interface Route {
   path: RoutePaths;
   name?: keyof Messages['Navbar'];
   requiresAuth?: boolean;
-  showInNavbar?: boolean;
+  inNavbar?: boolean;
+  isVisibleInNavbar?: boolean;
 }

@@ -1,6 +1,6 @@
-import { FC, HTMLAttributes } from 'react';
+import { FC, SVGAttributes } from 'react';
 
-type IconFullLogoProps = HTMLAttributes<HTMLOrSVGElement>;
+type IconFullLogoProps = SVGAttributes<HTMLOrSVGElement>;
 
 export const IconFullLogo: FC<IconFullLogoProps> = ({ ...props }) => {
   return (

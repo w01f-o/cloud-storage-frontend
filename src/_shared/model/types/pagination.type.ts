@@ -1,4 +1,4 @@
-interface PaginatedResult<T> {
+export interface PaginatedResult<T> {
   list: T[];
   meta: {
     total: number;
@@ -10,14 +10,19 @@ interface PaginatedResult<T> {
   };
 }
 
-interface PaginationOptions<T> {
+export interface PaginationOptions<T> {
   page: number;
   perPage: number;
-  // TODO: add types for sortBy
   sortBy: keyof T;
   sortOrder: 'asc' | 'desc';
 }
 
-type InfinitePaginationOptions<T> = Omit<PaginationOptions<T>, 'page'>;
+export interface SearchPaginationOptions<T> extends PaginationOptions<T> {
+  search: string;
+}
 
-export type { InfinitePaginationOptions, PaginatedResult, PaginationOptions };
+export type InfinitePaginationOptions<T> = Omit<PaginationOptions<T>, 'page'>;
+export type InfiniteSearchPaginationOptions<T> =
+  InfinitePaginationOptions<T> & {
+    search: string | null;
+  };

@@ -28,6 +28,25 @@ export const getFiles = async (
   };
 };
 
+export const getFilesByFolder = async (
+  folderId: string,
+  params?: Partial<PaginationOptions<FileEntity>>,
+  options?: RequestOptions
+): Promise<PaginatedResult<FileEntity>> => {
+  const { data } = await authApiClient.get<PaginatedResult<FileEntity>>(
+    `${ENDPOINT}/folder/${folderId}`,
+    {
+      signal: options?.signal,
+      params,
+    }
+  );
+
+  return {
+    list: data.list.map(deserializeFile),
+    meta: data.meta,
+  };
+};
+
 export const getFileById = async (
   id: string,
   options?: RequestOptions
@@ -59,6 +78,10 @@ export const uploadFile = async (
   });
 
   return deserializeFile(data);
+};
+
+export const getDownloadFileLink = (id: string): string => {
+  return `${authApiClient.defaults.baseURL!}${ENDPOINT}/download/${id}`;
 };
 
 export const updateFile = async (

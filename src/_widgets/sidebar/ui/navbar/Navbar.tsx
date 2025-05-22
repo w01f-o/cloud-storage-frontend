@@ -32,32 +32,21 @@ export const Navbar: FC = () => {
       )}
       <ul className='flex flex-col gap-2 pr-4 pl-2.5'>
         {RouterConfig.getNavBarRoutes().map(route => {
-          const isSettingsActive =
-            route.path === RoutePaths.SETTINGS &&
-            pathname.startsWith(RoutePaths.SETTINGS);
+          const isActive =
+            pathname === route.path ||
+            (route.path.startsWith(RoutePaths.SETTINGS_GENERAL) &&
+              pathname.startsWith(RoutePaths.SETTINGS));
 
-          if (isSettingsActive) {
-            return (
+          return (
+            route.isVisibleInNavbar && (
               <NavItem
                 path={route.path}
                 title={t(route.name)}
                 key={route.path}
-                ref={activeElementRef}
-                isActive
+                ref={isActive ? activeElementRef : undefined}
+                isActive={isActive}
               />
-            );
-          }
-
-          const isActive = pathname === route.path;
-
-          return (
-            <NavItem
-              path={route.path}
-              title={t(route.name)}
-              key={route.path}
-              ref={isActive ? activeElementRef : undefined}
-              isActive={isActive}
-            />
+            )
           );
         })}
       </ul>

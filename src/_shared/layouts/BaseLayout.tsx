@@ -27,7 +27,7 @@ export const BaseLayout: FC<PropsWithChildren> = async ({ children }) => {
         <MobileNavbar />
       </MobileOnly>
       <main className='bg-background lg:bg-content lg:rounded-content relative flex h-full max-w-[1355px] flex-grow flex-col overflow-hidden pt-16 pb-7 transition-colors'>
-        <PageTitle className='px-12' />
+        <PageTitle />
         <ScrollContainer>
           <div className='size-full px-12'>{children}</div>
         </ScrollContainer>

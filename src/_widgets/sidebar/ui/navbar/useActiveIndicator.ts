@@ -38,7 +38,9 @@ export const useActiveIndicator = ({
 
   const updateIndicatorPosition = useDebounceCallback(() => {
     if (
-      RouterConfig.getNavBarRoutes().every(route => route.path !== pathname)
+      RouterConfig.getNavBarRoutes().every(
+        route => route.path !== pathname && !route.isVisibleInNavbar
+      )
     ) {
       return setActiveIndicatorStyles(null);
     }

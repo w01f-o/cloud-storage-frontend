@@ -1,8 +1,10 @@
-import { UserAccountDeleter } from '@/_features/user-account-deleter';
-import { UserAvatarChanger } from '@/_features/user-avatar-changer';
-import { UserEmailChanger } from '@/_features/user-email-changer';
-import { UserNameChanger } from '@/_features/user-name-changer';
-import { UserPasswordChanger } from '@/_features/user-password-changer';
+import {
+  UserAccountDeleter,
+  UserAvatarChanger,
+  UserEmailChanger,
+  UserNameChanger,
+  UserPasswordChanger,
+} from '@/_features/user';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import { SettingsGroup } from '../SettingsGroup';

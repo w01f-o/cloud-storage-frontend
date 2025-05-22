@@ -1,32 +1,17 @@
 'use client';
 
-import { useFolder } from '@/_entities/folder';
 import { usePathname } from '@/_shared/i18n';
 import { RoutePaths, RouterConfig } from '@/_shared/router';
 import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
-import { FC, HTMLAttributes } from 'react';
+import { FC } from 'react';
 import { tv } from 'tailwind-variants';
 
-export const PageTitle: FC<HTMLAttributes<HTMLHeadingElement>> = ({
-  className,
-  ...props
-}) => {
+export const PageTitle: FC = () => {
   const t = useTranslations();
   const pathname = usePathname();
-  const params = useParams<{ id: string | undefined }>();
-  const { data: folderName } = useFolder(
-    { id: params.id! },
-    {
-      enabled: !!params.id && !!pathname.startsWith(RoutePaths.FOLDER),
-      select: data => data.name,
-    }
-  );
 
   const title = (() => {
-    if (pathname.startsWith(RoutePaths.FOLDER)) {
-      return folderName;
-    }
+    if (pathname.startsWith(RoutePaths.FOLDER)) return null;
 
     if (pathname.startsWith(RoutePaths.SETTINGS)) {
       const tab = pathname.split('/').pop();
@@ -52,13 +37,8 @@ export const PageTitle: FC<HTMLAttributes<HTMLHeadingElement>> = ({
   })();
 
   return (
-    !!title && (
-      <h1
-        className={tv({ base: 'text-4xl font-bold' })({ className })}
-        {...props}
-      >
-        {title}
-      </h1>
+    title && (
+      <h1 className={tv({ base: 'px-12 text-4xl font-bold' })()}>{title}</h1>
     )
   );
 };

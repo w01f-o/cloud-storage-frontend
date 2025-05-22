@@ -1,4 +1,4 @@
-import { LogoutButton } from '@/_features/logout-button';
+import { LogoutButton } from '@/_features/auth';
 import { FC } from 'react';
 import { CurrentUser } from './current-user/CurrentUser';
 import { Navbar } from './navbar/Navbar';

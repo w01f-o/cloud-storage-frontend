@@ -237,13 +237,13 @@
       ]
     },
     "FolderItem": {
-    "contextMenu": {
-      "open": "Открыть",
-      "delete": "Удалить",
-      "properties": "Свойства"
-    },
-    "modal": {
-      "title": "Свойства"
+      "contextMenu": {
+        "open": "Открыть",
+        "delete": "Удалить",
+        "properties": "Свойства"
+      },
+      "modal": {
+        "title": "Свойства"
+      }
     }
-  }
 }

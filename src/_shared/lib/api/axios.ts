@@ -72,16 +72,14 @@ authApiClient.interceptors.response.use(
       } else {
         refreshPromise = refreshTokens();
         await refreshPromise;
-
-        if (isServer) {
-          originalRequest.headers.Authorization = `Bearer ${(await refreshPromise).accessToken}`;
-        }
-
-        refreshPromise = null;
       }
-    } catch {
-      refreshPromise = null;
 
+      if (isServer) {
+        originalRequest.headers.Authorization = `Bearer ${(await refreshPromise).accessToken}`;
+      }
+
+      refreshPromise = null;
+    } catch {
       if (!isServer) {
         await logout();
 

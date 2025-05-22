@@ -6,75 +6,84 @@ export class RouterConfig {
   private static readonly routes: Record<RoutePaths, Route> = {
     [RoutePaths.WELCOME]: {
       path: RoutePaths.WELCOME,
-      showInNavbar: false,
+      inNavbar: false,
     },
     [RoutePaths.HOME]: {
       path: RoutePaths.HOME,
       name: 'home',
       requiresAuth: true,
-      showInNavbar: true,
+      inNavbar: true,
+      isVisibleInNavbar: true,
     },
     [RoutePaths.PROFILE]: {
       path: RoutePaths.PROFILE,
       name: 'profile',
       requiresAuth: true,
-      showInNavbar: true,
+      inNavbar: true,
+      isVisibleInNavbar: true,
     },
     [RoutePaths.STORAGE]: {
       path: RoutePaths.STORAGE,
       name: 'storage',
       requiresAuth: true,
-      showInNavbar: true,
+      inNavbar: true,
+      isVisibleInNavbar: true,
     },
     [RoutePaths.SHARED]: {
       path: RoutePaths.SHARED,
       name: 'shared',
       requiresAuth: true,
-      showInNavbar: true,
+      inNavbar: true,
+      isVisibleInNavbar: true,
     },
     [RoutePaths.SETTINGS]: {
       path: RoutePaths.SETTINGS_GENERAL,
       name: 'settings',
-      showInNavbar: true,
+      inNavbar: true,
+      isVisibleInNavbar: true,
     },
     [RoutePaths.SETTINGS_GENERAL]: {
       path: RoutePaths.SETTINGS_GENERAL,
       name: 'settingsGeneral',
-      showInNavbar: false,
+      inNavbar: true,
+      isVisibleInNavbar: false,
     },
     [RoutePaths.SETTINGS_ACCOUNT]: {
       path: RoutePaths.SETTINGS_ACCOUNT,
       name: 'settingsAccount',
-      showInNavbar: false,
+      inNavbar: true,
       requiresAuth: true,
+      isVisibleInNavbar: false,
     },
     [RoutePaths.SETTINGS_APPEARANCE]: {
       path: RoutePaths.SETTINGS_APPEARANCE,
       name: 'settingsAppearance',
-      showInNavbar: false,
+      inNavbar: true,
+      isVisibleInNavbar: false,
     },
     [RoutePaths.HELP]: {
       path: RoutePaths.HELP,
       name: 'help',
-      showInNavbar: true,
+      inNavbar: true,
+      isVisibleInNavbar: true,
     },
     [RoutePaths.LOGIN]: {
       path: RoutePaths.LOGIN,
-      showInNavbar: false,
+      inNavbar: false,
     },
     [RoutePaths.REGISTER]: {
       path: RoutePaths.REGISTER,
-      showInNavbar: false,
+      inNavbar: false,
     },
     [RoutePaths.FOLDER]: {
       path: RoutePaths.FOLDER,
       requiresAuth: true,
-      showInNavbar: false,
+      inNavbar: false,
     },
     [RoutePaths.ACTIVATE]: {
       path: RoutePaths.ACTIVATE,
       requiresAuth: true,
-      showInNavbar: false,
+      inNavbar: false,
     },
   } as const;
 
@@ -83,14 +92,14 @@ export class RouterConfig {
   }
 
   static getNavBarRoutes(): Array<
-    Route & { showInNavbar: true; name: keyof Messages['Navbar'] }
+    Route & { inNavbar: true; name: keyof Messages['Navbar'] }
   > {
     const isNavbarRoute = (
       route: Route
     ): route is Route & {
-      showInNavbar: true;
+      inNavbar: true;
       name: keyof Messages['Navbar'];
-    } => !!route.showInNavbar && !!route.name;
+    } => !!route.inNavbar && !!route.name;
 
     return Object.values(this.routes).filter(isNavbarRoute);
   }

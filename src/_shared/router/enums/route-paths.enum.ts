@@ -1,4 +1,4 @@
-export const enum RoutePaths {
+export enum RoutePaths {
   WELCOME = '/welcome',
   HOME = '/',
   PROFILE = '/profile',
