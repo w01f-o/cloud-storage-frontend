@@ -1,6 +1,6 @@
 import { File } from '@/_entities/file';
 import { FC, Ref } from 'react';
-import { FileItem } from './FileItem';
+import { FileItem } from './item/FileItem';
 
 interface FileListProps {
   list: File[];

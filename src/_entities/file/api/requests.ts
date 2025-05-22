@@ -59,23 +59,27 @@ export const getFileById = async (
 };
 
 export const uploadFile = async (
-  file: File,
+  { file, folderId }: { file: File; folderId: string },
   options?: RequestOptions & { onProgress?: (progress: number) => void }
 ): Promise<FileEntity> => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const { data } = await authApiClient.post<FileEntity>(ENDPOINT, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-    signal: options?.signal,
-    onUploadProgress: progress => {
-      if (progress.total) {
-        const percent = Math.round((progress.loaded * 100) / progress.total);
+  const { data } = await authApiClient.post<FileEntity>(
+    `${ENDPOINT}/folder/${folderId}`,
+    formData,
+    {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      signal: options?.signal,
+      onUploadProgress: progress => {
+        if (progress.total) {
+          const percent = Math.round((progress.loaded * 100) / progress.total);
 
-        options?.onProgress?.(percent);
-      }
-    },
-  });
+          options?.onProgress?.(percent);
+        }
+      },
+    }
+  );
 
   return deserializeFile(data);
 };

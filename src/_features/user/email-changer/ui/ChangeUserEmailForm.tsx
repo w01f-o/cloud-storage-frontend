@@ -1,15 +1,26 @@
 'use client';
 
-import { useSession } from '@/_entities/auth';
-import { Input } from '@/_shared/ui';
+import { Button, FadeInOut, Input } from '@/_shared/ui';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import { useChangeEmailForm } from '../model/hooks/useChangeEmailForm';
 
 export const ChangeUserEmailForm: FC = () => {
-  const user = useSession();
+  const { errors, register, submitHandler, buttonIsVisible, currentEmail } =
+    useChangeEmailForm();
+  const t = useTranslations('SettingsPage.account.email');
 
   return (
-    <form>
-      <Input size='sm' defaultValue={user?.email} />
+    <form className='flex gap-2' onSubmit={submitHandler}>
+      <Input
+        size='sm'
+        {...register('email')}
+        isInvalid={!!errors.email?.message}
+        defaultValue={currentEmail}
+      />
+      <FadeInOut isVisible={buttonIsVisible}>
+        <Button className='mt-1'>{t('title')}</Button>
+      </FadeInOut>
     </form>
   );
 };

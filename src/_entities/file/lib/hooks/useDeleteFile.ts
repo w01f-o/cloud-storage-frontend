@@ -1,5 +1,12 @@
+import { invalidateSharedFileListQueries } from '@/_entities/shared-file/lib/utils/invalidate-shared-file-list-queries';
+import { SharedFileQueryKeys } from '@/_entities/shared-file/model/enums/query-keys.enum';
+import { SharedFile } from '@/_entities/shared-file/model/types/shared-file.type';
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { deleteFile } from '../../api/requests';
 import { FileMutationKeys } from '../../model/enums/mutation-keys.enum';
@@ -35,12 +42,22 @@ export const useDeleteFile = ({
           Array.isArray(query.queryKey) &&
           query.queryKey[0] === FileQueryKeys.LIST,
       });
+      const previousInfiniteFolderFileList = queryClient.getQueriesData<
+        InfiniteData<PaginatedResult<File>> | undefined
+      >({
+        predicate: query =>
+          Array.isArray(query.queryKey) &&
+          query.queryKey[0] === FileQueryKeys.INFINITE_FOLDER_LIST,
+      });
       const previousFile = queryClient.getQueriesData<File | undefined>({
         queryKey: [FileQueryKeys.FIND_ONE, id],
       });
 
       queryClient.removeQueries({
         queryKey: [FileQueryKeys.FIND_ONE, id],
+      });
+      queryClient.removeQueries({
+        queryKey: [SharedFileQueryKeys.FIND_ONE, id],
       });
       queryClient.setQueriesData(
         {
@@ -59,11 +76,45 @@ export const useDeleteFile = ({
           };
         }
       );
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FileQueryKeys.INFINITE_FOLDER_LIST,
+        },
+        (old: InfiniteData<PaginatedResult<File>> | undefined) => {
+          if (!old) return old;
 
-      return { previousFileList, previousFile };
+          return {
+            ...old,
+            pages: old.pages.map(page => ({
+              ...page,
+              list: page.list.filter(file => file.id !== id),
+            })),
+          };
+        }
+      );
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === SharedFileQueryKeys.LIST,
+        },
+        (old: PaginatedResult<SharedFile> | undefined) => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            list: old.list.filter(file => file.id !== id),
+          };
+        }
+      );
+
+      return { previousFileList, previousFile, previousInfiniteFolderFileList };
     },
-    onSettled: async (data, error, variables, context) => {
-      await invalidateFileListQueries(queryClient);
+    onSettled: (data, error, variables, context) => {
+      invalidateFileListQueries(queryClient);
+      invalidateSharedFileListQueries(queryClient);
 
       onSettled?.(data, error, variables, context);
     },
@@ -71,7 +122,8 @@ export const useDeleteFile = ({
       if (
         context instanceof Object &&
         'previousFile' in context &&
-        'previousFileList' in context
+        'previousFileList' in context &&
+        'previousInfiniteFolderFileList' in context
       ) {
         queryClient.setQueriesData(
           {

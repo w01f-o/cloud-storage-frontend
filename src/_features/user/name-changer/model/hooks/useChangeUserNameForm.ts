@@ -44,11 +44,11 @@ export const useChangeUserNameForm = () => {
   };
 
   return {
-    buttonIsVisible: watch('name') !== user!.name,
+    buttonIsVisible: watch('name') !== user?.name,
     register,
     submitHandler: handleSubmit(submitHandler, errorHandler),
     errors,
     isPending,
-    currentName: user!.name,
+    currentName: user?.name,
   };
 };

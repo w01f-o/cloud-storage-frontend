@@ -9,6 +9,7 @@ interface User {
 type UpdateUserDto = Partial<
   Pick<User, 'name' | 'email'> & {
     password?: string;
+    oldPassword?: string;
     avatar?: File;
   }
 >;

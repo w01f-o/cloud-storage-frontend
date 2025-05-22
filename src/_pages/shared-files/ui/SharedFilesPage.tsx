@@ -1,5 +1,18 @@
+'use client';
+
+import { useSharedFileList } from '@/_entities/shared-file/lib/hooks/useSharedFileList';
+import { FileList } from '@/_widgets/file';
 import { FC } from 'react';
 
 export const SharedFilesPage: FC = () => {
-  return <></>;
+  const { data } = useSharedFileList(
+    {},
+    { select: data => data.list.map(file => file.file) }
+  );
+
+  return (
+    <>
+      <FileList list={data} />
+    </>
+  );
 };

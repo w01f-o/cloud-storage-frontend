@@ -54,7 +54,7 @@ export const ColorPicker: FC<ColorPickerProps> = ({
   );
 
   return (
-    <div className='border-primary relative overflow-hidden rounded-full border shadow-2xl *:size-8'>
+    <div className='border-primary relative shrink-0 overflow-hidden rounded-full border shadow-2xl *:size-8'>
       <input
         type='color'
         className='absolute cursor-pointer opacity-0'

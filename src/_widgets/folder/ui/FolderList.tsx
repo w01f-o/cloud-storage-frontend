@@ -16,7 +16,7 @@ export const FolderList: FC<FolderListProps> = ({
 }) => {
   return (
     <div
-      className={clsx('grid gap-5 py-4', {
+      className={clsx('grid gap-5', {
         'grid-cols-3': perRow === 3,
         'grid-cols-6': perRow === 6,
       })}

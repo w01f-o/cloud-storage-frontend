@@ -3,7 +3,7 @@ import { UpdateUserDto, User } from '../model/types/user.type';
 
 const ENDPOINT: string = '/user';
 
-export const updateUser = async (dto: UpdateUserDto) => {
+export const updateUser = async (dto: UpdateUserDto): Promise<User> => {
   const formData = new FormData();
 
   Object.entries(dto).forEach(([key, value]) => {
@@ -17,7 +17,7 @@ export const updateUser = async (dto: UpdateUserDto) => {
   return data;
 };
 
-export const deleteUser = async () => {
+export const deleteUser = async (): Promise<User> => {
   const { data } = await authApiClient.delete<User>(ENDPOINT);
 
   return data;
