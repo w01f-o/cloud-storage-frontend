@@ -16,7 +16,7 @@ export const FileDistributionItem: FC<FileDistributionItemProps> = ({
 }) => {
   const convertToMb = (size: bigint) => Number(size / 1024n / 1024n);
   const locale = useLocale();
-  const t = useTranslations('StoragePage.resolvedFileType.plural');
+  const t = useTranslations('resolvedFileType.plural');
 
   return (
     <div className='flex items-center justify-between'>

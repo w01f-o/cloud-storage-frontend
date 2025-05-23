@@ -11,8 +11,8 @@ export const SharedFilesPage: FC = () => {
   );
 
   return (
-    <>
+    <div className='py-6'>
       <FileList list={data} />
-    </>
+    </div>
   );
 };

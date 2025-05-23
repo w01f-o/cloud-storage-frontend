@@ -7,7 +7,7 @@ import { FC } from 'react';
 
 export const LogoutButton: FC = () => {
   const user = useSession();
-  const { mutate: logout } = useLogout();
+  const { mutate: logout, isPending } = useLogout();
 
   if (!user) return <div className='h-12'></div>;
 
@@ -26,6 +26,7 @@ export const LogoutButton: FC = () => {
         className='font-semibold'
         startContent={<IconLogout />}
         onClick={clickHandler}
+        isLoading={isPending}
       >
         Выйти
       </Button>

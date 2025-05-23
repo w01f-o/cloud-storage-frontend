@@ -6,9 +6,14 @@ import { FC, ReactNode } from 'react';
 interface FadeInOutProps {
   isVisible: boolean;
   children: ReactNode;
+  className?: string;
 }
 
-export const FadeInOut: FC<FadeInOutProps> = ({ isVisible, children }) => {
+export const FadeInOut: FC<FadeInOutProps> = ({
+  isVisible,
+  children,
+  className,
+}) => {
   return (
     <AnimatePresence>
       {isVisible && (
@@ -17,6 +22,7 @@ export const FadeInOut: FC<FadeInOutProps> = ({ isVisible, children }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1, ease: 'easeOut' }}
+          className={className}
         >
           {children}
         </motion.div>

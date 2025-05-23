@@ -7,7 +7,7 @@ interface FolderListLoader {
 
 export const FolderListLoader: FC<FolderListLoader> = ({ length = 36 }) => {
   return (
-    <div className='grid grid-cols-6 gap-5 py-4'>
+    <div className='grid grid-cols-6 gap-5'>
       {Array.from({ length }).map((_, index) => (
         <Skeleton key={index} wrapperClassName='h-32 rounded-2xl' />
       ))}

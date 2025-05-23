@@ -18,7 +18,9 @@ export const LastUpdatedFolders: FC = () => {
   return (
     <div className='w-1/2'>
       <Heading as='h3'>{t('lastUpdatedFolders')}</Heading>
-      <FolderList folders={data} perRow={3} />
+      <div className='py-4'>
+        <FolderList folders={data} perRow={3} />
+      </div>
     </div>
   );
 };

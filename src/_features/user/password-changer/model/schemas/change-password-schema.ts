@@ -3,31 +3,33 @@ import { createTranslator, Messages } from 'next-intl';
 import { z } from 'zod';
 
 export const changePasswordSchema = (
-  t: ReturnType<typeof createTranslator<Messages, 'AuthPage'>>
+  t: ReturnType<
+    typeof createTranslator<Messages, 'SettingsPage.account.password'>
+  >
 ) =>
   z
     .object({
       currentPassword: z
         .string()
         .min(MIN_PASSWORD_LENGTH, {
-          message: t('errors.passwordMinLength', {
+          message: t('errors.minLength', {
             minLength: String(MIN_PASSWORD_LENGTH),
           }),
         })
         .max(MAX_PASSWORD_LENGTH, {
-          message: t('errors.passwordMaxLength', {
+          message: t('errors.maxLength', {
             maxLength: String(MAX_PASSWORD_LENGTH),
           }),
         }),
       newPassword: z
         .string()
         .min(MIN_PASSWORD_LENGTH, {
-          message: t('errors.passwordMinLength', {
+          message: t('errors.minLength', {
             minLength: String(MIN_PASSWORD_LENGTH),
           }),
         })
         .max(MAX_PASSWORD_LENGTH, {
-          message: t('errors.passwordMaxLength', {
+          message: t('errors.maxLength', {
             maxLength: String(MAX_PASSWORD_LENGTH),
           }),
         }),
@@ -36,7 +38,7 @@ export const changePasswordSchema = (
     .refine(
       ({ newPassword, confirmPassword }) => newPassword === confirmPassword,
       {
-        message: t('errors.passwordsNotMatch'),
+        message: t('errors.notMatch'),
         path: ['confirmPassword'],
       }
     );

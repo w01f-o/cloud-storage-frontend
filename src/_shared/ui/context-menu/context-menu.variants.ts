@@ -7,7 +7,7 @@ const interactiveStyles =
   'cursor-pointer relative flex items-center data-[disabled]:pointer-events-none data-[disabled]:opacity-50';
 
 const contentBaseStyles =
-  'bg-content text-foreground z-50 min-w-[12rem] origin-[--radix-context-menu-content-transform-origin] overflow-hidden rounded-md shadow-xl';
+  'bg-background text-foreground z-50 min-w-[12rem] origin-[--radix-context-menu-content-transform-origin] overflow-hidden rounded-md shadow-xl';
 
 const dangerStyles = 'text-danger';
 

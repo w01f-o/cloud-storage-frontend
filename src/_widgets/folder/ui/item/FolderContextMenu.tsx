@@ -24,23 +24,21 @@ export const FolderContextMenu: FC<FolderContextMenuProps> = ({
   onDelete,
   onOpenProperties,
 }) => {
-  const t = useTranslations('FolderItem');
+  const t = useTranslations('FolderItem.contextMenu');
 
   return (
     <ContextMenu>
       <ContextMenuTrigger>{children}</ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem asChild>
-          <Link href={RouterConfig.getFolderPath(id)}>
-            {t('contextMenu.open')}
-          </Link>
+          <Link href={RouterConfig.getFolderPath(id)}>{t('open')}</Link>
         </ContextMenuItem>
         <ContextMenuItem isDanger onSelect={onDelete}>
-          {t('contextMenu.delete')}
+          {t('delete')}
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem onSelect={onOpenProperties}>
-          {t('contextMenu.properties')}
+          {t('properties')}
         </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>

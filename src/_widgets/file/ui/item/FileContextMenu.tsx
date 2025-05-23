@@ -1,4 +1,5 @@
-import { File, getDownloadFileLink } from '@/_entities/file';
+import { File } from '@/_entities/file';
+import { downloadFile } from '@/_entities/file/api/requests';
 import {
   ContextMenu,
   ContextMenuContent,
@@ -6,6 +7,7 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '@/_shared/ui';
+import { useTranslations } from 'next-intl';
 import { FC, ReactNode } from 'react';
 
 interface FileContextMenuProps {
@@ -24,25 +26,25 @@ export const FileContextMenu: FC<FileContextMenuProps> = ({
   children,
 }) => {
   const downloadClickHandler = () => {
-    const link = document.createElement('a');
-    link.href = getDownloadFileLink(file.id);
-    link.download = file.originalName;
-    link.click();
+    downloadFile(file);
   };
+  const t = useTranslations('FileItem.contextMenu');
 
   return (
     <ContextMenu>
       <ContextMenuTrigger>{children}</ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem onSelect={downloadClickHandler}>
-          Download
+          {t('download')}
         </ContextMenuItem>
-        <ContextMenuItem onSelect={openShare}>Share</ContextMenuItem>
+        <ContextMenuItem onSelect={openShare}>{t('share')}</ContextMenuItem>
         <ContextMenuItem isDanger onSelect={openConfirmDelete}>
-          Delete
+          {t('delete')}
         </ContextMenuItem>
         <ContextMenuSeparator />
-        <ContextMenuItem onSelect={openProperties}>Properties</ContextMenuItem>
+        <ContextMenuItem onSelect={openProperties}>
+          {t('properties')}
+        </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   );

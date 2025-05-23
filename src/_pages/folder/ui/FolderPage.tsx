@@ -24,10 +24,12 @@ export const FolderPage: FC = () => {
   });
 
   return (
-    <DropzoneFileUploader folderId={id} withIcon>
-      <h1 className='pb-6 text-4xl font-bold'>{folderName}</h1>
-      <FileList list={data} cursorRef={cursorRef} />
-      {isFetchingNextPage && <FileListLoader />}
-    </DropzoneFileUploader>
+    <div className='flex size-full flex-col'>
+      <DropzoneFileUploader folderId={id} withIcon>
+        <h1 className='pb-6 text-4xl font-bold'>{folderName}</h1>
+        <FileList list={data} cursorRef={cursorRef} />
+        {isFetchingNextPage && <FileListLoader />}
+      </DropzoneFileUploader>
+    </div>
   );
 };

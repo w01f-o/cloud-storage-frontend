@@ -6,7 +6,7 @@ import { FC } from 'react';
 import { useChangeUserNameForm } from '../model/hooks/useChangeUserNameForm';
 
 export const ChangeUserNameForm: FC = () => {
-  const t = useTranslations('SettingsPage.account');
+  const t = useTranslations('common');
   const { buttonIsVisible, errors, register, submitHandler, currentName } =
     useChangeUserNameForm();
 
@@ -19,7 +19,7 @@ export const ChangeUserNameForm: FC = () => {
         defaultValue={currentName}
       />
       <FadeInOut isVisible={buttonIsVisible}>
-        <Button className='mt-1'>{t('submit')}</Button>
+        <Button className='mt-1'>{t('save')}</Button>
       </FadeInOut>
     </form>
   );

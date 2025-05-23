@@ -60,6 +60,7 @@ export const ColorPicker: FC<ColorPickerProps> = ({
         className='absolute cursor-pointer opacity-0'
         ref={setRefs}
         {...props}
+        defaultValue={color}
         onChange={changeHandler}
       />
       <div style={{ background: color }} onClick={clickHandler} />

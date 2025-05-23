@@ -1,3 +1,7 @@
+import { invalidateSharedFileListQueries } from '@/_entities/shared-file/lib/utils/invalidate-shared-file-list-queries';
+import { invalidateSharedFileQueries } from '@/_entities/shared-file/lib/utils/invalidate-shared-file-queries';
+import { SharedFileQueryKeys } from '@/_entities/shared-file/model/enums/query-keys.enum';
+import { SharedFile } from '@/_entities/shared-file/model/types/shared-file.type';
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import {
   InfiniteData,
@@ -51,6 +55,18 @@ export const useUpdateFile = ({
       const previousFile = queryClient.getQueriesData<File | undefined>({
         queryKey: [FileQueryKeys.FIND_ONE, id],
       });
+      const previousSharedFileList = queryClient.getQueriesData<
+        PaginatedResult<SharedFile> | undefined
+      >({
+        predicate: query =>
+          Array.isArray(query.queryKey) &&
+          query.queryKey[0] === SharedFileQueryKeys.LIST,
+      });
+      const previousSharedFile = queryClient.getQueriesData<
+        SharedFile | undefined
+      >({
+        queryKey: [SharedFileQueryKeys.FIND_ONE, id],
+      });
 
       queryClient.setQueriesData(
         {
@@ -102,15 +118,55 @@ export const useUpdateFile = ({
         }
       );
 
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === SharedFileQueryKeys.LIST,
+        },
+        (
+          old: PaginatedResult<SharedFile> | undefined
+        ): PaginatedResult<SharedFile> | undefined => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            list: old.list.map(file =>
+              file.file.id === id
+                ? { ...file, file: { ...file.file, ...data } }
+                : file
+            ),
+          };
+        }
+      );
+
+      queryClient.setQueriesData(
+        {
+          queryKey: [SharedFileQueryKeys.FIND_ONE, id],
+        },
+        (old: SharedFile | undefined): SharedFile | undefined => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            file: { ...old.file, ...data },
+          };
+        }
+      );
+
       return {
         previousFileList,
         previousFile,
         previousInfiniteFolderFileList,
+        previousSharedFileList,
+        previousSharedFile,
       };
     },
     onSettled: (data, error, variables, context) => {
       invalidateFileListQueries(queryClient);
       invalidateFileQueries(queryClient, variables.id);
+      invalidateSharedFileListQueries(queryClient);
+      invalidateSharedFileQueries(queryClient, variables.id);
 
       onSettled?.(data, error, variables, context);
     },
@@ -119,7 +175,9 @@ export const useUpdateFile = ({
         context instanceof Object &&
         'previousFile' in context &&
         'previousFileList' in context &&
-        'previousInfiniteFolderFileList' in context
+        'previousInfiniteFolderFileList' in context &&
+        'previousSharedFileList' in context &&
+        'previousSharedFile' in context
       ) {
         queryClient.setQueriesData(
           {
@@ -132,6 +190,18 @@ export const useUpdateFile = ({
         queryClient.setQueriesData(
           { queryKey: [FileQueryKeys.FIND_ONE, variables.id] },
           context.previousFile
+        );
+        queryClient.setQueriesData(
+          {
+            predicate: query =>
+              Array.isArray(query.queryKey) &&
+              query.queryKey[0] === SharedFileQueryKeys.LIST,
+          },
+          context.previousSharedFileList
+        );
+        queryClient.setQueriesData(
+          { queryKey: [SharedFileQueryKeys.FIND_ONE, variables.id] },
+          context.previousSharedFile
         );
         // TODO: FIX
         // queryClient.setQueriesData(

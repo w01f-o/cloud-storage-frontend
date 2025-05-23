@@ -11,6 +11,7 @@ export interface File {
   isShared: boolean;
   folderId: string;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 export type UpdateFileDto = Partial<Pick<File, 'displayName'>>;

@@ -18,7 +18,7 @@ export const useChangeUserNameForm = () => {
       toast.success(t('success'));
     },
     onError: () => {
-      // toast.error(t(''));
+      toast.error(t('errors.server.unknown'));
     },
   });
 

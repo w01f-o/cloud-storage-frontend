@@ -14,11 +14,20 @@ import {
 } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import { toast } from 'sonner';
 
 export const UserAccountDeleter: FC = () => {
+  const commonT = useTranslations('common');
   const t = useTranslations('SettingsPage.account.delete');
 
-  const { mutate, isPending } = useDeleteAccount();
+  const { mutate, isPending } = useDeleteAccount({
+    onSuccess: () => {
+      toast.success(t('success'));
+    },
+    onError: () => {
+      toast.error(t('errors.unknown'));
+    },
+  });
 
   const clickHandler = () => {
     mutate();
@@ -27,7 +36,7 @@ export const UserAccountDeleter: FC = () => {
   return (
     <Modal>
       <ModalTrigger asChild>
-        <Button color='danger'>{t('confirm')}</Button>
+        <Button color='danger'>{commonT('delete')}</Button>
       </ModalTrigger>
       <ModalContent>
         <ModalHeader>
@@ -36,10 +45,10 @@ export const UserAccountDeleter: FC = () => {
         <ModalBody className='py-2'>{t('warning')}</ModalBody>
         <ModalFooter className='justify-between'>
           <ModalClose asChild>
-            <Button>{t('cancel')}</Button>
+            <Button>{commonT('cancel')}</Button>
           </ModalClose>
           <Button color='danger' onClick={clickHandler} isLoading={isPending}>
-            {t('confirm')}
+            {commonT('delete')}
           </Button>
         </ModalFooter>
       </ModalContent>

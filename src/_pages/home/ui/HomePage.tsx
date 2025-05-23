@@ -8,13 +8,14 @@ import {
 import { CreateFormModal } from '@/_features/folder/create/ui/CreateFormModal';
 import { useInfiniteScroll } from '@/_shared/lib';
 import { FolderList, FolderListLoader } from '@/_widgets/folder';
+import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { FC, useState } from 'react';
 
 export const HomePage: FC = () => {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get(FOLDERS_SEARCH_QUERY_KEY) ?? '';
-
+  const t = useTranslations('HomePage');
   const [isSearching, setIsSearching] = useState(false);
 
   const {
@@ -42,13 +43,22 @@ export const HomePage: FC = () => {
     <div className='h-full pt-6 pb-4'>
       <FoldersSearchField setIsSearching={setIsSearching} />
 
-      {shouldShowLoader && <FolderListLoader />}
+      {shouldShowLoader && (
+        <div className='py-8'>
+          <FolderListLoader />
+        </div>
+      )}
 
       {!shouldShowLoader && isEmpty && (
         <>
           <div className='flex h-[80%] flex-col items-center justify-center gap-6 text-5xl'>
-            У вас ещё нет папок
-            <CreateFormModal />
+            {!searchQuery && (
+              <>
+                {t('youDontHaveFolders')}
+                <CreateFormModal />
+              </>
+            )}
+            {searchQuery && t('foldersNotFound')}
           </div>
         </>
       )}

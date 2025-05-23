@@ -1,6 +1,7 @@
 'use client';
 
 import { MutationUserKeys } from '@/_entities/user/model/enums/mutation-keys.enum';
+import { useDisclosure } from '@/_shared/lib';
 import {
   Button,
   Modal,
@@ -19,7 +20,8 @@ import { FC, useId } from 'react';
 import { ChangeUserPasswordForm } from './ChangeUserPasswordForm';
 
 export const UserPasswordChanger: FC = () => {
-  const t = useTranslations('SettingsPage.account');
+  const t = useTranslations('SettingsPage.account.password');
+  const commonT = useTranslations('common');
   const formId = useId();
   const isPending = !!useIsMutating({
     mutationKey: [MutationUserKeys.UPDATE],
@@ -28,25 +30,27 @@ export const UserPasswordChanger: FC = () => {
     predicate: mutation => mutation.state.variables.password,
   });
 
+  const { close, isOpen, toggle } = useDisclosure();
+
   return (
-    <Modal>
+    <Modal open={isOpen} onOpenChange={toggle}>
       <ModalTrigger asChild>
-        <Button>{t('change')}</Button>
+        <Button>{commonT('change')}</Button>
       </ModalTrigger>
       <ModalContent>
         <ModalHeader>
-          <ModalTitle>{t('password.title')}</ModalTitle>
-          <ModalDescription>{t('password.description')}</ModalDescription>
+          <ModalTitle>{t('title')}</ModalTitle>
+          <ModalDescription>{t('description')}</ModalDescription>
         </ModalHeader>
         <ModalBody>
-          <ChangeUserPasswordForm id={formId} />
+          <ChangeUserPasswordForm id={formId} closeModal={close} />
         </ModalBody>
         <ModalFooter className='justify-between'>
           <ModalClose asChild>
-            <Button color='secondary'>{t('password.cancel')}</Button>
+            <Button color='secondary'>{commonT('cancel')}</Button>
           </ModalClose>
           <Button type='submit' form={formId} isLoading={isPending}>
-            {t('submit')}
+            {commonT('change')}
           </Button>
         </ModalFooter>
       </ModalContent>

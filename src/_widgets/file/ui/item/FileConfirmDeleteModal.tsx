@@ -10,7 +10,9 @@ import {
   ModalHeader,
   ModalTitle,
 } from '@/_shared/ui';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import { toast } from 'sonner';
 
 interface FileConfirmDeleteModalProps {
   file: File;
@@ -23,7 +25,16 @@ export const FileConfirmDeleteModal: FC<FileConfirmDeleteModalProps> = ({
   onOpenChange,
   isOpen,
 }) => {
-  const { mutate } = useDeleteFile();
+  const t = useTranslations('FileItem.modal.form.delete');
+  const { mutate } = useDeleteFile({
+    onSuccess: () => {
+      toast.success(t('success'));
+    },
+    onError: () => {
+      toast.error(t('errors.server.unknown'));
+    },
+  });
+  const commonT = useTranslations('common');
 
   const deleteHandler = () => {
     mutate({ id: file.id });
@@ -32,18 +43,18 @@ export const FileConfirmDeleteModal: FC<FileConfirmDeleteModalProps> = ({
 
   return (
     <Modal open={isOpen} onOpenChange={onOpenChange}>
-      <ModalContent>
+      <ModalContent size='2xl'>
         <ModalHeader>
-          <ModalTitle>Are you sure?</ModalTitle>
+          <ModalTitle>{t('title')}</ModalTitle>
           <ModalDescription></ModalDescription>
         </ModalHeader>
-        <ModalBody>Your files will be deleted</ModalBody>
+        <ModalBody className='py-2 text-lg'>{t('warning')}</ModalBody>
         <ModalFooter className='gap-2'>
           <Button color='danger' onClick={deleteHandler}>
-            Delete
+            {commonT('delete')}
           </Button>
           <ModalClose asChild>
-            <Button>Cancel</Button>
+            <Button>{commonT('cancel')}</Button>
           </ModalClose>
         </ModalFooter>
       </ModalContent>

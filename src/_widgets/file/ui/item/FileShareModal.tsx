@@ -15,6 +15,7 @@ import {
   ModalTitle,
 } from '@/_shared/ui';
 import { useIsMutating } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { FC, useId } from 'react';
 
 interface FileShareModalProps {
@@ -35,12 +36,14 @@ export const FileShareModal: FC<FileShareModalProps> = ({
     // @ts-expect-error
     predicate: mutation => mutation.state.variables?.id === file.id,
   });
+  const t = useTranslations('ShareFileForm');
+  const tCommon = useTranslations('common');
 
   return (
     <Modal open={isOpen} onOpenChange={onOpenChange}>
       <ModalContent size='2xl'>
         <ModalHeader>
-          <ModalTitle>Share file</ModalTitle>
+          <ModalTitle>{t('title')}</ModalTitle>
           <ModalDescription></ModalDescription>
         </ModalHeader>
         <ModalBody className='flex flex-col gap-2 py-6'>
@@ -51,10 +54,10 @@ export const FileShareModal: FC<FileShareModalProps> = ({
         </ModalBody>
         <ModalFooter className='gap-2'>
           <Button form={formId} isLoading={isPending}>
-            Apply
+            {tCommon('apply')}
           </Button>
           <ModalClose asChild>
-            <Button>Cancel</Button>
+            <Button color='secondary'>{tCommon('cancel')}</Button>
           </ModalClose>
         </ModalFooter>
       </ModalContent>

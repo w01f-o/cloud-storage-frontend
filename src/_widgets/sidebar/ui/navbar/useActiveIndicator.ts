@@ -1,5 +1,5 @@
 import { useBodyRef } from '@/_shared/lib';
-import { RouterConfig } from '@/_shared/router';
+import { RoutePaths, RouterConfig } from '@/_shared/router';
 import { Ref, RefObject, useRef, useState } from 'react';
 import {
   useDebounceCallback,
@@ -39,7 +39,8 @@ export const useActiveIndicator = ({
   const updateIndicatorPosition = useDebounceCallback(() => {
     if (
       RouterConfig.getNavBarRoutes().every(
-        route => route.path !== pathname && !route.isVisibleInNavbar
+        route =>
+          route.path !== pathname && !pathname.startsWith(RoutePaths.SETTINGS)
       )
     ) {
       return setActiveIndicatorStyles(null);

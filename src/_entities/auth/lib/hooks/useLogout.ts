@@ -1,3 +1,4 @@
+import { useUploadFileProgresses } from '@/_entities/file/lib/stores/upload-progresses-store';
 import { useRouter } from '@/_shared/i18n';
 import { MutationHookOptions } from '@/_shared/model';
 import { RoutePaths } from '@/_shared/router';
@@ -7,21 +8,23 @@ import { logout } from '../../api/requests';
 import { AuthQueryKeys } from '../../model';
 
 export const useLogout = ({
-  onSettled,
+  onSuccess,
   onMutate,
   ...options
 }: MutationHookOptions<void, void, AxiosError> = {}) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { abortUpload, files } = useUploadFileProgresses();
 
   return useMutation<void, AxiosError>({
     mutationFn: logout,
     onMutate: variables => {
       router.prefetch(RoutePaths.WELCOME);
+      files.forEach(({ id }) => abortUpload(id));
 
       onMutate?.(variables);
     },
-    onSettled: async (data, error, variables, context) => {
+    onSuccess: async (data, variables, context) => {
       router.replace(RoutePaths.WELCOME);
 
       queryClient.setQueryData([AuthQueryKeys.CURRENT_SESSION], null);
@@ -31,7 +34,7 @@ export const useLogout = ({
           query.queryKey[0] !== AuthQueryKeys.CURRENT_SESSION,
       });
 
-      onSettled?.(data, error, variables, context);
+      onSuccess?.(data, variables, context);
     },
     ...options,
   });

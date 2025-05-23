@@ -4,6 +4,7 @@ import { catchApiError } from '@/_shared/lib';
 import { RoutePaths } from '@/_shared/router';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { RegisterFormSchema, registerSchema } from '../schemas/register-schema';
@@ -12,10 +13,14 @@ export const useRegisterForm = () => {
   const t = useTranslations('AuthPage');
 
   const router = useRouter();
+  const [isRouterPending, startRouterTransition] = useTransition();
+
   const { mutate: register, isPending } = useRegister({
     onSuccess: () => {
       toast.success(t('success.register'));
-      router.push(RoutePaths.HOME);
+      startRouterTransition(() => {
+        router.replace(RoutePaths.HOME);
+      });
     },
     onError: error => {
       const errorMessage = catchApiError<AuthErrors>(error).message;
@@ -47,7 +52,7 @@ export const useRegisterForm = () => {
   return {
     submitHandler: handleSubmit(submitHandler),
     errors,
-    isPending,
+    isPending: isPending || isRouterPending,
     registerField,
   };
 };

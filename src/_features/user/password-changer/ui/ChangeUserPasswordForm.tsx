@@ -5,13 +5,17 @@ import { useChangePasswordForm } from '../model/hooks/useChangePasswordForm';
 
 interface ChangeUserPasswordFormProps {
   id: string;
+  closeModal: () => void;
 }
 
 export const ChangeUserPasswordForm: FC<ChangeUserPasswordFormProps> = ({
   id,
+  closeModal,
 }) => {
   const t = useTranslations('SettingsPage.account.password');
-  const { errors, register, submitHandler } = useChangePasswordForm();
+  const { errors, register, submitHandler } = useChangePasswordForm({
+    closeModal,
+  });
 
   return (
     <form id={id} className='flex flex-col gap-2 py-2' onSubmit={submitHandler}>

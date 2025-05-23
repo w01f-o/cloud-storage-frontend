@@ -1,9 +1,11 @@
 import { useUploadFile } from '@/_entities/file';
 import { Button, FadeInOut } from '@/_shared/ui';
-import { IconUpload } from '@tabler/icons-react';
+import { IconFileUpload } from '@tabler/icons-react';
 import { nanoid } from 'nanoid';
-import { FC, ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, ReactNode, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { toast } from 'sonner';
 
 interface DropzoneFileUploaderProps {
   children: ReactNode;
@@ -17,7 +19,17 @@ export const DropzoneFileUploader: FC<DropzoneFileUploaderProps> = ({
   folderId,
   withIcon,
 }) => {
-  const { mutate } = useUploadFile();
+  const t = useTranslations('DropzoneFileUploader');
+  const { mutate, isPending } = useUploadFile({
+    onSuccess: data => {
+      toast.success(t('success', { name: data.displayName }));
+    },
+    onError: (error, variables) => {
+      if (error.code === 'ERR_CANCELED') return;
+
+      toast.error(t('errors.server.unknown', { name: variables.file.name }));
+    },
+  });
 
   const dropAcceptHandler = (files: File[]) => {
     mutate({ file: files[0], id: nanoid(), folderId });
@@ -28,24 +40,38 @@ export const DropzoneFileUploader: FC<DropzoneFileUploaderProps> = ({
     noClick: true,
   });
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isPending) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isPending]);
+
   return (
     <>
-      <div {...getRootProps()} className=''>
-        <input {...getInputProps()} />
+      <div {...getRootProps()} className='flex-grow'>
         {children}
         <FadeInOut isVisible={isDragActive}>
-          <div className='bg-overlay/40 dark:bg-overlay/60 absolute inset-0 grid place-items-center'>
-            <IconUpload size={120} />
+          <div className='bg-overlay/40 dark:bg-overlay/60 absolute inset-0 z-20 grid place-items-center'>
+            <IconFileUpload size={120} />
           </div>
         </FadeInOut>
+        <FadeInOut isVisible={!!withIcon && !isDragActive}>
+          <div className='relative flex justify-center py-2'>
+            <Button radius='full' isIconOnly onClick={open}>
+              <IconFileUpload size={30} />
+            </Button>
+          </div>
+        </FadeInOut>
+        <input {...getInputProps()} />
       </div>
-      {withIcon && (
-        <div className='flex justify-center py-2'>
-          <Button radius='full' isIconOnly onClick={open}>
-            <IconUpload size={30} />
-          </Button>
-        </div>
-      )}
     </>
   );
 };

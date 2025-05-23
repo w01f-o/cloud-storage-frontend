@@ -62,8 +62,6 @@ export const useUploadFile = ({
       onMutate?.({ file, id, folderId });
     },
     onSuccess: (newFile, variables, context) => {
-      console.log(newFile);
-
       queryClient.setQueriesData(
         { queryKey: [FileQueryKeys.LIST] },
         (old: PaginatedResult<FileEntity> | undefined) => {

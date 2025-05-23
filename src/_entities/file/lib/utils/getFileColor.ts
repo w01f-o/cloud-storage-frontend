@@ -7,7 +7,7 @@ export const getFileColor = (
   const filesStyles: Record<ResolvedFileTypes, string> = {
     [ResolvedFileTypes.DOCUMENT]: `rgba(0,114,255,${opacityColor})`,
     [ResolvedFileTypes.IMAGE]: `rgba(0,198,80,${opacityColor})`,
-    [ResolvedFileTypes.VIDEO]: `rgba(161,64,255,${opacityColor})`,
+    [ResolvedFileTypes.VIDEO]: `rgba(0,198,80,${opacityColor})`,
     [ResolvedFileTypes.CODE]: `rgba(255,62,76,${opacityColor})`,
     [ResolvedFileTypes.EXE]: `rgba(0,114,255,${opacityColor})`,
     [ResolvedFileTypes.ARCHIVE]: `rgba(161,64,255,${opacityColor})`,

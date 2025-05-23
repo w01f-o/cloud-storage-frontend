@@ -11,7 +11,7 @@ export const Accordion = forwardRef<
     <AccordionPrimitive.Root
       ref={ref}
       className={tv({
-        base: 'text-foreground w-full',
+        base: 'text-foreground w-full text-xl',
       })({
         className,
       })}
@@ -27,11 +27,11 @@ export const AccordionItem = forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <AccordionPrimitive.Item
-      className={tv({ base: 'border-foreground/20 border-b last:border-none' })(
-        {
-          className,
-        }
-      )}
+      className={tv({
+        base: 'border-foreground/20 border-b text-lg last:border-none',
+      })({
+        className,
+      })}
       ref={ref}
       {...props}
     />

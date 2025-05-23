@@ -52,6 +52,10 @@ authApiClient.interceptors.response.use(
       throw error;
     }
 
+    if (isAxiosError(error) && error.code === 'ERR_CANCELED') {
+      throw error;
+    }
+
     const originalRequest = error.config as RetryableRequestConfig;
     const errorData = catchApiError<AuthErrors>(error);
 

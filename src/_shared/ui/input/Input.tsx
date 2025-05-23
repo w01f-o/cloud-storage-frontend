@@ -63,7 +63,6 @@ export const Input: FC<InputProps> = ({
   );
 
   const wrapperClickHandler = (e: MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
     inputRef.current?.focus();
   };
 

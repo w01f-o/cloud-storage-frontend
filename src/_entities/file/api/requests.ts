@@ -7,6 +7,7 @@ const ENDPOINT: string = '/files';
 const deserializeFile = (file: FileEntity): FileEntity => ({
   ...file,
   createdAt: new Date(file.createdAt),
+  updatedAt: new Date(file.updatedAt),
   size: BigInt(file.size),
 });
 
@@ -84,8 +85,11 @@ export const uploadFile = async (
   return deserializeFile(data);
 };
 
-export const getDownloadFileLink = (id: string): string => {
-  return `${authApiClient.defaults.baseURL!}${ENDPOINT}/download/${id}`;
+export const downloadFile = (file: FileEntity) => {
+  const a = document.createElement('a');
+  a.href = `${authApiClient.defaults.baseURL!}${ENDPOINT}/download/${file.id}`;
+  a.download = file.originalName;
+  a.click();
 };
 
 export const updateFile = async (

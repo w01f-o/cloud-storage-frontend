@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
+import { toast } from 'sonner';
 import {
   UpdateFolderSchema,
   updateFolderSchema,
@@ -29,8 +30,15 @@ export const useUpdateFolderForm = ({
   id,
 }: UpdateFolderFormParams): UpdateFolderFormReturn => {
   const [color, setColor] = useState<string>(currentColor);
-  const t = useTranslations('FolderItem');
-  const { isPending, mutate } = useUpdateFolder();
+  const t = useTranslations('FolderItem.modal.form.update');
+  const { isPending, mutate } = useUpdateFolder({
+    onSuccess: () => {
+      toast.success(t('success'));
+    },
+    onError: () => {
+      toast.error(t('errors.server.unknown'));
+    },
+  });
 
   const {
     handleSubmit,
@@ -51,11 +59,15 @@ export const useUpdateFolderForm = ({
     mutate({ id, data });
   };
 
+  const errorHandler = (errors: FieldErrors<UpdateFolderSchema>) => {
+    toast.error(errors?.name?.message, { duration: 5000 });
+  };
+
   return {
     color,
     setColor,
     register,
-    submitHandler: handleSubmit(submitHandler),
+    submitHandler: handleSubmit(submitHandler, errorHandler),
     isPending,
     errors,
   };

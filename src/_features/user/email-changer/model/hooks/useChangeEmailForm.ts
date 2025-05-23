@@ -4,6 +4,7 @@ import { useUpdateUser } from '@/_entities/user/lib/hooks/useUpdateUser';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
+import { toast } from 'sonner';
 import {
   changeEmailSchema,
   ChangeEmailSchema,
@@ -18,8 +19,17 @@ interface UseChangeEmailFormReturn {
 }
 
 export const useChangeEmailForm = (): UseChangeEmailFormReturn => {
-  const { mutate } = useUpdateUser();
-  const t = useTranslations('AuthPage');
+  const t = useTranslations('SettingsPage.account.email');
+
+  const { mutate } = useUpdateUser({
+    onSuccess: () => {
+      toast.success(t('success'));
+    },
+    onError: () => {
+      toast.error(t('errors.server.unknown'));
+    },
+  });
+
   const user = useSession();
 
   const {
@@ -38,10 +48,14 @@ export const useChangeEmailForm = (): UseChangeEmailFormReturn => {
     mutate(data);
   };
 
+  const errorHandler = (errors: FieldErrors<ChangeEmailSchema>) => {
+    toast.error(errors?.email?.message, { duration: 5000 });
+  };
+
   const buttonIsVisible = watch('email') !== user?.email;
 
   return {
-    submitHandler: handleSubmit(submitHandler),
+    submitHandler: handleSubmit(submitHandler, errorHandler),
     register,
     errors,
     buttonIsVisible,

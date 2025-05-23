@@ -1,4 +1,5 @@
-import { File, getDownloadFileLink, getFileColor } from '@/_entities/file';
+import { File, getFileColor } from '@/_entities/file';
+import { downloadFile } from '@/_entities/file/api/requests';
 import { IconFile } from '@/_shared/ui';
 import { useLocale } from 'next-intl';
 import prettyBytes from 'pretty-bytes';
@@ -10,10 +11,8 @@ interface FileCardProps {
   ref?: Ref<HTMLButtonElement>;
 }
 
-export const FileCard: FC<FileCardProps> = ({
-  file: { createdAt, id, displayName, originalName, resolvedType, size },
-  ref,
-}) => {
+export const FileCard: FC<FileCardProps> = ({ file, ref }) => {
+  const { createdAt, displayName, resolvedType, size } = file;
   const locale = useLocale();
   const format = useFormatter();
 
@@ -24,10 +23,7 @@ export const FileCard: FC<FileCardProps> = ({
   });
 
   const downloadClickHandler = () => {
-    const link = document.createElement('a');
-    link.href = getDownloadFileLink(id);
-    link.download = originalName;
-    link.click();
+    downloadFile(file);
   };
 
   return (

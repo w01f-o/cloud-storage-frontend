@@ -14,7 +14,7 @@ Chart.register(ArcElement, Tooltip, Legend);
 export const StorageDoughnut: FC = () => {
   const { data: storage } = useUserStorage();
   const locale = useLocale();
-  const t = useTranslations('StoragePage.resolvedFileType.plural');
+  const t = useTranslations('resolvedFileType.plural');
 
   const data = storage.files.map(({ size }) => size);
   const labels = storage.files.map(({ resolvedType }) => t(resolvedType));

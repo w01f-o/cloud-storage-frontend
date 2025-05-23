@@ -2,6 +2,7 @@ import { useUpdateFile } from '@/_entities/file';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
+import { toast } from 'sonner';
 import {
   updateFileSchema,
   UpdateFileSchema,
@@ -22,8 +23,15 @@ export const useUpdateFileForm = ({
   id,
   currentDisplayName,
 }: UseUpdateFileFormParams): UseUpdateFileFormReturn => {
-  const { mutate } = useUpdateFile();
-  const t = useTranslations();
+  const t = useTranslations('FileItem.modal.form.update');
+  const { mutate } = useUpdateFile({
+    onSuccess: () => {
+      toast.success(t('success'));
+    },
+    onError: () => {
+      toast.error(t('errors.server.unknown'));
+    },
+  });
 
   const {
     register,
@@ -39,9 +47,13 @@ export const useUpdateFileForm = ({
     mutate({ data, id });
   };
 
+  const errorHandler = (errors: FieldErrors<UpdateFileSchema>) => {
+    toast.error(errors?.displayName?.message, { duration: 5000 });
+  };
+
   return {
     register,
-    submitHandler: handleSubmit(submitHandler),
+    submitHandler: handleSubmit(submitHandler, errorHandler),
     errors,
   };
 };

@@ -2,6 +2,7 @@
 
 import { usePathname } from '@/_shared/i18n';
 import { RoutePaths, RouterConfig } from '@/_shared/router';
+import { FadeInOut } from '@/_shared/ui';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
@@ -19,17 +20,17 @@ export const Navbar: FC = () => {
 
   return (
     <nav>
-      {activeIndicatorStyles && (
+      <FadeInOut isVisible={!!activeIndicatorStyles}>
         <div
           className={clsx('bg-primary absolute w-1', {
             'transition-[top]': !isDisableAnimation,
           })}
           style={{
-            top: activeIndicatorStyles.top ?? 0,
-            height: activeIndicatorStyles.height,
+            top: activeIndicatorStyles?.top ?? 0,
+            height: activeIndicatorStyles?.height,
           }}
         ></div>
-      )}
+      </FadeInOut>
       <ul className='flex flex-col gap-2 pr-4 pl-2.5'>
         {RouterConfig.getNavBarRoutes().map(route => {
           const isActive =

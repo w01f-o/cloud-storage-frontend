@@ -55,6 +55,9 @@ export const shareFile = async (
   return deserializeSharedFile(data);
 };
 
-export const getDownloadSharedFileLink = (id: string): string => {
-  return `${authApiClient.defaults.baseURL!}${ENDPOINT}/download/${id}`;
+export const downloadSharedFile = (file: SharedFile) => {
+  const a = document.createElement('a');
+  a.href = `${authApiClient.defaults.baseURL!}${ENDPOINT}/download/${file.file.id}`;
+  a.download = file.file.originalName;
+  a.click();
 };

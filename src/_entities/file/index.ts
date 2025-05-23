@@ -1,4 +1,3 @@
-export { getDownloadFileLink } from './api/requests';
 export { getInfiniteFolderFilesQueryOptions } from './config/query-options/getInfiniteFolderFilesQueryOptions';
 export {
   getFileColor,
