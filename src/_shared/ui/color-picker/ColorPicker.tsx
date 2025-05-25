@@ -1,15 +1,8 @@
 'use client';
 
-import { throttle } from 'lodash';
-import {
-  ChangeEvent,
-  FC,
-  InputHTMLAttributes,
-  Ref,
-  useCallback,
-  useMemo,
-  useRef,
-} from 'react';
+import { FC, InputHTMLAttributes, Ref } from 'react';
+import { colorPickerVariants } from './color-picker.variants';
+import { useColorPicker } from './use-color-picker';
 
 interface ColorPickerProps extends InputHTMLAttributes<HTMLInputElement> {
   color: string;
@@ -21,40 +14,17 @@ export const ColorPicker: FC<ColorPickerProps> = ({
   color,
   onColorChange,
   ref: propsRef,
+  className,
   ...props
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const setRefs = useCallback(
-    (el: HTMLInputElement) => {
-      inputRef.current = el;
-
-      if (typeof propsRef === 'function') {
-        propsRef(el);
-      } else if (propsRef) {
-        propsRef.current = el;
-      }
-    },
-    [propsRef]
-  );
-
-  const clickHandler = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
-  };
-
-  const changeHandler = useMemo(
-    () =>
-      throttle((e: ChangeEvent<HTMLInputElement>) => {
-        onColorChange(e.target.value);
-        props.onChange?.(e);
-      }, 50),
-    [onColorChange, props]
-  );
+  const { changeHandler, clickHandler, setRefs } = useColorPicker({
+    onChange: props.onChange,
+    propsRef,
+    onColorChange,
+  });
 
   return (
-    <div className='border-primary relative shrink-0 overflow-hidden rounded-full border shadow-2xl *:size-8'>
+    <div className={colorPickerVariants({ className })}>
       <input
         type='color'
         className='absolute cursor-pointer opacity-0'

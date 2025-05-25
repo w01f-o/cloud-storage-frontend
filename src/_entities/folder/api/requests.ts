@@ -31,7 +31,7 @@ export const getFolders = async (
 };
 
 export const getFolderById = async (
-  id: string,
+  id: Folder['id'],
   options: RequestOptions
 ): Promise<Folder> => {
   const { data } = await authApiClient.get<Folder>(`${ENDPOINT}/${id}`, {
@@ -48,7 +48,7 @@ export const createFolder = async (dto: CreateFolderDto): Promise<Folder> => {
 };
 
 export const updateFolder = async (
-  id: string,
+  id: Folder['id'],
   dto: UpdateFolderDto
 ): Promise<Folder> => {
   const { data } = await authApiClient.patch(`${ENDPOINT}/${id}`, dto);
@@ -56,7 +56,7 @@ export const updateFolder = async (
   return deserializeFolder(data);
 };
 
-export const deleteFolder = async (id: string): Promise<Folder> => {
+export const deleteFolder = async (id: Folder['id']): Promise<Folder> => {
   const { data } = await authApiClient.delete<Folder>(`${ENDPOINT}/${id}`);
 
   return deserializeFolder(data);

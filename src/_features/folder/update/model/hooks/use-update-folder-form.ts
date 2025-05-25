@@ -43,7 +43,6 @@ export const useUpdateFolderForm = ({
   const {
     handleSubmit,
     formState: { errors },
-    watch,
     register,
   } = useForm<UpdateFolderSchema>({
     resolver: zodResolver(updateFolderSchema(t)),
@@ -52,7 +51,7 @@ export const useUpdateFolderForm = ({
 
   const submitHandler = (data: UpdateFolderSchema) => {
     const isAvailableToSubmit =
-      watch('color') !== currentColor || watch('name') !== currentName;
+      data.color !== currentColor || data.name !== currentName;
 
     if (!isAvailableToSubmit) return;
 

@@ -1,1 +1,1 @@
-export { FolderList, FolderListLoader } from './ui';
+export { CreateFolderFormModal, FolderList, FolderListLoader } from './ui';

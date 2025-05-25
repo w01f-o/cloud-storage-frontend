@@ -1,2 +1,2 @@
-export { FOLDERS_SEARCH_QUERY_KEY } from './model/constants';
+export { useFolderSearchValue } from './model';
 export { FoldersSearchField } from './ui/FoldersSearchField';

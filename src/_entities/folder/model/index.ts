@@ -1,5 +1,4 @@
-export { FolderMutationKeys } from './enums/mutation-keys.enum';
-export { FolderQueryKeys } from './enums/query-keys.enum';
+export { FolderMutationKeys, FolderQueryKeys } from './enums';
 export type {
   CreateFolderDto,
   Folder,

@@ -1,4 +1,4 @@
-import { UploadingFile } from '@/_entities/file/lib/stores/upload-progresses-store';
+import { UploadingFile } from '@/_entities/file';
 import { Progress } from '@/_shared/ui/progress';
 import { IconX } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -14,7 +14,7 @@ export const FileUploadStatusItem: FC<FileUploadStatusItemProps> = memo(
     const t = useTranslations('FileUploadStatus');
 
     return (
-      <div className='border-secondary flex flex-col py-1 not-last:border-b'>
+      <div className='border-secondary flex flex-col pt-1 pb-3 not-last:border-b'>
         <div className='truncate'>{file.name}</div>
         <div className='flex items-center gap-2'>
           <div title={`${file.progress}%`} className='flex-grow'>

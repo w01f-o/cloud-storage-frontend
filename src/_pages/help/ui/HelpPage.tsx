@@ -14,8 +14,8 @@ export const HelpPage: FC = () => {
   return (
     <div className='py-6'>
       <Accordion type='single' collapsible>
-        {faqList.map(question => (
-          <AccordionItem value={question.q} key={question.q}>
+        {faqList.map((question, index) => (
+          <AccordionItem value={question.q} key={index}>
             <AccordionTrigger>{question.q}</AccordionTrigger>
             <AccordionContent>{question.a}</AccordionContent>
           </AccordionItem>

@@ -1,6 +1,6 @@
 'use client';
 
-import { MutationUserKeys } from '@/_entities/user/model/enums/mutation-keys.enum';
+import { MutationUserKeys } from '@/_entities/user';
 import { useDisclosure } from '@/_shared/lib';
 import {
   Button,

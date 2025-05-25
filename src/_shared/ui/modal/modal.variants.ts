@@ -24,7 +24,6 @@ export const modalContentVariants = tv({
     'px-7',
     'py-6',
     'w-full',
-    'mx-4',
     'shadow-small',
     'z-50',
     'pointer-events-auto',
@@ -48,8 +47,8 @@ export const modalContentVariants = tv({
       xl: 'rounded-2xl',
     },
     overflowScroll: {
-      inside: 'max-h-[calc(100vh-8rem)] my-16',
-      outside: 'my-16',
+      inside: 'max-h-dvh md:max-h-[calc(100dvh-8rem)] md:my-16',
+      outside: 'md:my-16',
     },
   },
   defaultVariants: {

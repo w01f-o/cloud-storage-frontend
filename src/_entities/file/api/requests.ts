@@ -1,3 +1,4 @@
+import { Folder } from '@/_entities/folder';
 import { authApiClient, RequestOptions } from '@/_shared/lib';
 import { PaginatedResult, PaginationOptions } from '@/_shared/model';
 import { File as FileEntity, UpdateFileDto } from '../model/types/file.type';
@@ -30,7 +31,7 @@ export const getFiles = async (
 };
 
 export const getFilesByFolder = async (
-  folderId: string,
+  folderId: Folder['id'],
   params?: Partial<PaginationOptions<FileEntity>>,
   options?: RequestOptions
 ): Promise<PaginatedResult<FileEntity>> => {
@@ -49,7 +50,7 @@ export const getFilesByFolder = async (
 };
 
 export const getFileById = async (
-  id: string,
+  id: FileEntity['id'],
   options?: RequestOptions
 ): Promise<FileEntity> => {
   const { data } = await authApiClient.get<FileEntity>(`${ENDPOINT}/${id}`, {
@@ -60,7 +61,7 @@ export const getFileById = async (
 };
 
 export const uploadFile = async (
-  { file, folderId }: { file: File; folderId: string },
+  { file, folderId }: { file: File; folderId: Folder['id'] },
   options?: RequestOptions & { onProgress?: (progress: number) => void }
 ): Promise<FileEntity> => {
   const formData = new FormData();
@@ -93,7 +94,7 @@ export const downloadFile = (file: FileEntity) => {
 };
 
 export const updateFile = async (
-  id: string,
+  id: FileEntity['id'],
   dto: Partial<UpdateFileDto>
 ): Promise<FileEntity> => {
   const { data } = await authApiClient.patch<FileEntity>(
@@ -104,7 +105,7 @@ export const updateFile = async (
   return deserializeFile(data);
 };
 
-export const deleteFile = async (id: string): Promise<FileEntity> => {
+export const deleteFile = async (id: FileEntity['id']): Promise<FileEntity> => {
   const { data } = await authApiClient.delete<FileEntity>(`${ENDPOINT}/${id}`);
 
   return deserializeFile(data);

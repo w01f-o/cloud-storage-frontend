@@ -1,17 +1,18 @@
+import { SharedFile } from '@/_entities/shared-file';
 import { RoutePaths } from '@/_shared/router';
 import { Button } from '@/_shared/ui';
 import { IconCopy } from '@tabler/icons-react';
 import { FC } from 'react';
 
 interface SharedFileLinkProps {
-  id: string;
+  id: SharedFile['id'];
 }
 
 export const SharedFileLink: FC<SharedFileLinkProps> = ({ id }) => {
   const link = `${location.origin}${RoutePaths.SHARED}/${id}`;
 
-  const copyClickHandler = async () => {
-    await navigator.clipboard.writeText(link);
+  const copyClickHandler = () => {
+    navigator.clipboard.writeText(link);
   };
 
   return (

@@ -5,7 +5,7 @@ import { SharedFile } from '../../model/types/shared-file.type';
 
 export const getSharedFileQueryOptions = fetchQueryOptionsFactory<
   SharedFile | null,
-  { id: SharedFile['file']['id'] }
+  { id: SharedFile['id'] }
 >({
   queryKey: ({ id }) => [SharedFileQueryKeys.FIND_ONE, id],
   queryFn: ({ id }) => getSharedFileById(id),

@@ -1,33 +1,32 @@
 'use client';
 
-import { useInfiniteFolderFiles } from '@/_entities/file';
-import { Folder, useFolder } from '@/_entities/folder';
 import { DropzoneFileUploader } from '@/_features/file';
-import { useInfiniteScroll } from '@/_shared/lib';
 import { FileList, FileListLoader } from '@/_widgets/file';
-import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { FC } from 'react';
+import { useFolderPage } from '../model/hooks/use-folder-page';
 
 export const FolderPage: FC = () => {
-  const { id } = useParams<Pick<Folder, 'id'>>();
-  const { data, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useInfiniteFolderFiles(
-      { folderId: id },
-      { select: data => data.pages.flatMap(page => page.list) }
-    );
-  const { data: folderName } = useFolder({ id }, { select: data => data.name });
-
-  const cursorRef = useInfiniteScroll({
-    hasNextPage,
-    fetchNextPage,
+  const t = useTranslations('FolderPage');
+  const {
+    cursorRef,
+    fileList,
+    isEmpty,
+    folderName,
     isFetchingNextPage,
-  });
+    folderId,
+  } = useFolderPage();
 
   return (
     <div className='flex size-full flex-col'>
-      <DropzoneFileUploader folderId={id} withIcon>
+      <DropzoneFileUploader folderId={folderId} withIcon>
         <h1 className='pb-6 text-4xl font-bold'>{folderName}</h1>
-        <FileList list={data} cursorRef={cursorRef} />
+        {isEmpty && (
+          <h1 className='flex basis-1/2 items-end justify-center text-center text-4xl font-bold lg:basis-1/3'>
+            {t('empty')}
+          </h1>
+        )}
+        <FileList list={fileList} cursorRef={cursorRef} />
         {isFetchingNextPage && <FileListLoader />}
       </DropzoneFileUploader>
     </div>

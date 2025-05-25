@@ -1,4 +1,4 @@
-import messages from './messages/ru.json';
+import messages from './messages/en.json';
 import { formats } from './request';
 import { routing } from './routing';
 
@@ -10,7 +10,6 @@ declare module 'next-intl' {
   }
 }
 
-export { nextIntlMiddleware } from './middleware';
 export {
   getPathname,
   Link,
@@ -19,4 +18,5 @@ export {
   usePathname,
   useRouter,
 } from './navigation';
+export { nextIntlMiddleware } from './next-intl-middleware';
 export { routing } from './routing';

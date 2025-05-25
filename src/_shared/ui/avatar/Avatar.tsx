@@ -16,13 +16,15 @@ export const Avatar: FC<AvatarProps> = ({
   ...props
 }) => {
   const getSize = () => {
-    return {
+    const sizeMap: Record<string, number> = {
       xs: 48,
       sm: 96,
       md: 128,
       lg: 208,
       xl: 256,
-    }[size];
+    };
+
+    return sizeMap[size];
   };
 
   return (

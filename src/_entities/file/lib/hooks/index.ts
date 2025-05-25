@@ -1,6 +1,6 @@
-export { useDeleteFile } from './useDeleteFile';
-export { useFile } from './useFile';
-export { useFileList } from './useFileList';
-export { useInfiniteFolderFiles } from './useInfiniteFolderFiles';
-export { useUpdateFile } from './useUpdateFile';
-export { useUploadFile } from './useUploadFile';
+export { useDeleteFile } from './use-delete-file';
+export { useFile } from './use-file';
+export { useFileList } from './use-file-list';
+export { useInfiniteFolderFiles } from './use-infinite-folder-files';
+export { useUpdateFile } from './use-update-file';
+export { useUploadFile } from './use-upload-file';

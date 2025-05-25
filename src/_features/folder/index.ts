@@ -1,2 +1,3 @@
-export { FOLDERS_SEARCH_QUERY_KEY, FoldersSearchField } from './search';
+export { CreateFolderForm } from './create';
+export { FoldersSearchField, useFolderSearchValue } from './search';
 export { UpdateFolderForm } from './update';

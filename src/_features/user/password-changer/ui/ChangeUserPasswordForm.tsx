@@ -1,7 +1,7 @@
 import { Input } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useChangePasswordForm } from '../model/hooks/useChangePasswordForm';
+import { useChangePasswordForm } from '../model';
 
 interface ChangeUserPasswordFormProps {
   id: string;

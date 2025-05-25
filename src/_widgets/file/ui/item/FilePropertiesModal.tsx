@@ -62,21 +62,21 @@ export const FilePropertiesModal: FC<FilePropertiesModalProps> = ({
           <UpdateFileForm file={file} id={formId} />
           <div className='flex flex-col gap-3 py-4'>
             <div className='flex gap-2'>
-              <div className='w-32'>{t('type')}:</div>
+              <div className='w-24 md:w-32'>{t('type')}:</div>
               <div className='first-letter:uppercase'>
                 {tResolvedFileType(file.resolvedType)}
               </div>
             </div>
             <div className='flex gap-2'>
-              <div className='w-32'>{t('uploaded')}:</div>
+              <div className='w-24 md:w-32'>{t('uploaded')}:</div>
               <div className='first-letter:uppercase'>{formattedCreatedAt}</div>
             </div>
             <div className='flex gap-2'>
-              <div className='w-32'>{t('updated')}:</div>
+              <div className='w-24 md:w-32'>{t('updated')}:</div>
               <div className='first-letter:uppercase'>{formattedUpdatedAt}</div>
             </div>
             <div className='flex gap-2'>
-              <div className='w-32'>{t('size')}:</div>
+              <div className='w-24 md:w-32'>{t('size')}:</div>
               <div>
                 {prettyBytes(file.size, { locale })} ({formattedSize} B)
               </div>

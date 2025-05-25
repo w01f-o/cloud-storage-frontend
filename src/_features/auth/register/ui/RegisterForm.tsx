@@ -5,11 +5,11 @@ import { RoutePaths } from '@/_shared/router';
 import { Button, Input, Text } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useRegisterForm } from '../model/hooks/useRegisterForm';
+import { useRegisterForm } from '../model';
 
 export const RegisterForm: FC = () => {
   const t = useTranslations('AuthPage');
-  const { errors, isPending, registerField, submitHandler } = useRegisterForm();
+  const { errors, isPending, register, submitHandler } = useRegisterForm();
 
   return (
     <form
@@ -21,14 +21,14 @@ export const RegisterForm: FC = () => {
         isRequired
         isInvalid={!!errors.name}
         errorMessage={errors.name?.message}
-        {...registerField('name')}
+        {...register('name')}
       />
       <Input
         label={t('labels.email')}
         isRequired
         isInvalid={!!errors.email}
         errorMessage={errors.email?.message}
-        {...registerField('email')}
+        {...register('email')}
       />
 
       <Input
@@ -37,7 +37,7 @@ export const RegisterForm: FC = () => {
         isRequired
         isInvalid={!!errors.password}
         errorMessage={errors.password?.message}
-        {...registerField('password')}
+        {...register('password')}
       />
       <Input
         type='password'
@@ -45,7 +45,7 @@ export const RegisterForm: FC = () => {
         isRequired
         isInvalid={!!errors.confirmPassword}
         errorMessage={errors.confirmPassword?.message}
-        {...registerField('confirmPassword')}
+        {...register('confirmPassword')}
       />
       <Text className='self-start'>
         {t.rich('labels.alreadyHaveAccount', {

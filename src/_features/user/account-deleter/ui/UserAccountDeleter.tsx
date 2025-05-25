@@ -1,6 +1,6 @@
 'use client';
 
-import { useDeleteAccount } from '@/_entities/user/lib/hooks/useDeleteAccount';
+import { useDeleteAccount } from '@/_entities/user';
 import {
   Button,
   Modal,

@@ -3,6 +3,7 @@
 import { IconExclamationCircle, IconProgressCheck } from '@tabler/icons-react';
 import dynamic from 'next/dynamic';
 import { FC } from 'react';
+import { useMediaQuery } from 'usehooks-ts';
 
 const DynamicNextTopLoader = dynamic(() => import('nextjs-toploader'), {
   ssr: false,
@@ -20,6 +21,8 @@ const DynamicFileUploadStatus = dynamic(
 );
 
 export const ClientEffects: FC = () => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <>
       <DynamicNextTopLoader
@@ -28,7 +31,7 @@ export const ClientEffects: FC = () => {
         height={4}
       />
       <DynamicToaster
-        position='bottom-right'
+        position={isMobile ? 'top-center' : 'bottom-right'}
         icons={{
           success: <IconProgressCheck />,
           error: <IconExclamationCircle />,

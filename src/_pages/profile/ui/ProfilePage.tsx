@@ -26,7 +26,7 @@ export const ProfilePage: FC = () => {
           {user.email}
         </Text>
       </div>
-      <div className='flex justify-between gap-20'>
+      <div className='flex flex-col justify-between gap-20 lg:flex-row'>
         <LastUpdatedFolders />
         <LastUploadedFiles />
       </div>

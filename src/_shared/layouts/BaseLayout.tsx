@@ -1,16 +1,15 @@
 import { getSessionQueryOptions } from '@/_entities/auth';
-import { MobileNavbar } from '@/_widgets/mobile-navbar/ui/MobileNavbar';
-import { Sidebar } from '@/_widgets/sidebar';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
 import { FC, PropsWithChildren } from 'react';
-import { DesktopOnly, MobileOnly } from '../ui';
-import { PageTitle } from '../ui/page-title/PageTitle';
-import { ScrollContainer } from '../ui/scroll-container/ScrollContainer';
+import { DesktopOnly, MobileOnly, ScrollContainer } from '../ui';
+import { PageTitle } from './page-title/PageTitle';
 import { ClientEffects } from './ClientEffects';
+import { HamburgerMenu } from './hamburger-menu';
+import { Sidebar } from './sidebar';
 
 export const BaseLayout: FC<PropsWithChildren> = async ({ children }) => {
   const queryClient = new QueryClient();
@@ -24,12 +23,12 @@ export const BaseLayout: FC<PropsWithChildren> = async ({ children }) => {
         <Sidebar />
       </DesktopOnly>
       <MobileOnly>
-        <MobileNavbar />
+        <HamburgerMenu />
       </MobileOnly>
-      <main className='bg-background lg:bg-content lg:rounded-content relative flex h-full max-w-[1355px] flex-grow flex-col overflow-hidden pt-16 pb-7 transition-colors'>
+      <main className='bg-background lg:bg-content lg:rounded-content relative flex h-full w-5/6 flex-grow flex-col overflow-hidden pt-14 pb-7 transition-colors md:pt-16'>
         <PageTitle />
         <ScrollContainer>
-          <div className='size-full px-12'>{children}</div>
+          <div className='size-full px-8 md:px-12'>{children}</div>
         </ScrollContainer>
       </main>
     </HydrationBoundary>

@@ -1,4 +1,4 @@
-export { getInfiniteFolderFilesQueryOptions } from './config/query-options/getInfiniteFolderFilesQueryOptions';
+export { getInfiniteFolderFilesQueryOptions } from './config/query-options/get-infinite-folder-files-query-options';
 export {
   getFileColor,
   useDeleteFile,
@@ -7,6 +7,8 @@ export {
   useInfiniteFolderFiles,
   useUpdateFile,
   useUploadFile,
+  useUploadFileProgresses,
 } from './lib';
-export { ResolvedFileTypes } from './model/enums/resolved-file-types.enum';
-export type { File } from './model/types';
+export type { UploadingFile } from './lib';
+export { FileMutationKeys, FileQueryKeys, ResolvedFileTypes } from './model';
+export type { File } from './model';

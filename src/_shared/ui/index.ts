@@ -25,8 +25,26 @@ export {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from './context-menu';
+export {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
+} from './drawer';
 export { Heading } from './heading';
-export { IconCloud, IconFile, IconFolder, IconFullLogo } from './icons';
+export {
+  IconCloud,
+  IconFile,
+  IconFlag,
+  IconFolder,
+  IconFullLogo,
+} from './icons';
 export { Image } from './image';
 export { Input } from './input';
 export { DesktopOnly, MobileOnly } from './mobile';
@@ -48,6 +66,7 @@ export {
   PopoverContent,
   PopoverTrigger,
 } from './popover';
+export { ScrollContainer } from './scroll-container';
 export {
   Select,
   SelectContent,
@@ -61,5 +80,6 @@ export {
   SelectValue,
 } from './select';
 export { Skeleton } from './skeleton';
+export { Spinner } from './spinner';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 export { Text } from './text';

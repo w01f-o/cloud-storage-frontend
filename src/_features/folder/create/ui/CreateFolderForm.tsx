@@ -1,15 +1,15 @@
 import { ColorPicker, Input } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useCreateFolderForm } from '../model/hooks/useCreateFolderForm';
+import { useCreateFolderForm } from '../model';
 
 interface CreateFolderFormProps {
-  id: string;
+  formId: string;
   closeModal: () => void;
 }
 
 export const CreateFolderForm: FC<CreateFolderFormProps> = ({
-  id,
+  formId,
   closeModal,
 }) => {
   const { errors, register, submitHandler, color, setColor } =
@@ -17,7 +17,11 @@ export const CreateFolderForm: FC<CreateFolderFormProps> = ({
   const t = useTranslations('HomePage.CreateFormModal.labels');
 
   return (
-    <form onSubmit={submitHandler} className='flex flex-col gap-3 py-4' id={id}>
+    <form
+      onSubmit={submitHandler}
+      className='flex flex-col gap-3 py-4'
+      id={formId}
+    >
       <Input
         label={t('name')}
         {...register('name')}

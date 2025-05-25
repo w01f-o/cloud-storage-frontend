@@ -3,7 +3,7 @@
 import { Button, FadeInOut, Input } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useChangeUserNameForm } from '../model/hooks/useChangeUserNameForm';
+import { useChangeUserNameForm } from '../model';
 
 export const ChangeUserNameForm: FC = () => {
   const t = useTranslations('common');

@@ -5,11 +5,11 @@ import { RoutePaths } from '@/_shared/router';
 import { Button, Input, Text } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useLoginForm } from '../model/hooks/useLoginForm';
+import { useLoginForm } from '../model';
 
 export const LoginForm: FC = () => {
   const t = useTranslations('AuthPage');
-  const { submitHandler, errors, isPending, registerField } = useLoginForm();
+  const { submitHandler, errors, isPending, register } = useLoginForm();
 
   return (
     <form
@@ -21,7 +21,7 @@ export const LoginForm: FC = () => {
         isRequired
         isInvalid={!!errors.email}
         errorMessage={errors.email?.message}
-        {...registerField('email')}
+        {...register('email')}
       />
       <Input
         type='password'
@@ -29,7 +29,7 @@ export const LoginForm: FC = () => {
         isRequired
         isInvalid={!!errors.password}
         errorMessage={errors.password?.message}
-        {...registerField('password')}
+        {...register('password')}
       />
       <Text className='self-start'>
         {t.rich('labels.dontHaveAccount', {

@@ -3,7 +3,7 @@
 import { Button, FadeInOut, Input } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useChangeEmailForm } from '../model/hooks/useChangeEmailForm';
+import { useChangeEmailForm } from '../model/hooks/use-change-email-form';
 
 export const ChangeUserEmailForm: FC = () => {
   const { errors, register, submitHandler, buttonIsVisible, currentEmail } =

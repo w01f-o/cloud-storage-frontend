@@ -1,3 +1,4 @@
-export {} from './lib';
+export { useDeleteAccount, useUpdateUser } from './lib/hooks';
 
-export type { User } from './model/types/user.type';
+export { MutationUserKeys } from './model';
+export type { UpdateUserDto, User } from './model';

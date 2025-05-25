@@ -1,25 +1,24 @@
 import { Folder } from '@/_entities/folder';
-import clsx from 'clsx';
 import { FC, Ref } from 'react';
+import { tv } from 'tailwind-variants';
 import { FolderItem } from './item/FolderItem';
 
 interface FolderListProps {
   folders: Folder[];
   cursorRef?: Ref<HTMLDivElement>;
-  perRow?: 3 | 6;
+  className?: string;
 }
 
 export const FolderList: FC<FolderListProps> = ({
   folders,
   cursorRef,
-  perRow = 6,
+  className,
 }) => {
   return (
     <div
-      className={clsx('grid gap-5', {
-        'grid-cols-3': perRow === 3,
-        'grid-cols-6': perRow === 6,
-      })}
+      className={tv({
+        base: 'grid gap-5',
+      })({ className })}
     >
       {folders.map((folder, index) => {
         const isNearEnd = index === folders.length - 6;

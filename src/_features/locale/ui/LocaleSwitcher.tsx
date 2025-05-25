@@ -2,18 +2,18 @@
 
 import { routing } from '@/_shared/i18n';
 import {
+  IconFlag,
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Spinner,
 } from '@/_shared/ui';
-import { IconFlag } from '@/_shared/ui/icons/IconFlag';
-import { Spinner } from '@/_shared/ui/spinner';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useLocaleSwitcher } from '../model/useLocaleSwitcher';
+import { useLocaleSwitcher } from '../model/hooks/use-locale-switcher';
 
 export const LocaleSwitcher: FC = () => {
   const { changeHandler, dropdownIsOpen, isPending, locale, toggleDropdown } =

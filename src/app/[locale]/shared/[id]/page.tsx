@@ -3,11 +3,13 @@ import { OneSharedFilePage } from '@/_pages/shared-files/ui/OneSharedFilePage';
 import { generatePrefixedPageTitle } from '@/_shared/lib';
 import { QueryClient } from '@tanstack/react-query';
 import { Metadata, NextPage } from 'next';
+import { Locale } from 'next-intl';
 import { notFound } from 'next/navigation';
 
 interface PageProps {
   params: Promise<{
     id: string;
+    locale: Locale;
   }>;
 }
 

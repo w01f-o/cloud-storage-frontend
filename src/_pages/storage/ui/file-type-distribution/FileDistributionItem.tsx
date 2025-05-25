@@ -19,7 +19,7 @@ export const FileDistributionItem: FC<FileDistributionItemProps> = ({
   const t = useTranslations('resolvedFileType.plural');
 
   return (
-    <div className='flex items-center justify-between'>
+    <div className='flex items-center justify-between gap-6'>
       <div className='flex items-center gap-3'>
         <i
           className='size-2 rounded-full'
@@ -34,7 +34,7 @@ export const FileDistributionItem: FC<FileDistributionItemProps> = ({
         value={(convertToMb(size) / convertToMb(used)) * 100}
         dir='rtl'
         color={getFileColor(resolvedType)}
-        className='max-w-[350px]'
+        className='max-w-[420px]'
       />
     </div>
   );

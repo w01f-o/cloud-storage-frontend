@@ -1,21 +1,13 @@
 'use client';
 
-import {
-  FC,
-  InputHTMLAttributes,
-  MouseEvent,
-  ReactNode,
-  Ref,
-  useCallback,
-  useId,
-  useRef,
-} from 'react';
+import { FC, InputHTMLAttributes, ReactNode, Ref } from 'react';
 import {
   inputVariants,
   inputWrapperVariants,
   labelVariants,
   wrapperVariants,
 } from './input.variants';
+import { useInput } from './use-input';
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id' | 'size'> {
@@ -45,26 +37,9 @@ export const Input: FC<InputProps> = ({
   ref: propsRef,
   ...props
 }) => {
-  const id = useId();
-  const errorId = `${id}-error`;
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const setRefs = useCallback(
-    (el: HTMLInputElement) => {
-      inputRef.current = el;
-
-      if (typeof propsRef === 'function') {
-        propsRef(el);
-      } else if (propsRef) {
-        propsRef.current = el;
-      }
-    },
-    [propsRef]
-  );
-
-  const wrapperClickHandler = (e: MouseEvent<HTMLDivElement>) => {
-    inputRef.current?.focus();
-  };
+  const { errorId, id, setRefs, wrapperClickHandler } = useInput({
+    propsRef,
+  });
 
   return (
     <div

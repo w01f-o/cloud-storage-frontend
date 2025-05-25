@@ -1,43 +1,26 @@
 'use client';
 
-import { useInfiniteFolderList } from '@/_entities/folder';
+import { FoldersSearchField } from '@/_features/folder';
 import {
-  FOLDERS_SEARCH_QUERY_KEY,
-  FoldersSearchField,
-} from '@/_features/folder';
-import { CreateFormModal } from '@/_features/folder/create/ui/CreateFormModal';
-import { useInfiniteScroll } from '@/_shared/lib';
-import { FolderList, FolderListLoader } from '@/_widgets/folder';
+  CreateFolderFormModal,
+  FolderList,
+  FolderListLoader,
+} from '@/_widgets/folder';
 import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { useHomePage } from '../model/hooks/use-home-page';
 
 export const HomePage: FC = () => {
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get(FOLDERS_SEARCH_QUERY_KEY) ?? '';
   const t = useTranslations('HomePage');
-  const [isSearching, setIsSearching] = useState(false);
-
   const {
-    data: folders,
-    fetchNextPage,
-    hasNextPage,
+    cursorRef,
+    isEmpty,
+    setIsSearching,
+    shouldShowLoader,
+    searchQuery,
+    folderList,
     isFetchingNextPage,
-    isPending,
-    isSuccess,
-  } = useInfiniteFolderList(
-    { perPage: 36, search: searchQuery },
-    { select: data => data.pages.flatMap(folder => folder.list) }
-  );
-
-  const cursorRef = useInfiniteScroll({
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  });
-
-  const shouldShowLoader = isPending || isSearching;
-  const isEmpty = !folders?.length;
+  } = useHomePage();
 
   return (
     <div className='h-full pt-6 pb-4'>
@@ -55,7 +38,7 @@ export const HomePage: FC = () => {
             {!searchQuery && (
               <>
                 {t('youDontHaveFolders')}
-                <CreateFormModal />
+                <CreateFolderFormModal />
               </>
             )}
             {searchQuery && t('foldersNotFound')}
@@ -63,12 +46,16 @@ export const HomePage: FC = () => {
         </>
       )}
 
-      {isSuccess && !isEmpty && (
+      {!isEmpty && (
         <div className='py-8'>
-          <FolderList folders={folders} cursorRef={cursorRef} />
+          <FolderList
+            folders={folderList}
+            cursorRef={cursorRef}
+            className='grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7'
+          />
           {isFetchingNextPage && <FolderListLoader />}
           <div className='flex w-full justify-center pt-6'>
-            <CreateFormModal />
+            <CreateFolderFormModal />
           </div>
         </div>
       )}

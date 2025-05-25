@@ -8,6 +8,7 @@ import {
 } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
+  ComponentPropsWithRef,
   createContext,
   Dispatch,
   FC,
@@ -74,11 +75,12 @@ export const ContextMenuPortal = ContextMenuPrimitive.Portal;
 export const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;
 
 export const ContextMenuSubTrigger: FC<
-  ContextMenuPrimitive.ContextMenuSubTriggerProps
-> = ({ className, children, ...props }) => {
+  ComponentPropsWithRef<typeof ContextMenuPrimitive.SubTrigger>
+> = ({ className, children, ref, ...props }) => {
   return (
     <ContextMenuPrimitive.SubTrigger
       className={subTriggerVariants({ className })}
+      ref={ref}
       {...props}
     >
       {children}
@@ -88,14 +90,14 @@ export const ContextMenuSubTrigger: FC<
 };
 
 export const ContextMenuSubContent: FC<
-  ContextMenuPrimitive.ContextMenuSubContentProps
-> = ({ children, className, ...props }) => {
+  ComponentPropsWithRef<typeof ContextMenuPrimitive.SubContent>
+> = ({ children, className, ref, ...props }) => {
   const { isOpen } = useContext(ContextSubMenuContext);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <ContextMenuPrimitive.SubContent {...props} forceMount>
+        <ContextMenuPrimitive.SubContent ref={ref} {...props} forceMount>
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -112,15 +114,15 @@ export const ContextMenuSubContent: FC<
 };
 
 export const ContextMenuContent: FC<
-  ContextMenuPrimitive.ContextMenuContentProps
-> = ({ className, children, ...props }) => {
+  ComponentPropsWithRef<typeof ContextMenuPrimitive.Content>
+> = ({ className, children, ref, ...props }) => {
   const { isOpen } = useContext(ContextMenuContext);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <ContextMenuPrimitive.Portal forceMount>
-          <ContextMenuPrimitive.Content {...props} forceMount>
+          <ContextMenuPrimitive.Content ref={ref} {...props} forceMount>
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -137,25 +139,30 @@ export const ContextMenuContent: FC<
 };
 
 interface ContextMenuItemProps
-  extends ContextMenuPrimitive.ContextMenuItemProps {
+  extends ComponentPropsWithRef<typeof ContextMenuPrimitive.Item> {
   isDanger?: boolean;
 }
 
 export const ContextMenuItem: FC<ContextMenuItemProps> = ({
   className,
   isDanger,
+  ref,
+  children,
   ...props
 }) => {
   return (
     <ContextMenuPrimitive.Item
       className={itemVariants({ className, isDanger })}
+      ref={ref}
       {...props}
-    />
+    >
+      {children}
+    </ContextMenuPrimitive.Item>
   );
 };
 
 interface ContextMeuCheckboxItemProps
-  extends ContextMenuPrimitive.ContextMenuCheckboxItemProps {
+  extends ComponentPropsWithRef<typeof ContextMenuPrimitive.CheckboxItem> {
   isDanger?: boolean;
 }
 
@@ -163,6 +170,7 @@ export const ContextMenuCheckboxItem: FC<ContextMeuCheckboxItemProps> = ({
   className,
   children,
   checked,
+  ref,
   isDanger,
   ...props
 }) => {
@@ -170,6 +178,7 @@ export const ContextMenuCheckboxItem: FC<ContextMeuCheckboxItemProps> = ({
     <ContextMenuPrimitive.CheckboxItem
       className={checkboxItemVariants({ className, isDanger })}
       checked={checked}
+      ref={ref}
       {...props}
     >
       <span className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
@@ -183,7 +192,7 @@ export const ContextMenuCheckboxItem: FC<ContextMeuCheckboxItemProps> = ({
 };
 
 interface ContextMenuRadioItemProps
-  extends ContextMenuPrimitive.ContextMenuRadioItemProps {
+  extends ComponentPropsWithRef<typeof ContextMenuPrimitive.RadioItem> {
   isDanger?: boolean;
 }
 
@@ -191,11 +200,13 @@ export const ContextMenuRadioItem: FC<ContextMenuRadioItemProps> = ({
   className,
   children,
   isDanger,
+  ref,
   ...props
 }) => {
   return (
     <ContextMenuPrimitive.RadioItem
       className={radioItemVariants({ className, isDanger })}
+      ref={ref}
       {...props}
     >
       <span className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
@@ -209,23 +220,29 @@ export const ContextMenuRadioItem: FC<ContextMenuRadioItemProps> = ({
 };
 
 export const ContextMenuLabel: FC<
-  ContextMenuPrimitive.ContextMenuLabelProps
-> = ({ className, ...props }) => {
+  ComponentPropsWithRef<typeof ContextMenuPrimitive.Label>
+> = ({ className, ref, children, ...props }) => {
   return (
     <ContextMenuPrimitive.Label
       className={labelVariants({ className })}
+      ref={ref}
       {...props}
-    />
+    >
+      {children}
+    </ContextMenuPrimitive.Label>
   );
 };
 
 export const ContextMenuSeparator: FC<
-  ContextMenuPrimitive.ContextMenuSeparatorProps
-> = ({ className, ...props }) => {
+  ComponentPropsWithRef<typeof ContextMenuPrimitive.Separator>
+> = ({ className, ref, children, ...props }) => {
   return (
     <ContextMenuPrimitive.Separator
       className={separatorVariants({ className })}
+      ref={ref}
       {...props}
-    />
+    >
+      {children}
+    </ContextMenuPrimitive.Separator>
   );
 };

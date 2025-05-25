@@ -5,24 +5,24 @@ import { FC } from 'react';
 import { useUpdateFolderForm } from '../model/hooks/use-update-folder-form';
 
 interface UpdateFolderFormProps {
-  id: string;
+  formId: string;
   folder: Folder;
 }
 
 export const UpdateFolderForm: FC<UpdateFolderFormProps> = ({
-  id,
-  folder: { color: currentColor, name, id: folderId },
+  formId,
+  folder: { color: currentColor, name, id },
 }) => {
   const { color, setColor, submitHandler, errors, register } =
     useUpdateFolderForm({
+      id,
       currentColor,
-      id: folderId,
       currentName: name,
     });
   const t = useTranslations('FolderItem.modal.form');
 
   return (
-    <form id={id} onSubmit={submitHandler} className='flex flex-col gap-3'>
+    <form id={formId} onSubmit={submitHandler} className='flex flex-col gap-3'>
       <div className='flex items-center gap-2'>
         <div className='w-32'>{t('name')}:</div>
         <div className='flex-grow'>

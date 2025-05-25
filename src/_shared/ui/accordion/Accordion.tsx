@@ -1,54 +1,52 @@
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { IconChevronUp } from '@tabler/icons-react';
-import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react';
-import { tv } from 'tailwind-variants';
+import { ComponentPropsWithRef, FC } from 'react';
+import {
+  contentVariants,
+  itemVariants,
+  rootVariants,
+  triggerVariants,
+} from './accordion.variants';
 
-export const Accordion = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Root>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
->(({ className, ...props }, ref) => {
+export const Accordion: FC<
+  ComponentPropsWithRef<typeof AccordionPrimitive.Root>
+> = ({ className, children, ref, ...props }) => {
   return (
     <AccordionPrimitive.Root
       ref={ref}
-      className={tv({
-        base: 'text-foreground w-full text-xl',
-      })({
+      className={rootVariants({
         className,
       })}
       {...props}
-    />
+    >
+      {children}
+    </AccordionPrimitive.Root>
   );
-});
-Accordion.displayName = AccordionPrimitive.Root.displayName;
+};
 
-export const AccordionItem = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => {
+export const AccordionItem: FC<
+  ComponentPropsWithRef<typeof AccordionPrimitive.Item>
+> = ({ className, children, ref, ...props }) => {
   return (
     <AccordionPrimitive.Item
-      className={tv({
-        base: 'border-foreground/20 border-b text-lg last:border-none',
-      })({
+      className={itemVariants({
         className,
       })}
       ref={ref}
       {...props}
-    />
+    >
+      {children}
+    </AccordionPrimitive.Item>
   );
-});
-AccordionItem.displayName = AccordionPrimitive.Item.displayName;
+};
 
-export const AccordionTrigger = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ children, className, ...props }, ref) => {
+export const AccordionTrigger: FC<
+  ComponentPropsWithRef<typeof AccordionPrimitive.Trigger>
+> = ({ children, className, ref, ...props }) => {
   return (
     <AccordionPrimitive.Header className='w-full'>
       <AccordionPrimitive.Trigger
-        className={tv({
-          base: 'hover:bg-background/80 flex w-full items-center justify-between px-4 py-3 text-left font-medium transition-all [&[data-state=open]>svg]:rotate-360',
-        })({ className })}
+        className={triggerVariants({ className })}
         ref={ref}
         {...props}
       >
@@ -57,23 +55,18 @@ export const AccordionTrigger = forwardRef<
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );
-});
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+};
 
-export const AccordionContent = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ children, className, ...props }, ref) => {
+export const AccordionContent: FC<
+  ComponentPropsWithRef<typeof AccordionPrimitive.Content>
+> = ({ children, className, ref, ...props }) => {
   return (
     <AccordionPrimitive.Content
-      className={tv({
-        base: 'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden',
-      })({ className })}
       ref={ref}
+      className={contentVariants({ className })}
       {...props}
     >
       <div className='px-4 py-2'>{children}</div>
     </AccordionPrimitive.Content>
   );
-});
-AccordionContent.displayName = AccordionPrimitive.Content.displayName;
+};

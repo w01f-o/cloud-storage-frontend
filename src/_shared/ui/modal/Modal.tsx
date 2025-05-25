@@ -179,7 +179,7 @@ export const ModalDescription = forwardRef<
   return (
     <ModalPrimitive.Description
       ref={ref}
-      className={tv({})({ className })}
+      className={tv({ base: 'truncate' })({ className })}
       asChild
       {...props}
     >

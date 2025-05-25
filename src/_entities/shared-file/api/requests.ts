@@ -6,11 +6,8 @@ const ENDPOINT: string = '/shared_files';
 
 const deserializeSharedFile = (file: SharedFile): SharedFile => ({
   ...file,
-  file: {
-    ...file.file,
-    createdAt: new Date(file.file.createdAt),
-    size: BigInt(file.file.size),
-  },
+  createdAt: new Date(file.createdAt),
+  size: BigInt(file.size),
 });
 
 export const getSharedFiles = async (
@@ -57,7 +54,7 @@ export const shareFile = async (
 
 export const downloadSharedFile = (file: SharedFile) => {
   const a = document.createElement('a');
-  a.href = `${authApiClient.defaults.baseURL!}${ENDPOINT}/download/${file.file.id}`;
-  a.download = file.file.originalName;
+  a.href = `${authApiClient.defaults.baseURL!}${ENDPOINT}/download/${file.id}`;
+  a.download = file.originalName;
   a.click();
 };

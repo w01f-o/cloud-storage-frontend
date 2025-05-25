@@ -1,3 +1,3 @@
-export { useBodyRef } from './useBodyRef';
-export { useDisclosure } from './useDisclosure';
-export { useInfiniteScroll } from './useInfiniteScroll';
+export { useBodyRef } from './use-body-ref';
+export { useDisclosure } from './use-disclosure';
+export { useInfiniteScroll } from './use-infinite-scroll';

@@ -7,8 +7,8 @@ interface SettingsRowProps {
 
 export const SettingsRow: FC<SettingsRowProps> = ({ label, children }) => {
   return (
-    <div className='flex items-center gap-4'>
-      <div className='w-40'>{label}</div>
+    <div className='flex flex-col gap-2 md:flex-row md:items-center md:gap-4'>
+      <div className='text-xl md:w-40 md:text-base'>{label}</div>
       <div className='flex items-center gap-3'>{children}</div>
     </div>
   );

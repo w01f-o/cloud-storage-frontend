@@ -31,7 +31,7 @@ export const FileContextMenu: FC<FileContextMenuProps> = ({
   const t = useTranslations('FileItem.contextMenu');
 
   return (
-    <ContextMenu>
+    <ContextMenu modal>
       <ContextMenuTrigger>{children}</ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem onSelect={downloadClickHandler}>

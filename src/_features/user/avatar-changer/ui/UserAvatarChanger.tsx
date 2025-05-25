@@ -19,7 +19,7 @@ import { IconFileUpload } from '@tabler/icons-react';
 import { FC } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import { useAvatarChanger } from '../model/useAvatarChanger';
+import { useAvatarChanger } from '../model/hooks/use-avatar-changer';
 
 export const UserAvatarChanger: FC = () => {
   const user = useSession();
@@ -53,13 +53,13 @@ export const UserAvatarChanger: FC = () => {
         </FadeInOut>
       </div>
       <Modal open={cropperIsOpen} onOpenChange={toggleCropper}>
-        <ModalContent size='2xl'>
+        <ModalContent size='auto'>
           <ModalHeader>
             <ModalTitle>Change avatar</ModalTitle>
             <ModalDescription>Crop your avatar</ModalDescription>
           </ModalHeader>
           <ModalBody>
-            <div className='relative flex h-[60vh] justify-center p-8'>
+            <div className='relative flex h-[60vh] justify-center px-2 py-6 md:p-8'>
               <ReactCrop
                 crop={crop}
                 onChange={setCrop}

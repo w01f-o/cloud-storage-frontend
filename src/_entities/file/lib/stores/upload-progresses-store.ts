@@ -22,6 +22,7 @@ interface UploadFileProgressesActions {
   updateFileProgress: (id: string, progress: number) => void;
   setAbortController: (id: string, controller: AbortController) => void;
   abortUpload: (id: string) => void;
+  abortAllUploads: () => void;
 }
 
 type UploadFileProgressesStore = UploadFileProgressesState &
@@ -64,6 +65,10 @@ export const useUploadFileProgresses = create<UploadFileProgressesStore>()(
       abortUpload: id => {
         const file = get().files.find(file => file.id === id);
         file?.abortController?.abort();
+      },
+      abortAllUploads: () => {
+        get().files.forEach(file => file.abortController?.abort());
+        set({ files: [] });
       },
     })),
     { name: 'upload-file-progresses' }

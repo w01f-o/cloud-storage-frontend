@@ -16,10 +16,13 @@ export const LastUpdatedFolders: FC = () => {
   );
 
   return (
-    <div className='w-1/2'>
+    <div className='w-full lg:w-1/2'>
       <Heading as='h3'>{t('lastUpdatedFolders')}</Heading>
       <div className='py-4'>
-        <FolderList folders={data} perRow={3} />
+        <FolderList
+          folders={data}
+          className='grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3'
+        />
       </div>
     </div>
   );

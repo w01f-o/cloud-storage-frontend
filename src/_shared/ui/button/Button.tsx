@@ -1,23 +1,14 @@
 'use client';
 
+import { Root as Slot, Slottable } from '@radix-ui/react-slot';
 import { motion, MotionProps } from 'motion/react';
-import {
-  ComponentPropsWithoutRef,
-  ElementType,
-  FC,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
-  ReactNode,
-  useMemo,
-} from 'react';
+import { ButtonHTMLAttributes, FC, ReactNode, useMemo } from 'react';
 import { Spinner } from '../spinner';
 import { buttonVariants } from './button-variants';
 import { Ripples } from './ripples';
 
-interface ButtonProps<T extends ElementType = 'button'>
-  extends HTMLAttributes<T> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
-  as?: T;
   variant?: 'solid' | 'bordered' | 'ghost';
   color?: 'primary' | 'secondary' | 'danger' | 'success' | 'default';
   size?: 'sm' | 'md' | 'lg';
@@ -32,11 +23,11 @@ interface ButtonProps<T extends ElementType = 'button'>
   disableRipple?: boolean;
   disableAnimation?: boolean;
   customMotionProps?: MotionProps;
+  asChild?: boolean;
 }
 
-const Button = <T extends ElementType = 'button'>({
+export const Button: FC<ButtonProps> = ({
   children,
-  as,
   className,
   color,
   endContent = null,
@@ -52,15 +43,12 @@ const Button = <T extends ElementType = 'button'>({
   isFullWidth,
   customMotionProps,
   variant,
+  asChild,
   ...props
-}: ButtonProps<T> &
-  Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>): ReturnType<FC> => {
-  const Tag = useMemo(
-    () =>
-      motion.create(as ?? 'button') as ForwardRefExoticComponent<
-        MotionProps & HTMLAttributes<T>
-      >,
-    [as]
+}) => {
+  const Comp = useMemo(
+    () => motion.create(asChild ? Slot : 'button'),
+    [asChild]
   );
 
   const animationProps: MotionProps = disableAnimation
@@ -76,7 +64,7 @@ const Button = <T extends ElementType = 'button'>({
   const isRipplesDisabled = disableRipple || variant === 'bordered';
 
   return (
-    <Tag
+    <Comp
       className={buttonVariants({
         className,
         variant,
@@ -89,17 +77,19 @@ const Button = <T extends ElementType = 'button'>({
       })}
       {...animationProps}
       {...props}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       disabled={isDisabled || isLoading}
       aria-disabled={isDisabled || isLoading}
     >
       {spinnerPosition === 'start' && isLoading && <Spinner />}
       {startContent}
-      {isIconOnly ? children : <span>{children}</span>}
+      <span>
+        <Slottable>{children}</Slottable>
+      </span>
       {endContent}
       {spinnerPosition === 'end' && isLoading && <Spinner />}
       {!isRipplesDisabled && <Ripples />}
-    </Tag>
+    </Comp>
   );
 };
-
-export { Button };

@@ -350,6 +350,9 @@ declare const messages: {
   "NotFound": {
     "title": "404",
     "message": "This page does not exist"
+  },
+  "FolderPage": {
+    "empty": "Folder is empty, you can upload a new file"
   }
 };
 export default messages;

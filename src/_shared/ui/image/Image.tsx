@@ -1,53 +1,38 @@
 'use client';
 
+import { Root as Slot } from '@radix-ui/react-slot';
 import NextImage from 'next/image';
-import {
-  ComponentPropsWithoutRef,
-  ElementType,
-  HTMLAttributes,
-  SyntheticEvent,
-  useRef,
-  useState,
-} from 'react';
+import { FC, HTMLAttributes } from 'react';
 import { Skeleton } from '../skeleton/Skeleton';
 import { imageVariants, imageWrapperVariants } from './image.variants';
+import { useImage } from './use-image';
 
-interface ImageProps<T extends ElementType = 'div'> extends HTMLAttributes<T> {
+interface ImageProps extends HTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
   fallbackSrc: string;
   width: number;
   height: number;
   wrapperClassName?: string;
-  as?: T;
+  asChild?: boolean;
 }
 
-export const Image = <T extends ElementType = 'div'>({
+export const Image: FC<ImageProps> = ({
   src,
   fallbackSrc,
   className,
   wrapperClassName,
-  as,
+  asChild,
   ...props
-}: ImageProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ImageProps<T>>) => {
-  const Tag = as || 'div';
-
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-  const ref = useRef<HTMLImageElement>(null);
-
-  const loadHandler = async (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    setIsLoading(false);
-    props.onLoad?.(e);
-  };
-
-  const errorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    setIsError(true);
-    props.onError?.(e);
-  };
+}) => {
+  const Comp = asChild ? Slot : 'div';
+  const { errorHandler, isError, isLoading, loadHandler, ref } = useImage({
+    onError: props.onError,
+    onLoad: props.onLoad,
+  });
 
   return (
-    <Tag className={imageWrapperVariants({ className: wrapperClassName })}>
+    <Comp className={imageWrapperVariants({ className: wrapperClassName })}>
       <Skeleton isLoaded={!isLoading}>
         <NextImage
           className={imageVariants({
@@ -63,6 +48,6 @@ export const Image = <T extends ElementType = 'div'>({
           ref={ref}
         />
       </Skeleton>
-    </Tag>
+    </Comp>
   );
 };

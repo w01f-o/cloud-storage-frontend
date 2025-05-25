@@ -6,4 +6,6 @@ export {
   useUpdateFile,
   useUploadFile,
 } from './hooks';
-export { getFileColor } from './utils/getFileColor';
+export { useUploadFileProgresses } from './stores/upload-progresses-store';
+export type { UploadingFile } from './stores/upload-progresses-store';
+export { getFileColor } from './utils/get-file-color';
