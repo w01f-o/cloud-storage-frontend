@@ -2,7 +2,7 @@
 
 import { Link } from '@/_shared/i18n';
 import { RoutePaths } from '@/_shared/router';
-import { Button, Input, Text } from '@/_shared/ui';
+import { Button, Input } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import { useRegisterForm } from '../model';
@@ -47,7 +47,7 @@ export const RegisterForm: FC = () => {
         errorMessage={errors.confirmPassword?.message}
         {...register('confirmPassword')}
       />
-      <Text className='self-start'>
+      <p className='self-start'>
         {t.rich('labels.alreadyHaveAccount', {
           login: chunks => (
             <Link href={RoutePaths.LOGIN} className='text-primary underline'>
@@ -55,7 +55,7 @@ export const RegisterForm: FC = () => {
             </Link>
           ),
         })}
-      </Text>
+      </p>
       <Button isLoading={isPending}>{t('actions.register')}</Button>
     </form>
   );

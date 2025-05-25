@@ -7,6 +7,7 @@ const ENDPOINT: string = '/shared_files';
 const deserializeSharedFile = (file: SharedFile): SharedFile => ({
   ...file,
   createdAt: new Date(file.createdAt),
+  updatedAt: new Date(file.updatedAt),
   size: BigInt(file.size),
 });
 

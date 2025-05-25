@@ -3,15 +3,18 @@ import { FileQueryKeys } from '../../model/enums/query-keys.enum';
 
 export const invalidateFileListQueries = async (
   queryClient: QueryClient
-): Promise<void> => {
-  Promise.all([
-    queryClient.invalidateQueries({
-      predicate: query =>
-        Array.isArray(query.queryKey) &&
-        (query.queryKey[0] === FileQueryKeys.LIST ||
-          query.queryKey[0] === FileQueryKeys.INFINITE ||
-          query.queryKey[0] === FileQueryKeys.FOLDER_LIST ||
-          query.queryKey[0] === FileQueryKeys.INFINITE_FOLDER_LIST),
-    }),
-  ]);
-};
+): Promise<void> =>
+  queryClient.invalidateQueries({
+    predicate: query => {
+      if (!Array.isArray(query.queryKey)) return false;
+
+      const queryKey = query.queryKey[0];
+
+      return (
+        queryKey === FileQueryKeys.LIST ||
+        queryKey === FileQueryKeys.INFINITE ||
+        queryKey === FileQueryKeys.FOLDER_LIST ||
+        queryKey === FileQueryKeys.INFINITE_FOLDER_LIST
+      );
+    },
+  });

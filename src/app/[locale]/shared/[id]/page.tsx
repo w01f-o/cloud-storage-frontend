@@ -1,5 +1,5 @@
-import { getSharedFileQueryOptions } from '@/_entities/shared-file/config/query-options/get-shared-file-query-options';
-import { OneSharedFilePage } from '@/_pages/shared-files/ui/OneSharedFilePage';
+import { getSharedFileQueryOptions } from '@/_entities/shared-file';
+import { OneSharedFilePage } from '@/_pages/shared-files';
 import { generatePrefixedPageTitle } from '@/_shared/lib';
 import { QueryClient } from '@tanstack/react-query';
 import { Metadata, NextPage } from 'next';
@@ -26,7 +26,7 @@ export const generateMetadata = async ({
     if (!sharedFile) notFound();
 
     return {
-      title: generatePrefixedPageTitle(sharedFile.file.displayName),
+      title: generatePrefixedPageTitle(sharedFile.displayName),
     };
   } catch {
     notFound();

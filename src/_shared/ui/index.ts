@@ -7,7 +7,6 @@ export {
 export { FadeIn, FadeInOut } from './animations';
 export { Avatar } from './avatar';
 export { Button } from './button';
-export { Caption } from './caption';
 export { ColorPicker } from './color-picker';
 export {
   ContextMenu,
@@ -25,19 +24,6 @@ export {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from './context-menu';
-export {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerPortal,
-  DrawerTitle,
-  DrawerTrigger,
-} from './drawer';
-export { Heading } from './heading';
 export {
   IconCloud,
   IconFile,
@@ -61,6 +47,13 @@ export {
   ModalTrigger,
 } from './modal';
 export {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from './pagination';
+export {
   Popover,
   PopoverAnchor,
   PopoverContent,
@@ -82,4 +75,4 @@ export {
 export { Skeleton } from './skeleton';
 export { Spinner } from './spinner';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
-export { Text } from './text';
+export { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';

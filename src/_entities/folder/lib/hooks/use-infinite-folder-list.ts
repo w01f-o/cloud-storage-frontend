@@ -1,4 +1,4 @@
-import { suspenseInfiniteQueryHookFactory } from '@/_shared/lib';
+import { suspenseInfiniteQueryHookFactory } from '@/_shared/lib/query';
 import { PaginatedResult } from '@/_shared/model';
 import { InfiniteSearchPaginationOptions } from '@/_shared/model/types/pagination.type';
 import { getFolders } from '../../api/requests';

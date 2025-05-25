@@ -1,1 +1,1 @@
-export { ShareFileForm } from './ui/ShareFileForm';
+export { SharedFileLink, ShareFileForm } from './ui';

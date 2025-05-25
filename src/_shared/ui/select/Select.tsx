@@ -4,7 +4,7 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 
 import { IconCheck, IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { FC, ReactNode } from 'react';
+import { ComponentPropsWithRef, FC, ReactNode } from 'react';
 import {
   contentVariants,
   itemVariants,
@@ -20,14 +20,13 @@ export const Select = SelectPrimitive.Root;
 export const SelectGroup = SelectPrimitive.Group;
 export const SelectValue = SelectPrimitive.Value;
 
-export const SelectTrigger: FC<SelectPrimitive.SelectTriggerProps> = ({
-  className,
-  children,
-  ...props
-}) => {
+export const SelectTrigger: FC<
+  ComponentPropsWithRef<typeof SelectPrimitive.Trigger>
+> = ({ className, children, ref, ...props }) => {
   return (
     <SelectPrimitive.Trigger
       className={triggerVariants({ className })}
+      ref={ref}
       {...props}
     >
       {children}
@@ -39,11 +38,12 @@ export const SelectTrigger: FC<SelectPrimitive.SelectTriggerProps> = ({
 };
 
 export const SelectScrollUpButton: FC<
-  SelectPrimitive.SelectScrollUpButtonProps
-> = ({ className, ...props }) => {
+  ComponentPropsWithRef<typeof SelectPrimitive.ScrollUpButton>
+> = ({ className, ref, ...props }) => {
   return (
     <SelectPrimitive.ScrollUpButton
       className={scrollUpButtonVariants({ className })}
+      ref={ref}
       {...props}
     >
       <IconChevronUp className='h-4 w-4' />
@@ -52,22 +52,20 @@ export const SelectScrollUpButton: FC<
 };
 
 export const SelectScrollDownButton: FC<
-  SelectPrimitive.SelectScrollDownButtonProps
-> = ({ className, ...props }) => (
+  ComponentPropsWithRef<typeof SelectPrimitive.ScrollDownButton>
+> = ({ className, ref, ...props }) => (
   <SelectPrimitive.ScrollDownButton
     className={scrollDownButtonVariants({ className })}
+    ref={ref}
     {...props}
   >
     <IconChevronDown className='h-4 w-4' />
   </SelectPrimitive.ScrollDownButton>
 );
 
-export const SelectContent: FC<SelectPrimitive.SelectContentProps> = ({
-  className,
-  children,
-  position = 'popper',
-  ...props
-}) => {
+export const SelectContent: FC<
+  ComponentPropsWithRef<typeof SelectPrimitive.Content>
+> = ({ className, children, ref, position = 'popper', ...props }) => {
   return (
     <AnimatePresence>
       <SelectPrimitive.Portal>
@@ -77,6 +75,7 @@ export const SelectContent: FC<SelectPrimitive.SelectContentProps> = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.12 }}
+            ref={ref}
             className={contentVariants({ className, position })}
           >
             <SelectScrollUpButton />

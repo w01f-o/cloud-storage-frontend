@@ -1,6 +1,8 @@
 import { fetchInfiniteQueryOptionsFactory } from '@/_shared/lib/query';
-import { PaginatedResult } from '@/_shared/model';
-import { InfiniteSearchPaginationOptions } from '@/_shared/model/types/pagination.type';
+import {
+  InfiniteSearchPaginationOptions,
+  PaginatedResult,
+} from '@/_shared/model';
 import { getFolders } from '../../api/requests';
 import { Folder, FolderQueryKeys } from '../../model';
 

@@ -16,7 +16,7 @@ export const SettingsPage: FC<SettingsPageProps> = ({ tabValue }) => {
   const t = useTranslations('SettingsPage');
 
   return (
-    <div className='pt-3 md:pt-6'>
+    <div className='md:pt-3'>
       <Tabs value={tabValue}>
         <TabsList className='mb-4'>
           <TabsTrigger value={SettingsTabValue.GENERAL}>

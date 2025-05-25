@@ -11,10 +11,23 @@ import { FolderMutationKeys } from '../../model/enums/mutation-keys.enum';
 import { Folder } from '../../model/types/folder.type';
 import { cancelFolderListQueries } from '../utils/cancel-folder-list-queries';
 import { cancelFolderQueries } from '../utils/cancel-folder-queries';
+import { getPreviousFolderQueries } from '../utils/get-previous-folders-queries';
 import { invalidateFolderListQueries } from '../utils/invalidate-folder-list-queries';
 
 interface UseDeleteFolderParams {
   id: Folder['id'];
+}
+
+interface DeleteFolderContext {
+  previousFolder: [readonly unknown[], Folder | undefined][];
+  previousFolderInfiniteList: [
+    readonly unknown[],
+    InfiniteData<PaginatedResult<Folder>, unknown> | undefined,
+  ][];
+  previousFolderList: [
+    readonly unknown[],
+    PaginatedResult<Folder> | undefined,
+  ][];
 }
 
 export const useDeleteFolder = ({
@@ -25,7 +38,12 @@ export const useDeleteFolder = ({
 }: MutationHookOptions<Folder, UseDeleteFolderParams, AxiosError> = {}) => {
   const queryClient = useQueryClient();
 
-  return useMutation<Folder, AxiosError, UseDeleteFolderParams>({
+  return useMutation<
+    Folder,
+    AxiosError,
+    UseDeleteFolderParams,
+    DeleteFolderContext
+  >({
     mutationFn: ({ id }) => deleteFolder(id),
     mutationKey: [FolderMutationKeys.DELETE],
     onMutate: async ({ id }) => {
@@ -36,36 +54,20 @@ export const useDeleteFolder = ({
         cancelFolderQueries(queryClient, id),
       ]);
 
-      const previousFolderList = queryClient.getQueriesData<
-        PaginatedResult<Folder> | undefined
-      >({
-        predicate: query =>
-          Array.isArray(query.queryKey) &&
-          query.queryKey[0] === FolderQueryKeys.LIST,
-      });
-      const previousFolderInfiniteList = queryClient.getQueriesData<
-        InfiniteData<PaginatedResult<Folder>>
-      >({
-        predicate: query =>
-          Array.isArray(query.queryKey) &&
-          query.queryKey[0] === FolderQueryKeys.INFINITE,
-      });
-      const previousFolder = queryClient.getQueriesData<Folder | undefined>({
-        queryKey: [FolderQueryKeys.FIND_ONE, id],
-      });
+      const { previousFolder, previousFolderInfiniteList, previousFolderList } =
+        getPreviousFolderQueries(queryClient, id);
 
       queryClient.removeQueries({
         queryKey: [FolderQueryKeys.FIND_ONE, id],
       });
-      queryClient.setQueriesData(
+
+      queryClient.setQueriesData<PaginatedResult<Folder>>(
         {
           predicate: query =>
             Array.isArray(query.queryKey) &&
             query.queryKey[0] === FolderQueryKeys.LIST,
         },
-        (
-          old: PaginatedResult<Folder> | undefined
-        ): PaginatedResult<Folder> | undefined => {
+        old => {
           if (!old) return old;
 
           return {
@@ -74,13 +76,14 @@ export const useDeleteFolder = ({
           };
         }
       );
-      queryClient.setQueriesData(
+
+      queryClient.setQueriesData<InfiniteData<PaginatedResult<Folder>>>(
         {
           predicate: query =>
             Array.isArray(query.queryKey) &&
             query.queryKey[0] === FolderQueryKeys.INFINITE,
         },
-        (old: InfiniteData<PaginatedResult<Folder>> | undefined) => {
+        old => {
           if (!old) return old;
 
           return {
@@ -95,41 +98,36 @@ export const useDeleteFolder = ({
 
       return { previousFolderList, previousFolderInfiniteList, previousFolder };
     },
-    onSettled: async (data, error, variables, context) => {
-      await invalidateFolderListQueries(queryClient);
-
+    onSettled: (data, error, variables, context) => {
       onSettled?.(data, error, variables, context);
+
+      invalidateFolderListQueries(queryClient);
     },
     onError: (error, id, context) => {
-      if (
-        context instanceof Object &&
-        'previousFolder' in context &&
-        'previousFolderList' in context &&
-        'previousFolderInfiniteList' in context
-      ) {
-        queryClient.setQueriesData(
-          {
-            predicate: query =>
-              Array.isArray(query.queryKey) &&
-              query.queryKey[0] === FolderQueryKeys.LIST,
-          },
-          context.previousFolderList
-        );
-        queryClient.setQueriesData(
-          {
-            predicate: query =>
-              Array.isArray(query.queryKey) &&
-              query.queryKey[0] === FolderQueryKeys.INFINITE,
-          },
-          context.previousFolderInfiniteList
-        );
-        queryClient.setQueriesData(
-          { queryKey: [FolderQueryKeys.FIND_ONE, id] },
-          context.previousFolder
-        );
-      }
-
       onError?.(error, id, context);
+
+      if (!context) return;
+
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FolderQueryKeys.LIST,
+        },
+        context.previousFolderList
+      );
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FolderQueryKeys.INFINITE,
+        },
+        context.previousFolderInfiniteList
+      );
+      queryClient.setQueriesData(
+        { queryKey: [FolderQueryKeys.FIND_ONE, id] },
+        context.previousFolder
+      );
     },
     ...options,
   });

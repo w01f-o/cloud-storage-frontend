@@ -74,6 +74,7 @@ export const Button: FC<ButtonProps> = ({
         isIconOnly,
         isFullWidth,
         isLoading,
+        isDisabled,
       })}
       {...animationProps}
       {...props}
@@ -84,9 +85,7 @@ export const Button: FC<ButtonProps> = ({
     >
       {spinnerPosition === 'start' && isLoading && <Spinner />}
       {startContent}
-      <span>
-        <Slottable>{children}</Slottable>
-      </span>
+      <Slottable>{children}</Slottable>
       {endContent}
       {spinnerPosition === 'end' && isLoading && <Spinner />}
       {!isRipplesDisabled && <Ripples />}

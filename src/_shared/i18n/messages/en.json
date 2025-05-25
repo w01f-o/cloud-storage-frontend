@@ -123,7 +123,8 @@
     "used": "Used"
   },
   "SharedFilePage": {
-    "title": "Shared Files"
+    "title": "Shared Files",
+     "empty": "You don't have any shared files yet"
   },
   "SettingsPage": {
     "title": "Settings",
@@ -317,7 +318,7 @@
               "unknown": "An unknown error occurred while deleting the file"
             }
           },
-          "success": "File deleted successfully"
+          "success": "File {name} deleted successfully"
         }
       }
     }
@@ -339,9 +340,11 @@
   "DropzoneFileUploader": {
     "errors": {
       "server": {
-        "unknown": "An unknown error occurred while uploading file {name}"
+        "unknown": "An unknown error occurred while uploading file {name}",
+        "notEnoughSpace": "Not enough space to upload file {name}"
       }
     },
+    "started": "The download of the {name} file has begun",
     "success": "File {name} uploaded successfully"
   },
   "NotFound": {
@@ -349,6 +352,6 @@
     "message": "This page does not exist"
   },
   "FolderPage": {
-    "empty": "Folder is empty, you can upload a new file"
+    "empty": "Folder is empty but you can upload a new file"
   }
 }

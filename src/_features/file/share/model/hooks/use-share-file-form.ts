@@ -1,5 +1,5 @@
 import { useShareFile } from '@/_entities/shared-file';
-import { useForm, UseFormRegister } from 'react-hook-form';
+import { Control, useForm } from 'react-hook-form';
 
 interface UseShareFileParams {
   id: string;
@@ -13,7 +13,7 @@ interface UseShareFileSchema {
 interface UseShareFileReturn {
   submitHandler: () => void;
   isPending: boolean;
-  register: UseFormRegister<UseShareFileSchema>;
+  control: Control<UseShareFileSchema>;
 }
 
 export const useShareFileForm = ({
@@ -22,7 +22,7 @@ export const useShareFileForm = ({
 }: UseShareFileParams): UseShareFileReturn => {
   const { mutate, isPending } = useShareFile();
 
-  const { handleSubmit, register } = useForm<UseShareFileSchema>();
+  const { handleSubmit, control } = useForm<UseShareFileSchema>();
 
   const submitHandler = ({ isShared }: UseShareFileSchema) => {
     if (isShared === currentSharedStatus) return;
@@ -33,6 +33,6 @@ export const useShareFileForm = ({
   return {
     submitHandler: handleSubmit(submitHandler),
     isPending,
-    register,
+    control,
   };
 };

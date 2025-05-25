@@ -1,4 +1,5 @@
 import { UploadingFile } from '@/_entities/file';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/_shared/ui';
 import { Progress } from '@/_shared/ui/progress';
 import { IconX } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -14,12 +15,17 @@ export const FileUploadStatusItem: FC<FileUploadStatusItemProps> = memo(
     const t = useTranslations('FileUploadStatus');
 
     return (
-      <div className='border-secondary flex flex-col pt-1 pb-3 not-last:border-b'>
+      <div className='border-secondary flex flex-col pt-1.5 pb-2 text-sm not-last:border-b'>
         <div className='truncate'>{file.name}</div>
         <div className='flex items-center gap-2'>
-          <div title={`${file.progress}%`} className='flex-grow'>
-            <Progress value={file.progress} />
-          </div>
+          <Tooltip delayDuration={10}>
+            <TooltipTrigger asChild>
+              <div className='flex-grow'>
+                <Progress value={file.progress} />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>{file.progress}%</TooltipContent>
+          </Tooltip>
           <button onClick={onAbort} title={t('button')}>
             <IconX />
           </button>

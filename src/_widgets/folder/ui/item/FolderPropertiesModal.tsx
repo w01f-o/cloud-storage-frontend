@@ -61,7 +61,7 @@ export const FolderPropertiesModal: FC<FolderPropertiesModalProps> = ({
           <ModalDescription>{folder.name}</ModalDescription>
         </ModalHeader>
         <ModalBody>
-          <UpdateFolderForm folder={folder} id={formId} />
+          <UpdateFolderForm folder={folder} formId={formId} />
           <div className='flex flex-col gap-3 py-4'>
             <div className='flex gap-2'>
               <div className='w-32'>{t('created')}:</div>

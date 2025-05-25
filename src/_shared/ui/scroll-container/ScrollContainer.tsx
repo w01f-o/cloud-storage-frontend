@@ -1,12 +1,18 @@
-import { FC, ReactNode } from 'react';
+import { FC, HTMLAttributes, ReactNode, Ref } from 'react';
+import { scrollContainerVariants } from './scroll-container.variants';
 
-interface ScrollContainerProps {
+interface ScrollContainerProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  ref?: Ref<HTMLDivElement>;
 }
 
-export const ScrollContainer: FC<ScrollContainerProps> = ({ children }) => {
+export const ScrollContainer: FC<ScrollContainerProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
-    <div className='[&::-webkit-scrollbar-thumb]:bg-foreground/20 [&::-webkit-scrollbar-track]:bg-background/50 size-full overflow-x-hidden overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:rounded-full'>
+    <div className={scrollContainerVariants({ className })} {...props}>
       {children}
     </div>
   );

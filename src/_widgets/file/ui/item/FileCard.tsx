@@ -1,5 +1,4 @@
-import { File, getFileColor } from '@/_entities/file';
-import { downloadFile } from '@/_entities/file/api/requests';
+import { downloadFile, File, getFileColor } from '@/_entities/file';
 import { IconFile } from '@/_shared/ui';
 import { useLocale } from 'next-intl';
 import prettyBytes from 'pretty-bytes';

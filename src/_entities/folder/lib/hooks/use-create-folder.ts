@@ -10,6 +10,7 @@ import { FolderMutationKeys } from '../../model/enums/mutation-keys.enum';
 import { FolderQueryKeys } from '../../model/enums/query-keys.enum';
 import { CreateFolderDto, Folder } from '../../model/types/folder.type';
 import { cancelFolderListQueries } from '../utils/cancel-folder-list-queries';
+import { invalidateFolderListQueries } from '../utils/invalidate-folder-list-queries';
 
 export const useCreateFolder = ({
   onMutate,
@@ -22,20 +23,30 @@ export const useCreateFolder = ({
   return useMutation<Folder, AxiosError, CreateFolderDto>({
     mutationFn: createFolder,
     mutationKey: [FolderMutationKeys.CREATE],
-    onMutate: async variables => {
-      await cancelFolderListQueries(queryClient);
-
+    onMutate: variables => {
       onMutate?.(variables);
+
+      cancelFolderListQueries(queryClient);
     },
     onSuccess: (newFolder, variables, context) => {
-      queryClient.setQueriesData(
+      onSuccess?.(newFolder, variables, context);
+
+      queryClient.setQueriesData<PaginatedResult<Folder>>(
         { queryKey: [FolderQueryKeys.LIST] },
-        (old: PaginatedResult<Folder> | undefined) => {
+        old => {
           if (!old) return old;
 
           return {
             ...old,
-            list: [newFolder, ...old.list.slice(0, old.meta.perPage - 1)],
+            list: [
+              {
+                ...newFolder,
+                createdAt: new Date(newFolder.createdAt),
+                updatedAt: new Date(newFolder.updatedAt),
+                size: BigInt(newFolder.size),
+              },
+              ...old.list.slice(0, old.meta.perPage - 1),
+            ],
             meta: {
               ...old.meta,
               total: old.meta.total + 1,
@@ -44,9 +55,9 @@ export const useCreateFolder = ({
         }
       );
 
-      queryClient.setQueriesData(
+      queryClient.setQueriesData<InfiniteData<PaginatedResult<Folder>>>(
         { queryKey: [FolderQueryKeys.INFINITE] },
-        (old: InfiniteData<PaginatedResult<Folder>> | undefined) => {
+        old => {
           if (!old) return old;
 
           return {
@@ -56,7 +67,12 @@ export const useCreateFolder = ({
                 return {
                   ...page,
                   list: [
-                    newFolder,
+                    {
+                      ...newFolder,
+                      createdAt: new Date(newFolder.createdAt),
+                      updatedAt: new Date(newFolder.updatedAt),
+                      size: BigInt(newFolder.size),
+                    },
                     ...page.list.slice(0, page.meta.perPage - 1),
                   ],
                   meta: {
@@ -71,13 +87,11 @@ export const useCreateFolder = ({
           };
         }
       );
-
-      onSuccess?.(newFolder, variables, context);
     },
-    onSettled: async (data, error, variables, context) => {
-      // await invalidateFolderListQueries(queryClient);
-
+    onSettled: (data, error, variables, context) => {
       onSettled?.(data, error, variables, context);
+
+      invalidateFolderListQueries(queryClient);
     },
     ...options,
   });

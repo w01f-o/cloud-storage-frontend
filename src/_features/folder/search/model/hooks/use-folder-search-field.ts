@@ -1,6 +1,6 @@
+import { usePathname, useRouter } from '@/_shared/i18n';
 import debounce from 'lodash/debounce';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { ChangeEvent, useEffect, useMemo, useTransition } from 'react';
 import { FOLDERS_SEARCH_QUERY_KEY } from '../constants';
 

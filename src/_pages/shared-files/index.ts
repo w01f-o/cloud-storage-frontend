@@ -1,1 +1,1 @@
-export { SharedFilesPage } from './ui/SharedFilesPage';
+export { OneSharedFilePage, SharedFilesPage } from './ui';

@@ -1,10 +1,11 @@
+'use client';
+
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { AnimatePresence, motion } from 'motion/react';
 import {
-  ComponentRef,
+  ComponentPropsWithRef,
   createContext,
   FC,
-  forwardRef,
   useContext,
   useState,
 } from 'react';
@@ -45,10 +46,9 @@ export const Tooltip: FC<TooltipPrimitive.TooltipProps> = ({
 
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 
-export const TooltipContent = forwardRef<
-  ComponentRef<typeof TooltipPrimitive.Content>,
-  TooltipPrimitive.TooltipContentProps
->(({ children, className, ...props }, ref) => {
+export const TooltipContent: FC<
+  ComponentPropsWithRef<typeof TooltipPrimitive.Content>
+> = ({ children, className, ref, ...props }) => {
   const { isOpen } = useContext(TooltipContext);
 
   return (
@@ -56,17 +56,17 @@ export const TooltipContent = forwardRef<
       {isOpen && (
         <TooltipPrimitive.Portal forceMount>
           <TooltipPrimitive.Content
-            className={tooltipVariants({ className })}
+            className='!z-[60]'
             ref={ref}
             {...props}
             forceMount
-            asChild
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 5 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              animate={{ opacity: 1, scale: 1, y: -5 }}
               exit={{ opacity: 0, scale: 0.95, y: 5 }}
               transition={{ duration: 0.15, ease: 'easeOut' }}
+              className={tooltipVariants({ className })}
             >
               {children}
             </motion.div>
@@ -75,5 +75,4 @@ export const TooltipContent = forwardRef<
       )}
     </AnimatePresence>
   );
-});
-TooltipContent.displayName = TooltipPrimitive.Content.displayName;
+};

@@ -126,7 +126,8 @@ declare const messages: {
     "used": "Used"
   },
   "SharedFilePage": {
-    "title": "Shared Files"
+    "title": "Shared Files",
+     "empty": "You don't have any shared files yet"
   },
   "SettingsPage": {
     "title": "Settings",
@@ -320,7 +321,7 @@ declare const messages: {
               "unknown": "An unknown error occurred while deleting the file"
             }
           },
-          "success": "File deleted successfully"
+          "success": "File {name} deleted successfully"
         }
       }
     }
@@ -342,9 +343,11 @@ declare const messages: {
   "DropzoneFileUploader": {
     "errors": {
       "server": {
-        "unknown": "An unknown error occurred while uploading file {name}"
+        "unknown": "An unknown error occurred while uploading file {name}",
+        "notEnoughSpace": "Not enough space to upload file {name}"
       }
     },
+    "started": "The download of the {name} file has begun",
     "success": "File {name} uploaded successfully"
   },
   "NotFound": {
@@ -352,7 +355,7 @@ declare const messages: {
     "message": "This page does not exist"
   },
   "FolderPage": {
-    "empty": "Folder is empty, you can upload a new file"
+    "empty": "Folder is empty but you can upload a new file"
   }
 };
 export default messages;

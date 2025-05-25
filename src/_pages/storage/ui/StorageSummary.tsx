@@ -1,3 +1,5 @@
+'use client';
+
 import { useUserStorage } from '@/_entities/storage';
 import { useLocale, useTranslations } from 'next-intl';
 import prettyBytes from 'pretty-bytes';

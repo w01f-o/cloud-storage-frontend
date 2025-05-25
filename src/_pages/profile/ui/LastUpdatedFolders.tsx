@@ -1,5 +1,4 @@
 import { useFolderList } from '@/_entities/folder';
-import { Heading } from '@/_shared/ui';
 import { FolderList } from '@/_widgets/folder';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
@@ -17,7 +16,9 @@ export const LastUpdatedFolders: FC = () => {
 
   return (
     <div className='w-full lg:w-1/2'>
-      <Heading as='h3'>{t('lastUpdatedFolders')}</Heading>
+      <h3 className='text-[1.625rem] font-semibold'>
+        {t('lastUpdatedFolders')}
+      </h3>
       <div className='py-4'>
         <FolderList
           folders={data}

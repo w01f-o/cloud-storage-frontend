@@ -1,4 +1,4 @@
-import { getUserStorageQueryOptions } from '@/_entities/storage/config/query-options/get-user-storage-query-options';
+import { getUserStorageQueryOptions } from '@/_entities/storage';
 import { StoragePage } from '@/_pages/storage';
 import { generatePrefixedPageTitle } from '@/_shared/lib';
 import {

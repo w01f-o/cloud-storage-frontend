@@ -2,7 +2,14 @@
 
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { AnimatePresence, motion } from 'motion/react';
-import { createContext, RefObject, useContext, useState, type FC } from 'react';
+import {
+  createContext,
+  Ref,
+  RefObject,
+  useContext,
+  useState,
+  type FC,
+} from 'react';
 import { contentVariants } from './popover.variants';
 
 interface PopoverContextValue {
@@ -46,6 +53,7 @@ export const PopoverAnchor = PopoverPrimitive.Anchor;
 
 interface PopoverContentProps extends PopoverPrimitive.PopoverContentProps {
   portalContainer?: RefObject<HTMLDivElement | null>;
+  ref?: Ref<HTMLDivElement>;
 }
 
 export const PopoverContent: FC<PopoverContentProps> = ({
@@ -53,6 +61,7 @@ export const PopoverContent: FC<PopoverContentProps> = ({
   align = 'center',
   sideOffset = 4,
   children,
+  ref,
   portalContainer,
   ...props
 }) => {
@@ -70,6 +79,7 @@ export const PopoverContent: FC<PopoverContentProps> = ({
             sideOffset={sideOffset}
             forceMount
             asChild
+            ref={ref}
             {...props}
           >
             <motion.div

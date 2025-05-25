@@ -1,14 +1,15 @@
-import { File } from '@/_entities/file';
-import { cancelFileListQueries } from '@/_entities/file/lib/utils/cancel-file-list-queries';
-import { cancelFileQueries } from '@/_entities/file/lib/utils/cancel-file-queries';
-import { invalidateFileListQueries } from '@/_entities/file/lib/utils/invalidate-file-list-queries';
-import { invalidateFileQueries } from '@/_entities/file/lib/utils/invalidate-file-queries';
+import {
+  cancelFileListQueries,
+  cancelFileQueries,
+  File,
+  invalidateFileListQueries,
+  invalidateFileQueries,
+} from '@/_entities/file';
 import { MutationHookOptions } from '@/_shared/model';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { shareFile } from '../../api/requests';
 import { SharedFileMutationKeys } from '../../model/enums/mutation-keys.enum';
-import { SharedFileQueryKeys } from '../../model/enums/query-keys.enum';
 import { SharedFile } from '../../model/types/shared-file.type';
 import { cancelSharedFileListQueries } from '../utils/cancel-shared-file-list-queries';
 import { cancelSharedFileQueries } from '../utils/cancel-shared-file-queries';
@@ -31,26 +32,20 @@ export const useShareFile = ({
     mutationKey: [SharedFileMutationKeys.SHARE],
     mutationFn: ({ id, type }) => shareFile(id, type),
     onMutate: variables => {
+      onMutate?.(variables);
+
       cancelSharedFileListQueries(queryClient);
       cancelSharedFileQueries(queryClient, variables.id);
       cancelFileListQueries(queryClient);
       cancelFileQueries(queryClient, variables.id);
-
-      if (variables.type === 'unshare') {
-        queryClient.removeQueries({
-          queryKey: [SharedFileQueryKeys.LIST, variables.id],
-        });
-      }
-
-      onMutate?.(variables);
     },
     onSettled: (data, error, variables, context) => {
+      onSettled?.(data, error, variables, context);
+
       invalidateSharedFileListQueries(queryClient);
       invalidateSharedFileQueries(queryClient, variables.id);
       invalidateFileListQueries(queryClient);
       invalidateFileQueries(queryClient, variables.id);
-
-      onSettled?.(data, error, variables, context);
     },
     ...options,
   });

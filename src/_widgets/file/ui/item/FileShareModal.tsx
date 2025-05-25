@@ -1,7 +1,6 @@
-import { File } from '@/_entities/file';
-import { SharedFileMutationKeys } from '@/_entities/shared-file/model/enums/mutation-keys.enum';
-import { SharedFileLink } from '@/_features/file/share/ui/SharedFileLink';
-import { ShareFileForm } from '@/_features/file/share/ui/ShareFileForm';
+import { File, FileQueryKeys } from '@/_entities/file';
+import { SharedFileMutationKeys } from '@/_entities/shared-file';
+import { SharedFileLink, ShareFileForm } from '@/_features/file';
 import {
   Button,
   FadeInOut,
@@ -14,7 +13,7 @@ import {
   ModalHeader,
   ModalTitle,
 } from '@/_shared/ui';
-import { useIsMutating } from '@tanstack/react-query';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { FC, useId } from 'react';
 
@@ -30,12 +29,25 @@ export const FileShareModal: FC<FileShareModalProps> = ({
   file,
 }) => {
   const formId = useId();
-  const isPending = !!useIsMutating({
+  const isMutating = !!useIsMutating({
     mutationKey: [SharedFileMutationKeys.SHARE],
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     predicate: mutation => mutation.state.variables?.id === file.id,
   });
+  const fileIsPending = !!useIsFetching({
+    predicate: query => {
+      if (!Array.isArray(query.queryKey)) return false;
+
+      const queryKey = query.queryKey[0];
+
+      return (
+        queryKey === FileQueryKeys.INFINITE_FOLDER_LIST ||
+        queryKey === FileQueryKeys.LIST
+      );
+    },
+  });
+
   const t = useTranslations('ShareFileForm');
   const tCommon = useTranslations('common');
 
@@ -47,13 +59,13 @@ export const FileShareModal: FC<FileShareModalProps> = ({
           <ModalDescription></ModalDescription>
         </ModalHeader>
         <ModalBody className='flex flex-col gap-2 py-6'>
-          <ShareFileForm id={formId} file={file} />
+          <ShareFileForm formId={formId} file={file} />
           <FadeInOut isVisible={file.isShared}>
             <SharedFileLink id={file.id} />
           </FadeInOut>
         </ModalBody>
         <ModalFooter className='gap-2'>
-          <Button form={formId} isLoading={isPending}>
+          <Button form={formId} isLoading={isMutating || fileIsPending}>
             {tCommon('apply')}
           </Button>
           <ModalClose asChild>

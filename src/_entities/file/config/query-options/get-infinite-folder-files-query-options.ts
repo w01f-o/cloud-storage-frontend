@@ -1,6 +1,5 @@
 import { fetchInfiniteQueryOptionsFactory } from '@/_shared/lib/query';
-import { PaginatedResult } from '@/_shared/model';
-import { PaginationOptions } from '@/_shared/model/types/pagination.type';
+import { PaginatedResult, PaginationOptions } from '@/_shared/model';
 import { getFilesByFolder } from '../../api/requests';
 import { File } from '../../model';
 import { FileQueryKeys } from '../../model/enums/query-keys.enum';

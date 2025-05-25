@@ -1,6 +1,7 @@
 export type { MutationHookOptions } from './types/mutation-hook.type';
 export type {
   InfinitePaginationOptions,
+  InfiniteSearchPaginationOptions,
   PaginatedResult,
   PaginationOptions,
   SearchPaginationOptions,

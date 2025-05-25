@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const avatarVariants = tv({
-  base: 'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full text-foreground',
+  base: 'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full text-foreground shadow-md',
   variants: {
     size: {
       xs: 'size-12',

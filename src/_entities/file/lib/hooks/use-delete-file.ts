@@ -3,6 +3,7 @@ import {
   SharedFile,
   SharedFileQueryKeys,
 } from '@/_entities/shared-file';
+import { StorageQueryKeys } from '@/_entities/storage/model/enums/storage-query-keys.enum';
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import {
   InfiniteData,
@@ -16,10 +17,24 @@ import { FileQueryKeys } from '../../model/enums/query-keys.enum';
 import { File } from '../../model/types/file.type';
 import { cancelFileListQueries } from '../utils/cancel-file-list-queries';
 import { cancelFileQueries } from '../utils/cancel-file-queries';
+import { getPreviousFileQueries } from '../utils/get-previous-file-queries';
 import { invalidateFileListQueries } from '../utils/invalidate-file-list-queries';
 
 interface UseDeleteFileParams {
   id: File['id'];
+}
+
+interface UseDeleteFileContext {
+  previousFile: [readonly unknown[], globalThis.File | undefined][];
+  previousFileList: [
+    readonly unknown[],
+    PaginatedResult<globalThis.File> | undefined,
+  ][];
+  previousSharedFile: [readonly unknown[], File | undefined][];
+  previousSharedFileList: [
+    readonly unknown[],
+    PaginatedResult<File> | undefined,
+  ][];
 }
 
 export const useDeleteFile = ({
@@ -30,7 +45,12 @@ export const useDeleteFile = ({
 }: MutationHookOptions<File, UseDeleteFileParams, AxiosError> = {}) => {
   const queryClient = useQueryClient();
 
-  return useMutation<File, AxiosError, UseDeleteFileParams>({
+  return useMutation<
+    File,
+    AxiosError,
+    UseDeleteFileParams,
+    UseDeleteFileContext
+  >({
     mutationFn: ({ id }) => deleteFile(id),
     mutationKey: [FileMutationKeys.DELETE],
     onMutate: async ({ id }) => {
@@ -41,23 +61,12 @@ export const useDeleteFile = ({
         cancelFileQueries(queryClient, id),
       ]);
 
-      const previousFileList = queryClient.getQueriesData<
-        PaginatedResult<File> | undefined
-      >({
-        predicate: query =>
-          Array.isArray(query.queryKey) &&
-          query.queryKey[0] === FileQueryKeys.LIST,
-      });
-      const previousInfiniteFolderFileList = queryClient.getQueriesData<
-        InfiniteData<PaginatedResult<File>> | undefined
-      >({
-        predicate: query =>
-          Array.isArray(query.queryKey) &&
-          query.queryKey[0] === FileQueryKeys.INFINITE_FOLDER_LIST,
-      });
-      const previousFile = queryClient.getQueriesData<File | undefined>({
-        queryKey: [FileQueryKeys.FIND_ONE, id],
-      });
+      const {
+        previousFile,
+        previousFileList,
+        previousSharedFile,
+        previousSharedFileList,
+      } = getPreviousFileQueries(queryClient, id);
 
       queryClient.removeQueries({
         queryKey: [FileQueryKeys.FIND_ONE, id],
@@ -65,15 +74,13 @@ export const useDeleteFile = ({
       queryClient.removeQueries({
         queryKey: [SharedFileQueryKeys.FIND_ONE, id],
       });
-      queryClient.setQueriesData(
+      queryClient.setQueriesData<PaginatedResult<File>>(
         {
           predicate: query =>
             Array.isArray(query.queryKey) &&
             query.queryKey[0] === FileQueryKeys.LIST,
         },
-        (
-          old: PaginatedResult<File> | undefined
-        ): PaginatedResult<File> | undefined => {
+        old => {
           if (!old) return old;
 
           return {
@@ -82,13 +89,13 @@ export const useDeleteFile = ({
           };
         }
       );
-      queryClient.setQueriesData(
+      queryClient.setQueriesData<InfiniteData<PaginatedResult<File>>>(
         {
           predicate: query =>
             Array.isArray(query.queryKey) &&
             query.queryKey[0] === FileQueryKeys.INFINITE_FOLDER_LIST,
         },
-        (old: InfiniteData<PaginatedResult<File>> | undefined) => {
+        old => {
           if (!old) return old;
 
           return {
@@ -100,52 +107,65 @@ export const useDeleteFile = ({
           };
         }
       );
+      queryClient.setQueriesData<PaginatedResult<SharedFile>>(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === SharedFileQueryKeys.LIST,
+        },
+        old => {
+          if (!old) return old;
+
+          return {
+            ...old,
+            list: old.list.filter(file => file.id !== id),
+          };
+        }
+      );
+
+      return {
+        previousFileList,
+        previousFile,
+        previousSharedFile,
+        previousSharedFileList,
+      };
+    },
+    onSettled: (data, error, variables, context) => {
+      onSettled?.(data, error, variables, context);
+
+      invalidateFileListQueries(queryClient);
+      invalidateSharedFileListQueries(queryClient);
+      queryClient.invalidateQueries({ queryKey: [StorageQueryKeys.USER] });
+    },
+    onError: (error, id, context) => {
+      onError?.(error, id, context);
+
+      if (!context) return;
+
       queryClient.setQueriesData(
         {
           predicate: query =>
             Array.isArray(query.queryKey) &&
             query.queryKey[0] === SharedFileQueryKeys.LIST,
         },
-        (old: PaginatedResult<SharedFile> | undefined) => {
-          if (!old) return old;
-
-          return {
-            ...old,
-            list: old.list.filter(file => file.file.id !== id),
-          };
-        }
+        context.previousSharedFileList
       );
-
-      return { previousFileList, previousFile, previousInfiniteFolderFileList };
-    },
-    onSettled: (data, error, variables, context) => {
-      invalidateFileListQueries(queryClient);
-      invalidateSharedFileListQueries(queryClient);
-
-      onSettled?.(data, error, variables, context);
-    },
-    onError: (error, id, context) => {
-      if (
-        context instanceof Object &&
-        'previousFile' in context &&
-        'previousFileList' in context &&
-        'previousInfiniteFolderFileList' in context
-      ) {
-        queryClient.setQueriesData(
-          {
-            predicate: query =>
-              Array.isArray(query.queryKey) &&
-              query.queryKey[0] === FileQueryKeys.LIST,
-          },
-          context.previousFileList
-        );
-        queryClient.setQueriesData(
-          { queryKey: [FileQueryKeys.FIND_ONE, id] },
-          context.previousFile
-        );
-      }
-
-      onError?.(error, id, context);
+      queryClient.setQueriesData(
+        { queryKey: [SharedFileQueryKeys.FIND_ONE, id] },
+        context.previousSharedFile
+      );
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FileQueryKeys.LIST,
+        },
+        context.previousFileList
+      );
+      queryClient.setQueriesData(
+        { queryKey: [FileQueryKeys.FIND_ONE, id] },
+        context.previousFile
+      );
     },
     ...options,
   });

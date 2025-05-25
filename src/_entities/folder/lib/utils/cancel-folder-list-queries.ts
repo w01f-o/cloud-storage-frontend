@@ -5,13 +5,15 @@ export const cancelFolderListQueries = async (
   queryClient: QueryClient
 ): Promise<void> => {
   queryClient.cancelQueries({
-    predicate: query =>
-      Array.isArray(query.queryKey) &&
-      query.queryKey[0] === FolderQueryKeys.LIST,
-  });
-  queryClient.cancelQueries({
-    predicate: query =>
-      Array.isArray(query.queryKey) &&
-      query.queryKey[0] === FolderQueryKeys.INFINITE,
+    predicate: query => {
+      if (!Array.isArray(query.queryKey)) return false;
+
+      const queryKey = query.queryKey[0];
+
+      return (
+        queryKey === FolderQueryKeys.LIST ||
+        queryKey === FolderQueryKeys.INFINITE
+      );
+    },
   });
 };

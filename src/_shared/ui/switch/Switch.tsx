@@ -5,7 +5,7 @@ import { FC, Ref } from 'react';
 import { switchVariants, thumbVariants } from './switch.variants';
 
 interface SwitchProps extends SwitchPrimitives.SwitchProps {
-  ref: Ref<HTMLButtonElement>;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 const Switch: FC<SwitchProps> = ({ className, ref, ...props }) => (

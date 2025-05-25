@@ -5,8 +5,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
 import { toast } from 'sonner';
 import {
-  createFolderSchema,
-  CreateFolderSchema,
+  createFolderFormSchema,
+  CreateFolderFormSchema,
 } from '../schemas/create-folder-form-schema';
 
 interface CreateFolderFormParams {
@@ -14,9 +14,9 @@ interface CreateFolderFormParams {
 }
 
 interface UseCreateFolderFormReturn {
-  register: UseFormRegister<CreateFolderSchema>;
+  register: UseFormRegister<CreateFolderFormSchema>;
   submitHandler: () => void;
-  errors: FieldErrors<CreateFolderSchema>;
+  errors: FieldErrors<CreateFolderFormSchema>;
   color: string;
   setColor: Dispatch<SetStateAction<string>>;
 }
@@ -40,15 +40,15 @@ export const useCreateFolderForm = (
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateFolderSchema>({
-    resolver: zodResolver(createFolderSchema(t)),
+  } = useForm<CreateFolderFormSchema>({
+    resolver: zodResolver(createFolderFormSchema(t)),
   });
 
-  const submitHandler = (data: CreateFolderSchema) => {
+  const submitHandler = (data: CreateFolderFormSchema) => {
     mutate(data);
   };
 
-  const errorHandler = (errors: FieldErrors<CreateFolderSchema>) => {
+  const errorHandler = (errors: FieldErrors<CreateFolderFormSchema>) => {
     toast.error(errors?.name?.message, { duration: 5000 });
   };
 

@@ -16,8 +16,7 @@ export const NavItem: FC<NavItemProps> = memo(
     return (
       <li ref={ref}>
         <Button
-          as={Link}
-          href={path}
+          asChild
           isFullWidth
           variant='ghost'
           color='default'
@@ -26,7 +25,7 @@ export const NavItem: FC<NavItemProps> = memo(
           disableAnimation
           className={clsx('justify-start', isActive && 'font-bold')}
         >
-          {title}
+          <Link href={path}>{title}</Link>
         </Button>
       </li>
     );

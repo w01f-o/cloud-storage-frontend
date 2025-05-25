@@ -27,8 +27,8 @@ export const FileConfirmDeleteModal: FC<FileConfirmDeleteModalProps> = ({
 }) => {
   const t = useTranslations('FileItem.modal.form.delete');
   const { mutate } = useDeleteFile({
-    onSuccess: () => {
-      toast.success(t('success'));
+    onSuccess: ({ displayName }) => {
+      toast.success(t('success', { name: displayName }));
     },
     onError: () => {
       toast.error(t('errors.server.unknown'));

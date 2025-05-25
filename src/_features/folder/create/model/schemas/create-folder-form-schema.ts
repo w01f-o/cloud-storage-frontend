@@ -10,17 +10,17 @@ export const createFolderFormSchema = (
       .string()
       .min(MIN_FOLDER_NAME_LENGTH, {
         message: t('errors.nameMinLength', {
-          minLength: String(MIN_FOLDER_NAME_LENGTH),
+          minLength: MIN_FOLDER_NAME_LENGTH,
         }),
       })
       .max(MAX_FILE_NAME_LENGTH, {
         message: t('errors.nameMaxLength', {
-          maxLength: String(MAX_FILE_NAME_LENGTH),
+          maxLength: MAX_FILE_NAME_LENGTH,
         }),
       }),
     color: z.string().regex(/^#(?:[0-9a-fA-F]{3}){1,2}$/),
   });
 
-export type CreateFolderSchema = z.infer<
+export type CreateFolderFormSchema = z.infer<
   ReturnType<typeof createFolderFormSchema>
 >;

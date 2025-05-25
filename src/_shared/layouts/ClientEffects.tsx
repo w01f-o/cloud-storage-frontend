@@ -1,6 +1,10 @@
 'use client';
 
-import { IconExclamationCircle, IconProgressCheck } from '@tabler/icons-react';
+import {
+  IconExclamationCircle,
+  IconProgressAlert,
+  IconProgressCheck,
+} from '@tabler/icons-react';
 import dynamic from 'next/dynamic';
 import { FC } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
@@ -35,12 +39,14 @@ export const ClientEffects: FC = () => {
         icons={{
           success: <IconProgressCheck />,
           error: <IconExclamationCircle />,
+          info: <IconProgressAlert />,
         }}
         toastOptions={{
-          className: '!text-foreground',
+          className: '!text-foreground !text-base !rounded-xl',
           classNames: {
-            success: '!bg-success !border-success',
-            error: '!bg-danger !border-danger',
+            success: '!bg-success !border-success !gap-2.5',
+            error: '!bg-danger !border-danger !gap-2.5',
+            info: '!bg-secondary !border-secondary dark:!bg-primary dark:!border-primary !gap-2.5',
           },
         }}
       />

@@ -1,5 +1,4 @@
-import { File } from '@/_entities/file';
-import { downloadFile } from '@/_entities/file/api/requests';
+import { downloadFile, File } from '@/_entities/file';
 import {
   ContextMenu,
   ContextMenuContent,

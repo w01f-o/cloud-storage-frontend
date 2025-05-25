@@ -12,7 +12,7 @@
   --color-danger: #e65858;
   --color-danger-50: #6a1c1c;
   --color-warning: #ffbf00;
-  --color-success: #5f9f5f;
+  --color-success: #9edc9e;
   --color-secondary: #d1defc;
 
   --color-overlay: #1c1c1c;
@@ -27,6 +27,7 @@
   --color-foreground: #f1f3f6;
   --color-content: #1a1a1c;
   --color-default: #f1f3f6;
+  --color-success: #5f9f5f;
 
   --color-skeleton: #2e313a;
   --color-skeleton-highlight: #3d414c;

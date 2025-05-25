@@ -45,8 +45,6 @@ export const buttonVariants = tv({
     'outline-focus-base',
     'focus-visible:outline-primary',
     'transition-colors-background-opacity',
-    'disabled:pointer-events-none',
-    'disabled:opacity-70',
   ],
   variants: {
     color: {
@@ -74,6 +72,9 @@ export const buttonVariants = tv({
     },
     isLoading: {
       true: '',
+    },
+    isDisabled: {
+      true: 'opacity-70 pointer-events-none',
     },
     radius: {
       none: 'rounded-none',

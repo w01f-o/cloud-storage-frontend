@@ -4,7 +4,7 @@ import { useSession } from '@/_entities/auth';
 import { Link } from '@/_shared/i18n';
 import { getApiStaticUrl } from '@/_shared/lib';
 import { RoutePaths } from '@/_shared/router';
-import { Avatar, Caption, Heading } from '@/_shared/ui';
+import { Avatar } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 
@@ -20,9 +20,9 @@ export const CurrentUser: FC = () => {
       >
         <Avatar src={null} />
         <div className='flex w-0 flex-1 flex-col'>
-          <Heading size='default' className='truncate'>
+          <h5 className='truncate text-[1.125rem]'>
             {t('AuthPage.actions.login')}
-          </Heading>
+          </h5>
         </div>
       </Link>
     );
@@ -35,12 +35,8 @@ export const CurrentUser: FC = () => {
     >
       <Avatar src={user?.avatar ? getApiStaticUrl(user.avatar) : null} />
       <div className='flex w-0 flex-1 flex-col'>
-        <Heading size='default' className='truncate'>
-          {user.name}
-        </Heading>
-        <Caption size='md' className='truncate'>
-          {user.email}
-        </Caption>
+        <h5 className='truncate text-[1.125rem] font-semibold'>{user.name}</h5>
+        <span className='truncate text-sm'>{user.email}</span>
       </div>
     </Link>
   );

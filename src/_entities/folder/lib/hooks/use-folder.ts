@@ -1,4 +1,4 @@
-import { suspenseQueryHookFactory } from '@/_shared/lib';
+import { suspenseQueryHookFactory } from '@/_shared/lib/query';
 import { getFolderById } from '../../api/requests';
 import { FolderQueryKeys } from '../../model/enums/query-keys.enum';
 import { Folder } from '../../model/types/folder.type';

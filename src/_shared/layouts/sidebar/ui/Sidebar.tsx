@@ -1,7 +1,7 @@
 import { LogoutButton } from '@/_features/auth';
 import { FC } from 'react';
-import { CurrentUser } from './current-user/CurrentUser';
-import { Navbar } from './navbar/Navbar';
+import { CurrentUser } from '../../current-user/CurrentUser';
+import { Navbar } from '../../navbar';
 
 export const Sidebar: FC = () => {
   return (

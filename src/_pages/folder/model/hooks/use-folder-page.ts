@@ -20,6 +20,7 @@ export const useFolderPage = (): UseFolderPageReturn => {
       { folderId: id },
       { select: data => data.pages.flatMap(page => page.list) }
     );
+
   const { data: folderName } = useFolder({ id }, { select: data => data.name });
 
   const cursorRef = useInfiniteScroll({

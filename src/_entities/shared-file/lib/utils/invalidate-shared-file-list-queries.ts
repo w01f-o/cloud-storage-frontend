@@ -3,5 +3,7 @@ import { SharedFileQueryKeys } from '../../model/enums/query-keys.enum';
 
 export const invalidateSharedFileListQueries = (queryClient: QueryClient) =>
   queryClient.invalidateQueries({
-    queryKey: [SharedFileQueryKeys.LIST],
+    predicate: query =>
+      Array.isArray(query.queryKey) &&
+      query.queryKey[0] === SharedFileQueryKeys.LIST,
   });

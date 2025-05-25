@@ -6,7 +6,7 @@ import { FadeInOut } from '@/_shared/ui';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { useActiveIndicator } from '../../model/hooks/use-active-indicator';
+import { useActiveIndicator } from '../model/hooks/use-active-indicator';
 import { NavItem } from './NavItem';
 
 export const Navbar: FC = () => {

@@ -1,4 +1,4 @@
-import { suspenseQueryHookFactory } from '@/_shared/lib';
+import { suspenseQueryHookFactory } from '@/_shared/lib/query';
 import { PaginatedResult, PaginationOptions } from '@/_shared/model';
 import { getSharedFiles } from '../../api/requests';
 import { SharedFileQueryKeys } from '../../model/enums/query-keys.enum';

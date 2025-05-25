@@ -5,8 +5,8 @@ import { useDisclosure } from '@/_shared/lib';
 import { AnimatePresence, motion } from 'motion/react';
 import { usePathname } from 'next/navigation';
 import { FC, useEffect } from 'react';
-import { CurrentUser } from '../../sidebar/ui/current-user/CurrentUser';
-import { Navbar } from '../../sidebar/ui/navbar/Navbar';
+import { CurrentUser } from '../../current-user/CurrentUser';
+import { Navbar } from '../../navbar';
 
 export const HamburgerMenu: FC = () => {
   const { isOpen, toggle, close } = useDisclosure();

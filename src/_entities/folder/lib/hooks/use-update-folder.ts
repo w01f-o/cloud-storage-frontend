@@ -11,12 +11,25 @@ import { FolderMutationKeys } from '../../model/enums/mutation-keys.enum';
 import { Folder, UpdateFolderDto } from '../../model/types/folder.type';
 import { cancelFolderListQueries } from '../utils/cancel-folder-list-queries';
 import { cancelFolderQueries } from '../utils/cancel-folder-queries';
+import { getPreviousFolderQueries } from '../utils/get-previous-folders-queries';
 import { invalidateFolderListQueries } from '../utils/invalidate-folder-list-queries';
 import { invalidateFolderQueries } from '../utils/invalidate-folder-queries';
 
 interface UpdateFolderParams {
   id: Folder['id'];
   data: UpdateFolderDto;
+}
+
+interface UpdateFolderContext {
+  previousFolder: [readonly unknown[], Folder | undefined][];
+  previousFolderInfiniteList: [
+    readonly unknown[],
+    InfiniteData<PaginatedResult<Folder>, unknown> | undefined,
+  ][];
+  previousFolderList: [
+    readonly unknown[],
+    PaginatedResult<Folder> | undefined,
+  ][];
 }
 
 export const useUpdateFolder = ({
@@ -27,7 +40,12 @@ export const useUpdateFolder = ({
 }: MutationHookOptions<Folder, UpdateFolderParams, AxiosError> = {}) => {
   const queryClient = useQueryClient();
 
-  return useMutation<Folder, AxiosError, UpdateFolderParams>({
+  return useMutation<
+    Folder,
+    AxiosError,
+    UpdateFolderParams,
+    Partial<UpdateFolderContext>
+  >({
     mutationFn: ({ id, data }) => updateFolder(id, data),
     mutationKey: [FolderMutationKeys.UPDATE],
     onMutate: async ({ data, id }) => {
@@ -38,29 +56,18 @@ export const useUpdateFolder = ({
         cancelFolderQueries(queryClient, id),
       ]);
 
-      const previousFolderList = queryClient.getQueriesData<
-        PaginatedResult<Folder> | undefined
-      >({
-        predicate: query =>
-          Array.isArray(query.queryKey) &&
-          query.queryKey[0] === FolderQueryKeys.LIST,
-      });
-      const previousFolderInfiniteList = queryClient.getQueriesData<
-        InfiniteData<PaginatedResult<Folder>>
-      >({
-        predicate: query =>
-          Array.isArray(query.queryKey) &&
-          query.queryKey[0] === FolderQueryKeys.INFINITE,
-      });
-      const previousFolder = queryClient.getQueriesData<Folder | undefined>({
-        queryKey: [FolderQueryKeys.FIND_ONE, id],
-      });
+      const { previousFolder, previousFolderInfiniteList, previousFolderList } =
+        getPreviousFolderQueries(queryClient, id);
 
-      queryClient.setQueriesData(
+      queryClient.setQueriesData<Folder>(
         {
           queryKey: [FolderQueryKeys.FIND_ONE, id],
         },
-        (old: Folder) => ({ ...old, ...data })
+        old => {
+          if (!old) return old;
+
+          return { ...old, ...data };
+        }
       );
 
       queryClient.setQueriesData<PaginatedResult<Folder>>(
@@ -108,44 +115,39 @@ export const useUpdateFolder = ({
         previousFolder,
       };
     },
-    onSettled: async (data, error, variables, context) => {
-      await Promise.all([
+    onSettled: (data, error, variables, context) => {
+      onSettled?.(data, error, variables, context);
+
+      Promise.all([
         invalidateFolderListQueries(queryClient),
         invalidateFolderQueries(queryClient, variables.id),
       ]);
-
-      onSettled?.(data, error, variables, context);
     },
     onError: (error, variables, context) => {
-      if (
-        context instanceof Object &&
-        'previousFolder' in context &&
-        'previousFolderList' in context &&
-        'previousFolderInfiniteList' in context
-      ) {
-        queryClient.setQueriesData(
-          {
-            predicate: query =>
-              Array.isArray(query.queryKey) &&
-              query.queryKey[0] === FolderQueryKeys.LIST,
-          },
-          context.previousFolderList
-        );
-        queryClient.setQueriesData(
-          {
-            predicate: query =>
-              Array.isArray(query.queryKey) &&
-              query.queryKey[0] === FolderQueryKeys.INFINITE,
-          },
-          context.previousFolderInfiniteList
-        );
-        queryClient.setQueriesData(
-          { queryKey: [FolderQueryKeys.FIND_ONE, variables.id] },
-          context.previousFolder
-        );
-      }
-
       onError?.(error, variables, context);
+
+      if (!context) return;
+
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FolderQueryKeys.LIST,
+        },
+        context.previousFolderList
+      );
+      queryClient.setQueriesData(
+        {
+          predicate: query =>
+            Array.isArray(query.queryKey) &&
+            query.queryKey[0] === FolderQueryKeys.INFINITE,
+        },
+        context.previousFolderInfiniteList
+      );
+      queryClient.setQueriesData(
+        { queryKey: [FolderQueryKeys.FIND_ONE, variables.id] },
+        context.previousFolder
+      );
     },
     ...options,
   });

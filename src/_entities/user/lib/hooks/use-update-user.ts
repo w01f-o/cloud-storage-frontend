@@ -6,6 +6,10 @@ import { updateUser } from '../../api/requests';
 import { MutationUserKeys } from '../../model/enums/mutation-keys.enum';
 import { UpdateUserDto, User } from '../../model/types/user.type';
 
+interface UseUpdateUserContext {
+  previousUser?: [readonly unknown[], User | undefined][];
+}
+
 export const useUpdateUser = ({
   onMutate,
   onSettled,
@@ -14,53 +18,57 @@ export const useUpdateUser = ({
 }: MutationHookOptions<User, UpdateUserDto, AxiosError> = {}) => {
   const queryClient = useQueryClient();
 
-  return useMutation<User, AxiosError, UpdateUserDto>({
+  return useMutation<User, AxiosError, UpdateUserDto, UseUpdateUserContext>({
     mutationFn: updateUser,
     mutationKey: [MutationUserKeys.UPDATE],
     onMutate: async data => {
       onMutate?.(data);
 
+      await queryClient.cancelQueries({
+        queryKey: [AuthQueryKeys.CURRENT_SESSION],
+      });
+
       if (data.email || data.name) {
-        await queryClient.cancelQueries({
+        const previousUser = queryClient.getQueriesData<User>({
           queryKey: [AuthQueryKeys.CURRENT_SESSION],
         });
 
-        const previousUser = queryClient.getQueryData<User>([
-          AuthQueryKeys.CURRENT_SESSION,
-        ]);
-
-        queryClient.setQueriesData(
+        queryClient.setQueriesData<User>(
           {
             queryKey: [AuthQueryKeys.CURRENT_SESSION],
           },
-          (old: User): User => ({
-            ...old,
-            email: data.email ?? old.email,
-            name: data.name ?? old.name,
-          })
+          old => {
+            if (!old) return old;
+
+            return {
+              ...old,
+              email: data.email ?? old.email,
+              name: data.name ?? old.name,
+            };
+          }
         );
 
         return { previousUser };
       }
     },
-    onSettled: async (data, error, variables, context) => {
-      await queryClient.invalidateQueries({
+    onSettled: (data, error, variables, context) => {
+      onSettled?.(data, error, variables, context);
+
+      queryClient.invalidateQueries({
         queryKey: [AuthQueryKeys.CURRENT_SESSION],
       });
-
-      onSettled?.(data, error, variables, context);
     },
     onError: (error, variables, context) => {
-      if (context instanceof Object && 'previousUser' in context) {
-        queryClient.setQueriesData(
-          {
-            queryKey: [AuthQueryKeys.CURRENT_SESSION],
-          },
-          context.previousUser
-        );
-      }
-
       onError?.(error, variables, context);
+
+      if (!context) return;
+
+      queryClient.setQueriesData(
+        {
+          queryKey: [AuthQueryKeys.CURRENT_SESSION],
+        },
+        context.previousUser
+      );
     },
     ...options,
   });

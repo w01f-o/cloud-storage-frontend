@@ -5,8 +5,8 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  ScrollContainer,
 } from '@/_shared/ui';
-import { ScrollContainer } from '@/_shared/ui';
 import { IconFileUpload } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
@@ -21,7 +21,7 @@ export const FileUploadStatusList: FC = () => {
   return (
     <FadeInOut
       isVisible={!!files.length}
-      className='fixed bottom-6 left-6 z-30 lg:top-6 lg:right-6'
+      className='fixed bottom-6 left-6 z-30 lg:top-6 lg:right-6 lg:bottom-auto lg:left-auto'
     >
       <Popover>
         <PopoverTrigger asChild>
@@ -30,7 +30,7 @@ export const FileUploadStatusList: FC = () => {
           </Button>
         </PopoverTrigger>
         <PopoverContent align={isMobile ? 'start' : 'end'}>
-          <div className='pb-0.5 text-lg font-semibold'>{t('title')}</div>
+          <div className='pb-1 text-xl font-semibold'>{t('title')}</div>
           <ScrollContainer>
             <div className='flex max-h-[calc(100vh-16rem)] w-[calc(100vw-6rem)] flex-col gap-2 md:w-md'>
               {files.map(file => (

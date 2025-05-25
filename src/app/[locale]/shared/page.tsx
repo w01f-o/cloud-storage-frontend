@@ -17,7 +17,7 @@ export const generateMetadata = async ({
   const t = await getTranslations({ locale });
 
   return {
-    title: generatePrefixedPageTitle(t(`HelpPage.title`)),
+    title: generatePrefixedPageTitle(t(`SharedFilePage.title`)),
   };
 };
 

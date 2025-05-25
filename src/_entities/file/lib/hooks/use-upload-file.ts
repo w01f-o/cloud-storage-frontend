@@ -1,4 +1,5 @@
 import { Folder } from '@/_entities/folder';
+import { StorageQueryKeys } from '@/_entities/storage/model/enums/storage-query-keys.enum';
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import {
   InfiniteData,
@@ -55,24 +56,34 @@ export const useUploadFile = ({
       );
     },
     onMutate: async ({ file, storeId, folderId }) => {
+      onMutate?.({ file, storeId, folderId });
+
       addFile({
         name: file.name,
         id: storeId,
         abortController: new AbortController(),
       });
-      await cancelFileListQueries(queryClient);
-
-      onMutate?.({ file, storeId, folderId });
+      cancelFileListQueries(queryClient);
     },
     onSuccess: (newFile, variables, context) => {
-      queryClient.setQueriesData(
+      onSuccess?.(newFile, variables, context);
+
+      queryClient.setQueriesData<PaginatedResult<FileEntity>>(
         { queryKey: [FileQueryKeys.LIST] },
-        (old: PaginatedResult<FileEntity> | undefined) => {
+        old => {
           if (!old) return old;
 
           return {
             ...old,
-            list: [newFile, ...old.list.slice(0, old.meta.perPage - 1)],
+            list: [
+              {
+                ...newFile,
+                createdAt: new Date(newFile.createdAt),
+                updatedAt: new Date(newFile.updatedAt),
+                size: BigInt(newFile.size),
+              },
+              ...old.list.slice(0, old.meta.perPage - 1),
+            ],
             meta: {
               ...old.meta,
               total: old.meta.total + 1,
@@ -80,7 +91,6 @@ export const useUploadFile = ({
           };
         }
       );
-
       queryClient.setQueriesData(
         { queryKey: [FileQueryKeys.INFINITE_FOLDER_LIST, newFile.folderId] },
         (old: InfiniteData<PaginatedResult<FileEntity>> | undefined) => {
@@ -92,7 +102,15 @@ export const useUploadFile = ({
               if (index === 0) {
                 return {
                   ...page,
-                  list: [newFile, ...page.list.slice(0, page.meta.perPage - 1)],
+                  list: [
+                    {
+                      ...newFile,
+                      createdAt: new Date(newFile.createdAt),
+                      updatedAt: new Date(newFile.updatedAt),
+                      size: BigInt(newFile.size),
+                    },
+                    ...page.list.slice(0, page.meta.perPage - 1),
+                  ],
                   meta: {
                     ...page.meta,
                     total: page.meta.total + 1,
@@ -105,38 +123,13 @@ export const useUploadFile = ({
           };
         }
       );
-      queryClient.setQueriesData(
-        { queryKey: [FileQueryKeys.INFINITE] },
-        (old: InfiniteData<PaginatedResult<FileEntity>> | undefined) => {
-          if (!old) return old;
-
-          return {
-            ...old,
-            pages: old.pages.map((page, index) => {
-              if (index === 0) {
-                return {
-                  ...page,
-                  list: [newFile, ...page.list.slice(0, page.meta.perPage - 1)],
-                  meta: {
-                    ...page.meta,
-                    total: page.meta.total + 1,
-                  },
-                };
-              }
-
-              return page;
-            }),
-          };
-        }
-      );
-
-      onSuccess?.(newFile, variables, context);
     },
-    onSettled: async (data, error, { file, storeId, folderId }, context) => {
-      await invalidateFileListQueries(queryClient);
-      removeFile(storeId);
-
+    onSettled: (data, error, { file, storeId, folderId }, context) => {
       onSettled?.(data, error, { file, storeId, folderId }, context);
+
+      removeFile(storeId);
+      invalidateFileListQueries(queryClient);
+      queryClient.invalidateQueries({ queryKey: [StorageQueryKeys.USER] });
     },
     ...options,
   });

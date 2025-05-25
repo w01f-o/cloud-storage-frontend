@@ -1,5 +1,5 @@
 import { File } from '@/_entities/file';
-import { UpdateFileForm } from '@/_features/file/update/ui/UpdateFileForm';
+import { UpdateFileForm } from '@/_features/file';
 import {
   Button,
   Modal,
@@ -59,7 +59,7 @@ export const FilePropertiesModal: FC<FilePropertiesModalProps> = ({
           <ModalDescription>{file.displayName}</ModalDescription>
         </ModalHeader>
         <ModalBody>
-          <UpdateFileForm file={file} id={formId} />
+          <UpdateFileForm file={file} formId={formId} />
           <div className='flex flex-col gap-3 py-4'>
             <div className='flex gap-2'>
               <div className='w-24 md:w-32'>{t('type')}:</div>
