@@ -1,5 +1,4 @@
 import { RegisterForm } from '@/_features/auth';
-import { Heading } from '@/_shared/ui';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 
@@ -8,7 +7,7 @@ export const RegisterPage: FC = () => {
 
   return (
     <div className='flex size-full flex-col items-center justify-center gap-4'>
-      <Heading size='xl'>{t('title.register')}</Heading>
+      <h1 className='text-4xl'>{t('title.register')}</h1>
       <RegisterForm />
     </div>
   );

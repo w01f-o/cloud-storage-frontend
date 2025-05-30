@@ -1,5 +1,6 @@
-import { useSession } from '@/_entities/auth';
+import { AuthErrors, useSession } from '@/_entities/auth';
 import { User, useUpdateUser } from '@/_entities/user';
+import { catchApiError } from '@/_shared/lib';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { FieldErrors, useForm, UseFormRegister } from 'react-hook-form';
@@ -24,8 +25,17 @@ export const useChangeEmailForm = (): UseChangeEmailFormReturn => {
     onSuccess: () => {
       toast.success(t('success'));
     },
-    onError: () => {
-      toast.error(t('errors.server.unknown'));
+    onError: error => {
+      const errorMessage = catchApiError<AuthErrors>(error).message;
+
+      switch (errorMessage) {
+        case AuthErrors.NOT_CONFIRMED_ACCOUNT:
+          toast.error(t('errors.server.userAlreadyExists'));
+          break;
+        default:
+          toast.error(t('errors.server.unknown'));
+          break;
+      }
     },
   });
 

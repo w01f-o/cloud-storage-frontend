@@ -35,14 +35,16 @@ export const useSharedFilesPage = ({
     data: { meta, list },
   } = useSharedFileList({ page, perPage });
   const pathname = usePathname();
+  const paginationIsVisible = !!meta.next || !!meta.prev;
 
   useEffect(() => {
-    if (meta.lastPage < page) {
+    if (paginationIsVisible && meta.lastPage < page) {
+      console.log(meta);
+
       router.push({ pathname, query: { [PAGE_QUERY_KEY]: meta.lastPage } });
     }
-  }, [meta, page, pathname, router]);
+  }, [meta, page, paginationIsVisible, pathname, router]);
 
-  const paginationIsVisible = !!meta.next || !!meta.prev;
   const isHasNext = !!meta.next;
   const isHasPrev = !!meta.prev;
 

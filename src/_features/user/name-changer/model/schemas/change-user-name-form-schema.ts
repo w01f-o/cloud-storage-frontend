@@ -10,12 +10,12 @@ export const changeUserNameFormSchema = (
       .string()
       .min(MIN_USER_NAME_LENGTH, {
         message: t('errors.minLength', {
-          minLength: String(MIN_USER_NAME_LENGTH),
+          minLength: MIN_USER_NAME_LENGTH,
         }),
       })
       .max(MAX_USER_NAME_LENGTH, {
         message: t('errors.maxLength', {
-          maxLength: String(MAX_USER_NAME_LENGTH),
+          maxLength: MAX_USER_NAME_LENGTH,
         }),
       }),
   });

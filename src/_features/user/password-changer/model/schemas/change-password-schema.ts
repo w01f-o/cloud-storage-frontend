@@ -13,24 +13,24 @@ export const changePasswordSchema = (
         .string()
         .min(MIN_PASSWORD_LENGTH, {
           message: t('errors.minLength', {
-            minLength: String(MIN_PASSWORD_LENGTH),
+            minLength: MIN_PASSWORD_LENGTH,
           }),
         })
         .max(MAX_PASSWORD_LENGTH, {
           message: t('errors.maxLength', {
-            maxLength: String(MAX_PASSWORD_LENGTH),
+            maxLength: MAX_PASSWORD_LENGTH,
           }),
         }),
       newPassword: z
         .string()
         .min(MIN_PASSWORD_LENGTH, {
           message: t('errors.minLength', {
-            minLength: String(MIN_PASSWORD_LENGTH),
+            minLength: MIN_PASSWORD_LENGTH,
           }),
         })
         .max(MAX_PASSWORD_LENGTH, {
           message: t('errors.maxLength', {
-            maxLength: String(MAX_PASSWORD_LENGTH),
+            maxLength: MAX_PASSWORD_LENGTH,
           }),
         }),
       confirmPassword: z.string(),

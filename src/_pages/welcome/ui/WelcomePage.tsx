@@ -2,7 +2,7 @@
 
 import { Link } from '@/_shared/i18n';
 import { RoutePaths } from '@/_shared/router';
-import { Button, Heading, IconFullLogo, Text } from '@/_shared/ui';
+import { Button, IconFullLogo } from '@/_shared/ui';
 import { IconArrowRight } from '@tabler/icons-react';
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
@@ -22,8 +22,8 @@ export const WelcomePage: FC = () => {
         transition={{ type: 'spring', mass: 5, stiffness: 120, damping: 120 }}
       >
         <IconFullLogo />
-        <Heading size='xl'>{t('greeting')}</Heading>
-        <Text size='lg'>{t('description')}</Text>
+        <h1 className='text-4xl'>{t('greeting')}</h1>
+        <p className='text-lg'>{t('description')}</p>
       </motion.div>
       <div className='flex w-full max-w-sm justify-center gap-3'>
         <motion.div
@@ -37,13 +37,8 @@ export const WelcomePage: FC = () => {
           }}
           className='flex-1'
         >
-          <Button
-            as={Link}
-            href={RoutePaths.LOGIN}
-            isFullWidth
-            endContent={<IconArrowRight />}
-          >
-            {t('links.login')}
+          <Button asChild isFullWidth endContent={<IconArrowRight />}>
+            <Link href={RoutePaths.LOGIN}>{t('links.login')}</Link>
           </Button>
         </motion.div>
         <motion.div
@@ -57,13 +52,8 @@ export const WelcomePage: FC = () => {
           }}
           className='flex-2'
         >
-          <Button
-            as={Link}
-            href={RoutePaths.REGISTER}
-            color='secondary'
-            isFullWidth
-          >
-            {t('links.register')}
+          <Button asChild isFullWidth>
+            <Link href={RoutePaths.REGISTER}>{t('links.register')}</Link>
           </Button>
         </motion.div>
       </div>

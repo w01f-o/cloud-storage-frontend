@@ -27,6 +27,7 @@ export const LogoutButton: FC = () => {
         startContent={<IconLogout />}
         onClick={clickHandler}
         isLoading={isPending}
+        spinnerPosition='end'
       >
         Выйти
       </Button>

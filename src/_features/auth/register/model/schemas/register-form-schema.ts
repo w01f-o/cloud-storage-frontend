@@ -20,24 +20,24 @@ export const registerFormSchema = (
         .string()
         .min(MIN_USER_NAME_LENGTH, {
           message: t('errors.nameMinLength', {
-            minLength: String(MIN_USER_NAME_LENGTH),
+            minLength: MIN_USER_NAME_LENGTH,
           }),
         })
         .max(MAX_USER_NAME_LENGTH, {
           message: t('errors.nameMaxLength', {
-            maxLength: String(MAX_USER_NAME_LENGTH),
+            maxLength: MAX_USER_NAME_LENGTH,
           }),
         }),
       password: z
         .string()
         .min(MIN_PASSWORD_LENGTH, {
           message: t('errors.passwordMinLength', {
-            minLength: String(MIN_PASSWORD_LENGTH),
+            minLength: MIN_PASSWORD_LENGTH,
           }),
         })
         .max(MAX_PASSWORD_LENGTH, {
           message: t('errors.passwordMaxLength', {
-            maxLength: String(MAX_PASSWORD_LENGTH),
+            maxLength: MAX_PASSWORD_LENGTH,
           }),
         }),
       confirmPassword: z.string(),

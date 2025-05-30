@@ -60,9 +60,9 @@ authApiClient.interceptors.response.use(
     const errorData = catchApiError<AuthErrors>(error);
 
     const isTokensError =
-      errorData.statusCode === HttpStatus.UNAUTHORIZED &&
-      (errorData.message === AuthErrors.INVALID_ACCESS_TOKEN ||
-        errorData.message === AuthErrors.INVALID_REFRESH_TOKEN);
+      errorData?.statusCode === HttpStatus.UNAUTHORIZED &&
+      (errorData?.message === AuthErrors.INVALID_ACCESS_TOKEN ||
+        errorData?.message === AuthErrors.INVALID_REFRESH_TOKEN);
 
     if (!isTokensError || !originalRequest || originalRequest._retry) {
       throw error;

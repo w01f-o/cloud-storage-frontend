@@ -14,12 +14,12 @@ export const loginFormSchema = (
       .string()
       .min(MIN_PASSWORD_LENGTH, {
         message: t('errors.passwordMinLength', {
-          minLength: String(MIN_PASSWORD_LENGTH),
+          minLength: MIN_PASSWORD_LENGTH,
         }),
       })
       .max(MAX_PASSWORD_LENGTH, {
         message: t('errors.passwordMaxLength', {
-          maxLength: String(MAX_PASSWORD_LENGTH),
+          maxLength: MAX_PASSWORD_LENGTH,
         }),
       }),
   });

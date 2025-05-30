@@ -123,11 +123,12 @@ declare const messages: {
     "title": "My Storage",
     "available": "Available",
     "capacity": "Total",
-    "used": "Used"
+    "used": "Used",
+    "empty": "You don't have any files yet"
   },
   "SharedFilePage": {
     "title": "Shared Files",
-     "empty": "You don't have any shared files yet"
+    "empty": "You don't have any shared files yet"
   },
   "SettingsPage": {
     "title": "Settings",
@@ -180,7 +181,8 @@ declare const messages: {
           "minLength": "Email must be at least {minLength, plural, =1 {# character} other {# characters}}",
           "maxLength": "Email must be no more than {maxLength, plural, =1 {# character} other {# characters}}",
           "server": {
-            "unknown": "An unknown error occurred while changing the email"
+            "unknown": "An unknown error occurred while changing the email",
+            "userAlreadyExists": "User with this email already exists"
           }
         },
         "success": "Email changed successfully"

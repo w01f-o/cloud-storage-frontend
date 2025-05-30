@@ -1,6 +1,5 @@
 import { AuthErrors, useRegister } from '@/_entities/auth';
-import { useRouter } from '@/_shared/i18n';
-import { catchApiError } from '@/_shared/lib';
+import { catchApiError, navigate } from '@/_shared/lib';
 import { RoutePaths } from '@/_shared/router';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -22,14 +21,13 @@ interface UseRegisterFormReturn {
 export const useRegisterForm = (): UseRegisterFormReturn => {
   const t = useTranslations('AuthPage');
 
-  const router = useRouter();
   const [isRouterPending, startRouterTransition] = useTransition();
 
   const { mutate: register, isPending } = useRegister({
     onSuccess: () => {
       toast.success(t('success.register'));
       startRouterTransition(() => {
-        router.replace(RoutePaths.HOME);
+        navigate(RoutePaths.HOME);
       });
     },
     onError: error => {

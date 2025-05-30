@@ -1,4 +1,4 @@
-interface User {
+export interface User {
   id: string;
   email: string;
   name: string;
@@ -6,12 +6,10 @@ interface User {
   avatar: string | null;
 }
 
-type UpdateUserDto = Partial<
+export type UpdateUserDto = Partial<
   Pick<User, 'name' | 'email'> & {
     password?: string;
     oldPassword?: string;
     avatar?: File;
   }
 >;
-
-export type { UpdateUserDto, User };

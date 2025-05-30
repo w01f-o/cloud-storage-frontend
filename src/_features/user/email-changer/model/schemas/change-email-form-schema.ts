@@ -13,7 +13,7 @@ export const changeEmailFormSchema = (
         message: t('errors.minLength', { minLength: MIN_EMAIL_LENGTH }),
       })
       .max(MAX_EMAIL_LENGTH, {
-        message: t('errors.maxLength', { maxLength: 255 }),
+        message: t('errors.maxLength', { maxLength: MAX_EMAIL_LENGTH }),
       }),
   });
 
