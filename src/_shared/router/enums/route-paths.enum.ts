@@ -1,0 +1,16 @@
+export enum RoutePaths {
+  WELCOME = '/welcome',
+  HOME = '/',
+  PROFILE = '/profile',
+  STORAGE = '/storage',
+  SHARED = '/shared',
+  SETTINGS = '/settings',
+  SETTINGS_GENERAL = '/settings/general',
+  SETTINGS_ACCOUNT = '/settings/account',
+  SETTINGS_APPEARANCE = '/settings/appearance',
+  HELP = '/help',
+  ACTIVATE = '/auth/activate',
+  LOGIN = '/auth/login',
+  REGISTER = '/auth/register',
+  FOLDER = '/folder',
+}
