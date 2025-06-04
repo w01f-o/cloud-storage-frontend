@@ -117,7 +117,8 @@ declare const messages: {
   "ProfilePage": {
     "title": "Profile",
     "lastUpdatedFolders": "Recently Updated Folders",
-    "lastUploadedFiles": "Recently Uploaded Files"
+    "lastUploadedFiles": "Recently Uploaded Files",
+    "empty": "It's empty so far"
   },
   "StoragePage": {
     "title": "My Storage",
@@ -349,7 +350,7 @@ declare const messages: {
         "notEnoughSpace": "Not enough space to upload file {name}"
       }
     },
-    "started": "The download of the {name} file has begun",
+    "started": "The upload of the {name} file has begun",
     "success": "File {name} uploaded successfully"
   },
   "NotFound": {

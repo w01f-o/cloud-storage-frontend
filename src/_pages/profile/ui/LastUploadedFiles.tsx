@@ -19,9 +19,13 @@ export const LastUploadedFiles: FC = () => {
       <h3 className='text-[1.625rem] font-semibold'>
         {t('lastUploadedFiles')}
       </h3>
-      <div className='py-4'>
-        <FileList list={data} />
-      </div>
+      {!!data.length ? (
+        <div className='py-4'>
+          <FileList list={data} />
+        </div>
+      ) : (
+        <div className='py-5'>{t('empty')}</div>
+      )}
     </div>
   );
 };

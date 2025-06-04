@@ -114,7 +114,8 @@
   "ProfilePage": {
     "title": "Профиль",
     "lastUpdatedFolders": "Последние обновленные папки",
-    "lastUploadedFiles": "Последние загруженные файлы"
+    "lastUploadedFiles": "Последние загруженные файлы",
+    "empty": "Пока что тут пусто"
   },
   "StoragePage": {
     "title": "Моё хранилище",

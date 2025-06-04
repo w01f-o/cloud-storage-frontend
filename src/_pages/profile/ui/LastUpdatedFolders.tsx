@@ -20,10 +20,14 @@ export const LastUpdatedFolders: FC = () => {
         {t('lastUpdatedFolders')}
       </h3>
       <div className='py-4'>
-        <FolderList
-          folders={data}
-          className='grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3'
-        />
+        {!!data.length ? (
+          <FolderList
+            folders={data}
+            className='grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3'
+          />
+        ) : (
+          <div>{t('empty')}</div>
+        )}
       </div>
     </div>
   );
