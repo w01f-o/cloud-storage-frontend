@@ -17,7 +17,7 @@ export const useFolderPage = (): UseFolderPageReturn => {
   const { id } = useParams<Pick<Folder, 'id'>>();
   const { data, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useInfiniteFolderFiles(
-      { folderId: id },
+      { folderId: id, perPage: 36 },
       { select: data => data.pages.flatMap(page => page.list) }
     );
 

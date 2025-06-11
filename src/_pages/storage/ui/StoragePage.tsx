@@ -16,7 +16,7 @@ export const StoragePage: FC = () => {
 
   if (isEmpty) {
     return (
-      <div className='grid h-2/3 place-items-center text-5xl font-semibold'>
+      <div className='grid h-[90%] place-items-center text-center text-5xl font-semibold lg:h-4/5'>
         {t('StoragePage.empty')}
       </div>
     );

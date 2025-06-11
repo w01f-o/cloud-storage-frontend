@@ -50,17 +50,19 @@ const clouds: CloudConfig[] = [
   },
 ];
 
-export const Background: FC = () => (
-  <>
-    {clouds.map(({ style, motionProps }, index) => (
-      <motion.div
-        className='absolute'
-        key={index}
-        style={style}
-        {...motionProps}
-      >
-        <IconCloud />
-      </motion.div>
-    ))}
-  </>
-);
+export const Background: FC = () => {
+  return (
+    <>
+      {clouds.map(({ style, motionProps }, index) => (
+        <motion.div
+          className='absolute hidden lg:block'
+          key={index}
+          style={style}
+          {...motionProps}
+        >
+          <IconCloud />
+        </motion.div>
+      ))}
+    </>
+  );
+};

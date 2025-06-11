@@ -28,7 +28,7 @@ export const SharedFilesPage: FC = () => {
   return (
     <div className='flex size-full flex-col justify-between py-6'>
       {isEmpty && (
-        <h3 className='grid h-2/3 place-items-center text-5xl font-semibold'>
+        <h3 className='grid h-[90%] place-items-center text-center text-5xl font-semibold lg:h-4/5'>
           {t('empty')}
         </h3>
       )}

@@ -22,9 +22,9 @@ export const FolderPage: FC = () => {
       <DropzoneFileUploader folderId={folderId} withIcon>
         <h1 className='pb-6 text-4xl font-bold'>{folderName}</h1>
         {isEmpty && (
-          <h1 className='flex basis-1/2 items-end justify-center text-center text-4xl font-bold lg:basis-1/3'>
+          <div className='flex basis-2/5 items-end justify-center text-center text-4xl font-bold lg:basis-1/3'>
             {t('empty')}
-          </h1>
+          </div>
         )}
         <FileList list={fileList} cursorRef={cursorRef} />
         {isFetchingNextPage && <FileListLoader />}

@@ -37,11 +37,13 @@ export const HomePage: FC = () => {
           <div className='flex h-[80%] flex-col items-center justify-center gap-6 text-5xl'>
             {!searchQuery && (
               <>
-                {t('youDontHaveFolders')}
+                <div className='text-center'>{t('youDontHaveFolders')}</div>
                 <CreateFolderFormModal />
               </>
             )}
-            {searchQuery && t('foldersNotFound')}
+            {searchQuery && (
+              <div className='text-center'>{t('foldersNotFound')}</div>
+            )}
           </div>
         </>
       )}
@@ -53,7 +55,9 @@ export const HomePage: FC = () => {
             cursorRef={cursorRef}
             className='grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7'
           />
-          {isFetchingNextPage && <FolderListLoader />}
+          {isFetchingNextPage && (
+            <FolderListLoader className='grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7' />
+          )}
           <div className='flex w-full justify-center pt-6'>
             <CreateFolderFormModal />
           </div>
