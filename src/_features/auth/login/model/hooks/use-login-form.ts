@@ -1,4 +1,5 @@
 import { AuthErrors, useLogin } from '@/_entities/auth';
+import { useRouter } from '@/_shared/i18n';
 import { catchApiError, navigate } from '@/_shared/lib';
 import { RoutePaths } from '@/_shared/router';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,11 +20,13 @@ export const useLoginForm = (): UseLoginFormReturn => {
   const t = useTranslations('AuthPage');
 
   const [isRouterPending, startRouterTransition] = useTransition();
+  const router = useRouter();
 
   const { mutate: login, isPending } = useLogin({
     onSuccess: () => {
       toast.success(t('success.login'));
       startRouterTransition(() => {
+        router.refresh();
         navigate(RoutePaths.HOME);
       });
     },

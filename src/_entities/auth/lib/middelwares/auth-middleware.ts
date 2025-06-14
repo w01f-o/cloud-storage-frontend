@@ -21,7 +21,7 @@ export const authMiddleware: ComposableMiddleware = async (req, res) => {
   const accessToken = req.cookies.get('accessToken')?.value ?? null;
   const refreshToken = req.cookies.get('refreshToken')?.value ?? null;
 
-  const tokenIsValid = accessToken && refreshToken;
+  const tokenIsValid = !!accessToken && !!refreshToken;
 
   const protectedPaths = RouterConfig.getProtectedPaths();
   const authPaths = RouterConfig.getAuthPaths();
@@ -29,13 +29,18 @@ export const authMiddleware: ComposableMiddleware = async (req, res) => {
   const pathname = clearPathname(req.nextUrl.pathname);
 
   if (authPaths.includes(pathname) && tokenIsValid) {
-    return NextResponse.redirect(new URL(RoutePaths.HOME, req.nextUrl.origin));
+    const url = req.nextUrl.clone();
+
+    url.pathname = RoutePaths.HOME;
+
+    return NextResponse.redirect(url);
   }
 
   if (protectedPaths.includes(pathname) && !tokenIsValid) {
-    return NextResponse.redirect(
-      new URL(RoutePaths.WELCOME, req.nextUrl.origin)
-    );
+    const url = req.nextUrl.clone();
+    url.pathname = RoutePaths.WELCOME;
+
+    return NextResponse.redirect(url);
   }
 
   return res;

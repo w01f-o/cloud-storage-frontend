@@ -5,7 +5,7 @@ export const listVariants = tv({
 });
 
 export const triggerVariants = tv({
-  base: 'data-[state=active]:bg-content bg-transparent inline-flex items-center justify-center rounded-lg px-4 py-2 text-xl md:text-lg font-medium whitespace-nowrap transition-colors-background-opacity disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm',
+  base: 'data-[state=active]:bg-content lg:data-[state=active]:bg-background bg-transparent inline-flex items-center justify-center rounded-lg px-4 py-2 text-xl md:text-lg font-medium whitespace-nowrap transition-colors-background-opacity disabled:pointer-events-none disabled:opacity-50 lg:data-[state=active]:shadow-sm',
 });
 
 export const contentVariants = tv({

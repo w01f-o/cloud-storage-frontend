@@ -1,5 +1,5 @@
 import { useUploadFileProgresses } from '@/_entities/file';
-import { useRouter } from '@/_shared/i18n';
+import { navigate } from '@/_shared/lib';
 import { MutationHookOptions } from '@/_shared/model';
 import { RoutePaths } from '@/_shared/router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -13,7 +13,6 @@ export const useLogout = ({
   ...options
 }: MutationHookOptions<void, void, AxiosError> = {}) => {
   const queryClient = useQueryClient();
-  const router = useRouter();
   const abortAllUploads = useUploadFileProgresses(
     state => state.abortAllUploads
   );
@@ -21,13 +20,12 @@ export const useLogout = ({
   return useMutation<void, AxiosError>({
     mutationFn: logout,
     onMutate: variables => {
-      router.prefetch(RoutePaths.WELCOME);
       abortAllUploads();
 
       onMutate?.(variables);
     },
     onSuccess: async (data, variables, context) => {
-      router.replace(RoutePaths.WELCOME);
+      navigate(RoutePaths.WELCOME);
 
       queryClient.setQueryData([AuthQueryKeys.CURRENT_SESSION], null);
       await queryClient.resetQueries({
