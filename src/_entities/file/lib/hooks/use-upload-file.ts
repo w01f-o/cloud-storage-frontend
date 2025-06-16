@@ -1,4 +1,8 @@
-import { Folder } from '@/_entities/folder';
+import {
+  Folder,
+  invalidateFolderListQueries,
+  invalidateFolderQueries,
+} from '@/_entities/folder';
 import { StorageQueryKeys } from '@/_entities/storage/model/enums/storage-query-keys.enum';
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import {
@@ -130,6 +134,11 @@ export const useUploadFile = ({
       removeFile(storeId);
       invalidateFileListQueries(queryClient);
       queryClient.invalidateQueries({ queryKey: [StorageQueryKeys.USER] });
+
+      invalidateFolderListQueries(queryClient);
+      if (data?.folderId) {
+        invalidateFolderQueries(queryClient, data.folderId);
+      }
     },
     ...options,
   });

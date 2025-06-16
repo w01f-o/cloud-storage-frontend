@@ -3,6 +3,8 @@ export {
   getInfiniteFolderListQueryOptions,
 } from './config/query-options';
 export {
+  invalidateFolderListQueries,
+  invalidateFolderQueries,
   useCreateFolder,
   useDeleteFolder,
   useFolder,

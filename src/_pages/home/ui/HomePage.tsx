@@ -28,7 +28,7 @@ export const HomePage: FC = () => {
 
       {shouldShowLoader && (
         <div className='py-8'>
-          <FolderListLoader />
+          <FolderListLoader className='grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7' />
         </div>
       )}
 
