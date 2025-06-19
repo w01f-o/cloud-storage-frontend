@@ -6,3 +6,5 @@ export {
   useInfiniteFolderList,
   useUpdateFolder,
 } from './hooks';
+
+export { invalidateFolderListQueries, invalidateFolderQueries } from './utils';
