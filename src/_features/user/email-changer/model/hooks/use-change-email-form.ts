@@ -29,7 +29,7 @@ export const useChangeEmailForm = (): UseChangeEmailFormReturn => {
       const errorMessage = catchApiError<AuthErrors>(error).message;
 
       switch (errorMessage) {
-        case AuthErrors.NOT_CONFIRMED_ACCOUNT:
+        case AuthErrors.USER_ALREADY_EXISTS:
           toast.error(t('errors.server.userAlreadyExists'));
           break;
         default:

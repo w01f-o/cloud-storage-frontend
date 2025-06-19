@@ -1,3 +1,5 @@
+import { invalidateSharedFileListQueries } from '@/_entities/shared-file';
+import { StorageQueryKeys } from '@/_entities/storage/model/enums/storage-query-keys.enum';
 import { MutationHookOptions, PaginatedResult } from '@/_shared/model';
 import {
   InfiniteData,
@@ -102,6 +104,8 @@ export const useDeleteFolder = ({
       onSettled?.(data, error, variables, context);
 
       invalidateFolderListQueries(queryClient);
+      invalidateSharedFileListQueries(queryClient);
+      queryClient.invalidateQueries({ queryKey: [StorageQueryKeys.USER] });
     },
     onError: (error, id, context) => {
       onError?.(error, id, context);

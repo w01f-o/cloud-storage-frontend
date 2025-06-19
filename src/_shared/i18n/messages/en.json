@@ -345,7 +345,8 @@
       "server": {
         "unknown": "An unknown error occurred while uploading file {name}",
         "notEnoughSpace": "Not enough space to upload file {name}"
-      }
+      },
+      "tooManyFiles": "Maximum number of files to upload: {limit}"
     },
     "started": "The upload of the {name} file has begun",
     "success": "File {name} uploaded successfully"

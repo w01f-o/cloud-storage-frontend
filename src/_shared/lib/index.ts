@@ -7,7 +7,12 @@ export {
 } from './api';
 export type { ApiError, RequestOptions } from './api';
 
-export { useBodyRef, useDisclosure, useInfiniteScroll } from './hooks';
+export {
+  useBodyRef,
+  useDisclosure,
+  useInfiniteScroll,
+  useMainScrollContainer,
+} from './hooks';
 
 export { navigate } from './actions';
 

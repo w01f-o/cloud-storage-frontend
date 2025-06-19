@@ -8,7 +8,7 @@ interface FolderListLoader {
 }
 
 export const FolderListLoader: FC<FolderListLoader> = ({
-  length = 36,
+  length = 35,
   className,
 }) => {
   return (

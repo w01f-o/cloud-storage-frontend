@@ -19,7 +19,7 @@ export const useHomePage = (): UseHomePageReturn => {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
     useInfiniteFolderList(
-      { perPage: 36, search: searchQuery },
+      { perPage: 35, search: searchQuery },
       { select: data => data.pages.flatMap(folder => folder.list) }
     );
 

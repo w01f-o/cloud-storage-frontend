@@ -88,7 +88,7 @@ export const useCreateFolder = ({
         }
       );
     },
-    onSettled: (data, error, variables, context) => {
+    onSettled: async (data, error, variables, context) => {
       onSettled?.(data, error, variables, context);
 
       invalidateFolderListQueries(queryClient);

@@ -124,6 +124,8 @@
   }
 }
 
+@custom-variant xs (@media (width >= 24rem));
+
 @layer {
   button {
     @apply cursor-pointer;

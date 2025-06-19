@@ -11,7 +11,7 @@ export const wrapperVariants = tv({
 });
 
 export const inputWrapperVariants = tv({
-  base: 'flex gap-2 relative cursor-text size-full border-2 bg-background transition-colors-background-opacity outline-focus-base focus-visible:outline-primary rounded-lg px-4',
+  base: 'flex gap-2 relative cursor-text size-full border-2 bg-content lg:bg-background transition-colors-background-opacity outline-focus-base focus-visible:outline-primary rounded-lg px-4',
   variants: {
     isInvalid: {
       true: 'border-danger text-danger',

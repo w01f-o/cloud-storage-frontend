@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import {
   DropzoneInputProps,
   DropzoneRootProps,
+  ErrorCode,
   useDropzone,
 } from 'react-dropzone';
 import { toast } from 'sonner';
@@ -24,6 +25,8 @@ interface UseDropzoneFileUploaderReturn {
 export const useDropzoneFileUploader = ({
   folderId,
 }: UseDropzoneFileUploaderParams): UseDropzoneFileUploaderReturn => {
+  const FILES_LIMIT = 10;
+
   const t = useTranslations('DropzoneFileUploader');
   const { mutate, isPending } = useUploadFile({
     onMutate: ({ file: { name } }) => {
@@ -54,7 +57,15 @@ export const useDropzoneFileUploader = ({
 
   const { getInputProps, getRootProps, isDragActive, open } = useDropzone({
     onDropAccepted: dropAcceptHandler,
+    onDropRejected: files => {
+      if (
+        files[0].errors.some(error => error.code === ErrorCode.TooManyFiles)
+      ) {
+        toast.error(t('errors.tooManyFiles', { limit: String(FILES_LIMIT) }));
+      }
+    },
     noClick: true,
+    maxFiles: FILES_LIMIT,
   });
 
   useEffect(() => {
